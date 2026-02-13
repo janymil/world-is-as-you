@@ -1,0 +1,18 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Backup folder
+zaloha/
+
+# Temporary files
+*.tmp

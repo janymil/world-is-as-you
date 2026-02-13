@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Kapitola 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Specific Overrides (Matching Chapter 2 Style) */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+        }
+
+        /* Ensure deep dive button matches the theme (Gold for Ch3?) 
+           The user liked the previous mirror smiley which was gold/silver specific.
+           I'll assume Gold is good for "Commanding/Manifesting".
+        */
+        .deep-dive-btn {
+            color: var(--accent-gold) !important;
+            border-color: var(--accent-gold) !important;
+        }
+
+        /* --- NEW INTERACTIVE TOOLS CSS --- */
+
+        /* REALITY GENERATOR TOOL */
+        .manifestation-tool-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, var(--primary-bg), #1a1a2e);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .step-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+
+        .step-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 250px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            opacity: 0.5;
+            position: relative;
+        }
+
+        .step-box.active {
+            opacity: 1;
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.15);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            color: #000;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* FLIP CARDS */
+        .flip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 250px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front,
+        .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .flip-front {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .flip-back {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(0, 0, 0, 0.8));
+            transform: rotateY(180deg);
+            border: 1px solid var(--accent-gold);
+        }
+
+        /* GLOSSARY & FAQ */
+        .educational-section {
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s ease-out;
+            padding: 0 1.5rem;
+            color: #94a3b8;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            /* Approximate height */
+            padding-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-back">
+            <i class="fas fa-arrow-left"></i> Späť na obsah
+        </a>
+    </nav>
+
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?galaxy,magic,energy'); background-size: cover; background-position: center;">
+        <div class="hero-content">
+            <h4 style="color: var(--accent-gold); letter-spacing: 3px;">KAPITOLA 3</h4>
+            <h1>Ako Ovládať Realitu</h1>
+            <p>Vytváranie reality je viac o zbavovaní sa, než o získavaní.</p>
+        </div>
+    </section>
+
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+            <p>Teraz prehovorím k tej časti teba, ktorá túži a odváži sa snívať. V prvom rade ti chcem pripomenúť, že
+                žiadny sen nie je dostatočne veľký v porovnaní s nekonečnou inteligenciou v tebe. Takže sa neobmedzuj.
+                Mier vysoko. Neuspokoj sa s najľahším snom alebo tým najlogickejším. Choď za hranice, siahaj po
+                výnimočnom a dôveruj, že budeš podporovaný v čomkoľvek, čo sa rozhodneš manifestovať. Ak ťa sen vzrušuje
+                a samotná myšlienka naň ťa napĺňa šťastím a radosťou, potom vedz, že je to súčasť tvojho poslania.
+                Dôveruj, že budeš podporovaný všetkými možnými spôsobmi a dovoľ svojim snom expandovať tak ďaleko, ako
+                si tvoje srdce dokáže predstaviť.</p>
+
+            <p>Vytváranie tvojej vytúženej reality je viac o zbavovaní sa chybných myšlienkových vzorcov, než o tom,
+                niečo robiť. Je to o zhadzovaní, nie o získavaní.</p>
+
+            <p>V tejto knihe ti pomôžem zbaviť sa všetkého, čo ti neslúži. Zanechám ťa s čerstvým porozumením, vďaka
+                ktorému sa budeš cítiť ako znovuzrodený, pripravený dobyť svet a prenášať hory jednoduchým zámerom. Ale
+                musíš byť ochotný vložiť do toho úsilie, svoju vôľu, svoju myšlienku, svoj čas a svoju energiu.
+                Prostredníctvom opakovania a sústredeného myslenia plne integruješ tieto pravdy, kým sa nestanú
+                neoddeliteľnou súčasťou teba a manifestovanie sa stane takým prirodzeným, ako dýchanie.</p>
+        </div>
+
+        <h2 style="color: var(--accent-gold); margin-top: 3rem; text-align: center;">Vzorec na Manifestáciu Tvojich
+            Túžob</h2>
+
+        <div class="paragraph-wrapper">
+            <p>Po prvé, <span class="highlight">rozhodni sa presne, čo chceš</span>. Buď špecifický. Buď odvážny. Vyber
+                si to, čo ťa skutočne vzrušuje, nie to, čo pôsobí bezpečne alebo rozumne. Ďalej, <span
+                    class="highlight">vizualizuj to</span>, nie len ako prchavú myšlienku, ale ako živý zážitok. Zatvor
+                oči a predstav si seba, akoby si to už dosiahol, akoby sa to stalo už pred nejakým časom. Čo robí tá
+                verzia teba? Kto je s tebou? Kde si? Ako vyzerá tvoje prostredie? Cíť uspokojenie z toho, že si to
+                dokázal. Predstav si seba na telefóne, ako zdieľaš dobré správy s priateľmi a rodinou. Cíť tú hrdosť a
+                radosť v hlase. Cíť úľavu a naplnenie z toho, že si si túžbu odškrtol zo zoznamu. Zostaň s touto víziou
+                dosť dlho na to, aby sa objavila pozitívna emócia – vzrušenie, radosť, istota, ľahkosť v bytí.</p>
+
+            <p>Ak máš problém dosiahnuť tento stav, skús spojiť vizualizáciu s hudbou, ktorá ťa motivuje alebo
+                inšpiruje. A keď dosiahneš pocit uspokojenia, chcem, aby si cítil vďačnosť, nie za prítomnosť, ale za
+                budúcnosť. Tento krok je kľúčový; nevynechaj ho. Vyjadri hlbokú vďačnosť za istotu, že tvoja túžba je už
+                na ceste k tebe. V duchu si povedz:</p>
+        </div>
+
+        <div class="quote-block">
+            "Ďakujem, ďakujem, ďakujem. Som taký vďačný za to, že sa to pre mňa deje. Som navždy vďačný. Cítim hlbokú
+            vďačnosť vediac, že moje želanie, moja túžba, sa čoskoro stáva realitou."
+        </div>
+
+        <div class="paragraph-wrapper">
+            <p>Zotrvaj v tej vďačnosti chvíľu. Teraz kráčaj svojím dňom s tichým sebavedomím, očakávajúc, že sa to
+                rozvinie. Žiadne spochybňovanie, žiadne premýšľanie "či", iba istota, že je to už na ceste. Čokoľvek sa
+                stane, bez ohľadu na to, ako to vyzerá na povrchu, predpokladaj, že to prispieva k realizácii tvojej
+                túžby. Každá udalosť, každá okolnosť pracuje v tvoj prospech. Očakávaj jej príchod. Drž si istotu, že sa
+                to môže zhmotniť kedykoľvek. Ak sa to nestane dnes alebo zajtra, nepredpokladaj, že si zlyhal. Je to len
+                oneskorenie, nikdy nie zlyhanie. (V ďalších kapitolách vysvetlím, prečo existujú časové oneskorenia a
+                aký účel plnia.)</p>
+
+            <p>Konaj, ale iba vtedy, keď to cítiš správne. Nasleduj impulzy zrodené z vzrušenia a inšpirácie, nie tie,
+                ktoré sú poháňané strachom, tlakom alebo urgenciou. Správne kroky pôsobia prirodzene a bez námahy.
+                Najdôležitejšie je, buď si vedomý svojich myšlienok. Akákoľvek myšlienka, ktorá protirečí naplneniu
+                tvojej túžby, musí byť otočená a nahradená takou, ktorá je v súlade s istotou. Neživ pochybnosti, nahraď
+                ich dôverou.</p>
+
+            <p>Každá myšlienka, ktorú si myslíš, je ako <span class="highlight">zasadené semienko</span>; prinesie
+                výsledky skôr či neskôr. Takže, keď máš myšlienku, ktorá je v súlade s tvojou túžbou, neruš ju tým, že
+                za ňou pošleš negatívnu. Naopak, kedykoľvek sa pristihneš pri negatívnej myšlienke, okamžite ju
+                neutralizuj tým, že ju nahradíš jej pozitívnym opakom. A nakoniec, odolaj nutkaniu diskutovať o svojej
+                vízii s inými. Ľudia projektujú svoje vlastné obmedzenia a ich pochybnosti môžu oslabiť tvoje
+                presvedčenie. Chráň svoju túžbu. Vyživuj ju v tichosti.</p>
+
+            <p>Ak budeš nasledovať túto jednoduchú formulu, tvoj život bude sériou zázrakov, budeš manifestovať jednu
+                túžbu za druhou, nič ťa nebude môcť zastaviť. Pamätaj, v momente, keď máš túžbu a okamžite vstúpiš do
+                stavu očakávania, predvídajúc jej realizáciu, je už na ceste k tebe. Aj keď sa veci zdajú byť
+                stagnujúce, okolnosti a ľudia sa zoraďujú v zákulisí. Takže sa nenechaj odradiť a nepredpokladaj, že sa
+                nič nedeje len preto, že nevidíš pohyb. Zostaň vo vernej očakávaní.</p>
+
+            <p>Keď zasadíš semienko, dôveruješ, že rastie pod pôdou, aj keď ho nevidíš. Nekopeš do zeme každú sekundu,
+                aby si skontroloval, či klíči; jednoducho vieš, bez tieňa pochybnosti, že časom rozkvitne. Aplikuj ten
+                istý princíp na svoje túžby.</p>
+        </div>
+
+        <h2 style="color: var(--accent-gold); margin-top: 3rem; text-align: center;">Ovládnuť Realitu Znamená Ovládnuť
+            Svoju Myseľ</h2>
+
+        <div class="paragraph-wrapper">
+            <p>Strach, pochybnosti a negatívne myšlienky nekonštatujú fakty ani nie sú vytesané do kameňa, iba ti
+                navrhujú jednu možnosť medzi nekonečným množstvom možností, ktoré by sa mohli rozvinúť. Tvoja myseľ
+                zosilní jednu jedinú možnosť a myšlienka na ňu ťa vystraší alebo spochybní. Sú to triky ega, ilúzie
+                určené na to, aby ťa držali v malosti. V momente, keď ich rozpoznáš ako ilúzie, stratia svoju moc.
+                Kedykoľvek sa objaví limitujúce presvedčenie, spochybni ho. Opýtaj sa: Je toto skutočne pravda? Alebo je
+                to len presvedčenie, ktoré som prijal bez otázok?</p>
+
+            <p>Uver mi, keď ti hovorím toto: <span class="highlight">neexistujú žiadne fakty, len to, čo prijmeš ako
+                    fakty</span>. Neexistujú žiadne pravidlá, len to, čo prijmeš ako pravidlá. Ty rozhoduješ, čo je
+                možné a čo nie. Ty rozhoduješ, čo sa stane a čo nie. Ty si jediná operatívna moc. Nikto nerozhoduje o
+                tom, čo sa deje v tvojom živote, okrem teba – žiadna vonkajšia sila, žiadny boh na nebesiach, žiadny
+                osud, len ty.</p>
+
+            <p>Pochybnosti, strach a všetky druhy negatívneho šumu sa budú občas snažiť získať tvoju pozornosť, ale
+                všetko, čo robia, je, že ti ponúkajú možný negatívny výsledok, ktorý existuje medzi nekonečným množstvom
+                pozitívnych výsledkov. Ty rozhoduješ, či to prijmeš ako pravdu alebo nie. Jednoducho odmietni. Uznaj ich
+                existenciu, ale rozhodni sa prijať vo svojej realite len ten najlepší scenár. Vedz, že v tvojom živote
+                sa rozvinie len to najlepšie, pretože ty si ten, kto velí. Nikto a nič iné za teba nerozhoduje. Máš
+                kontrolu, sto percent času.</p>
+
+            <p>Vždy dostaneš to, o čom premýšľaš. Ak neustále nepreberáš negatívne výsledky, je mechanicky nemožné, aby
+                sa stali. Je to zákon. Dostaneš to, o čom konzistentne premýšľaš.</p>
+
+            <p>Nahraď každú limitujúcu myšlienku posilňujúcou a celá tvoja realita sa posunie. Rozpusti strach a
+                pochybnosti okamžite, sú to ilúzie, ktoré majú moc len vtedy, keď sa s nimi zaoberáš. V momente, keď sa
+                objaví strach, vysmej ho. Doslova. Jednoducho sa mu vysmej. Povedz: "Strach je len myseľ hrajúca triky.
+                Rozhodujem sa nezúčastniť sa," a okamžite presuň svoju pozornosť na myšlienku, ktorá ťa vzrušuje.</p>
+
+            <p>Čokoľvek odmietneš kŕmiť pozornosťou, prestane vo tvojej realite existovať. Zostaň konzistentne v stave
+                očakávania, pretože realita sa preskupuje na základe konzistencie. Zaobchádzaj so svojou preferovanou
+                realitou ako s niečím, o čom sa nevyjednáva, a nezaoberaj sa protichodnými myšlienkami. Ak nevedome
+                dovolíš strachu, pochybnostiam a rozptýleniu zakoreniť sa, naberú hybnosť a bude veľmi ťažké sa ich
+                zbaviť, takže ich neutralizuj skôr, než sa uchytia.</p>
+
+            <p>Myseľ sa cíti ako nepriateľ len vtedy, keď ju necháš bežať na autopilota, nikdy neneutralizuješ negatívne
+                myšlienky a len prijímaš čokoľvek, čo navrhne. V momente, keď prevezmeš kontrolu späť, začneš si všímať
+                a spochybňovať svoje myšlienky, prijímať len tie pozitívne a otáčať tie negatívne, tvoja myseľ prestane
+                byť chaotickou silou a namiesto toho sa stane tvojím najväčším priateľom. Pozoruj svoje myšlienky bez
+                toho, aby si na ne reagoval. To ti umožní oddeliť sa od negativity, podobne ako sledovanie mrakov
+                plávajúcich na oblohe, a potom ich jemne presmerovať k lepšie pôsobiacim myšlienkam.</p>
+
+            <p>Pochybnosť je jedinou bariérou medzi tebou a tvojou silou. Nie okolnosti. Nie šťastie. Nie osud. Iba
+                pochybnosť. Oslabuje tvoj výtvor skôr, ako má šancu vynoriť sa. Nezaoberaj sa ňou. Nevyjednávaj s ňou.
+                Vykoreň ju. Tvoja viera vo tvoju víziu musí byť neotrasiteľná.</p>
+
+            <p>Kedykoľvek sa prikradne pochybnosť, použi ju ako odrazový mostík na to, aby si znovu potvrdil to, čo vo
+                svojom srdci vieš, že je pravda, to, čím si istý, že sa stane. Premeň každú pochybnosť na výhodu,
+                nástroj na ešte väčšie posilnenie tvojho presvedčenia. Vid každú pochybnú myšlienku ako príležitosť
+                posilniť svoju vieru.</p>
+        </div>
+
+        <h2 style="color: var(--accent-gold); margin-top: 3rem; text-align: center;">Každá Myšlienka je Afirmácia</h2>
+
+        <div class="paragraph-wrapper">
+            <p>Každá myšlienka, ktorú si myslíš, je afirmácia. Zakaždým, keď si pomyslíš: „Vždy mám problémy s
+                peniazmi,“ potvrdzuješ to. Zakaždým, keď si pomyslíš: „Ľudia ma vždy sklamú,“ potvrdzuješ to. Zakaždým,
+                keď si pomyslíš: „Nie som dosť dobrý,“ potvrdzuješ to. A pretože tvoje myšlienky tvoria realitu, fyzická
+                realita berie tieto výroky ako príkazy. Hovorí: „Rozumiem. Zabezpečím, aby tvoj život odrážal presne to,
+                čo si práve potvrdil.“</p>
+
+            <p>Keby si sa zastavil a skutočne počúval svoje vlastné myšlienky, čo by si počul? Hlas, ktorý ťa dvíha,
+                posúva vpred a pripomína ti tvoju silu? Alebo taký, ktorý stále pochybuje, kritizuje a drží ťa späť? Ak
+                si uviazol v negatívnom seba-rozhovore, prehrávaš si staré zlyhania alebo si predstavuješ to najhoršie,
+                tvoj život to bude odrážať – plný boja, prehier a sklamaní. Spôsob, akým sa rozprávaš sám so sebou v
+                súkromí, formuje realitu, ktorú žiješ verejne.</p>
+
+            <p>Ak chceš lepší život, musíš chrániť svoju myseľ. Prestaň očakávať, že sa veci pokazia. Prestaň plytvať
+                energiou na vnútorné boje. Prestaň predpovedať zlyhanie skôr, než sa vôbec pokúsiš. Namiesto toho sa
+                vytrénuj myslieť spôsobom, ktorý pracuje pre teba, nie proti tebe.</p>
+
+            <div class="quote-block">
+                Očakávaj, že veci vyjdú. Predpokladaj to najlepšie. Vo svojej mysli vid len pozitívne výsledky.
+            </div>
+
+            <p>To, s čím bojuješ, to kŕmiš. Čím viac tlačíš proti negatívnej myšlienke, tým silnejšou sa stáva. Namiesto
+                boja ju nahraď. Tvoja myseľ nemôže držať dve opačné myšlienky naraz. Takže keď sa objaví negatívna, otoč
+                ju na niečo lepšie.</p>
+
+            <p>Ak tvoja myseľ povie: „Toto nedokážem,“ nahraď to: „Toto zvládnem.“ Ak povie: „Je to príliš ťažké,“
+                povedz si: „Vždy na to prídem.“ Ak povie: „Veci mi nikdy nevychádzajú,“ zmeň to na: „Všetko vždy pracuje
+                v môj prospech.“ Nenechaj negativitu pretrvávať, bude ťažšie sa jej zbaviť, ak jej dovolíš zapustiť
+                korene.</p>
+
+            <p>Nie sú to len tvoje myšlienky, čo formuje tvoju realitu, je to celková <span class="highlight">vibrácia
+                    tvojej mysle</span>. Tvoja nálada je ako magnet. Ak si stále v strachu, pochybnostiach alebo
+                frustrácii, život ti bude naďalej dávať dôvody cítiť sa tak. Ale ak vytvoríš mentálny stav sebavedomia,
+                pokoja a očakávania, tvoja realita to začne odrážať tiež.</p>
+
+            <p>Riadenie tvojich emócií je rovnako dôležité ako riadenie tvojich myšlienok. Zakaždým, keď sa pristihneš,
+                že upadáš do negativity, zastav sa a opýtaj sa: „Čo si myslím, že ma núti cítiť sa takto?“ alebo „Aké
+                presvedčenie práve posilňujem?“ Zmeň myšlienku, posuň presvedčenie a tvoje emócie budú nasledovať.</p>
+        </div>
+
+    </section>
+
+    <!-- SUMMARY SECTION -->
+    <section class="summary-section" style="padding: 4rem 2rem; background: var(--secondary-bg);">
+        <div
+            style="max-width: 800px; margin: 0 auto; padding: 2rem; border: 1px solid var(--accent-gold); border-radius: 20px; background: rgba(251, 191, 36, 0.05);">
+            <h3 style="color: var(--accent-gold); text-align: center; margin-bottom: 1.5rem;">Kľúčové body kapitoly</h3>
+            <ul class="affirmation-list" style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 15px; display: flex; align-items: start; gap: 10px;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-gold); margin-top: 5px;"></i>
+                    <span><strong>Rozhodni sa a Vizualizuj:</strong> Buď odvážny, špecifický a preži svoj sen v mysli
+                        ako hotovú vec.</span>
+                </li>
+                <li style="margin-bottom: 15px; display: flex; align-items: start; gap: 10px;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-gold); margin-top: 5px;"></i>
+                    <span><strong>Vďačnosť za Budúcnosť:</strong> Ďakuj vopred. To je signál pre vesmír, že tvoja
+                        objednávka je prijatá.</span>
+                </li>
+                <li style="margin-bottom: 15px; display: flex; align-items: start; gap: 10px;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-gold); margin-top: 5px;"></i>
+                    <span><strong>Flipping (Otočenie):</strong> Negatívnu myšlienku okamžite nahraď jej pozitívnym
+                        opakom. Nenechaj ju zakoreniť.</span>
+                </li>
+                <li style="margin-bottom: 15px; display: flex; align-items: start; gap: 10px;">
+                    <i class="fas fa-check-circle" style="color: var(--accent-gold); margin-top: 5px;"></i>
+                    <span><strong>Operatívna Moc:</strong> Ty si jediný, kto v tvojom vesmíre rozhoduje. Žiadny osud,
+                        len tvoje prijatie faktov.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE TOOL: REALITY GENERATOR -->
+    <section class="manifestation-tool-section">
+        <h2 style="color: #fff; margin-bottom: 1rem;"><i class="fas fa-cogs" style="color: var(--accent-gold);"></i>
+            Generátor Reality</h2>
+        <p style="color: #94a3b8; max-width: 600px; margin: 0 auto 3rem;">Interaktívny sprievodca formulou manifestácie.
+            Prejdi všetkými 4 krokmi.</p>
+
+        <div class="step-container">
+            <div class="step-box active" onclick="activateStep(1)">
+                <div class="step-number">1</div>
+                <h4 style="color: #fff;">Rozhodnutie</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 10px;">Čo presne chceš? Napíš to.</p>
+                <div style="margin-top: 15px; width: 100%; height: 2px; background: rgba(255,255,255,0.2);">
+                    <div style="width: 100%; height: 100%; background: var(--accent-gold);"></div>
+                </div>
+            </div>
+
+            <div class="step-box" onclick="activateStep(2)">
+                <div class="step-number">2</div>
+                <h4 style="color: #fff;">Vizualizácia</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 10px;">Zavri oči. Kde si? Kto je s tebou?</p>
+                <i class="fas fa-eye" style="font-size: 1.5rem; color: rgba(255,255,255,0.3); margin-top: 10px;"></i>
+            </div>
+
+            <div class="step-box" onclick="activateStep(3)">
+                <div class="step-number">3</div>
+                <h4 style="color: #fff;">Vďačnosť</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 10px;">"Ďakujem, že je to hotové."</p>
+                <i class="fas fa-praying-hands"
+                    style="font-size: 1.5rem; color: rgba(255,255,255,0.3); margin-top: 10px;"></i>
+            </div>
+
+            <div class="step-box" onclick="activateStep(4)">
+                <div class="step-number">4</div>
+                <h4 style="color: #fff;">Istota</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 10px;">Pusť to. Je to na ceste.</p>
+                <i class="fas fa-paper-plane"
+                    style="font-size: 1.5rem; color: rgba(255,255,255,0.3); margin-top: 10px;"></i>
+            </div>
+        </div>
+
+        <p id="step-instruction" style="color: var(--accent-gold); font-style: italic; margin-top: 2rem;">Krok 1:
+            Definuj svoju túžbu jasne a odvážne.</p>
+    </section>
+
+    <!-- EDUCATIONAL: THOUGHT FLIPPING -->
+    <section class="educational-section" style="text-align: center;">
+        <h2 style="margin-bottom: 2rem;">Tréning: Otočenie Myšlienky (Flipping)</h2>
+        <p style="color: #94a3b8; margin-bottom: 3rem;">Klikni na negatívnu myšlienku a uvidíš, ako ju okamžite
+            neutralizovať.</p>
+
+        <div class="flip-grid">
+            <!-- Card 1 -->
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-front">
+                        <i class="fas fa-ban" style="font-size: 3rem; color: #ef4444; margin-bottom: 1rem;"></i>
+                        <h3>"Toto nedokážem..."</h3>
+                        <p style="opacity: 0.7;">(Klikni pre otočenie)</p>
+                    </div>
+                    <div class="flip-back">
+                        <i class="fas fa-check" style="font-size: 3rem; color: #fff; margin-bottom: 1rem;"></i>
+                        <h3>"Zvládnem to."</h3>
+                        <p>Mám v sebe nekonečnú inteligenciu, ktorá ma vedie.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-front">
+                        <i class="fas fa-exclamation-triangle"
+                            style="font-size: 3rem; color: #f97316; margin-bottom: 1rem;"></i>
+                        <h3>"Je to príliš ťažké..."</h3>
+                        <p style="opacity: 0.7;">(Klikni pre otočenie)</p>
+                    </div>
+                    <div class="flip-back">
+                        <i class="fas fa-magic" style="font-size: 3rem; color: #fff; margin-bottom: 1rem;"></i>
+                        <h3>"Vždy na to prídem."</h3>
+                        <p>Riešenia ku mne prichádzajú ľahko a prirodzene.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-front">
+                        <i class="fas fa-user-slash" style="font-size: 3rem; color: #64748b; margin-bottom: 1rem;"></i>
+                        <h3>"Nie som dosť dobrý..."</h3>
+                        <p style="opacity: 0.7;">(Klikni pre otočenie)</p>
+                    </div>
+                    <div class="flip-back">
+                        <i class="fas fa-crown" style="font-size: 3rem; color: #fff; margin-bottom: 1rem;"></i>
+                        <h3>"Som hoden všetkého."</h3>
+                        <p>Som tvorcom svojej reality a zaslúžim si to najlepšie.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="educational-section">
+        <h2 style="text-align: center; margin-bottom: 3rem;">Časté Otázky</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Čo ak pri vizualizácii nič necítim?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    To je v poriadku. Netlač na pílu. Skús použiť hudbu, ktorá ťa inšpiruje, alebo sa zameraj len na
+                    pocit "úľavy". Emoce prídu s praxou. Dôležitejší je zámer a opakovanie.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Mám o svojich snoch hovoriť iným?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Autorka odporúča: <strong>Nie</strong>. Kým tvoja viera nie je neotrasiteľná, iní ľudia môžu zasiať
+                    pochybnosti. Chráň svoj sen ako malé semienko, kým z neho nebude pevný strom.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Ako dlho trvá manifestácia?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Časové oneskorenie (time buffer) existuje, aby sme mohli prehodnotiť svoje myšlienky. Keby sa všetko
+                    dialo okamžite, každý tvoj strach by sa hneď zhmotnil. Dôveruj načasovaniu.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola2.html" class="nav-btn">&larr; Späť na Kapitolu 2</a>
+        <a href="Kapitola4.html" class="nav-btn">Pokračovať na Kapitolu 4 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script>
+        // --- REALITY GENERATOR LOGIC ---
+        function activateStep(stepNum) {
+            const steps = document.querySelectorAll('.step-box');
+            const instructions = [
+                "Krok 1: Rozhodni sa. Buď špecifický a odvážny. Napíš si to.",
+                "Krok 2: Vizualizuj. Preži to v mysli. Cíť radosť.",
+                "Krok 3: Poďakuj. 'Ďakujem, že je to na ceste.' Cíť vďačnosť.",
+                "Krok 4: Pusti to. Dôveruj procesu. Je to hotová vec."
+            ];
+
+            // Update Active State
+            steps.forEach((step, index) => {
+                if (index + 1 === stepNum) {
+                    step.classList.add('active');
+                    step.style.opacity = '1';
+                } else {
+                    step.classList.remove('active');
+                    step.style.opacity = '0.5';
+                }
+            });
+
+            // Update Instruction Text
+            const instrElement = document.getElementById('step-instruction');
+            if (instrElement) {
+                instrElement.innerText = instructions[stepNum - 1];
+                instrElement.style.animation = 'none';
+                instrElement.offsetHeight; /* trigger reflow */
+                instrElement.style.animation = 'fadeIn 0.5s';
+            }
+        }
+
+        // --- FAQ LOGIC ---
+        function toggleFaq(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+
+            const icon = header.querySelector('i');
+            if (item.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+    </script>
+    <script src="footer.js"></script>
+</body>
+
+</html>

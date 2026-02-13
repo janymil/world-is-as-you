@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty | Kniha Prebudenia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-bg: #020617;
+            /* Ešte tmavšia pre hĺbku */
+            --secondary-bg: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --gold: #fbbf24;
+            --cyan: #22d3ee;
+            --purple-glow: rgba(168, 85, 247, 0.4);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .cta-btn {
+            padding: 10px 25px;
+            border: 1px solid var(--gold);
+            border-radius: 30px;
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-btn:hover {
+            background: var(--gold);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(30, 41, 59, 0.4) 0%, var(--primary-bg) 80%), url('https://realita.mywire.org/images/hero.webp');
+            /* Tu príde AI obrázok "Vesmírne zrkadlo" */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, var(--primary-bg) 100%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeIn Up 1.5s ease-out;
+        }
+
+        .subtitle {
+            color: var(--cyan);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* --- ABOUT BOOK --- */
+        .about-section {
+            padding: 8rem 2rem;
+            background: var(--primary-bg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background: var(--glass);
+            padding: 2rem;
+            border-left: 3px solid var(--cyan);
+            margin-top: 2rem;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+        }
+
+        .visual-placeholder {
+            width: 100%;
+            height: 500px;
+            background: url('https://realita.mywire.org/images/o-knihe.webp') no-repeat center center/cover;
+            /* Tu príde AI obrázok "Rozpad ilúzie" */
+            border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* --- FEATURES / TOOLKIT --- */
+        .features-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.90)), url('https://realita.mywire.org/images/nastroje.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            padding: 2.5rem;
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 0.7rem;
+            background: var(--purple-glow);
+            padding: 5px 10px;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        /* --- CHAPTERS GRID --- */
+        .chapters-section {
+            padding: 8rem 2rem;
+            background: radial-gradient(circle at top, #1e1b4b 0%, var(--primary-bg) 60%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chapter-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .chapter-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .chap-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            margin-right: 1.5rem;
+            font-weight: bold;
+        }
+
+        .chap-title {
+            color: #e2e8f0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .chapter-item:hover .chap-num {
+            color: var(--gold);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border-glass);
+            padding: 4rem 2rem;
+            text-align: center;
+            background: #000;
+        }
+
+        .socials {
+            margin: 2rem 0;
+        }
+
+        .socials a {
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .socials a:hover {
+            color: var(--cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* Pre zjednodušenie mobilného menu */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">The World is as You Are</div>
+        <div class="nav-links">
+            <a href="#about">O Knihe</a>
+            <a href="#features">Nástroje</a>
+            <a href="#chapters">Kapitoly</a>
+        </div>
+        <a href="uvod.html" class="cta-btn">Začať Čítať</a>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="subtitle">Interaktívna e-kniha</div>
+            <h1>Svet je taký,<br>aký si ty.</h1>
+            <p>Sprievodca realitou pre tých, ktorí sa odvážili snívať.</p>
+            <div style="margin-top: 2rem;">
+                <a href="uvod.html" class="cta-btn" style="padding: 15px 40px; font-size: 1rem;">Vstúpiť do
+                    Zrkadla</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="visual-placeholder"></div>
+        <div class="about-text">
+            <h2>Zabudol si, že ty si kráľovstvo.</h2>
+            <p>
+                Kráčame týmto svetom v presvedčení, že sme len malými loďkami v búrke oceánu. Veríme na náhodu, na osud,
+                na šťastie. Ale čo ak je všetko inak? Čo ak oceán, búrka i loďka sú v skutočnosti jedným a tým istým
+                vedomím?
+            </p>
+            <p>
+                Táto kniha nie je len zbierkou teórií. Je to <strong>manuál k prebudeniu</strong>. Odhaľuje mechaniku
+                reality ako zrkadla, ktoré nemá vlastnú vôľu, ale len verne odráža tvoje vnútro.
+            </p>
+            <div class="highlight-box">
+                "Usmieva sa, keď sa usmievaš ty. A mračí sa, keď sa mračíš ty. Ty si príčina, svet je následok."
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Viac než len kniha</h2>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+            Spojili sme starodávnu múdrosť s modernou technológiou. Každá kapitola obsahuje prvky, ktoré ti pomôžu
+            integrovať poznanie priamo do života.
+        </p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="badge">Coming Soon</div>
+                <i class="fas fa-headphones feature-icon"></i>
+                <h3>Audio Kniha</h3>
+                <p style="color: #cbd5e1; font-size: 0.9rem;">Nechaj sa sprevádzať hlbokým hlasom, ktorý ťa prevedie
+                    každou kapitolou. Ideálne pre meditáciu a nočné počúvanie.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="badge">Exclusive</div>
+                <i class="fas fa-play-circle feature-icon"></i>
+                <h3>Video Vhľady</h3>
+                <p style="color: #cbd5e1; font-size: 0.9rem;">Vybrané kapitoly obsahujú vizuálne esejistické videá,
+                    ktoré vysvetľujú najzložitejšie koncepty reality.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="badge">Interactive</div>
+                <i class="fas fa-magic feature-icon"></i>
+                <h3>Nástroje Prebudenia</h3>
+                <ul style="text-align: left; margin-top: 15px; color: #cbd5e1; font-size: 0.9rem;">
+                    <li><i class="fas fa-caret-right" style="color: var(--cyan)"></i> Simulátor Zrkadla (Kap. 2)</li>
+                    <li><i class="fas fa-caret-right" style="color: var(--cyan)"></i> Prepísanie Presvedčení (Kap. 8)
+                    </li>
+                    <li><i class="fas fa-caret-right" style="color: var(--cyan)"></i> Emocionálne GPS (Kap. 4)</li>
+                    <li><i class="fas fa-caret-right" style="color: var(--cyan)"></i> Denník Manifestácie (Kap. 13)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapters-section" id="chapters">
+        <div class="section-header">
+            <h4 style="color: var(--cyan); letter-spacing: 3px; text-transform: uppercase;">Obsah</h4>
+            <h2 style="font-size: 3rem; color: #fff;">Cesta Prebudenia</h2>
+            <p style="color: var(--text-muted);">Vyber si svoju kapitolu a začni meniť svoju realitu.</p>
+        </div>
+
+        <div class="chapter-grid">
+            <a href="uvod.html" class="chapter-item" style="border-color: var(--gold);">
+                <span class="chap-num" style="color: var(--gold);">00</span>
+                <span class="chap-title">Úvod: Kráľ a jeho kráľovstvo</span>
+            </a>
+            <a href="kapitola1.html" class="chapter-item">
+                <span class="chap-num">01</span>
+                <span class="chap-title">Poznaj sám seba (Know Thyself)</span>
+            </a>
+            <a href="kapitola2.html" class="chapter-item">
+                <span class="chap-num">02</span>
+                <span class="chap-title">Realita je zrkadlo</span>
+            </a>
+            <a href="kapitola3.html" class="chapter-item">
+                <span class="chap-num">03</span>
+                <span class="chap-title">Ako ovládať realitu</span>
+            </a>
+            <a href="kapitola4.html" class="chapter-item">
+                <span class="chap-num">04</span>
+                <span class="chap-title">Tvoje emócie sú GPS</span>
+            </a>
+            <a href="kapitola5.html" class="chapter-item">
+                <span class="chap-num">05</span>
+                <span class="chap-title">Čas (Ilúzia meškania)</span>
+            </a>
+            <a href="kapitola6.html" class="chapter-item">
+                <span class="chap-num">06</span>
+                <span class="chap-title">Okolnosti nie sú podstatné</span>
+            </a>
+            <a href="kapitola7.html" class="chapter-item">
+                <span class="chap-num">07</span>
+                <span class="chap-title">Prelomenie negatívneho momentu</span>
+            </a>
+            <a href="kapitola8.html" class="chapter-item">
+                <span class="chap-num">08</span>
+                <span class="chap-title">Preskúmaj svoje presvedčenia</span>
+            </a>
+            <a href="kapitola9.html" class="chapter-item">
+                <span class="chap-num">09</span>
+                <span class="chap-title">Víťazný postoj (Winner's Attitude)</span>
+            </a>
+            <a href="kapitola10.html" class="chapter-item">
+                <span class="chap-num">10</span>
+                <span class="chap-title">Prevezmi zodpovednosť za všetko</span>
+            </a>
+            <a href="kapitola11.html" class="chapter-item">
+                <span class="chap-num">11</span>
+                <span class="chap-title">Falošní bohovia</span>
+            </a>
+            <a href="kapitola12.html" class="chapter-item">
+                <span class="chap-num">12</span>
+                <span class="chap-title">Nenaučíš sa plávať čítaním o vode</span>
+            </a>
+            <a href="kapitola13.html" class="chapter-item">
+                <span class="chap-num">13</span>
+                <span class="chap-title">Sila vďačnosti & Závisť</span>
+            </a>
+            <a href="kapitola14.html" class="chapter-item">
+                <span class="chap-num">14</span>
+                <span class="chap-title">Najmocnejšia technika (Knowingness)</span>
+            </a>
+            <a href="kapitola15.html" class="chapter-item">
+                <span class="chap-num">15</span>
+                <span class="chap-title">Buď darcom (Be a Giver)</span>
+            </a>
+            <a href="kapitola16.html" class="chapter-item">
+                <span class="chap-num">16</span>
+                <span class="chap-title">Ľudia sú zrkadlá</span>
+            </a>
+            <a href="kapitola17.html" class="chapter-item">
+                <span class="chap-num">17</span>
+                <span class="chap-title">Byť "realistom" je pasca</span>
+            </a>
+            <a href="kapitola18.html" class="chapter-item">
+                <span class="chap-num">18</span>
+                <span class="chap-title">Pravda o tvrdej práci</span>
+            </a>
+            <a href="kapitola19.html" class="chapter-item">
+                <span class="chap-num">19</span>
+                <span class="chap-title">Menej sa strachuj, viac dôveruj</span>
+            </a>
+            <a href="kapitola20.html" class="chapter-item">
+                <span class="chap-num">20</span>
+                <span class="chap-title">Nepýtaj si rady</span>
+            </a>
+            <a href="kapitola21.html" class="chapter-item">
+                <span class="chap-num">21</span>
+                <span class="chap-title">Život je plátno a ty si umelec</span>
+            </a>
+            <a href="kapitola22.html" class="chapter-item">
+                <span class="chap-num">22</span>
+                <span class="chap-title">Je čas prekvitať (Thrive)</span>
+            </a>
+            <a href="kapitola23.html" class="chapter-item">
+                <span class="chap-num">23</span>
+                <span class="chap-title">Nájdenie svojho účelu</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo" style="color: #fff; margin-bottom: 20px;">The World is as You Are</div>
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p style="color: #64748b; font-size: 0.8rem;">
+            &copy; 2026. Všetky práva vyhradené. Vytvorené pre snílkov.
+        </p>
+    </footer>
+
+</body>
+
+</html>

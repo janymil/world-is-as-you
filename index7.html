@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcia 1: Poznaj sám seba | The World is as You Are</title>
+    <style>
+        :root {
+            --primary: #1a1a2e; /* Hlboká vesmírna modrá */
+            --secondary: #16213e;
+            --accent: #e94560; /* Motivačná červená/ružová */
+            --gold: #fcdab7; /* Pre "Božské" vedomie */
+            --text: #eaeaea;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Progress Bar --- */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+            z-index: 1000;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            width: 0%;
+            transition: width 0.2s;
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, var(--secondary), var(--primary));
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: -webkit-linear-gradient(var(--gold), #cfaa82);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .start-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(233, 69, 96, 0.6);
+        }
+
+        /* --- Content Blocks --- */
+        section {
+            padding: 60px 0;
+            opacity: 0; /* Pre animáciu */
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .highlight-box {
+            background: var(--glass);
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* --- Interactive Reveal --- */
+        .reveal-container {
+            background: var(--secondary);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+
+        .reveal-blur {
+            filter: blur(8px);
+            transition: filter 0.5s;
+            user-select: none;
+        }
+
+        .reveal-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 25px;
+            background: var(--gold);
+            color: var(--primary);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* --- Case Study Cards --- */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .card.victim { border-top: 3px solid #ff4757; }
+        .card.creator { border-top: 3px solid #2ed573; transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+        .card h3 { margin-top: 0; }
+
+        /* --- Journal Input --- */
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #444;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* --- Quiz --- */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: var(--secondary);
+            border: 1px solid #333;
+            color: white;
+            text-align: left;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #233055;
+        }
+
+        .quiz-option.correct {
+            background: #2ed573;
+            color: #1a1a2e;
+            font-weight: bold;
+        }
+
+        .quiz-option.wrong {
+            background: #ff4757;
+            opacity: 0.6;
+        }
+
+        /* --- Action Step --- */
+        .action-box {
+            background: linear-gradient(135deg, var(--accent), #c0392b);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <header>
+        <div class="subtitle">Kapitola 1</div>
+        <h1>Know Thyself</h1>
+        <p style="max-width: 600px; font-size: 1.2rem; opacity: 0.8;">
+            "Nie si osoba prežívajúca realitu. Si realita prežívajúca osobu."
+        </p>
+        <br><br>
+        <button class="start-btn" onclick="document.getElementById('lesson-start').scrollIntoView({behavior: 'smooth'})">
+            Začať Lekciu
+        </button>
+    </header>
+
+    <div class="container">
+
+        <section id="lesson-start" class="visible">
+            <h2>Kto v skutočnosti si?</h2>
+            <p>
+                Predstav si na moment, že si vo virtuálnej realite. Máš okuliare, slúchadlá, cítiš dotyky. Hra je taká presvedčivá, že si zabudol, že je to len hra. Začal si veriť, že si postava v hre. Že tvoje meno, tvoje telo a tvoj príbeh sú všetkým, čím si.
+            </p>
+            <p>
+                Ale <strong>Kapitola 1</strong> ti pripomína niečo šokujúce:
+            </p>
+            
+            <div class="highlight-box">
+                "Ty nie si telo. Nie si meno. Si vedomie, v ktorom sa to všetko odohráva. Všetko, čo vidíš, nie je mimo teba. Je to vnútri tvojho vedomia."
+            </div>
+
+            <p>
+                Väčšina ľudí žije v ilúzii, že svet je "tam vonku" a oni sú len malé figúrky, ktorým sa veci "dejú". Kniha to nazýva <strong>Prvá lož: Oddelenosť</strong> (The First Lie: Separation).
+            </p>
+        </section>
+
+        <section>
+            <h2>Zákon zrkadla</h2>
+            <p>Prečítaj si nasledujúcu pravdu, ktorá mení pravidlá hry. Si pripravený počuť, ako funguje realita?</p>
+            
+            <div class="reveal-container" id="revealBox">
+                <button class="reveal-btn" onclick="revealSecret()">Odhaliť tajomstvo reality</button>
+                <div class="reveal-blur" id="secretText">
+                    <h3 style="color: var(--gold);">Svet je len zrkadlo</h3>
+                    <p>
+                        "Fyzická realita nie je nič iné ako zrkadlo, ktoré ťa napodobňuje. Usmeje sa, keď sa usmeješ ty. Zamračí sa, keď sa zamračíš ty."<br><br>
+                        Nikdy si nebol obeťou okolností. Všetko, čo sa ti deje – ľudia, ktorých stretávaš, prekážky, úspechy – sú len <strong>projekciou tvojho vlastného vedomia</strong>. Ty si projektor. Svet je plátno.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Ako to vyzerá v praxi?</h2>
+            <p>Poďme si to ukázať na bežnej situácii. Predstav si, že <strong>stratíš dôležitého klienta</strong> alebo prídeš o peniaze.</p>
+
+            <div class="scenario-grid">
+                <div class="card victim">
+                    <h3>❌ Staré Ja (Obeť)</h3>
+                    <p><em>"To nie je fér! Prečo sa to deje mne? Ten klient je idiot. Teraz nebudem mať na nájom. Svet je proti mne."</em></p>
+                    <hr style="border-color: #444; margin: 15px 0;">
+                    <p style="font-size: 0.9rem; color: #aaa;">
+                        <strong>Výsledok:</strong> Cítiš bezmocnosť. Veríš v oddelenosť. Dávaš silu okolnostiam. Zrkadlo ti odrazí viac nedostatku.
+                    </p>
+                </div>
+
+                <div class="card creator">
+                    <h3>✅ Nové Ja (Tvorca)</h3>
+                    <p><em>"Toto sa nedeje MNĚ, deje sa to PRE MŇA. Ja som zdrojom mojej reality. Ak tento klient odišiel, znamená to, že uvoľnil miesto pre niečo lepšie, čo som si vytvoril."</em></p>
+                    <hr style="border-color: #444; margin: 15px 0;">
+                    <p style="font-size: 0.9rem; color: var(--gold);">
+                        <strong>Výsledok:</strong> Cítiš silu. Preberáš zodpovednosť. Zrkadlo nemá na výber, musí ti odraziť novú, lepšiu príležitosť.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Tvoja premena</h2>
+            <p>Kniha hovorí: <em>"Ak realita vždy bola zrkadlom, znamená to, že sa ti nikdy nič nestalo... stalo sa to kvôli tebe."</em></p>
+            <p>Napíš jednu situáciu, ktorá ťa momentálne trápi. Potom ju prepiš z pohľadu <strong>Tvorcu</strong>.</p>
+            
+            <textarea placeholder="Napríklad: Hnevám sa na šéfa... -> ZMENA: Môj šéf len zrkadlí moju vlastnú neistotu. Rozhodujem sa cítiť sebaisto a vidieť ho ako podporujúceho..."></textarea>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">Tvoje poznámky sú súkromné (neukladajú sa na server).</p>
+        </section>
+
+        <section>
+            <h2>Overenie pochopenia</h2>
+            <p>Čo je podľa Kapitoly 1 primárnou príčinou všetkých okolností v tvojom živote?</p>
+            
+            <div id="quiz">
+                <button class="quiz-option" onclick="checkAnswer(this, false)">A) Osud alebo náhoda</button>
+                <button class="quiz-option" onclick="checkAnswer(this, true)">B) Tvoje vlastné vedomie a presvedčenia</button>
+                <button class="quiz-option" onclick="checkAnswer(this, false)">C) Rozhodnutia iných ľudí</button>
+            </div>
+            <p id="quiz-result" style="margin-top: 15px; font-weight: bold; height: 20px;"></p>
+        </section>
+
+        <section>
+            <div class="action-box">
+                <h2 style="color: white; margin-bottom: 10px;">🔥 Výzva na tento týždeň</h2>
+                <p style="font-size: 1.2rem;">
+                    <strong>Hraj sa na "Detektíva Reality"</strong>
+                </p>
+                <p>
+                    Kedykoľvek sa ti niečo stane (dobré alebo zlé), zastav sa a povedz si:
+                    <br><br>
+                    <em>"Toto je odraz. Čo som vysielal/a, že sa mi toto vrátilo?"</em>
+                </p>
+                <button class="start-btn" style="background: white; color: var(--accent); margin-top: 20px;">
+                    Mám splnené
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+            
+            // Fade in sections on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+
+            document.querySelectorAll('section').forEach((section) => {
+                observer.observe(section);
+            });
+        };
+
+        // Reveal Secret
+        function revealSecret() {
+            document.getElementById('secretText').classList.remove('reveal-blur');
+            document.querySelector('.reveal-btn').style.display = 'none';
+        }
+
+        // Quiz Logic
+        function checkAnswer(btn, isCorrect) {
+            let options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.disabled = true);
+            
+            if (isCorrect) {
+                btn.classList.add('correct');
+                document.getElementById('quiz-result').innerText = "Správne! Ty si príčina, svet je následok.";
+                document.getElementById('quiz-result').style.color = "#2ed573";
+            } else {
+                btn.classList.add('wrong');
+                document.getElementById('quiz-result').innerText = "Skús to znova. Pamätaj, nič nie je 'vonku'.";
+                document.getElementById('quiz-result').style.color = "#ff4757";
+                setTimeout(() => {
+                    options.forEach(opt => {
+                        opt.disabled = false;
+                        opt.classList.remove('wrong');
+                    });
+                    document.getElementById('quiz-result').innerText = "";
+                }, 2000);
+            }
+        }
+    </script>
+
+</body>
+</html>

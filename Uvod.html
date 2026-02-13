@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Úvod</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Specific Overrides for Uvod */
+        :root {
+            --accent-gold: #fbbf24;
+            --accent-purple: #a855f7;
+        }
+
+        .hero h1 {
+            background: linear-gradient(to right, #fff, var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+        }
+
+        .book-content {
+            border-left: 4px solid var(--accent-gold);
+            border-right: none;
+            overflow: visible !important;
+            /* Allow side notes to pop out */
+        }
+
+        .book-content::before {
+            content: "“";
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 8rem;
+            color: rgba(251, 191, 36, 0.1);
+            font-family: serif;
+        }
+
+        /* Ensure notes are visible on mobile */
+        @media (max-width: 1200px) {
+            .note-content.side-popup {
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+                margin-top: 1rem;
+                border-left: 2px solid var(--accent-gold);
+            }
+
+            .note-anchor {
+                position: relative;
+                right: auto;
+                float: right;
+                margin-left: 10px;
+            }
+        }
+
+        /* --- CONCEPTS SECTION (Specific Layout) --- */
+        .concepts-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, var(--primary-bg), #261836);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+            margin: 10px auto;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- AFFIRMATION MIRROR (Unique) --- */
+        .affirmation-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: radial-gradient(circle at center, #2e1065 0%, var(--primary-bg) 70%);
+        }
+
+        .mirror-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.5s ease;
+        }
+
+        .mirror-container:hover {
+            box-shadow: 0 0 80px rgba(251, 191, 36, 0.4);
+            transform: scale(1.02);
+        }
+
+        .affirmation-text {
+            font-size: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInText 4s forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .video-caption {
+            margin-top: 1.5rem;
+            color: var(--accent-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+        }
+
+        /* Next Chapter Btn */
+        .next-chapter-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+
+        .next-chapter-btn:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?universe,mirror,dream'); background-size: cover; background-position: center;">
+        <div class="hero-content" style="max-width: 800px; animation: fadeIn 2s ease-in-out;">
+            <h4>Svet je taký, aký si TY</h4>
+            <h1 style="font-size: 4rem;">Úvod</h1>
+            <p style="font-size: 1.5rem; color: #cbd5e1; font-weight: 300;">Kráľ, ktorý hľadal svoje vlastné kráľovstvo,
+                zabúdajúc, že on sám je kráľovstvo.</p>
+        </div>
+        <div class="scroll-down" onclick="document.getElementById('content').scrollIntoView({behavior: 'smooth'})">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" style="padding-bottom: 0;">
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/MaDtpjpdoWk?si=OvTfD4jvwlBZRdR-"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section id="content" class="book-content">
+        <h2 style="color: var(--accent-gold); text-align: center; margin-bottom: 2rem;">Úvod</h2>
+        <div class="book-text">
+
+            <div class="paragraph-wrapper">
+                <p>
+                    <em>„Celý život kričal do priepasti a prosil, aby sa svet zmenil, no ozvena mu vracala len jeho
+                        vlastný
+                        hlas. Až v tichu pochopil, že priepasť nemá vlastnú vôľu – len verne opakuje pieseň, ktorú
+                        spieva on
+                        sám.“</em>
+                </p>
+                <!-- Side Note 1 -->
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-info"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-gold);">Priepasť je Zrkadlo</h5>
+                        <p style="font-size: 0.9rem;">Metafora priepasti ukazuje na neutrálnu povahu reality. Realita
+                            nie je bytosť, ktorá ťa súdi. Je to mechanizmus. Ak kričíš 'nenávisť', vráti sa 'nenávisť'.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ECHO CHAMBER TOOL -->
+            <div class="echo-chamber">
+                <div class="echo-title"><i class="fas fa-volume-up"></i> Vyskúšaj Ozvenu Reality</div>
+                <input type="text" class="echo-input" placeholder="Napíš, čo vysielaš do sveta..."
+                    onkeypress="handleEcho(event)">
+                <div class="echo-results" id="echoResults">
+                    <p style="color: rgba(255,255,255,0.2); font-style: italic;">(Stlač Enter)</p>
+                </div>
+            </div>
+
+            <p>
+                Rozhodol som sa začať túto knihu touto metaforou, pretože dokonale ilustruje, ako sme my, ľudské
+                bytosti, úplne stratili kontakt s našou pravou podstatou. Kráčame touto fyzickou ríšou bez toho, aby sme
+                vedeli kto sme a čoho sme schopní.
+            </p>
+
+            <div class="paragraph-wrapper">
+                <p>
+                    Od narodenia predpokladáme, že sme bezmocné fyzické bytosti, a chodíme po tejto zemi v nevedomosti o
+                    obrovskej sile, ktorú vlastníme. Automaticky veríme, že okolnosti sa nám dejú kvôli šťastiu alebo
+                    inému
+                    náhodnému faktoru. Vkladáme svoju vieru do kauzality, pričom si neuvedomujeme, že <span
+                        class="highlight">my sme príčina a svet je následok.</span>
+                </p>
+                <!-- Side Note 2 -->
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-eye"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-cyan);">Obrátená Kauzalita</h5>
+                        <p style="font-size: 0.9rem;">V škole nás učia, že vonkajšia udalosť (príčina) vyvolá tvoju
+                            reakciu (následok). Tu sa učíme opak: Tvoj stav je príčina, udalosť je následok.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>
+                Niektorí veria v osud, iní v božskú bytosť, ktorá trestá zlé skutky a odmeňuje dobré, ale väčšina ľudí
+                zostáva úplne nevedomá skutočnosti, že fyzická realita nie je nič iné ako zrkadlo, ktoré ťa napodobňuje.
+                Usmieva sa, keď sa usmievaš ty, a mračí sa, keď sa mračíš ty.
+            </p>
+
+            <p>
+                Teraz, čo keby si na krátky okamih mohol odložiť všetko, čo ťa učili o živote? Čo keby som ti povedal,
+                že život sa nedeje tebe, ale skôr reaguje na teba? Že si nikdy nebol obeťou okolností, ale vždy ich
+                tvorcom? Že aj v tých najťažších situáciách boli tie okolnosti spôsobené tebou, že si nikdy nebol vydaný
+                na milosť Bohu, ktorý rozhoduje o tvojom osude?
+            </p>
+
+            <div class="paragraph-wrapper">
+                <p>
+                    V skutočnosti Bohu nezáleží na tom, či si vytvoríš život v bohatstve alebo v chudobe. Tvoj život je
+                    tvoje plátno a ty si slobodný namaľovať čokoľvek, po čom túžiš. Akúkoľvek realitu namaľuješ, bude
+                    rovnako platná, rovnako krásna. To, čo nazývaš „skutočným svetom“, nie je nič iné ako sen, ilúzia
+                    vytvorená tvojím vlastným vedomím.
+                </p>
+                <!-- Side Note 3 -->
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-heart"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-purple);">Láska je Sloboda</h5>
+                        <p style="font-size: 0.9rem;">Prečo by Boh dovolil chudobu? Pretože láska neobmedzuje. Dáva ti
+                            absolútnu slobodu zažiť čokoľvek, čo si pre seba vytvoríš. Aj keď je to bolesť.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>
+                <span class="highlight">Čím silnejšia je ilúzia, tým extatickejšie je prebudenie.</span> Každý objekt,
+                každá skúsenosť, každá osoba, každá udalosť, s ktorou sa stretneš, je projekcia, odraz tvojich
+                myšlienok, presvedčení a očakávaní. Presne tak ako v tvojom sne v noci, všetko sa javí tak skutočne, ale
+                v momente, keď sa zobudíš, uvedomíš si, že sa to všetko dialo v tebe. Aj zdanlivo oddelené postavy a
+                udalosti boli v skutočnosti ty.
+            </p>
+
+            <div class="paragraph-wrapper">
+                <p>
+                    Ty si tvorcom všetkého, všetko okolo teba je predĺžením teba. Ty si snívajúci, sen aj snívaný,
+                    všetko v
+                    jednom. Vytvoril si celý tento svet, do najmenšieho detailu, a máš schopnosť ho zmeniť v okamihu.
+                    Keď si
+                    uvedomíš túto pravdu, ilúzia sa začne rozplývať. Začneš vidieť, že nič nie je oddelené, nič nie je
+                    pevné. Všetko plynie, neustále sa mení a reaguje na teba.
+                </p>
+                <img src="https://realita.mywire.org/images/uvod1.jpg" alt="Úvod: Zmena perspektívy"
+                    style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+                <!-- Side Note 4 -->
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-film"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-gold);">Projektor</h5>
+                        <p style="font-size: 0.9rem;">Ty si svetlo v projektore. Film je tvoje presvedčenie. Svet je
+                            plátno. Ak sa ti nepáči film, nekrič na plátno. Vymeň film v projektore.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>
+                Ty si projektor, vedomie za plátnom reality. Každá skúsenosť, ktorú si mal, každá osoba, ktorú si
+                stretol, každá takzvaná prekážka, ktorá sa pred tebou objavila, to všetko si bol ty, hrajúci hru,
+                ponárajúci sa hlbšie do ilúzie, aby si zažil silu prebudenia. Rozhodol si sa zabudnúť, aby si mohol
+                cítiť extázu zo spomenutia si. Rozhodol si sa cítiť stratený, aby si mohol ochutnať blaženosť návratu
+                domov.
+            </p>
+            <p>
+                Si taký mocný, že aj keby si sa ponoril do najhlbšieho spánku a zabudol všetko o svojej pravej podstate,
+                vždy by si našiel cestu späť. Hlboko vo vnútri vieš, že neexistuje spôsob, ako sa stratiť navždy. Bez
+                ohľadu na to, ako ďaleko by si zablúdil do ilúzie oddelenosti, nevyhnutne by si si spomenul, kto si.
+            </p>
+            <p>
+                A teraz, tu si, s voľbou vidieť jasne, alebo pokračovať v predstieraní.
+            </p>
+        </div>
+    </section>
+
+    <!-- Concepts Grid -->
+    <section class="concepts-section">
+        <h2 class="section-title">Kľúčové myšlienky Úvodu</h2>
+        <div class="grid-container">
+            <div class="concept-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-video icon-large"></i>
+                        <h3>Ty si Projektor</h3>
+                        <p>Dotkni sa pre odhalenie pravdy</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Nie si obeť</h3>
+                        <p>Svet nie je film, ktorý sleduješ. Je to film, ktorý premietaš. Všetko "tam vonku" má pôvod
+                            "tu vnútri".</p>
+                    </div>
+                </div>
+            </div>
+            <!-- More cards kept same as before but abbreviated for brevity here if needed -->
+            <div class="concept-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-arrows-spin icon-large"></i>
+                        <h3>Zrkadlo Reality</h3>
+                        <p>Ako funguje svet?</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Príčina a Následok</h3>
+                        <p>Realita len zrkadlí tvoj stav. Ak sa mračíš na zrkadlo, neodrazí úsmev. Ty sa musíš usmiať
+                            prvý.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-bed icon-large"></i>
+                        <h3>Sen a Prebudenie</h3>
+                        <p>Prečo sme tu?</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Hra na Zabudnutie</h3>
+                        <p>Zabudli sme na svoju moci zámerne. Aby sme mohli zažiť tú najväčšiu extázu – extázu zo
+                            znovunájdenia seba samého.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Vocabulary and Scenarios -->
+    <section class="vocabulary-section">
+        <div class="grid-container">
+
+            <div>
+                <h2 style="color: var(--accent-gold); margin-bottom: 2rem;">Slovníček prebudenia</h2>
+
+                <div class="vocab-item">
+                    <div class="vocab-term">Zrkadlo (The Mirror)</div>
+                    <p>Metafora pre fyzickú realitu. Nemá vlastnú vôľu. Je neutrálne. Len verne a okamžite odráža to,
+                        kým si, čomu veríš a čo očakávaš.</p>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-term">Projektor</div>
+                    <p>To si ty. Tvoje vedomie. Svetlo, ktoré prechádza cez "film" tvojich presvedčení a vytvára obraz
+                        na plátne sveta.</p>
+                </div>
+
+                <div class="vocab-item">
+                    <div class="vocab-term">Obeť vs. Tvorca</div>
+                    <p>Obeť verí, že život sa jej "deje". Tvorca vie, že život na neho "reaguje". Prechod od obete k
+                        tvorcovi je hlavným cieľom tejto knihy.</p>
+                </div>
+            </div>
+
+            <div>
+                <h2 style="color: var(--accent-gold); margin-bottom: 2rem;">Zo života: Zmena perspektívy</h2>
+                <p>Predstav si bežnú situáciu a pozri sa na ňu dvoma spôsobmi:</p>
+
+                <div class="scenario-box" style="border-left-color: #ef4444;">
+                    <h4 style="margin: 0 0 10px 0;">Starý pohľad (Spánok)</h4>
+                    <p><em>„Šéf na mňa nakričal. Mám smolu. Svet je nespravodlivý a ľudia sú zlí. Cítim sa bezmocne,
+                            pokazilo mi to celý deň.“</em></p>
+                    <p><small>Veríš v kauzalitu vonkajšieho sveta.</small></p>
+                </div>
+                <br>
+                <div class="scenario-box" style="border-left-color: var(--accent-gold);">
+                    <h4 style="margin: 0 0 10px 0;">Nový pohľad (Prebudenie)</h4>
+                    <p><em>„Šéf na mňa nakričal. Zaujímavé. Čo v mojom vnútri vytvorilo túto scénu? Cítil som sa neistý?
+                            Očakával som konflikt? On je len moje zrkadlo.“</em></p>
+                    <p><small>Preberáš zodpovednosť. Vieš, že zmenou seba zmeníš odraz.</small></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="affirmation-section">
+        <h2 style="margin-bottom: 2rem;">Tvoja pravda pre dnešný deň</h2>
+        <div class="mirror-container" id="mirror">
+            <div class="affirmation-text" id="affirmation-text">
+                "Ja som snívajúci,<br>sen i snívaný."
+            </div>
+            <p style="margin-top: 20px; color: rgba(255,255,255,0.5); font-size: 0.9rem;">(Klikni pre novú myšlienku)
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola1.html" class="next-chapter-btn">Pokračovať na Kapitolu 1 <i
+                class="fas fa-arrow-right"></i></a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script>
+        // Default affirmations script
+        const affirmations = [
+            '"Ja som snívajúci,<br>sen i snívaný."',
+            '"Svet sa nedeje mne,<br>ale reaguje na mňa."',
+            '"Ja som príčina,<br>svet je následok."',
+            '"Môj život je plátno<br>a ja držím štetec."',
+            '"Nič nie je oddelené.<br>Všetko som ja."'
+        ];
+
+        const mirror = document.getElementById('mirror');
+        const textElement = document.getElementById('affirmation-text');
+
+        if (mirror) {
+            mirror.addEventListener('click', () => {
+                textElement.style.opacity = 0;
+                setTimeout(() => {
+                    const randomIndex = Math.floor(Math.random() * affirmations.length);
+                    textElement.innerHTML = affirmations[randomIndex];
+                    textElement.style.opacity = 1;
+                }, 500);
+            });
+        }
+
+        // --- NEW SCRIPTS ---
+
+        // Echo Chamber
+        function handleEcho(e) {
+            if (e.key === 'Enter') {
+                const input = e.target.value;
+                const output = document.getElementById('echoResults');
+                output.innerHTML = ''; // Clear previous
+
+                if (!input.trim()) return;
+
+                // Create ripples
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const p = document.createElement('p');
+                        p.className = 'echo-text';
+                        // Fade opacity
+                        p.style.opacity = 1 - (i * 0.2);
+                        // Scale down slightly
+                        p.style.transform = `scale(${1 - (i * 0.05)})`;
+                        p.innerText = input + (i > 0 ? '...' : '');
+                        output.appendChild(p);
+                    }, i * 300); // Delay for echo effect
+                }
+            }
+        }
+
+        // Side Notes Toggle
+        function toggleSideNote(btn) {
+            // Find the sibling note-content
+            const content = btn.nextElementSibling;
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                btn.style.background = 'transparent';
+                btn.style.color = '#22d3ee';
+            } else {
+                content.style.display = 'block';
+                content.style.animation = 'fadeIn 0.3s ease';
+                btn.style.background = '#22d3ee';
+                btn.style.color = '#000';
+            }
+        }
+    </script>
+    <script src="footer.js"></script>
+</body>
+
+</html>

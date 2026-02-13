@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Kapitola 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,silhouette,meditation'); background-size: cover; background-position: center;">
+        <div class="hero-content">
+            <h4>Kapitola 1</h4>
+            <h1>Poznaj Sám Seba</h1>
+            <p>Kto v skutočnosti si, keď zabudneš na svoje meno a minulosť?</p>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" style="padding-bottom: 0;">
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/vWu4gCjapxY?si=fSZO28wpxwFDvk1V"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Audio Section -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">01 - Poznaj Sám Seba</h3>
+                </div>
+            </div>
+
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="https://realita.mywire.org/audio/1kapitola-kto-som.mp3"></audio>
+
+                <button class="play-pause-btn" id="playPauseBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+
+                <div class="audio-progress-area">
+                    <div class="progress-time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="book-content">
+        <div class="book-text">
+            <!-- Sidebar Gallery (Dynamic Content) -->
+            <div class="gallery-sidebar" id="sidebarGallery">
+                <!-- Images will be injected by JS -->
+            </div>
+
+            <div class="paragraph-wrapper">
+                <p>Kto v skutočnosti si? Nie identita, ktorú nosíš. Nie meno, ktoré ti dali, nie príbeh, ktorý si si o
+                    sebe rozprával. Odlož to všetko na chvíľu nabok. Zabudni na svoju minulosť, svoju osobnosť, svoje
+                    skúsenosti, čo zostane?
+                    <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                        <i class="fas fa-book-open"></i> Hlbší rozbor
+                    </button>
+                </p>
+
+                <div class="deep-dive-content">
+                    <h5 style="color: var(--accent-gold); margin-bottom: 1.5rem;">Rozbor: Hlbší Význam Otázky</h5>
+                    <p>Text kladie existenciálnu otázku identity a používa negáciu, aby ťa oddelil od všetkého naučeného
+                        a podmieneného.</p>
+
+                    <p
+                        style="margin-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; width: fit-content; color: var(--accent-cyan);">
+                        Význam po krokoch:</p>
+
+                    <p><strong>„Kto v skutočnosti si?“</strong><br>
+                        Otázka nemieri na opis osoby, ale na samotný základ bytia.</p>
+
+                    <p><strong>„Nie identita, ktorú nosíš.“</strong><br>
+                        Identita je konštrukt – roly, masky, sociálne funkcie. Nie je to podstata, ale nástroj
+                        fungovania vo svete.</p>
+
+                    <p><strong>„Nie meno, ktoré ti dali.“</strong><br>
+                        Meno je externý štítok. Označuje ťa, ale neurčuje, čím si.</p>
+
+                    <p><strong>„Nie príbeh, ktorý si si o sebe rozprával.“</strong><br>
+                        Sebaobraz je mentálny naratív vytvorený pamäťou, skúsenosťami a interpretáciami. Nie je to
+                        realita, ale jej výklad.</p>
+
+                    <p><strong>„Odlož to všetko na chvíľu nabok.“</strong><br>
+                        Výzva k dočasnému pozastaveniu myslenia založeného na pamäti a ego-štruktúre.</p>
+
+                    <p><strong>„Zabudni na svoju minulosť, svoju osobnosť, svoje skúsenosti…“</strong><br>
+                        Minulosť, osobnosť aj skúsenosti sú obsah vedomia, nie vedomie samotné.</p>
+
+                    <p style="margin-bottom: 1.5rem;"><strong>„Čo zostane?“</strong><br>
+                        Otázka smeruje k tomu, čo je nezávislé od obsahu mysle: čisté uvedomovanie, prítomné bytie,
+                        fakt, že „som“, bez prívlastkov.</p>
+
+                    <p style="border-left: 2px solid var(--accent-cyan); padding-left: 15px;">
+                        <strong>Záver:</strong><br>
+                        Text netvrdí odpoveď. Núti ťa ju zažiť, nie si ju myslieť. Keď odstrániš všetko, čo sa dá
+                        pomenovať, opisovať a pamätať, zostáva len vedomá prítomnosť. To je cieľ otázky.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Identity Peeling Tool -->
+            <div class="identity-section">
+                <p class="instruction-text"><i class="fas fa-hand-pointer"></i> Klikaj na vrstvy a odlep všetko, čím nie
+                    si.</p>
+                <div class="onion-container" id="onionContainer">
+                    <div class="layer-circle layer-core" id="coreLayer">
+                        <span class="core-text" id="coreText">JA SOM</span>
+                    </div>
+                    <div class="layer-circle layer-4" onclick="peelLayer(this)">Moje Meno</div>
+                    <div class="layer-circle layer-3" onclick="peelLayer(this)">Moja Minulosť</div>
+                    <div class="layer-circle layer-2" onclick="peelLayer(this)">Moje Presvedčenia</div>
+                    <div class="layer-circle layer-1" onclick="peelLayer(this)">Moje Telo</div>
+                </div>
+                <p id="peelFeedback" style="height: 20px; margin-top: 1rem; color: #94a3b8; font-style: italic;"></p>
+            </div>
+
+
+            <div class="paragraph-wrapper">
+                <p>Ak si niekedy zažil moment čistého pokoja, moment, kedy si odstúpil od hluku svojej mysle a
+                    jednoducho existoval, potom si sa dotkol odpovede. Pretože vo svojom jadre, za vrstvami myšlienok,
+                    spomienok a podmieňovania, nie si osoba zažívajúca realitu. <span class="highlight">Si realita
+                        samotná zažívajúca osobu</span>.
+                    <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                        <i class="fas fa-book-open"></i> Hlbší rozbor
+                    </button>
+                </p>
+
+                <div class="deep-dive-content">
+                    <h5 style="color: var(--accent-gold); margin-bottom: 1.5rem;">Rozbor: Úroveň Vnímania vs. Úroveň
+                        Myslenia</h5>
+
+                    <p>Tento text opisuje stav, ktorý je v ľudskej skúsenosti reálny a overiteľný, ale zle uchopiteľný
+                        pojmami, pretože neleží na úrovni myslenia, ale na úrovni samotného vnímania. Nehovorí o viere,
+                        filozofii ani o metafyzickej predstave, ale o okamihu, keď sa dočasne preruší automatická
+                        identifikácia s obsahom mysle.</p>
+
+                    <p>Keď človek zažije moment čistého pokoja, nejde o vytvorený stav ani o emocionálne vyvrcholenie.
+                        Ide o chvíľu, keď sa myšlienková aktivita buď výrazne utlmí, alebo stratí svoju psychologickú
+                        váhu. Myšlienky môžu byť prítomné, no prestávajú dominovať pozornosti. V tomto stave sa nestráca
+                        vedomie, naopak, je jasnejšie, pretože nie je zahltené hodnotením, očakávaním ani vnútorným
+                        komentárom. Tento pokoj nevzniká aktívnym úsilím, ale prirodzene sa objavuje vtedy, keď sa
+                        prestane udržiavať mentálny hluk.</p>
+
+                    <p>Podstatné je, že v takomto momente človek nezažíva seba primárne ako „osobu“ v zmysle
+                        psychologickej identity. Neprítomnosť vnútorného príbehu neznamená zánik vnímania, ale práve
+                        naopak – odhalí sa samotný fakt existencie. Zostáva jednoduché bytie bez potreby ho pomenovať
+                        alebo interpretovať. Tento stav sa často opisuje ako „len som“, hoci aj tento opis je už
+                        dodatočný.</p>
+
+                    <p>Text týmto smeruje k zásadnému posunu perspektívy. Bežne sa predpokladá, že existuje pevná osoba,
+                        ktorá vníma svet. Priame pozorovanie však ukazuje, že osoba – vrátane myšlienky „ja“, osobnej
+                        histórie a identity – sa objavuje ako súčasť skúsenosti, nie ako jej zdroj. Myšlienky o sebe
+                        prichádzajú a odchádzajú rovnako ako akýkoľvek iný mentálny obsah. To, čo je stabilné a
+                        nepretržité, nie je osobný príbeh, ale samotné vnímanie, v ktorom sa tento príbeh objavuje.</p>
+
+                    <p>Tvrdenie, že „nie si osoba zažívajúca realitu, ale realita zažívajúca osobu“, preto neznamená
+                        popretie praktickej existencie osoby. Osoba existuje ako funkčný model – ako psychologická a
+                        sociálna štruktúra potrebná na fungovanie v každodennom živote. Text však poukazuje na to, že
+                        táto štruktúra nie je fundamentálna. Je javom v rámci vedomia, nie jeho nositeľom. Inými
+                        slovami, vedomie nepatrí osobe; osoba sa objavuje vo vedomí.</p>
+
+                    <p>Tento pohľad nie je záverom vyplývajúcim z viery alebo filozofickej špekulácie, ale z priamej
+                        skúsenosti, ktorú si môže overiť každý, kto niekedy zažil ticho mysle bez straty bdelosti. Keď
+                        sa mentálne vrstvy dočasne stiahnu, nezostane prázdnota ani ničota, ale jasná prítomnosť. Práve
+                        táto prítomnosť je tým, na čo text odkazuje ako na odpoveď – nie ako na definíciu, ale ako na
+                        rozpoznateľný fakt skúsenosti.</p>
+
+                    <p>V tomto zmysle text nesľubuje transformáciu ani nadstavbu identity. Skôr odhaľuje, že to, čo sa
+                        bežne považuje za „ja“, je sekundárne a prechodné, zatiaľ čo samotné vedomie, v ktorom sa všetko
+                        odohráva, je základné a vždy prítomné, aj keď si ho zvyčajne nevšímame.</p>
+                </div>
+            </div>
+
+            <div class="paragraph-wrapper">
+                <p>Nie si telo. Nie si meno. Si vedomie, v ktorom sa toto všetko deje. Všetko čo vidíš, všetko čoho sa
+                    dotýkaš, všetko o čom veríš, že je vonkajšie, nie je mimo teba. Je to vo vnútri tvojho vedomia.
+                    Presne tak ako v tvojom sne v noci, kde veríš, že beháš, rozprávaš, stretávaš ľudí a zažívaš
+                    dobrodružstvá, až kým sa nezobudíš a neuvedomíš si, že sa to všetko dialo v tvojej mysli. Život je
+                    presne rovnaký, až na to, že do tohto sna si vstúpil dobrovoľne.</p>
+
+                <!-- Reality Translator Tool -->
+                <div class="translator-section">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h3 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">Nástroj 4: Prekladač Reality</h3>
+                        <p style="color: #94a3b8; font-size: 0.9rem;">To, čo ťa hnevá "tam vonku", je len správa pre
+                            teba.</p>
+                    </div>
+
+                    <div class="translator-grid">
+                        <div class="translator-input-box">
+                            <div class="translator-label" style="color: var(--accent-gold);">Ilúzia (Svet vonku)</div>
+                            <textarea id="transInput" class="trans-textarea"
+                                placeholder="Napíš, čo ťa hnevá. Napr.: 'Môj šéf ma nerešpektuje.'"></textarea>
+                        </div>
+
+                        <div class="translator-arrow" onclick="translateReality()">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+
+                        <div class="translator-output-box">
+                            <div class="translator-label" style="color: var(--accent-cyan);">Pravda (Svet vnútri)</div>
+                            <div class="translator-overlay" id="transOverlay">
+                                <i class="fas fa-lock" style="margin-right: 8px;"></i> Klikni na šípku
+                            </div>
+                            <div id="transResult" class="translator-result"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-bed"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-cyan);">Lucidné Snívanie</h5>
+                        <p style="font-size: 0.9rem;">Keď v noci zistíš, že snívaš, zrazu získaš nad snom kontrolu a
+                            prestaneš sa báť príšer. Prebudenie v realite funguje rovnako. Keď vieš, že toto je 'sen',
+                            prestaneš sa báť problémov a začneš ich meniť.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Journal Prompt -->
+
+
+
+            <p>Predtým, než si sa narodil do tejto fyzickej skúsenosti, existoval si ako čisté, nekonečné vedomie,
+                neobmedzené, beztvaré. Nepoznal si oddelenosť, boj, ani strach. Bol si všetkým. Si všetkým. Ale aby si
+                zažil sám seba novým spôsobom, rozhodol si sa zabudnúť. Rozhodol si sa vstúpiť do tohto sna obmedzenia,
+                nasadiť si masku, prijať postavu a jej príbeh.</p>
+
+            <p>Predstav si to ako hru. Ty, nekonečný, si sa rozhodol hrať rolu. Ale aby hra pôsobila skutočne, musel si
+                zabudnúť, že je to hra. Musel si sa ponoriť tak hlboko do ilúzie, aby všetko okolo teba posilňovalo
+                myšlienku, že si malý, oddelený a bezmocný. Inak, kde by bola výzva? Keby si už
+                vedel, že si Boh, ako by si mohol zažiť ten úžasný pocit, keď si spomenieš?
+                <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                    <i class="fas fa-book-open"></i> Hlbší rozbor
+                </button>
+            </p>
+
+            <div class="deep-dive-content">
+                <h5 style="color: var(--accent-gold); margin-bottom: 1.5rem;">Rozbor: Metafyzika Zabudnutia</h5>
+
+                <p>V tomto texte sa vychádza z metafyzického predpokladu, že vedomie je primárne a nie je produktom
+                    mozgu, tela ani času. Individuálna ľudská existencia sa tu nechápe ako začiatok bytia, ale ako
+                    lokalizovaná skúsenosť niečoho, čo existovalo pred formou a pokračuje po nej. Narodenie v tomto
+                    pohľade neznamená vznik vedomia, ale jeho vstup do obmedzenej perspektívy.</p>
+
+                <p>Keď text hovorí, že „predtým, než si sa narodil do tejto fyzickej skúsenosti, existoval si ako čisté,
+                    nekonečné vedomie“, vyjadruje ontologické tvrdenie známe z viacerých metafyzických systémov
+                    (advaita, mahájánový buddhizmus, neoplatonizmus, niektoré smery mystického kresťanstva aj moderné
+                    idealistické smery). V tomto rámci je individuálne „ja“ len dočasná konfigurácia, zatiaľ čo skutočná
+                    identita je neobmedzené vedomie bez tvaru, hraníc a polarity. Stav bez oddelenosti, strachu a boja
+                    je prirodzený dôsledok neexistencie duality subjekt–objekt.</p>
+
+                <p>Myšlienka, že vedomie „bolo všetkým“ a „je všetkým“, znamená, že neexistuje nič mimo neho. Svet,
+                    telá, mysle a čas nie sú niečím externým voči vedomiu, ale jeho prejavmi. Oddelenosť sa v tomto
+                    pohľade nepovažuje za ontologickú realitu, ale za zážitkový efekt obmedzenej perspektívy.</p>
+
+                <p>Motív „rozhodol si sa zabudnúť“ treba v tomto rámci chápať doslovne, ale nie psychologicky. Nejde o
+                    rozhodnutie osobnosti, ale o akt samotného vedomia, ktoré sa chce zažiť z vnútra obmedzenia.
+                    Zabudnutie tu nie je chyba ani pád, ale nevyhnutná podmienka autentickej skúsenosti. Bez zabudnutia
+                    by neexistoval kontrast, vývoj, vzťah ani význam. Vedomie by zostalo v stave absolútnej jednoty bez
+                    diferenciácie, a teda bez skúsenosti v pravom zmysle slova.</p>
+
+                <p>Analógia hry presne vystihuje túto dynamiku. Nekonečné vedomie prijíma rolu, masku a príbeh, aby sa
+                    mohlo zažiť ako niečo konkrétne. Aby hra fungovala, musí sa identifikácia s rolou stať úplnou. Ak by
+                    si vedel, že si nekonečný od začiatku, skúsenosť by stratila napätie, riziko, hĺbku a transformáciu.
+                    Ilúzia oddelenosti preto nie je omyl, ale mechanizmus skúsenosti.</p>
+
+                <p>Svet, telo, spoločnosť a psychologické podmienky potom slúžia ako konzistentný systém, ktorý túto
+                    ilúziu udržiava. Nie ako trest, ale ako podpora hry. Pocit malosti, bezmocnosti a individuality nie
+                    je konečnou pravdou, ale dočasným stavom vedomia ponoreného do vlastného výtvoru.</p>
+
+                <p>Záverečná otázka o Bohu v tomto kontexte neodkazuje na náboženský koncept, ale na absolútne vedomie
+                    bez formy. Pointa nie je byť „Bohom“ ako identitou, ale prežiť moment spomenutia – návratu poznania
+                    po období úplného zabudnutia. Hodnota tohto spomenutia existuje práve preto, že mu predchádzala
+                    skúsenosť obmedzenia.</p>
+
+                <p style="border-left: 2px solid var(--accent-cyan); padding-left: 15px;"><strong>Záver:</strong><br>
+                    Ak to zhrnieme striktne v rámci tohto metafyzického pohľadu: realita je vedomie, inkarnácia je jeho
+                    lokalizácia, zabudnutie je funkcia skúsenosti a prebudenie nie je získanie niečoho nového, ale
+                    rozpoznanie toho, čo tu bolo vždy.</p>
+            </div>
+
+            <p>A tak si sa narodil do sveta, ktorý ti povedal, že si len človek. Že vesmír je niečo oddelené od teba. Že
+                život je niečo, čo sa ti deje. Že musíš bojovať, trpieť a zaslúžiť si svoju hodnotu. Ilúzia bola
+                navrhnutá tak dokonale, že si jej úplne uveril. Zabudol si na svoju silu. Zabudol si, kto si. Ale teraz
+                ti hlas z vnútra šepká a pripomína, že je tu niečo viac. Že niečo na tomto svete celkom nesedí. Že
+                možno, len možno, tu nie si na to, aby si trpel. Že možno si oveľa mocnejší, než si bol vedený veriť.
+            </p>
+
+            <h3 class="sub-heading">Prvá lož: Oddelenosť</h3>
+            <p>Najväčšou ilúziou v tejto hre je viera, že vonkajší svet je od teba oddelený. Že vesmír je už hotový
+                systém, do ktorého ťa náhodne hodili, a kde musíš hrať podľa jeho pravidiel. Že si len jedným z miliárd
+                bojujúcich o svoj podiel, snažiacich sa vydobyť si miesto vo svete, ktorému na tom nezáleží. Ale to je
+                prvá a najväčšia lož.</p>
+
+            <img src="https://realita.mywire.org/images/prva-loz-oddelenost.webp" alt="Prvá lož: Oddelenosť"
+                style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+
+            <div class="paragraph-wrapper">
+                <p><span class="highlight">Neexistuje žiadny "vonkajší svet"</span>. Všetko, čo
+                    vidíš, je tvoj vlastný výtvor. Všetko existuje vo vnútri tvojho vedomia. Ľudia, okolnosti, udalosti.
+                    To sú projekcie tvojho vedomia, odrazy tvojich presvedčení, zrkadlá ukazujúce ti, kto si. Opäť,
+                    presne tak ako v sne, kde každá osoba, ktorú stretneš, je v skutočnosti predĺžením tvojej vlastnej
+                    mysle. Každá jedna vec, ktorú v tomto svete zažiješ, je jednoducho predĺžením teba. Neexistuje
+                    žiadne rozdelenie. Neexistuje žiadna oddelenosť. Nie si vo vesmíre, ty si vesmír.
+                    <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                        <i class="fas fa-book-open"></i> Hlbší rozbor
+                    </button>
+                </p>
+
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-globe"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-purple);">Holografický Vesmír</h5>
+                        <p style="font-size: 0.9rem;">Kvantová fyzika nám hovorí, že pozorovateľ ovplyvňuje pozorované.
+                            Neexistuje objektívny svet "tam vonku" bez teba. Ty ho svojím pohľadom a očakávaním neustále
+                            tvoríš.</p>
+                    </div>
+                </div>
+
+                <div class="deep-dive-content">
+                    <h5 style="color: var(--accent-gold); margin-bottom: 1.5rem;">Rozbor: Vedomie vs. Empirická Realita
+                    </h5>
+
+                    <p>Vedomie je tu chápané ako primárne a realita ako jeho prejav. V tomto rámci tvrdenie, že
+                        neexistuje skutočne „vonkajší“ svet, nepopiera zdanlivú stabilitu ani konzistentnosť skúsenosti,
+                        ale spochybňuje predpoklad, že realita existuje nezávisle od vedomia, prostredníctvom ktorého je
+                        poznávaná. Základné tvrdenie spočíva v tom, že oddelenosť medzi subjektom a svetom je skôr
+                        zážitková než fundamentálna.</p>
+
+                    <p>Z psychologického a empirického hľadiska tento pohľad nachádza čiastočnú oporu v tom, ako ľudské
+                        vnímanie v skutočnosti funguje. Súčasná kognitívna veda ukazuje, že mozog pasívne nezaznamenáva
+                        objektívny svet, ale aktívne konštruuje prežívanú realitu na základe senzorických vstupov,
+                        predchádzajúcich presvedčení, očakávaní, emocionálnych stavov a naučených vzorcov. To, čo
+                        prežívame ako „svet“, je preto vždy sprostredkovaná skúsenosť – model vytvorený vo vedomí, nie
+                        priamy prístup k veciam samotným. Hoci to empiricky nedokazuje, že neexistuje žiadna vonkajšia
+                        realita, ukazuje to, že jediná realita, s ktorou sa kedy stretávame, je tá, ktorá sa objavuje vo
+                        vedomí.</p>
+
+                    <p>Psychológia ďalej podporuje myšlienku, že vnútorný stav človeka formuje svet, ktorý prežíva.
+                        Dlhodobo známe mechanizmy ako projekcia, selektívna pozornosť, potvrdzovacie skreslenie a
+                        sebanapĺňajúce proroctvo ukazujú, že presvedčenia a očakávania silne ovplyvňujú to, čo si
+                        všímame, ako interpretujeme udalosti a ako na nás reagujú iní ľudia. V priebehu času tieto
+                        spätné slučky môžu vytvoriť životné vzorce, ktoré pôsobia tak, akoby „realita samotná“ odrážala
+                        vnútorné nastavenie jednotlivca. V tomto zmysle metafora sveta ako zrkadla nie je len poetická,
+                        ale opisne presná na úrovni prežívanej skúsenosti.</p>
+
+                    <p>Analógia sna je v tomto texte mimoriadne dôležitá. V sne existuje celý svet: priestory, postavy,
+                        udalosti a konflikty. Všetky sa javia ako autonómne a nezávislé, no po prebudení je zrejmé, že
+                        celý snový svet sa odohrával v jednom vedomí a každá postava bola jeho prejavom. Metafyzické
+                        tvrdenie knihy nie je, že bdelý stav je totožný so snom, ale že oba fungujú na rovnakom
+                        základnom princípe: skúsenosť vzniká vo vedomí, nie mimo neho. Bdelá realita sa od sna líši
+                        stabilitou, kontinuitou a zdieľanou štruktúrou, no stále je poznateľná výlučne ako jav v
+                        uvedomovaní.</p>
+
+                    <p>Keď text tvrdí, že „nie si vo vesmíre, ale si vesmír“, ide o tvrdenie identity, nie o fyzický
+                        opis. Neodmieta funkčnú realitu tela ani praktickú užitočnosť vnímania sveta ako vonkajšieho.
+                        Poukazuje však na to, že priestor, čas, objekty a dokonca aj pocit osobného „ja“ sú fenomény
+                        objavujúce sa vo vedomí. Z tohto pohľadu vedomie nie je lokalizované v priestore; priestor je
+                        javom vo vedomí. Jednotlivec nie je časťou reality, ale miestom, kde sa realita uvedomuje sama
+                        seba.</p>
+
+                    <p>Dôležité je, že absencia úplného empirického potvrdenia tento rámec neznehodnocuje. Samotná veda
+                        uznáva, že v súčasnosti nemá jednotné vysvetlenie vedomia ani jeho vzťahu k fyzickej realite.
+                        Metafyzický pohľad prezentovaný v knihe pracuje na úrovni, ktorá predchádza meraniu: zaoberá sa
+                        podmienkami samotnej skúsenosti, nie jej merateľnými výstupmi. Psychológia a neuroveda dokážu
+                        vysvetliť, ako vzniká skúsenosť oddelenosti a prečo pôsobí tak presvedčivo, no nedokážu
+                        definitívne vyriešiť otázku, čo je realita vo svojom základe.</p>
+
+                    <p style="border-left: 2px solid var(--accent-cyan); padding-left: 15px;">
+                        <strong>Záver:</strong><br>
+                        Takto chápané metafyzické, psychologické a empirické perspektívy si neprotirečia. Metafyzický
+                        rámec poskytuje ontologické tvrdenie: realita je vedomie prejavujúce sa samo sebou. Psychológia
+                        vysvetľuje mechanizmy, prostredníctvom ktorých sa toto prejavenie personalizuje, fragmentuje a
+                        prežíva ako oddelenosť. Empirická veda opisuje pozorovateľné vzorce v rámci tohto procesu bez
+                        toho, aby bola schopná úplne vysvetliť samotné vedomie.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-heading">Druhá lož: Bezmocnosť</h3>
+            <div class="paragraph-wrapper">
+                <p>Druhou veľkou ilúziou je viera, že si bezmocný. Že život sa ti "deje". Že musíš pracovať, bojovať a
+                    zápasiť, aby si dostal to, čo chceš. Ale to jednoducho nie je pravda. Nie si tu preto, aby si žobral
+                    o to, čo je už tvoje. Nie si tu, aby si si svoje túžby zaslúžil. Si tu, aby si si spomenul, že sú už
+                    tvoje. Ty si snívajúci tohto sna a v momente, keď sa rozhodneš, že je niečo tvoje, vesmír sa MUSÍ
+                    preskupiť tak, aby to tak bolo. Jediná vec, ktorá ti stojí v ceste, je tvoj vlastný odpor,
+                    pochybnosti, strach a presvedčenia, ktoré ti tvrdia, že to nie je možné.
+                    <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                        <i class="fas fa-book-open"></i> Hlbší rozbor
+                    </button>
+                </p>
+
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-magnet"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-gold);">Príkaz, nie Žiadosť</h5>
+                        <p style="font-size: 0.9rem;">Realita je ako počítačový program. Nehodnotí, či si "dobrý" alebo
+                            "zlý". Iba vykonáva tvoj kód. Tvojím kódom je to, čo považuješ za pravdu (tvoje
+                            presvedčenie). Zmeň kód a program sa zmení.</p>
+                    </div>
+                </div>
+
+                <div class="deep-dive-content">
+                    <h5 style="color: var(--accent-gold); margin-bottom: 1.5rem;">Rozbor: Ilúzia Bezmocnosti vs.
+                        Agentnosť</h5>
+
+                    <p>Táto pasáž cieli na jednu z najhlbších zakorenených identít človeka: presvedčenie, že je pasívnym
+                        objektom udalostí. Metafyzicky ide o ilúziu oddelenosti – predstavu, že vedomie je oddelené od
+                        reality, že existuje „ja“ a „život“, ktorý na mňa pôsobí zvonka. V tomto rámci je človek autorom
+                        skúsenosti, nie jej obeťou. Život sa mu „nedeje“; je projekciou jeho vnútorného stavu,
+                        presvedčení a rozhodnutí na úrovni vedomia. Myšlienka, že treba bojovať, zápasiť a zasluhovať
+                        si, vychádza z paradigmy nedostatku a z viery, že zdroj je mimo nás. Text tvrdí opak: túžby
+                        nevznikajú náhodne, ale ako impulzy vedomia smerujúce k vlastnému rozvinutiu, a preto sú „už
+                        tvoje“ na úrovni potenciálu.</p>
+
+                    <p>Psychologicky sa tento princíp dá vysvetliť cez koncept locus of control a sebavnímania
+                        agentnosti. Ľudia s externým locus of control vnímajú udalosti ako niečo, čo sa im stáva, zatiaľ
+                        čo interný locus of control vedie k prežívaniu vplyvu, zodpovednosti a aktívneho formovania
+                        reality. Výskum opakovane ukazuje, že samotná zmena presvedčenia o vlastnej schopnosti
+                        ovplyvňovať výsledky vedie k merateľným zmenám správania, vytrvalosti, rozhodovania a v konečnom
+                        dôsledku aj výsledkov. Keď sa človek vnútorne rozhodne, že niečo je „jeho“, mení sa jeho
+                        pozornosť, očakávania, mikro-rozhodnutia a reakcie – a tým aj trajektória udalostí, ktoré
+                        zažíva. Nejde o pasívne čakanie, ale o zosúladenie vnútornej identity s konkrétnym smerom.</p>
+
+                    <p>Empiricky možno tento jav priblížiť cez mechanizmy ako sebanaplňujúce sa proroctvo, kognitívna
+                        selekcia a prediktívne spracovanie mozgu. Mozog neustále filtruje realitu na základe presvedčení
+                        o tom, čo je možné a čo nie. Ak niečo považujem za nemožné alebo „nie pre mňa“, prestávam si
+                        všímať príležitosti, signály a cesty, ktoré by k tomu viedli. Naopak, pevné vnútorné rozhodnutie
+                        mení percepčný filter: začínam vidieť možnosti, reagujem inak na rovnaké podnety a vstupujem do
+                        iných interakcií. Z vonkajšieho pohľadu to vyzerá ako „preskupenie okolností“, hoci ide o súhru
+                        vnútorných nastavení a následných reálnych krokov.</p>
+
+                    <p>Text zároveň presne identifikuje hlavné prekážky: odpor, pochybnosti, strach a limitujúce
+                        presvedčenia. Z psychologického hľadiska ide o obranné mechanizmy ega, ktoré chránia existujúcu
+                        identitu pred zmenou. Z metafyzického hľadiska sú to formy nesúladu medzi tým, čo si vedomie
+                        zvolilo, a tým, čomu verí na úrovni osobnosti. Kým tento nesúlad trvá, skúsenosť sa javí ako
+                        zápas. Keď sa rozpustí, realita začne plynúť s menším trením.</p>
+                </div>
+            </div>
+
+            <p>Ale aj keď si sa rozhodol zabudnúť na svoju pravú podstatu, neprišiel si sem sám. Časť teba zostala plne
+                vedomá, plne prebudená a plne spojená s pravdou. To je to, čo nazývame Vyššie Ja. Tvoje Vyššie Ja si ty,
+                ale na vyššej úrovni vedomia. Je to tá verzia teba, ktorá sa nikdy nestratila v sne. Verzia, ktorá vidí
+                väčší obraz. Vždy ťa vedie, vždy ti posiela znamenia, postrkuje ťa k tomu, aby si si spomenul.</p>
+
+            <img src="https://realita.mywire.org/images/druha-loz.webp" alt="Druhá lož: Bezmocnosť"
+                style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+
+            <div class="paragraph-wrapper">
+                <p>Vždy, keď máš intuitívne tušenie, nevysvetliteľný ťah k niečomu, moment hlbokého pokoja alebo
+                    jasnosti,
+                    to ti šepká tvoje Vyššie Ja a pripomína ti, kto si. Nehovorí cez strach alebo silu. Hovorí cez
+                    inšpiráciu, vzrušenie a vnútorné vedenie. Čím viac mu dôveruješ, tým jasnejšie ho budeš počuť. Čím
+                    viac
+                    stíšiš hluk strachu, pochybností a nekonečného premýšľania, tým ľahšie budeš vedený. Tvoje Vyššie Ja
+                    už
+                    pozná tú najlepšiu, najrýchlejšiu a najľahšiu cestu pre teba. Všetko, čo musíš urobiť, je počúvať.
+                    <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                        <i class="fas fa-book-open"></i> Hlbší rozbor
+                    </button>
+                </p>
+
+                <div class="deep-dive-content">
+                    <h5 style="color: var(--accent-gold); margin-bottom: 1.5rem;">Rozbor: Mechanizmus Vnútorného Vedenia
+                    </h5>
+                    <p>Táto pasáž opisuje mechanizmus vnútorného vedenia jazykom metafyziky, ale zároveň sa opiera o
+                        fenomény, ktoré sú dobre známe aj v psychológii a kognitívnych vedách.</p>
+                    <p>Z metafyzického hľadiska „Vyššie Ja“ označuje tú úroveň vedomia, ktorá nie je viazaná na strach,
+                        prežitie, ego ani naučené vzorce. Je to širšia perspektíva vedomia, ktorá má prístup k celku – k
+                        súvislostiam, ktoré bežná myseľ zameraná na kontrolu a analýzu nevidí. Preto nekomunikuje cez
+                        nátlak, hrozby či paniku. Jeho „jazyk“ je tichý: pocit súladu, vnútorná istota, náhla jasnosť
+                        alebo jemná, ale vytrvalá príťažlivosť k určitému smeru. Text tým naznačuje, že pravé vedenie
+                        nikdy nevzniká zo strachu, pretože strach je vždy signálom identifikácie s obmedzenou
+                        perspektívou.</p>
+                    <p>Psychologicky sa tieto skúsenosti dajú vysvetliť ako prejavy integrácie nevedomých procesov.
+                        Ľudský mozog neustále spracúva obrovské množstvo informácií mimo vedomého uvedomenia. Intuícia,
+                        „nevysvetliteľný ťah“ alebo moment pokoja často vznikajú vtedy, keď sa tieto informácie
+                        zosúladia a vytvoria koherentný smer, ktorý ešte neprešiel racionálnym rozborom. Výskum
+                        rozhodovania ukazuje, že intuícia nie je iracionálna, ale rýchla forma poznania založená na
+                        skúsenosti a implicitnom učení. Keď myseľ utíchne, tento signál sa dostáva do popredia.</p>
+                    <p>Empiricky je dobre zdokumentované, že nadmerný vnútorný hluk – úzkosť, ruminácia, neustále
+                        hodnotenie a pochybovanie – znižuje schopnosť vnímať jemné vnútorné signály. Aktivita stresových
+                        systémov mozgu (napr. amygdaly) prekrýva procesy spojené s vhľadom a tvorivosťou. Naopak, stavy
+                        pokoja, uvoľnenej pozornosti a dôvery sú spojené s lepšou integráciou informácií, náhlymi
+                        vhľadmi a pocitom zmysluplného smeru. To korešponduje s tvrdením textu, že čím viac sa stíši
+                        strach a nekonečné premýšľanie, tým jasnejšie je vedenie.</p>
+                    <p>Tvrdenie, že Vyššie Ja „už pozná najlepšiu cestu“, neznamená predurčený scenár, ale poukazuje na
+                        to, že existuje hlbšia úroveň orientácie než vedomé plánovanie. Z praktického hľadiska ide o
+                        dôveru v proces, v ktorom sa rozhodnutia nerodia z donútenia alebo nedostatku, ale zo súladu
+                        medzi vnútorným stavom a vonkajším konaním. Počúvanie tu neznamená pasivitu, ale schopnosť
+                        rozlišovať medzi hlasom strachu a hlasom vnútorného súladu.</p>
+                    <p style="border-left: 2px solid var(--accent-cyan); padding-left: 15px;">
+                        <strong>Záver:</strong><br>
+                        V kontexte knihy táto pasáž posilňuje hlavnú myšlienku: realita sa nemení silou, ale zmenou
+                        vnímania a vzťahu k sebe samému. Keď človek prestane bojovať so sebou a začne dôverovať hlbšej
+                        vrstve vedomia, rozhodnutia sa stávajú jasnejšími a konanie prirodzenejším. To, čo je popísané
+                        ako duchovné vedenie, má zároveň jasné psychologické a empiricky pozorovateľné koreláty, aj keď
+                        ich význam presahuje rámec toho, čo je dnes možné úplne vysvetliť.
+                    </p>
+                </div>
+            </div>
+
+            <p>Práve teraz stojíš na rázcestí. Môžeš pokračovať v hre podľa pravidiel ilúzie, veriac, že život je
+                náhodný, že si oddelený, že musíš bojovať. Alebo sa môžeš zobudiť. Môžeš si spomenúť. Ale prebudenie nie
+                je vždy pohodlné. Spochybňuje všetko, čo si považoval za pravdu. Otriasa základmi tvojej identity. Núti
+                ťa prevziať zodpovednosť za svoj život. Pretože ak bola realita vždy zrkadlom, potom to znamená, že sa
+                ti nikdy nič nestalo – stalo sa to kvôli tebe. A toto uvedomenie je desivé aj oslobodzujúce zároveň.
+                Desivé, pretože to znamená, že už nemôžeš obviňovať nič mimo seba. Už nemôžeš ukazovať na okolnosti, na
+                ľudí alebo na osud a hovoriť: 'Toto je dôvod, prečo trpím.' Ale oslobodzujúce, pretože to znamená, že si
+                nikdy nebol bezmocný. Znamená to, že si vždy mal schopnosť vytvoriť niečo iné.</p>
+
+            <img src="https://realita.mywire.org/images/kapitola1.webp" alt="Kapitola 1: Prebudenie"
+                style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+
+            <p>Môžeš sa rozhodnúť vstúpiť do svojej sily, vidieť sa takého, aký skutočne si. Môžeš sa rozhodnúť, práve
+                teraz, že už nebudeš žiť ako obeť okolností, ale ako tvorca svojej reality. Pretože v momente, keď to
+                urobíš, hra sa zmení. Ilúzia sa rozplynie. Svet prestane byť niečím, proti čomu bojuješ, a začne byť
+                niečím, s čím sa hráš. A z tohto miesta je čokoľvek, absolútne čokoľvek, možné. Pretože ty si ten, kto
+                sníva.</p>
+        </div>
+    </section>
+
+    <section class="duality-section">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Odhaľovanie Ilúzií</h2>
+        <p style="text-align: center; margin-bottom: 3rem; color: #94a3b8;">Prejdi myšou (alebo klikni) na karty a odhaľ
+            pravdu skrytú za ilúziou.</p>
+
+        <div class="cards-wrapper">
+            <div class="reveal-card">
+                <div class="reveal-overlay">
+                    <i class="fas fa-user-lock fa-3x" style="margin-bottom: 20px; color: #ef4444;"></i>
+                    <h3 class="overlay-text">Ilúzia: Som len človek</h3>
+                    <p style="margin-top: 10px; color: #cbd5e1;">"Som malý, bezvýznamný a moje meno definuje, kto som."
+                    </p>
+                </div>
+                <div class="card-content">
+                    <i class="fas fa-infinity fa-3x" style="margin-bottom: 20px; color: var(--accent-cyan);"></i>
+                    <h3 class="truth-text">Pravda: Si Vedomie</h3>
+                    <p>"Nie si osoba prežívajúca realitu. Si realita prežívajúca osobu. Si nekonečné
+                        vedomie, ktoré sníva tento sen."</p>
+                </div>
+            </div>
+
+            <div class="reveal-card">
+                <div class="reveal-overlay">
+                    <i class="fas fa-cube fa-3x" style="margin-bottom: 20px; color: #ef4444;"></i>
+                    <h3 class="overlay-text">Ilúzia: Svet je vonku</h3>
+                    <p style="margin-top: 10px; color: #cbd5e1;">"Svet je oddelený a ja sa musím prispôsobiť jeho
+                        pravidlám."</p>
+                </div>
+                <div class="card-content">
+                    <i class="fas fa-globe-americas fa-3x" style="margin-bottom: 20px; color: var(--accent-cyan);"></i>
+                    <h3 class="truth-text">Pravda: Ty si Vesmír</h3>
+                    <p>"Neexistuje žiadny vonkajší svet. Všetko, čo vidíš, je projekcia tvojho vlastného
+                        vedomia."</p>
+                </div>
+            </div>
+
+            <div class="reveal-card">
+                <div class="reveal-overlay">
+                    <i class="fas fa-shield-alt fa-3x" style="margin-bottom: 20px; color: #ef4444;"></i>
+                    <h3 class="overlay-text">Ilúzia: Musím bojovať</h3>
+                    <p style="margin-top: 10px; color: #cbd5e1;">"Život je ťažký a musím si veci zaslúžiť utrpením."</p>
+                </div>
+                <div class="card-content">
+                    <i class="fas fa-magic fa-3x" style="margin-bottom: 20px; color: var(--accent-cyan);"></i>
+                    <h3 class="truth-text">Pravda: Už je to tvoje</h3>
+                    <p>"Nie si tu, aby si žobral. Si tu, aby si si spomenul, že všetko, po čom túžiš, je už
+                        tvoje."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="higher-self-section">
+        <div class="intuition-box">
+            <h2 style="color: #fff; margin-bottom: 1rem;">Tvoj Kompas: Vyššie Ja</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                Aj keď si sa rozhodol zabudnúť, neprišiel si sem sám. Časť teba zostala úplne vedomá. Hovoríme jej
+                <strong>Vyššie Ja</strong>.
+            </p>
+            <div
+                style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-left: 3px solid var(--accent-gold);">
+                <p><i class="fas fa-comment-dots" style="color: var(--accent-gold); margin-right: 10px;"></i>
+                    <strong>Ako hovorí Vyššie Ja?</strong><br>
+                    Neprihovára sa cez strach ani silu. Hovorí cez inšpiráciu, vzrušenie a vnútorné poznanie
+                    (knowing).
+                </p>
+
+                <p style="margin-top: 15px;"><i class="fas fa-volume-up"
+                        style="color: var(--accent-gold); margin-right: 10px;"></i> <strong>Ako ho počuť?</strong><br>
+                    Čím viac stíšiš hluk strachu, pochybností a premýšľania, tým jasnejšie ho budeš počuť.
+                    Ono už pozná tú najlepšiu a najľahšiu cestu.</p>
+
+                <!-- Tool 5: Breath Pacer -->
+                <div class="breath-wrapper">
+                    <h4 style="margin-bottom: 2rem; color: #fff;">Nástroj 5: Dychová Kotva</h4>
+                    <div class="breath-circle" id="breathCircle">
+                        <span class="breath-label"></span>
+                    </div>
+                    <p class="breath-instruction" id="breathText">Priprav sa...</p>
+                    <button class="breath-btn" id="startBreathBtn" onclick="startBreathing()">Spustiť dýchanie</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="application-section">
+
+        <div>
+            <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem;">Zo života: Zmena identity</h3>
+            <div class="scenario-box">
+                <p><strong>Situácia:</strong> Stratil si prácu a cítiš paniku.</p>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+
+                <p style="color: #94a3b8; font-size: 0.9rem;"><em>Reakcia Spiaceho (Obeť):</em></p>
+                <p>"Prečo sa to stalo mne? Čo som urobil zle? Svet je krutý. Som nezamestnaný a bezcenný." <br> -> <span
+                        style="color: #ef4444;">Stotožňuješ sa s okolnosťou.</span></p>
+
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+
+                <p style="color: var(--accent-cyan); font-size: 0.9rem;"><em>Reakcia Prebudeného (Tvorca):</em></p>
+                <p>"Táto udalosť je len odrazom starej energie. Ja nie som 'nezamestnaný', ja som Vedomie, ktoré práve
+                    mení smer. Moje Vyššie Ja mi čistí cestu pre niečo lepšie. Prijímam zodpovednosť a tvorím ďalej."
+                    <br> -> <span style="color: var(--accent-cyan);">Odstupuješ od ilúzie a berieš si späť moc.</span>
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h3 style="color: var(--accent-gold); margin-bottom: 1.5rem;">Afirmácie pre túto kapitolu</h3>
+            <ul class="affirmation-list">
+                <li>Nie som telo. Nie som meno. Som vedomie, v ktorom sa deje celý svet.</li>
+                <li>Svet tam vonku je len zrkadlom môjho vnútra.</li>
+                <li>Preberám plnú zodpovednosť za svoju realitu. Nie som obeť, som tvorca.</li>
+                <li>Moje Vyššie Ja ma vedie cez radosť a inšpiráciu.</li>
+                <li>Rozhodujem sa zobudiť zo sna obmedzenia.</li>
+            </ul>
+        </div>
+
+        <!-- Tool 6: Final Check-in -->
+        </div>
+    </section>
+
+    <!-- MASTER SUMMARY DASHBOARD (Wide Layout) -->
+    <section style="max-width: 1400px; margin: 0 auto; padding: 2rem;">
+        <div class="dashboard-container">
+            <div class="tab-section" id="lessonSummary">
+                <div style="padding: 2rem; text-align: center; border-bottom: 1px solid var(--border-glass);">
+                    <h2 style="color: var(--accent-gold); margin-bottom: 0.5rem;">Zhrnutie Lekcie: Zákon Zrkadla</h2>
+                    <p style="color: #94a3b8; font-size: 0.9rem;">Všetko, čo potrebuješ vedieť z Kapitoly 1 na jednom
+                        mieste.</p>
+                </div>
+
+                <div class="tab-header">
+                    <button class="tab-btn active" onclick="openTab(event, 'tabTheory')">1. Tajomstvo</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tabExample')">2. Príklad</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tabPractice')">3. Tréning</button>
+                    <button class="tab-btn" onclick="openTab(event, 'tabMission')">4. Misia</button>
+                </div>
+
+                <!-- TAB 1: THEORY (The Secret) -->
+                <div id="tabTheory" class="tab-content active">
+                    <div class="reveal-container" style="text-align: center; padding: 20px;">
+                        <div id="secretBlur" style="filter: blur(5px); transition: 0.8s;">
+                            <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">Svet je len zrkadlo</h3>
+                            <p style="font-size: 1.1rem; line-height: 1.8;">
+                                "Fyzická realita nie je nič iné ako zrkadlo, ktoré ťa napodobňuje. Usmeje sa, keď sa
+                                usmeješ
+                                ty. Zamračí sa, keď sa zamračíš ty."<br><br>
+                                Nikdy si nebol obeťou okolností. Všetko, čo sa ti deje – ľudia, ktorých stretávaš,
+                                prekážky,
+                                úspechy – sú len <strong>projekciou tvojho vlastného vedomia</strong>. Ty si projektor.
+                                Svet
+                                je plátno.
+                            </p>
+                        </div>
+                        <button id="revealBtn" class="breath-btn"
+                            style="margin-top: -50px; position: relative; z-index: 10;"
+                            onclick="document.getElementById('secretBlur').style.filter='none'; this.style.display='none'">
+                            Odhaliť pravdu
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB 2: EXAMPLE (Scenario) -->
+                <div id="tabExample" class="tab-content">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem; text-align: center;">Situácia: Stratil
+                        si
+                        dôležitého klienta</h3>
+                    <div class="scenario-grid-tab">
+                        <div class="card-tab victim">
+                            <h4 style="color: #ef4444;">❌ Staré Ja (Obeť)</h4>
+                            <p><em>"To nie je fér! Prečo sa to deje mne? Ten klient je idiot. Teraz nebudem mať na
+                                    nájom.
+                                    Svet je proti mne."</em></p>
+                            <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+                            <p style="font-size: 0.9rem; color: #94a3b8;">
+                                <strong>Výsledok:</strong> Cítiš bezmocnosť. Veríš v oddelenosť. Zrkadlo ti odrazí viac
+                                nedostatku.
+                            </p>
+                        </div>
+
+                        <div class="card-tab creator">
+                            <h4 style="color: var(--accent-cyan);">✅ Nové Ja (Tvorca)</h4>
+                            <p><em>"Toto sa nedeje MNE, deje sa to PRE MŇA. Ak tento klient odišiel, znamená to, že
+                                    uvoľnil
+                                    miesto pre niečo lepšie."</em></p>
+                            <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 0;">
+                            <p style="font-size: 0.9rem; color: #fff;">
+                                <strong>Výsledok:</strong> Cítiš silu. Preberáš zodpovednosť. Zrkadlo ti musí odraziť
+                                novú
+                                príležitosť.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: PRACTICE (Journaling) -->
+                <div id="tabPractice" class="tab-content">
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Tvoja Premena</h3>
+                        <p style="margin-bottom: 1.5rem; color: #94a3b8; text-align: center;">
+                            Napíš jednu situáciu, ktorá ťa momentálne trápi. Potom ju prepiš z pohľadu
+                            <strong>Tvorcu</strong>, nie Obete.
+                        </p>
+
+                        <textarea class="trans-textarea"
+                            style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; min-height: 150px; border: 1px solid var(--border-glass);"
+                            placeholder="Napríklad: Hnevám sa na šéfa... -> ZMENA: Môj šéf len zrkadlí moju vlastnú neistotu."></textarea>
+
+                        <button class="breath-btn" style="margin-top: 15px; width: 100%;"
+                            onclick="this.innerText='Uložené (Súkromne) ✅'">Uložiť do Vedomia</button>
+                        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px; text-align: center;">Tvoje poznámky
+                            ostávajú v tvojom prehliadači.</p>
+                    </div>
+                </div>
+
+                <!-- TAB 4: MISSION (Challenge Only) -->
+                <div id="tabMission" class="tab-content">
+
+
+                    <div class="action-box">
+                        <h2 style="color: #fff; margin-bottom: 10px;">🔥 Výzva na tento týždeň</h2>
+                        <p style="font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 1rem;">Hraj sa na
+                            "Detektíva
+                            Reality"</p>
+                        <p style="margin-bottom: 1.5rem;">
+                            Kedykoľvek sa ti niečo stane (dobré alebo zlé), zastav sa a povedz si:<br>
+                            <em>"Toto je odraz. Čo som vysielal/a?"</em>
+                        </p>
+                        <button class="breath-btn"
+                            onclick="this.innerText='Misia Prijatá! 🚀'; this.style.background='#2ed573'">
+                            Prijímam výzvu
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW SIDEBAR QUIZ -->
+            <div class="quiz-sidebar">
+                <h3 style="text-align: center; margin-bottom: 1.5rem;">Miera Prebudenia 👁️</h3>
+                <div class="quiz-progress">
+                    <div class="quiz-bar" id="quizBar"></div>
+                </div>
+
+                <!-- Q1 -->
+                <div class="quiz-step active" id="q1">
+                    <h4>Keď sa ti niečo nepodarí (napr. stratíš peňaženku), aká je tvoja prvá myšlienka?</h4>
+                    <button class="sidebar-option" onclick="nextStep(1, 0)">"Došľaka, prečo mám ja takú smolu?"</button>
+                    <button class="sidebar-option" onclick="nextStep(1, 5)">"Hmm, čo mi tým chce vesmír
+                        naznačiť?"</button>
+                    <button class="sidebar-option" onclick="nextStep(1, 10)">"Ok, toto je správa. Kde som nedával pozor
+                        na svoju energiu?"</button>
+                </div>
+
+                <!-- Q2 -->
+                <div class="quiz-step" id="q2">
+                    <h4>Ako vnímaš ľudí, ktorí ťa hnevajú?</h4>
+                    <button class="sidebar-option" onclick="nextStep(2, 0)">Sú to idioti, ktorí mi kazia deň.</button>
+                    <button class="sidebar-option" onclick="nextStep(2, 5)">Je to skúška mojej trpezlivosti.</button>
+                    <button class="sidebar-option" onclick="nextStep(2, 10)">Sú to moji herci. Hrajú presne to, čo som
+                        si nevedome objednal.</button>
+                </div>
+
+                <!-- Q3 -->
+                <div class="quiz-step" id="q3">
+                    <h4>Veríš, že môžeš zmeniť svoju budúcnosť?</h4>
+                    <button class="sidebar-option" onclick="nextStep(3, 0)">Niekedy áno, ale osud je silnejší.</button>
+                    <button class="sidebar-option" onclick="nextStep(3, 5)">Dúfam, že áno, ak budem tvrdo
+                        pracovať.</button>
+                    <button class="sidebar-option" onclick="nextStep(3, 10)">Budúcnosť neexistuje. Tvorím ju TERAZ
+                        svojím stavom bytia.</button>
+                </div>
+
+                <!-- RESULT -->
+                <div class="quiz-step" id="qResult">
+                    <div class="quiz-final-result">
+                        <div class="result-score-circle" id="scoreCircle">0%</div>
+                        <h4 id="resultTitle" style="color: #fff;">Spiaci</h4>
+                        <p id="resultDesc" style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">
+                            Ešte stále veríš, že svet je skutočnejší než ty.
+                        </p>
+                        <button class="breath-btn" style="margin-top: 1rem; font-size: 0.8rem;"
+                            onclick="resetQuiz()">Skúsiť znova</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Uvod.html" class="nav-btn" style="margin-right: 20px;">&larr; Späť na Úvod</a>
+        <a href="Kapitola2.html" class="nav-btn">Pokračovať na Kapitolu 2 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <div id="imageGalleryModal" class="gallery-modal">
+        <span class="gallery-close" onclick="closeGallery()">&times;</span>
+        <div class="gallery-content-wrapper">
+            <a class="gallery-prev" onclick="changeImage(-1)">&#10094;</a>
+            <img class="gallery-image" id="galleryImg" src="" alt="Gallery Image">
+            <a class="gallery-next" onclick="changeImage(1)">&#10095;</a>
+            <div class="gallery-counter" id="galleryCounter">1 / 15</div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Side Notes
+        function toggleSideNote(btn) {
+            // Find the sibling note-content
+            const content = btn.nextElementSibling;
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                btn.style.background = 'transparent';
+                btn.style.color = '#22d3ee'; // reset to original cyan
+            } else { // Close other open notes first? Optional.
+                document.querySelectorAll('.note-content').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.note-toggle-btn').forEach(el => {
+                    el.style.background = 'transparent';
+                    el.style.color = '#22d3ee';
+                });
+
+                content.style.display = 'block';
+                content.style.animation = 'fadeIn 0.3s ease';
+                btn.style.background = '#22d3ee';
+                btn.style.color = '#000';
+            }
+        }
+
+        // Toggle Deep Dive (Inline)
+        // Toggle Deep Dive (Inline)
+        function toggleDeepDive(btn) {
+            let content = btn.parentElement.nextElementSibling;
+
+            // Skip non-deep-dive elements (like note-anchor) to find the correct container
+            while (content && !content.classList.contains('deep-dive-content')) {
+                content = content.nextElementSibling;
+            }
+
+            if (!content) return;
+
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                btn.style.background = 'transparent';
+                btn.style.color = '#fbbf24'; // Reset to gold
+            } else {
+                content.style.display = 'block';
+                content.style.animation = 'fadeIn 0.5s ease';
+                btn.style.background = '#fbbf24';
+                btn.style.color = '#000';
+
+                // Scroll slightly if needed (optional UX improvement)
+                // content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // --- GALLERY LOGIC ---
+        const totalImages = 15;
+        let currentImageIndex = 1;
+        const modal = document.getElementById('imageGalleryModal');
+        const imgElement = document.getElementById('galleryImg');
+        const counterElement = document.getElementById('galleryCounter');
+        const sidebarContainer = document.getElementById('sidebarGallery');
+
+        // Populate Sidebar
+        if (sidebarContainer) {
+            for (let i = 1; i <= totalImages; i++) {
+                const img = document.createElement('img');
+                img.src = `https://realita.mywire.org/images/kapitola1/${i}.jpg`;
+                img.className = 'gallery-thumb';
+                img.alt = `Gallery ${i}`;
+                img.onclick = () => openGallery(i);
+                sidebarContainer.appendChild(img);
+            }
+        }
+
+        function openGallery(index = 1) {
+            currentImageIndex = index;
+            modal.style.display = "block";
+            showImage(currentImageIndex);
+        }
+
+        function closeGallery() {
+            modal.style.display = "none";
+        }
+
+        function changeImage(n) {
+            showImage(currentImageIndex += n);
+        }
+
+        function showImage(n) {
+            if (n > totalImages) { currentImageIndex = 1 }
+            if (n < 1) { currentImageIndex = totalImages }
+
+            // Construct URL: https://realita.mywire.org/images/kapitola1/X.jpg
+            const imageUrl = `https://realita.mywire.org/images/kapitola1/${currentImageIndex}.jpg`;
+
+            // Preload next image for smoothness (optional)
+            const nextIndex = (currentImageIndex % totalImages) + 1;
+            const nextImg = new Image();
+            nextImg.src = `https://realita.mywire.org/images/kapitola1/${nextIndex}.jpg`;
+
+            imgElement.src = imageUrl;
+            counterElement.innerText = `${currentImageIndex} / ${totalImages}`;
+        }
+
+        // Close on outside click
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                closeGallery();
+            }
+        }
+
+        // --- AUDIO PLAYER LOGIC ---
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        // Toggle Play/Pause
+        function togglePlay() {
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Playback failed:", error);
+                        // Reset icon if play failed immediately
+                        playIcon.className = 'fas fa-play';
+                        alert("Nepodarilo sa spustiť audio. (Chyba: " + error.message + ")");
+                    });
+                }
+            } else {
+                audio.pause();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        // Update UI based on actual audio state
+        audio.addEventListener('play', () => {
+            playIcon.className = 'fas fa-pause';
+        });
+
+        audio.addEventListener('pause', () => {
+            playIcon.className = 'fas fa-play';
+        });
+
+        audio.addEventListener('waiting', () => {
+            playIcon.className = 'fas fa-spinner fa-spin';
+        });
+
+        audio.addEventListener('playing', () => {
+            playIcon.className = 'fas fa-pause';
+        });
+
+        audio.addEventListener('ended', () => {
+            playIcon.className = 'fas fa-play';
+        });
+
+        // Update Progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Load Metadata
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        // Error Handling
+        audio.addEventListener('error', (e) => {
+            console.error("Audio error:", e);
+            const errorMsg = audio.error ? `Code ${audio.error.code}` : 'Unknown';
+            // Optional: alert user only if they try to play
+            // alert("Chyba pri načítaní audia: " + errorMsg); 
+        });
+
+        // Setup duration if already loaded
+        if (audio.readyState >= 1) {
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = pos * audio.duration;
+            }
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // --- IDENTITY TOOL LOGIC ---
+        function peelLayer(element) {
+            element.classList.add('peeled');
+            setTimeout(checkLayers, 600);
+        }
+
+        function checkLayers() {
+            const layers = document.querySelectorAll('.layer-circle:not(.layer-core)');
+            let allPeeled = true;
+            layers.forEach(l => {
+                if (!l.classList.contains('peeled')) allPeeled = false;
+            });
+
+            if (allPeeled) {
+                const core = document.getElementById('coreLayer');
+                const text = document.getElementById('coreText');
+                const feedback = document.getElementById('peelFeedback');
+
+                core.classList.add('revealed');
+
+                // Audio effect for revelation (optional/subtle)
+                // const revealSound = new Audio('path/to/sound.mp3'); 
+                // revealSound.play();
+
+                setTimeout(() => {
+                    text.style.opacity = '1';
+                    feedback.innerText = "To, čo zostalo, je čisté Vedomie. To si skutočne Ty.";
+                    feedback.style.color = "var(--accent-gold)";
+                    feedback.style.textShadow = "0 0 10px rgba(251, 191, 36, 0.5)";
+                }, 500);
+            }
+        }
+
+
+
+        // --- JOURNALING TOOL LOGIC ---
+        function saveJournalEntry(id) {
+            const input = document.getElementById('journalInput1'); // Simplified for this specific ID
+            const status = document.getElementById('journalStatus1');
+            const overlay = document.getElementById('blurOverlay1');
+
+            if (input.value.length < 5) {
+                status.innerText = "Prosím, napíš aspoň jednu vetu.";
+                status.style.color = "#ef4444";
+                status.style.opacity = "1";
+                return;
+            }
+
+            // Simulate saving (Local Storage)
+            localStorage.setItem('kniha_kapitola1_dennik', input.value);
+
+            status.innerText = "Zapísané. Tvoj odraz bol uložený.";
+            status.style.color = "var(--accent-cyan)";
+            status.style.opacity = "1";
+
+            // Visual reward
+            input.style.borderColor = "var(--accent-gold)";
+        }
+
+        // Check if already answered on load
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('kniha_kapitola1_dennik');
+            if (saved) {
+                document.getElementById('journalInput1').value = saved;
+            }
+        });
+
+
+
+
+        // --- REALITY TRANSLATOR LOGIC ---
+        function translateReality() {
+            const input = document.getElementById('transInput').value.trim();
+            const resultBox = document.getElementById('transResult');
+            const overlay = document.getElementById('transOverlay');
+
+            if (input.length < 3) {
+                alert("Napíš najprv, čo ťa trápi.");
+                return;
+            }
+
+            // 1. Loading Text (Simulate processing)
+            resultBox.style.opacity = '0';
+            setTimeout(() => {
+
+                // 2. Logic
+                const lower = input.toLowerCase();
+                let response = "";
+
+                // Expanded Dictionary
+                const triggers = {
+                    "seba": "Ak sa to týka teba, prečo sa súdiš? Čo by sa stalo, keby si sa prijal presne taký, aký si?",
+                    "peniaze": "Peniaze sú len energia. Kde veríš v nedostatok? Vesmír ti nemôže dať to, o čom pochybuješ.",
+                    "prác": "Práca je tam, kde dávaš energiu. Robíš to z lásky alebo zo strachu o prežitie?",
+                    "šéf": "Tvoj šéf je len herec v tvojom filme. Hrá rolu autority, ktorú si ty sám nedávaš.",
+                    "partner": "Partner ti len zrkadlí vzťah, ktorý máš sám so sebou. Kde sa vo vzťahu strácaš?",
+                    "lásk": "Lásku netreba hľadať, láskou treba byť. Kde si zavrel svoje srdce?",
+                    "deti": "Deti sú najčistejšie zrkadlá. Čo ťa na nich hnevá, je to, čo si v sebe potlačil, keď si bol dieťa.",
+                    "rodič": "Odpustiť rodičom znamená oslobodiť seba. Oni robili len to, čo vedeli, na úrovni vedomia, ktorú mali.",
+                    "čas": "Čas je ilúzia. Prečo sa ponáhľaš? Všetko, čo máš, je tento okamih.",
+                    "nestíham": "Nestíhaš, pretože utekáš pred prítomnosťou. Zastav sa. Nič ti neujde.",
+                    "hnev": "Hnev je strážcom tvojich hraníc. Kde si dovolil, aby niekto vstúpil tam, kam nepatrí?",
+                    "smút": "Smútok je liečenie. Dovoľ mu pretiecť. Čoho sa bojíš pustiť?",
+                    "strach": "Strach je len viera v to, čo nechceš. Čo by si urobil, keby si vedel, že nemôžeš zlyhať?",
+                    "sám": "Nikdy nie si sám. Tvoje Vyššie Ja je stále s tebou. Samota je len ilúzia oddelenosti.",
+                    "nechápem": "Nemusíš chápať mysľou. Cíť srdcom. Odpoveď príde, keď prestaneš tlačiť."
+                };
+
+                // Check triggers
+                let foundMatch = false;
+                for (const [key, val] of Object.entries(triggers)) {
+                    if (lower.includes(key)) {
+                        response = val;
+                        foundMatch = true;
+                        break;
+                    }
+                }
+
+                // If no trigger, use random deep Questions (Fallback)
+                if (!foundMatch) {
+                    const generics = [
+                        "To, čo ťa na tom irituje najviac, je presne tá vec, ktorú na sebe odmietaš vidieť.",
+                        "Keby táto situácia bola sen, ktorý sa ti sníva, čo by ti ten sen chcel povedať o tebe?",
+                        "Svet je len zrkadlo. Ak sa ti nepáči obraz, nerozbíjaj zrkadlo. Zmeň svoju tvár (postoj).",
+                        "Opýtaj sa sám seba: 'Čomu musím veriť, aby som sa cítil takto?'",
+                        "Táto situácia sa bude opakovať, kým nepochopíš lekciu, ktorú nesie.",
+                        "Odstúp od toho. Nie si ten príbeh. Si ten, kto ho pozoruje."
+                    ];
+                    response = generics[Math.floor(Math.random() * generics.length)];
+                }
+
+                // 3. Reveal
+                overlay.classList.add('hidden');
+                resultBox.innerText = response;
+                resultBox.style.opacity = '1';
+
+                // Glow effect
+                document.querySelector('.translator-output-box').style.boxShadow = "0 0 30px rgba(34, 211, 238, 0.4)";
+
+            }, 300); // 300ms delay for "thinking" feel
+        }
+
+        // --- BREATH PACER LOGIC ---
+        let breathInterval;
+
+        function startBreathing() {
+            const circle = document.getElementById('breathCircle');
+            const text = document.getElementById('breathText');
+            const btn = document.getElementById('startBreathBtn');
+
+            btn.classList.add('hidden');
+            circle.classList.add('breathing');
+
+            // Initial State
+            text.innerText = "Nádych (4s)";
+
+            // Cycle Logic
+            let isInhale = true;
+            breathInterval = setInterval(() => {
+                isInhale = !isInhale;
+                text.innerText = isInhale ? "Nádych (4s)" : "Výdych (4s)";
+            }, 4000); // 4 seconds cycle (half of 8s CSS animation)
+        }
+
+        // --- FEELING CHECK-IN LOGIC ---
+        function updateSlider(val) {
+            const feedback = document.getElementById('checkinFeedback');
+            const h4 = feedback.querySelector('h4');
+            const p = feedback.querySelector('p');
+
+            if (val > 10) { // Only show feedback after interaction starts
+                feedback.style.display = 'block';
+            }
+
+            if (val < 40) {
+                h4.innerText = "Je to v poriadku.";
+                h4.style.color = "#ef4444";
+                p.innerText = "Je normálne cítiť odpor, keď sa ego cíti ohrozené. Skús sa vrátiť k Dychovej Kotve vyššie.";
+            } else if (val < 70) {
+                h4.innerText = "Si na ceste.";
+                h4.style.color = "#eab308";
+                p.innerText = "Pocit neutrality je prvým krokom k slobode. Pozoruj svoje myšlienky bez posudzovania.";
+            } else {
+                h4.innerText = "Výborne.";
+                h4.style.color = "#22d3ee";
+                p.innerText = "Tento stav je tvoja prirodzenosť. Čím častejšie si ho uvedomíš, tým trvalejší bude.";
+            }
+        }
+        // --- TAB LOGIC ---
+        function openTab(evt, tabName) {
+            // Hide all tab content
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Remove active class from buttons
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show current tab
+            document.getElementById(tabName).style.display = "block";
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+
+            evt.currentTarget.className += " active";
+        }
+
+        // --- QUIZ LOGIC ---
+        function checkQuiz(btn, isCorrect) {
+            // Reset colors in this specific block
+            let parent = btn.parentElement;
+            let options = parent.querySelectorAll('.quiz-option');
+            let result = document.getElementById('quizResult');
+
+            options.forEach(opt => {
+                opt.style.background = "rgba(255, 255, 255, 0.05)";
+                opt.style.borderColor = "rgba(255, 255, 255, 0.1)";
+            });
+
+            if (isCorrect) {
+                btn.style.background = "rgba(46, 213, 115, 0.2)";
+                btn.style.borderColor = "#2ed573";
+                result.innerText = "⭐ Správne! Ty si tvorca.";
+                result.style.color = "#2ed573";
+            } else {
+                btn.style.background = "rgba(239, 68, 68, 0.2)";
+                btn.style.borderColor = "#ef4444";
+                result.innerText = "Skús znova. Kde je zdroj?";
+                result.style.color = "#ef4444";
+            }
+        }
+        // --- SIDEBAR QUIZ LOGIC ---
+        let userScore = 0;
+        const maxScore = 30; // 3 questions * 10 points
+
+        function nextStep(currentQ, points) {
+            userScore += points;
+
+            // Hide current
+            document.getElementById('q' + currentQ).classList.remove('active');
+
+            // Show next or result
+            const nextQ = currentQ + 1;
+
+            // Update progress bar
+            const progress = (currentQ / 3) * 100;
+            document.getElementById('quizBar').style.width = progress + "%";
+
+            if (document.getElementById('q' + nextQ)) {
+                setTimeout(() => {
+                    document.getElementById('q' + nextQ).classList.add('active');
+                }, 200);
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function showFinalResult() {
+            setTimeout(() => {
+                document.getElementById('qResult').classList.add('active');
+
+                const percentage = Math.round((userScore / maxScore) * 100);
+                const circle = document.getElementById('scoreCircle');
+                const title = document.getElementById('resultTitle');
+                const desc = document.getElementById('resultDesc');
+
+                // Animate number
+                let start = 0;
+                const timer = setInterval(() => {
+                    if (start >= percentage) clearInterval(timer);
+                    circle.innerText = start + "%";
+                    start++;
+                }, 20);
+
+                if (percentage < 40) {
+                    title.innerText = "Spiaci Divák 😴";
+                    title.style.color = "#94a3b8";
+                    desc.innerText = "Stále veríš, že život sa ti 'deje'. Táto kapitola je pre teba kľúčová. Čítaj ju znova.";
+                } else if (percentage < 80) {
+                    title.innerText = "Prebúdzajúci sa 🌱";
+                    title.style.color = "var(--accent-cyan)";
+                    desc.innerText = "Začínaš vidieť súvislosti, ale staré návyky ťa občas stiahnu späť. Pokračuj v tréningu.";
+                } else {
+                    title.innerText = "Vedomý Tvorca 🌟";
+                    title.style.color = "var(--accent-gold)";
+                    desc.innerText = "Chápeš, že si zdrojom. Tvoj život sa začne radikálne meniť.";
+                }
+            }, 200);
+        }
+
+        function resetQuiz() {
+            userScore = 0;
+            document.getElementById('quizBar').style.width = "0%";
+            document.getElementById('qResult').classList.remove('active');
+            document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('q1').classList.add('active');
+        }
+    </script>
+
+
+    <script src="footer.js"></script>
+</body>
+
+</html>

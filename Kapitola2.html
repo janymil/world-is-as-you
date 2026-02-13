@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Kapitola 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Specific Overrides */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, var(--accent-mirror));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .highlight {
+            color: var(--accent-mirror);
+        }
+
+        /* --- INTERACTIVE: MIRROR SIMULATOR --- */
+        .mirror-simulator-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, var(--primary-bg), #0c1220);
+            text-align: center;
+        }
+
+        .simulator-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            align-items: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .sim-box {
+            width: 250px;
+            padding: 2rem;
+            border-radius: 20px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.5s;
+        }
+
+        .arrow-icon {
+            font-size: 2rem;
+            color: var(--accent-silver);
+            animation: pulse 2s infinite;
+        }
+
+        .reflection-box {
+            background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+            color: #0f172a;
+            transform: scaleX(-1);
+            /* Zrkadlový efekt */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .reflection-text {
+            transform: scaleX(-1);
+            /* Aby text bol čitateľný aj v zrkadlenom dive */
+            font-weight: bold;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--accent-mirror);
+            color: var(--accent-mirror);
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .action-btn:hover {
+            background: var(--accent-mirror);
+            color: #000;
+        }
+
+        /* --- CONCEPTS GRID --- */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .concept-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-top: 3px solid var(--accent-silver);
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?mirror,reflection,water'); background-size: cover; background-position: center;">
+        <div class="hero-content">
+            <h4 style="color: var(--accent-silver); letter-spacing: 3px;">KAPITOLA 2</h4>
+            <h1>Realita je Zrkadlo</h1>
+            <p>Svet sa neháda. Svet nesúdi. Svet iba odráža.</p>
+        </div>
+    </section>
+
+    <section class="book-content silver-theme">
+        <div class="paragraph-wrapper">
+            <p>Predstav si fyzickú realitu ako obrovské, komplexné, viacrozmerné zrkadlo, ktoré ti neustále odráža to,
+                čo sa deje v tvojom vnútri. Zrkadlo tak obrovské, tak pohlcujúce a tak zložité, že sa zdá, akoby malo
+                vlastný život. Zrkadlo zhmotňuje tvoje najsilnejšie predpoklady o živote, tvoje očakávania, to, čo
+                považuješ za najpravdepodobnejšie, tvoje strachy a tvoje presvedčenia. V podstate ti ukazuje, kto si.
+                Zrkadlo nemá vlastnú myseľ, aby rozhodlo, čo je pre teba najlepšie, alebo aby poznalo túžby tvojho srdca
+                a dalo ti ich. Nie je to sila mimo teba. Nemá nezávislú autoritu. Neháda sa. Neprotirečí. Nesúdi.
+                Jednoducho odráža. A predsa, pretože je toto zrkadlo tak pohlcujúce, tak detailné a presvedčivé, často v
+                ňom samého seba nespoznáš.</p>
+
+            <div class="note-anchor">
+                <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                        class="fas fa-robot"></i></button>
+                <div class="note-content side-popup">
+                    <h5 style="color: var(--accent-gold);">Mechanizmus</h5>
+                    <p style="font-size: 0.9rem;">Dôležité je chápať realitu ako mechanizmus, nie ako "Boha", ktorý ťa
+                        súdi. Zrkadlu je jedno, či sa naň usmievaš alebo plačeš. Len odráža dáta.</p>
+                </div>
+            </div>
+        </div>
+
+        <img src="https://realita.mywire.org/images/uvod/zrkadlo-reality.webp" alt="Zrkadlo Reality"
+            style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.3s;"
+            onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"
+            onclick="openModal(this.src)">
+
+        <p>Zrkadlo ti vždy, vždy, bez výnimky, dá za pravdu. Keď povieš, že niečo bude ťažké, zrkadlo odpovie: "A tak sa
+            staň." Keď povieš, že niečo bude vyžadovať veľa práce, zrkadlo ti potvrdí, že máš pravdu. Ak veríš v
+            nedostatok, zrkadlo ti ukáže nedostatok. Ak veríš v hojnosť, zrkadlo odhalí nekonečné možnosti. Je to, a
+            vždy bolo, také jednoduché.</p>
+
+        <div class="paragraph-wrapper">
+            <p>Zrkadlo nerozlišuje medzi tým, čo je realistické alebo nerealistické, či sa to už stalo predtým, alebo či
+                to tvoja súčasná realita dovoľuje. Nepýta si povolenie od tvojej súčasnej reality, aby zhmotnilo tú
+                ďalšiu. Jednoducho sa pozrie hlboko do teba, aby videlo, čomu veríš, čo predpokladáš a očakávaš. A dá ti
+                za pravdu, zakaždým. Bol si naprogramovaný veriť, že určité veci sú možné a realistické, zatiaľ čo iné
+                nie, ale zrkadlo takú vec nepozná, poslúcha iba tvoje presvedčenia, bez ohľadu na to, ako "skutočné"
+                alebo "nemožné" sa môžu zdať.</p>
+
+            <div class="note-anchor">
+                <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                        class="fas fa-magic"></i></button>
+                <div class="note-content side-popup">
+                    <h5 style="color: var(--accent-cyan);">Žiadne Limity</h5>
+                    <p style="font-size: 0.9rem;">Pre zrkadlo je vytvoriť milión eur rovnako ľahké ako vytvoriť jedno
+                        euro. Zrkadlo nepozná "náročnosť". Obmedzenia existujú len vo tvojom softvéri (presvedčení).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-block">
+            "Zrkadlo počúva šepot tvojej mysle a odpovedá: 'Ak tak povieš, tak sa staň!'"
+        </div>
+
+        <div class="paragraph-wrapper">
+            <p>Zrkadlo má moc urobiť aj tie najneuveriteľnejšie veci možnými, ak v ne skutočne veríš. Vezmi si napríklad
+                lietadlá: ak by si tento koncept predstavil ľuďom v minulosti, nazvali by takú vec nemožnou, ale pretože
+                sa v ňu silne verilo, zrkadlo poskytlo logický rámec pre jej existenciu. To isté platí pre mnoho iných
+                veľkých vynálezov. Uverili by ti ľudia v minulosti, keby si im povedal, že iná osoba na druhom konci
+                sveta môže okamžite počuť tvoj hlas a odpovedať ti? Nie. Myšlienke sa najprv uverí, bez ohľadu na to,
+                ako nereálne sa môže zdať, a potom sa pre ňu objaví logický rámec. Keď si udržíš presvedčenie vo svojej
+                vízii bez ohľadu na logiku alebo okolnosti, uvedomíš si, že realita sa ohýba podľa teba.</p>
+
+            <div class="note-anchor">
+                <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                        class="fas fa-brain"></i></button>
+                <div class="note-content side-popup">
+                    <h5 style="color: var(--accent-purple);">Logika prichádza druhá</h5>
+                    <p style="font-size: 0.9rem;">Väčšina ľudí čaká na logický dôkaz, aby uverili. Tvorca najprv uverí,
+                        a realita je potom nútená vytvoriť logické vysvetlenie (most incidentov), aby sa to stalo.</p>
+                </div>
+            </div>
+        </div>
+
+        <p>Teraz sa rozhliadni okolo seba a všimneš si, že celý tvoj život je odrazom toho, čomu si veril, že je pre
+            teba
+            možné. Tvoje okolnosti, tvoje vzťahy, tvoje úspechy, tvoje boje, všetko okolo teba je fyzickou
+            reprezentáciou predpokladov, ktoré si držal, či už vedome alebo nevedome. Spomeň si na čas, keď si bol
+            absolútne presvedčený, že sa niečo pokazí. Možno si sa bál zlyhania, straty príležitosti, alebo že ťa niekto
+            sklame. A potom, takmer ako hodinky, stalo sa to. Nie preto, že to bolo súdené, nie preto, že život je
+            nespravodlivý, ale preto, že si nevedomky kŕmil ten predpoklad dostatočnou vierou na to, aby nabral formu.
+            Zrkadlo ti jednoducho ukázalo to, čo si očakával.
+            <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                <i class="fas fa-book-open"></i> Hlbší rozbor
+            </button>
+        </p>
+
+        <div class="deep-dive-content">
+            <h5 style="color: var(--accent-silver); margin-bottom: 1.5rem;">Rozbor: Mechanizmus Zrkadlenia</h5>
+            <p><strong>Z metafyzickej perspektívy</strong> je zrkadlo symbolom vedomia. Realita tu nie je chápaná ako
+                nezávislá entita s vlastnou vôľou, ale ako pole, ktoré reaguje na nastavenie pozorovateľa. Zrkadlo nemá
+                úmysel, nehodnotí a nerozhoduje, čo by „malo“ človek dostať. Len odráža. To je kľúčové: ak človek
+                očakáva boj, realita sa mu javí ako boj; ak očakáva nedostatok, jeho skúsenosť sveta sa usporiada tak,
+                aby tento nedostatok potvrdila. Nie preto, že by svet trestal alebo odmeňoval, ale preto, že vedomie
+                selektuje, interpretuje a aktivuje presne tie aspekty reality, ktoré sú v súlade s vnútorným nastavením.
+            </p>
+
+            <p><strong>Psychologicky</strong> sa tento princíp opiera o dobre zdokumentované mechanizmy vnímania a
+                správania. Ľudský mozog nevidí realitu objektívne, ale filtruje ju cez presvedčenia, očakávania a
+                naučené vzorce. Fenomény ako konfirmačné skreslenie, selektívna pozornosť a sebanaplňujúce proroctvá
+                ukazujú, že ak niečo považujeme za pravdepodobné alebo nevyhnutné, budeme si všímať dôkazy, ktoré to
+                potvrdzujú, a zároveň sa budeme správať spôsobmi, ktoré tento výsledok podporujú. Z tohto hľadiska
+                „zrkadlo“ neznamená magické vytváranie udalostí z ničoho, ale konzistentné zosúladenie vnímania,
+                rozhodovania a konania s vnútorným presvedčením.</p>
+
+            <p>Keď text tvrdí, že zrkadlo vždy dáva za pravdu, poukazuje na fakt, že realita je prežívaná subjektívne.
+                Ak niekto verí, že niečo bude ťažké, vstupuje do situácie s napätím, opatrnosťou a očakávaním prekážok.
+                Tým sa zvyšuje pravdepodobnosť, že si prekážky všimne, že ho rýchlejšie vyčerpajú a že ich vyhodnotí ako
+                dôkaz svojej pôvodnej viery. Rovnaký princíp platí aj opačne: presvedčenie o možnostiach, hojnosti alebo
+                zvládnuteľnosti mení spôsob, akým človek koná, aké riešenia hľadá a aké príležitosti rozpozná.</p>
+
+            <p><strong>Empiricky</strong> je podložené, že presvedčenia ovplyvňujú výkon, kreativitu a schopnosť učiť
+                sa. Výskumy v oblasti placeba, mindsetu, očakávaní a neuroplasticity ukazujú, že to, čo človek považuje
+                za možné alebo nemožné, má priamy vplyv na fyziologické procesy, rozhodovanie a dlhodobé výsledky. Text
+                ide ešte ďalej a naznačuje, že samotný rámec „realistické verzus nerealistické“ je historicky a kultúrne
+                podmienený. Príklady technológií ako lietanie alebo okamžitá komunikácia na diaľku ilustrujú, že to, čo
+                bolo kedysi považované za nemožné, sa stalo možným až po tom, čo tomu niekto dokázal uveriť natoľko, že
+                začal konať v súlade s touto víziou.</p>
+
+            <p>Dôležitý bod je, že zrkadlo nereaguje na logiku v zmysle súčasných obmedzení, ale na hlboké presvedčenia.
+                Logický rámec často vzniká až dodatočne. Najprv sa objaví vízia alebo viera, a až potom sa nájdu
+                prostriedky, ako ju uskutočniť. To neznamená popretie fyzikálnych zákonov, ale poukazuje na to, že
+                hranice možného sa v praxi neustále posúvajú tam, kde sa mení kolektívne aj individuálne presvedčenie o
+                tom, čo je dosiahnuteľné.</p>
+
+            <p style="border-left: 2px solid var(--accent-silver); padding-left: 15px;"><strong>Záver:</strong><br>
+                V kontexte knihy má tento text jasný zámer: presunúť pocit moci späť k čitateľovi. Nie tým, že by mu
+                sľuboval okamžité zázraky, ale tým, že mu ukazuje, že realita, ktorú prežíva, nie je neutrálna ani
+                náhodná. Je neustále formovaná jeho vnútorným nastavením. Zrkadlo je presvedčivé práve preto, že pôsobí
+                objektívne a „vonkajšie“. A práve preto si v ňom človek často neuvedomí, že sa pozerá sám na seba.</p>
+        </div>
+
+        <p>Teraz si spomeň na čas, keď si veril, že všetko bude v poriadku, aj keď nebol žiadny logický dôvod tomu
+            veriť. Možno si nemal ani tušenia, ako sa situácia vyrieši, no rozhodol si sa mať vieru a nejakým spôsobom
+            to všetko vyšlo. V momente, keď si sa odovzdal istote, realita sa podľa toho zarovnala. Prečo? Pretože si
+            predpokladal priaznivý výsledok. A presne tak ako predtým, zrkadlo nemalo inú možnosť, než ti to odraziť
+            späť.</p>
+
+        <p>Dvaja ľudia môžu žiť v tom istom svete, ale zažívať úplne odlišné reality. Jeden človek predpokladá, že život
+            je boj, že úspech si vyžaduje ťažkosti, že dobré veci sú vzácne a že musí bojovať o to, čo chce. Druhý
+            predpokladá, že život je ľahký, že úspech prichádza bez námahy, že je vždy podporovaný a že veci idú
+            prirodzene jeho smerom. A tak život dá obidvom za pravdu.</p>
+
+        <img src="https://realita.mywire.org/images/uvod/uvod2.webp" alt="Dve Reality"
+            style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.3s;"
+            onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"
+            onclick="openModal(this.src)">
+
+        <p>Tvoje presvedčenia sú plány, ktoré realita nasleduje s absolútnou presnosťou. Ak neustále
+            očakávaš ťažkosti, život sa vytvaruje tak, aby to odrážal, a vytvorí viac prekážok, ktorým budeš čeliť. Ak
+            očakávaš, že ťa ľudia zradia, zradia ťa. Ak predpokladáš, že peniaze sa získavajú ťažko, finančné
+            príležitosti sa ti jednoducho neukážu a okolnosti sa zarovnajú tak, aby udržali peniaze mimo tvojho dosahu.
+            <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                <i class="fas fa-book-open"></i> Hlbší rozbor
+            </button>
+        </p>
+
+        <div class="deep-dive-content">
+            <h5 style="color: var(--accent-silver); margin-bottom: 1.5rem;">Rozbor: Presvedčenia Tvoria Realitu</h5>
+
+            <p>Tieto pasáže rozvíjajú myšlienku, že život, ako ho človek prežíva, nie je náhodnou sériou udalostí, ale
+                dôsledným odrazom jeho dlhodobých vnútorných predpokladov. Nehovoria o jednorazových myšlienkach ani o
+                vedomom „pozitívnom myslení“, ale o hlbokých presvedčeniach, ktoré sa formovali rokmi skúseností,
+                výchovy a opakovaných interpretácií reality. Práve tieto presvedčenia určujú, čo človek považuje za
+                možné, pravdepodobné alebo nevyhnutné, a podľa toho sa jeho život prirodzene usporadúva.</p>
+
+            <p><strong>Z metafyzického hľadiska</strong> text nadväzuje na princíp, že vedomie je primárne a skúsenosť
+                reality sekundárna. To, čo človek dlhodobo predpokladá, sa stáva akoby „inštrukciou“ pre to, akým
+                spôsobom sa realita prejaví. Nejde o osud ani trest, ale o konzistentnú spätnú väzbu. Keď niekto
+                vnútorne očakáva zlyhanie, konflikt alebo stratu, ladí sa na frekvenciu týchto skúseností a realita mu
+                ich začne potvrdzovať. Zrkadlo, o ktorom text hovorí, v tomto zmysle nevyberá ani nehodnotí – len
+                zhmotňuje to, čo je vnútorne považované za „pravdu“.</p>
+
+            <p><strong>Psychologicky</strong> je tento mechanizmus dobre vysvetliteľný. Očakávania výrazne ovplyvňujú
+                správanie, rozhodovanie aj emočné reakcie. Ak človek verí, že sa niečo pokazí, správa sa opatrnejšie,
+                menej otvorene, viac defenzívne. Zvyšuje sa jeho stres, znižuje flexibilita myslenia a rastie
+                pravdepodobnosť chýb. Zároveň si viac všíma signály, ktoré jeho obavy potvrdzujú, a ignoruje tie, ktoré
+                by im odporovali. Výsledkom je situácia, ktorá sa skutočne „pokazí“, a spätne posilní pôvodné
+                presvedčenie. Text to popisuje nie ako náhodu, ale ako dôsledok dlhodobého mentálneho nastavenia.</p>
+
+            <p>Rovnaký princíp funguje aj opačne. Keď človek nemá jasný plán ani logické vysvetlenie, ale zachová si
+                vnútorný pokoj a dôveru, jeho nervový systém zostáva v stave, ktorý podporuje tvorivé riešenia, lepšiu
+                komunikáciu a schopnosť rozpoznať príležitosti. <strong>Empirické výskumy</strong> ukazujú, že pokoj,
+                dôvera a pozitívne očakávania zlepšujú rozhodovanie, zvyšujú vytrvalosť a umožňujú lepšie využívať
+                dostupné zdroje. To, čo sa subjektívne javí ako „zázračné vyriešenie“, je často výsledkom toho, že
+                človek neblokoval riešenia strachom a odporom.</p>
+
+            <p>Myšlienka, že dvaja ľudia môžu žiť v tom istom svete, no zažívať úplne odlišné reality, poukazuje na
+                rozdiel medzi objektívnymi okolnosťami a subjektívnou skúsenosťou. Rovnaké udalosti môžu byť
+                interpretované ako dôkaz boja alebo ako prirodzený proces rastu. Presvedčenie, že život je ťažký, vedie
+                k neustálemu očakávaniu odporu, a tým aj k jeho častejšiemu prežívaniu. Presvedčenie, že veci idú
+                prirodzene, zas vytvára vnútorný stav, v ktorom sa človek menej bráni, viac spolupracuje a ľahšie sa
+                prispôsobuje. Realita následne „potvrdí“ obidva prístupy, pretože správanie a vnímanie sa im
+                prispôsobia.</p>
+
+            <p>Keď text tvrdí, že presvedčenia sú „plány“, ktoré realita nasleduje, nejde o popretie vonkajších
+                faktorov, ale o zdôraznenie ich filtrovania cez vnútorné nastavenie. Očakávanie zrady vedie k nedôvere,
+                napätiu vo vzťahoch a výberu partnerov či situácií, ktoré túto vieru potvrdia. Presvedčenie o nedostatku
+                peňazí ovplyvňuje rizikové správanie, schopnosť vidieť príležitosti a ochotu konať. Okolnosti sa potom
+                usporiadajú tak, že človek má „pravdu“, nie preto, že by svet bol proti nemu, ale preto, že jeho
+                vnútorný model sveta bol dôsledne premietnutý do skúsenosti.</p>
+
+            <p style="border-left: 2px solid var(--accent-silver); padding-left: 15px;"><strong>Záver:</strong><br>
+                V kontexte celej knihy tieto pasáže posilňujú zodpovednosť bez obviňovania. Nehovoria, že človek je
+                vinný za všetko, čo sa mu stalo, ale že má omnoho väčší vplyv na svoju skúsenosť reality, než si
+                uvedomuje. Zmena života sa tu nezačína vonkajšími okolnosťami, ale prehodnotením toho, čomu človek
+                dlhodobo veril o sebe, o živote a o tom, čo je pre neho možné.</p>
+        </div>
+
+        <p>Tvoja intuícia funguje presne tým istým spôsobom. Mal si niekedy silný vnútorný pocit o niečom, či už to
+            bolo, že ti niekto zavolá, že stretneš určitú osobu, alebo že sa niečo stane, a potom sa to stalo? To, čo
+            nazývame intuíciou, nie je nič iné ako uverený predpoklad. Zrkadlo vždy počúva šepot tvojej mysle a
+            odpovedá: "Ak tak povieš, tak sa staň!"</p>
+
+        <p>Ty si príčina. Ty si pôvod. Ty si ten, kto generuje obraz, ktorý zrkadlo odráža. A ak si nespokojný s tým, čo
+            vidíš, existuje len jedno riešenie: zmeň to, čo vysielaš, a zrkadlo sa musí zmeniť tiež. Ak sa postavíš pred
+            zrkadlo a zamračíš sa, usmeje sa odraz späť? Samozrejme, že nie. Zrkadlo ťa neľutuje. Nevyjednáva. Nehovorí:
+            "Vidím, že si smutný, ale aj tak ti odrazím šťastnú verziu teba." Nie. Zrkadlo je neutrálne. Jednoducho
+            vracia to, čo dostane. A tak, ak chceš vidieť úsmev, musíš sa usmiať prvý.</p>
+    </section>
+
+    <!-- Key Points Summary -->
+    <section class="summary-section" style="padding: 2rem; background: var(--secondary-bg);">
+        <div
+            style="margin: 0 auto; max-width: 800px; padding: 2rem; border: 1px solid var(--accent-gold); border-radius: 10px; background: rgba(251, 191, 36, 0.05);">
+            <h3 style="color: var(--accent-gold); text-align: center; margin-bottom: 1.5rem;">Kľúčové body kapitoly</h3>
+            <ul class="affirmation-list" style="padding-left: 20px;">
+                <li style="margin-bottom: 10px; list-style: none;"><strong>1. Zrkadlo je neutrálne:</strong> Nesúdi
+                    tvoje želania ani strachy. Len ich mechanicky odráža.</li>
+                <li style="margin-bottom: 10px; list-style: none;"><strong>2. Uver, potom uvidíš:</strong> Logika a
+                    dôkazy prichádzajú AŽ po tom, čo uveríš v "nemožné".</li>
+                <li style="margin-bottom: 10px; list-style: none;"><strong>3. Úsmev musí prísť prvý:</strong> Nemôžeš
+                    čakať, kým sa zmení realita, aby si sa cítil dobre. Ty musíš zmeniť pocit (príčinu), aby sa zmenil
+                    obraz (následok).</li>
+                <li style="margin-bottom: 10px; list-style: none;"><strong>4. Intuícia je predpoklad:</strong> Tvoje
+                    "ciťáky" sú len signálom toho, aké presvedčenie práve vkladáš do zrkadla.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="mirror-simulator-section">
+        <h2 style="margin-bottom: 1rem;">Simulátor Zrkadla</h2>
+        <p style="color: #94a3b8; margin-bottom: 3rem;">Zrkadlo nemôžeš donútiť k úsmevu, kým sa mračíš. Vyskúšaj to.
+        </p>
+
+        <div class="simulator-container">
+            <div class="sim-box" id="inputBox">
+                <h3 style="color: var(--accent-gold);">TY (Príčina)</h3>
+                <div id="userState" style="font-size: 4rem; margin: 20px 0;">😠</div>
+                <p id="userDesc">Vysielaš: "Život je boj"</p>
+                <button class="action-btn" onclick="changeState()">Zmeniť postoj</button>
+            </div>
+
+            <div class="arrow-icon">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+
+            <div class="sim-box reflection-box">
+                <h3 class="reflection-text" style="color: #0f172a;">REALITA (Následok)</h3>
+                <div id="mirrorState" style="font-size: 4rem; margin: 20px 0;">😠</div>
+                <p id="mirrorDesc" class="reflection-text">Odráža: Problémy a ťažkosti</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="concepts-grid">
+        <div class="concept-item">
+            <i class="fas fa-balance-scale fa-2x" style="color: var(--accent-silver); margin-bottom: 1rem;"></i>
+            <h3>Neutralita Zrkadla</h3>
+            <p>Zrkadlo nemá názor. Nesúdi ťa, keď sa bojíš, ani ťa neodmeňuje za to, že si "dobrý". Iba
+                mechanicky odráža tvoj dominantný stav.</p>
+        </div>
+        <div class="concept-item">
+            <i class="fas fa-lightbulb fa-2x" style="color: var(--accent-silver); margin-bottom: 1rem;"></i>
+            <h3>Viera vs. Logika</h3>
+            <p>Väčšina ľudí čaká na logický dôkaz, aby uverili. Zrkadlo funguje naopak: najprv musíš uveriť
+                (lietadlá, telefóny), a až potom zrkadlo vytvorí "logický rámec", ako to uskutočniť.
+            </p>
+        </div>
+        <div class="concept-item">
+            <i class="fas fa-brain fa-2x" style="color: var(--accent-silver); margin-bottom: 1rem;"></i>
+            <h3>Intuícia</h3>
+            <p>To, čo nazývame intuíciou, je často len silný predpoklad, ktorému veríme.
+                Zrkadlo počúva šepot tvojej mysle a hovorí: "Ak tak povieš, tak sa staň".</p>
+        </div>
+    </section>
+
+    <section class="vocabulary-section">
+        <h2 style="text-align: center; color: #fff; margin-bottom: 3rem;">Ako to použiť v praxi?</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1000px; margin: 0 auto;">
+
+            <div>
+                <h3 style="color: var(--accent-mirror); margin-bottom: 1.5rem;">Príklad zo života: Čakanie na výsledok
+                </h3>
+                <p style="margin-bottom: 1rem;"><strong>Situácia:</strong> Čakáš na výsledok pohovoru alebo skúšky.</p>
+
+                <div
+                    style="background: rgba(255,0,0,0.1); padding: 15px; border-left: 3px solid red; margin-bottom: 1rem;">
+                    <strong>Chyba:</strong> "Určite to pokazím. Mám zlý pocit."<br>
+                    <em>Zrkadlo:</em> Poskytne ti zlyhanie alebo komplikácie.
+                </div>
+
+                <div style="background: rgba(0,255,0,0.1); padding: 15px; border-left: 3px solid #00ff00;">
+                    <strong>Správny postoj:</strong> "Neviem ako, ale verím, že to dopadne v môj
+                    prospech."<br>
+                    <em>Zrkadlo:</em> Zarovná okolnosti tak, aby to vyšlo.
+                </div>
+            </div>
+
+            <div>
+                <h3 style="color: var(--accent-silver); margin-bottom: 1.5rem;">Afirmácie pre Zrkadlo</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-check"
+                            style="color: var(--accent-mirror); margin-right: 10px;"></i> Ja som príčina, svet je len
+                        následok.</li>
+                    <li style="margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-check"
+                            style="color: var(--accent-mirror); margin-right: 10px;"></i> Zrkadlo sa na mňa usmeje, lebo
+                        sa usmievam prvý.</li>
+                    <li style="margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-check"
+                            style="color: var(--accent-mirror); margin-right: 10px;"></i> Realita sa vždy ohne podľa
+                        môjho presvedčenia.</li>
+                    <li style="margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-check"
+                            style="color: var(--accent-mirror); margin-right: 10px;"></i> Moje presvedčenie tvorí
+                        logiku, nie naopak.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola1.html" class="nav-btn">&larr; Späť na Kapitolu 1</a>
+        <a href="Kapitola3.html" class="nav-btn">Pokračovať na Kapitolu 3 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script>
+        // Toggle Side Notes
+        function toggleSideNote(btn) {
+            const content = btn.nextElementSibling;
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                btn.style.background = 'transparent';
+                btn.style.color = '#22d3ee';
+            } else {
+                content.style.display = 'block';
+                content.style.animation = 'fadeIn 0.3s ease';
+                btn.style.background = '#22d3ee';
+                btn.style.color = '#000';
+            }
+        }
+
+        // Toggle Deep Dive (Inline)
+        function toggleDeepDive(btn) {
+            let content = btn.parentElement.nextElementSibling;
+
+            while (content && !content.classList.contains('deep-dive-content')) {
+                content = content.nextElementSibling;
+            }
+
+            if (!content) return;
+
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--accent-gold)';
+            } else {
+                content.style.display = 'block';
+                content.style.animation = 'fadeIn 0.5s ease';
+                btn.style.background = 'var(--accent-gold)';
+                btn.style.color = '#000';
+            }
+        }
+
+        let isSmiling = false;
+
+        function changeState() {
+            const userState = document.getElementById('userState');
+            const userDesc = document.getElementById('userDesc');
+            const mirrorState = document.getElementById('mirrorState');
+            const mirrorDesc = document.getElementById('mirrorDesc');
+            const btn = document.querySelector('.action-btn');
+
+            if (!isSmiling) {
+                // Change User First
+                userState.innerHTML = '😌';
+                userDesc.innerHTML = 'Vysielaš: "Všetko je v poriadku"';
+                btn.innerHTML = 'Čakať na odraz...';
+                btn.disabled = true;
+
+                // Delay reflection to simulate reality lag (optional metaphor) or instant law
+                setTimeout(() => {
+                    mirrorState.innerHTML = '😌';
+                    mirrorDesc.innerHTML = 'Odráža: Pokoj a riešenia';
+                    btn.innerHTML = 'Vrátiť späť (pochybovať)';
+                    btn.disabled = false;
+                    isSmiling = true;
+                }, 800);
+            } else {
+                // Change User back to negative
+                userState.innerHTML = '😠';
+                userDesc.innerHTML = 'Vysielaš: "Život je boj"';
+
+                setTimeout(() => {
+                    mirrorState.innerHTML = '😠';
+                    mirrorDesc.innerHTML = 'Odráža: Problémy a ťažkosti';
+                    btn.innerHTML = 'Zmeniť postoj';
+                    isSmiling = false;
+                }, 800);
+            }
+        }
+    </script>
+    <!-- Image Modal -->
+    <div id="imageModal" class="gallery-modal" onclick="closeModal()">
+        <span class="gallery-close">&times;</span>
+        <div class="gallery-content-wrapper">
+            <img class="gallery-image" id="modalImg" src="">
+        </div>
+    </div>
+
+    <script>
+        // Modal Logic
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modal.style.display = "block";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+        }
+    </script>
+    <script src="footer.js"></script>
+</body>
+
+</html>
