@@ -135,6 +135,44 @@
         </div>
     </section>
 
+    <!-- Audio Section -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">02 - Realita je Zrkadlo</h3>
+                </div>
+            </div>
+
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="https://realita.mywire.org/audio/2kapitola-zrkadlo.mp3"></audio>
+
+                <button class="play-pause-btn" id="playPauseBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+
+                <div class="audio-progress-area">
+                    <div class="progress-time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="book-content silver-theme">
         <div class="paragraph-wrapper">
             <p>Predstav si fyzickú realitu ako obrovské, komplexné, viacrozmerné zrkadlo, ktoré ti neustále odráža to,
@@ -547,6 +585,104 @@
                 }, 800);
             }
         }
+
+        // --- AUDIO PLAYER LOGIC ---
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        // Toggle Play/Pause
+        function togglePlay() {
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Playback failed:", error);
+                        // Reset icon if play failed immediately
+                        playIcon.className = 'fas fa-play';
+                        alert("Nepodarilo sa spustiť audio. (Chyba: " + error.message + ")");
+                    });
+                }
+            } else {
+                audio.pause();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        // Update UI based on actual audio state
+        audio.addEventListener('play', () => {
+            playIcon.className = 'fas fa-pause';
+        });
+
+        audio.addEventListener('pause', () => {
+            playIcon.className = 'fas fa-play';
+        });
+
+        audio.addEventListener('waiting', () => {
+            playIcon.className = 'fas fa-spinner fa-spin';
+        });
+
+        audio.addEventListener('playing', () => {
+            playIcon.className = 'fas fa-pause';
+        });
+
+        audio.addEventListener('ended', () => {
+            playIcon.className = 'fas fa-play';
+        });
+
+        // Update Progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Load Metadata
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        // Error Handling
+        audio.addEventListener('error', (e) => {
+            console.error("Audio error:", e);
+            const errorMsg = audio.error ? `Code ${audio.error.code}` : 'Unknown';
+            // Optional: alert user only if they try to play
+            // alert("Chyba pri načítaní audia: " + errorMsg); 
+        });
+
+        // Setup duration if already loaded
+        if (audio.readyState >= 1) {
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = pos * audio.duration;
+            }
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
     </script>
     <!-- Image Modal -->
     <div id="imageModal" class="gallery-modal" onclick="closeModal()">

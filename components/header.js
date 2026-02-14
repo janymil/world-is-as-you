@@ -1,37 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('shared-header');
-        if (!container) return;
+    const container = document.getElementById('shared-header');
+    if (!container) return;
 
-        // Modern, compact header matching site's design language
-        container.innerHTML = `
-        <header class="shared-nav">
-            <div class="nav-left">
-                <a class="logo" href="index.html">Svet je taký, aký si ty</a>
-            </div>
-            <div class="nav-center">
-                <nav class="nav-links">
-                    <a href="index.html">Domov</a>
-                    <a href="Uvod.html">O Knihe</a>
-                    <a href="#chapters">Kapitoly</a>
-                </nav>
-            </div>
-            <div class="nav-right">
-                <div class="search-container">
-                    <input id="siteSearchInput" placeholder="Hľadať..." aria-label="Search" autocomplete="off" />
-                    <div id="siteSearchResults" class="search-results" aria-hidden="true"></div>
-                </div>
-                <a href="Uvod.html" class="cta-btn">Začať</a>
-                <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
-            </div>
-        </header>
-        `;
+    // Header copied from index.html so reusable header matches the page
+    container.innerHTML = `
+    <nav class="shared-nav">
+        <a class="logo" href="index.html">The World is as You Are</a>
 
-        // mobile menu toggle
-        const mobileBtn = document.getElementById('mobileMenuBtn');
-        if (mobileBtn) {
-            mobileBtn.addEventListener('click', () => {
-                const nav = container.querySelector('.nav-links');
-                nav.classList.toggle('open');
-            });
-        }
+        <div class="nav-links">
+            <a href="index.html">Domov</a>
+            <a href="index.html#about-book">O KNIHE</a>
+            <a href="index.html#chapters">KAPITOLY</a>
+        </div>
+
+        <div class="nav-actions">
+            <div class="search-box">
+                <input id="siteSearchInput" placeholder="Hľadať..." aria-label="Search" />
+                <button id="siteSearchBtn" class="search-btn" aria-label="Search button"><i class="fas fa-search"></i></button>
+            </div>
+            <a href="Uvod.html" class="cta-btn">ZAČAŤ ČÍTAŤ</a>
+        </div>
+    </nav>
+    `;
+
+    // Wire search: Enter or button navigates to search page with query
+    const input = container.querySelector('#siteSearchInput');
+    const btn = container.querySelector('#siteSearchBtn');
+    function runSearch() {
+        const q = (input && input.value || '').trim();
+        if (!q) return;
+        location.href = `search.html?q=${encodeURIComponent(q)}`;
+    }
+    if (input) input.addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });
+    if (btn) btn.addEventListener('click', runSearch);
 });

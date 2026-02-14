@@ -12,6 +12,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+    <link rel="stylesheet" href="style.css">
+
     <style>
         :root {
             --primary-bg: #020617;
@@ -57,60 +59,7 @@
             list-style: none;
         }
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-glass);
-        }
-
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: var(--gold);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-        }
-
-        .nav-links a:hover {
-            color: var(--cyan);
-        }
-
-        .cta-btn {
-            padding: 10px 25px;
-            border: 1px solid var(--gold);
-            border-radius: 30px;
-            color: var(--gold);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .cta-btn:hover {
-            background: var(--gold);
-            color: var(--primary-bg);
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
-        }
+        /* Navigation styles moved to style.css to allow shared header injection */
 
         /* --- HERO SECTION --- */
         .hero {
@@ -441,6 +390,115 @@
                     <li><i class="fas fa-caret-right" style="color: var(--cyan)"></i> Emocionálne GPS (Kap. 4)</li>
                     <li><i class="fas fa-caret-right" style="color: var(--cyan)"></i> Denník Manifestácie (Kap. 13)</li>
                 </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-info-section" id="about-book">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 8rem 2rem;">
+            <div class="section-header" style="margin-bottom: 4rem;">
+                <h2 style="font-size: 2.5rem; color: var(--accent-gold);">O Knihe</h2>
+            </div>
+
+            <div style="color: #e2e8f0; line-height: 1.9; font-size: 1.05rem; display: grid; grid-template-columns: 1fr; gap: 2.5rem;">
+                <p style="margin-bottom: 1.5rem;">
+                    "Svet je taký, aký ste vy" slúži ako praktický manuál na ovládnutie fyzickej reality. Kniha vyzýva čitateľa, aby odhodil tradičné spoločenské naprogramovanie a prijal radikálny predpoklad: život sa nedeje vám, ale reaguje na vás. Tvrdí sa, že nie sme bezmocné obete okolností, ale jediní tvorcovia svojej existencie. Cieľom knihy nie je naučiť vás, ako niečo "získať", ale ako sa "zbaviť" chybných myšlienkových vzorcov, aby sa odhalila sila, ktorú už dávno máte.
+                </p>
+
+                <div style="background: rgba(251, 191, 36, 0.05); border-left: 4px solid var(--accent-gold); padding: 2.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 1.5rem; font-size: 1.5rem;">Hlavná filozofia: Princíp Zrkadla</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">
+                        Ústrednou metaforou knihy je, že fyzická realita funguje ako neutrálne, viacrozmerné zrkadlo.
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin: 1.5rem 0; color: #cbd5e1;">
+                        <li style="margin-bottom: 1.2rem; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-gold);">•</span>
+                            <strong>Mechanizmus:</strong> Zrkadlo nemá vlastnú myseľ. Nesúdi, neargumentuje, ani nerozhoduje o tom, čo je pre vás najlepšie. Jednoducho a s absolútnou presnosťou odráža váš vnútorný stav – vaše najsilnejšie predpoklady, presvedčenia a očakávania – späť k vám vo forme fyzických udalostí.
+                        </li>
+                        <li style="padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-gold);">•</span>
+                            <strong>Pravidlo:</strong> Ak sa na zrkadlo mračíte (veríte v nedostatok/boj), musí sa mračiť späť. Ak sa usmievate (veríte v hojnosť/ľahkosť), musí sa usmiať späť. Zrkadlo sa s vami neháda. Aby ste zmenili odraz (realitu), musíte najprv zmeniť obraz (svoj vnútorný stav).
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 2rem; font-size: 1.5rem;">Kľúčové koncepty a učenia</h3>
+                    
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">1. Identita a Sen</h4>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                            Kniha tvrdí, že nie ste svoje telo, meno ani minulosť, ale Nekonečné Vedomie, ktoré prežíva ľudský život. To, čo nazývame "reálny svet", je popisované ako sen alebo ilúzia, ktorú ste si vytvorili, aby ste mohli zažiť extázu z "prebudenia sa" a rozpamätania sa na svoju skutočnú moc.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">2. Sila Vedenia</h4>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                            Vedenie je označované za najmocnejšiu manifestačnú techniku. Na rozdiel od "nádeje" (ktorá v sebe nesie pochybnosť a nedostatok), "vedenie" je vnútorné rozhodnutie, že túžba je už faktom. Fyzická realita sa s vami neháda. V momente, keď niečo viete, stáva sa to skutočnosťou.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">3. Emócie ako Navigačný Systém</h4>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                            Emócie nie sú reakcie, ktoré treba pretrpieť, ale precízny navigačný systém. Negatívne emócie (strach, úzkosť, tlak) sú signálom, že práve veríte lži alebo myšlienke, ktorá je v rozpore s vašim Vyšším ja. Pozitívne emócie potvrdzujú, že ste v súlade s pravdou a svojím zámerom.
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">4. Ilúzia času a okolností</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; color: #cbd5e1;">
+                            <li style="margin-bottom: 1rem; padding-left: 25px; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent-gold);">✧</span>
+                                <strong>Okolnosti nie sú podstatné:</strong> Súčasné okolnosti sú len "staré správy" – zhmotnený výsledok vašich minulých myšlienok. Nemajú moc diktovať budúcnosť, pokiaľ sa na ne neprestajne nezameriavate.
+                            </li>
+                            <li style="padding-left: 25px; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent-gold);">✧</span>
+                                <strong>Čas je relatívny:</strong> Čas slúži ako nárazník, aby sa každá prchavá negatívna myšlienka nezhmotnila okamžite. Rýchlosť manifestácie však závisí výlučne od vašich presvedčení; ak veríte, že to potrvá mesiac, potrvá to mesiac. Ak veríte, že to bude zajtra, bude to zajtra.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">5. Postoj Víťaza</h4>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem;">
+                            Kniha rozlišuje "víťazov" nie podľa ich tvrdej práce, ale podľa ich systému presvedčení. Víťazi predpokladajú, že svet je nastavený v ich prospech. Prekážky nevnímajú ako zlyhania, ale ako obchádzky vedúce k niečomu lepšiemu. Kniha explicitne tvrdí, že "tvrdá práca je lož", ak nie je sprevádzaná vnútorným súladom, a že skutočný úspech prichádza z ľahkosti a očakávania, nie z boja.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 2rem; font-size: 1.5rem;">Praktické nástroje</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 1.5rem;">
+                        Kniha poskytuje konkrétne stratégie na zmenu reality:
+                    </p>
+                    <ul style="list-style: none; padding: 0; color: #cbd5e1;">
+                        <li style="margin-bottom: 1.2rem; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-gold);">•</span>
+                            <strong>Rozhodnutie o Výsledku:</strong> Rozhodnutie o výsledku konkrétnej udalosti (napr. otvorenie mailu) ešte predtým, než sa stane.
+                        </li>
+                        <li style="margin-bottom: 1.2rem; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-gold);">•</span>
+                            <strong>Zastavenie Negatívneho Momentu:</strong> Zastavenie boja s negatívnymi myšlienkami a odvedenie pozornosti k neutralite.
+                        </li>
+                        <li style="margin-bottom: 1.2rem; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-gold);">•</span>
+                            <strong>Vnútorný Monológ:</strong> Používanie vnútornej reči na odstránenie pochybností a vyhlásenie autority nad realitou.
+                        </li>
+                        <li style="padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--accent-gold);">•</span>
+                            <strong>Interakcia s ľuďmi:</strong> Pochopenie, že ľudia sú tiež zrkadlá, ktoré odrážajú vaše predpoklady o nich. Ak chcete zmeniť správanie človeka, musíte zmeniť svoj vnútorný scenár o ňom.
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(34, 211, 238, 0.05); border-left: 4px solid var(--accent-cyan); padding: 2.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 1.5rem; font-size: 1.3rem;">Záver</h3>
+                    <p style="color: #cbd5e1;">
+                        Kniha je výzvou prevziať 100% zodpovednosť za všetko vo svojom živote. Povzbudzuje čitateľa, aby prestal hľadať "falošných bohov" (externé rituály, astrológiu alebo záchrancov) a uznal, že on sám je Hybnou silou. Kniha pozýva čitateľa, aby vnímal život ako plátno a bez ospravedlňovania naň maľoval realitu radosti, bohatstva a slobody.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
