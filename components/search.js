@@ -29,6 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
         renderMatches(matches.slice(0, 10));
     });
 
+    // When user presses Enter, open dedicated search page with query param
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const q = input.value.trim();
+            if (!q) return;
+            // encode and navigate to search page
+            window.location.href = `search.html?q=${encodeURIComponent(q)}`;
+        }
+    });
+
     // close results on outside click
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.search-container')) {

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hľadať — Svet je taký, aký si ty</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="shared-header"></div>
+
+  <main style="max-width:1100px;margin:6rem auto;padding:2rem;">
+    <h2>Výsledky vyhľadávania</h2>
+    <div id="searchSummary" style="color:#94a3b8;margin-top:0.5rem"></div>
+    <div id="resultsList" style="margin-top:1.5rem;display:grid;gap:12px;"></div>
+  </main>
+
+  <div id="shared-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+  <script src="components/header.js"></script>
+  <script src="components/search.js"></script>
+  <script src="components/footer.js"></script>
+
+  <script>
+    // Helper to read query param
+    function qParam() {
+      const p = new URLSearchParams(location.search);
+      return p.get('q') || '';
+    }
+
+    const q = qParam();
+    const summary = document.getElementById('searchSummary');
+    const resultsList = document.getElementById('resultsList');
+    summary.textContent = `Hľadanie: "${q}"`;
+
+    fetch('search_index.json')
+      .then(r => r.json())
+      .then(index => {
+        // Use Fuse.js for fuzzy search
+        const fuse = new Fuse(index, { keys: ['title', 'content'], threshold: 0.35, includeMatches: true });
+        const res = fuse.search(q);
+        if (!res || res.length === 0) {
+          resultsList.innerHTML = '<div style="color:#94a3b8">Nenašlo sa nič.</div>';
+          return;
+        }
+
+        resultsList.innerHTML = res.map(r => {
+          const item = r.item;
+          const excerpt = item.content ? (item.content.substr(0, 220) + (item.content.length>220? '…':'')) : '';
+          return `<a class="result-item" href="${item.path}"><strong>${item.title}</strong><div style="color:#94a3b8">${excerpt}</div></a>`;
+        }).join('');
+      })
+      .catch(err => {
+        resultsList.innerHTML = '<div style="color:#ef4444">Chyba pri načítaní indexu.</div>';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
