@@ -1,69 +1,785 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 4</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Specific Overrides */
+
+        /* Hero - Purple Theme as requested for the Title */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        .hero h4 {
+            color: var(--accent-purple);
+        }
+
+        /* Content - Gold Theme as requested for the text */
+        /* Content - Gold Theme as requested for the text */
+        .book-content {
+            border-left: none;
+            /* Removing the line as requested */
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 3rem;
+            background: var(--secondary-bg);
+            box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+            border-left: 3px solid var(--accent-gold);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+
+        .quote-block {
+            border-color: rgba(251, 191, 36, 0.3);
+            color: #fde047;
+            /* Lighter gold */
+        }
+
+        .sub-heading {
+            color: var(--accent-gold);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- INTERACTIVE TOOLS FOR CHAPTER 4 --- */
+
+        /* 1. EMOTIONAL GPS SIMULATOR */
+        .gps-tool-container {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.1);
+            /* Purple glow for "Intuition" vibe */
+        }
+
+        .gps-display {
+            width: 200px;
+            height: 200px;
+            border: 4px solid #334155;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            position: relative;
+            background: radial-gradient(circle, #1e293b, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.5s;
+        }
+
+        .gps-needle {
+            width: 4px;
+            height: 90px;
+            background: #ef4444;
+            /* Default Red (Off track) */
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(-45deg);
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1), background 0.3s;
+            border-radius: 2px;
+            box-shadow: 0 0 10px currentColor;
+            z-index: 2;
+        }
+
+        .gps-center {
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .gps-labels span {
+            position: absolute;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #64748b;
+        }
+
+        .gps-status-text {
+            font-size: 1.2rem;
+            min-height: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .emotion-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .emotion-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .emotion-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* 2. FEAR BUSTER CARDS */
+        .fear-buster-section {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .fear-cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .fear-card {
+            width: 280px;
+            height: 320px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .fear-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .fear-card.flipped .fear-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fear-front,
+        .fear-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .fear-front {
+            background: #1e1e1e;
+            border: 1px solid #ef4444;
+            color: #eca5a5;
+        }
+
+        .fear-back {
+            background: linear-gradient(135deg, #0f172a, #334155);
+            border: 1px solid var(--accent-gold);
+            color: #fff;
+            transform: rotateY(180deg);
+        }
+
+        /* FAQ Styling */
+        .faq-section {
+            margin-top: 4rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-question {
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s ease;
+            padding: 0 1rem;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            /* Adjust as needed */
+            padding-bottom: 1rem;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?compass,aurora,stars'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 4</h4>
-            <h1>Tvoje emócie sú GPS</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px;">KAPITOLA 4</h4>
+            <h1>Tvoje Emócie sú Tvoje GPS</h1>
+            <p>Nie sú tu na to, aby ťa trestali. Objav, ako čítať signály svojho vnútorného navigačného systému.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Tvoje emócie sú GPS.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Tvoje emócie sú GPS" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">04 - Emócie ako GPS</h3>
+                </div>
+            </div>
+
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="https://realita.mywire.org/audio/4kapitola-emocie-su-gps.mp3"></audio>
+
+                <button class="play-pause-btn" id="playPauseBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+
+                <div class="audio-progress-area">
+                    <div class="progress-time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+            <p>Bol si obdarený neuveriteľným nástrojom: <span class="highlight">tvojimi emóciami</span>. Nie sú určené
+                len na to, aby si ich cítil, sú určené na to, aby si ich analyzoval a pochopil. Tvoje emócie sú
+                integrovaný navigačný systém, ktorý ti poskytuje neustálu spätnú väzbu. Hovoria ti, či myslíš v súlade
+                so svojimi túžbami, alebo či z tohto smeru vybočuješ. Každá emócia je signál.</p>
 
+            <h3 class="sub-heading">Dobré a Zlé Emócie</h3>
+            <p>Emócie pokrývajú široké spektrum, ale pre teraz ich kategorizujme na dva typy: dobré a zlé. Keď zažívaš
+                negatívnu emóciu, pochop, že pramení z myšlienky. Ak sa emócia cíti ťažká, nepríjemná alebo dusivá, nie
+                je určená na to, aby ťa trestala. Je určená na to, aby ťa varovala. Hovorí ti, že myšlienka, ktorú si
+                práve mal, je nepravdivá a nie je v súlade s tvojimi túžbami.</p>
+
+            <p>Dovoľ mi dať ti príklad. Predstav si, že máš sen, niečo, po čom hlboko túžiš. Na chvíľu na to pomyslíš a
+                tvoje telo naplní vzrušenie, rozžiari ťa. Ale potom sa vkradne iná myšlienka: "Možno je nemožné to
+                dosiahnuť. Bude to príliš ťažké. Možno to zaberie celý život, alebo horšie, nestane sa to vôbec."</p>
+
+            <p>Zrazu tá radosť zmizne. Tvoja hruď sa stiahne. Cítiš sa zaťažený. Prečo? Myslíš si, že tie emócie
+                existujú len preto, aby si trpel? Aby ti urobili život mizerným? Aby úzkosť a smútok pohltili tvoje
+                bytie? Nie. Existujú, aby upútali tvoju pozornosť, aby ti ukázali, že tvoje myšlienky sa vzďaľujú od
+                pravdy a že sabotuješ sám seba.</p>
+
+            <div class="highlight-box">
+                <p>Vo vesmíre, ktorý preteká hojnosťou, inteligenciou a nekonečnými možnosťami, v takom, ktorý bez
+                    námahy diriguje harmóniu tvojich miliárd buniek každú sekundu len preto, aby ťa udržal nažive, ktorý
+                    necháva slnko vychádzať každé ráno, aby osvetlilo tvoje dni a mesiac, aby osvetlil tvoje noci –
+                    <strong>odvažuješ sa veriť, že niečo je príliš ťažké na to, aby to nekonečná inteligencia priviedla
+                        k existencii?</strong> To je arogancia.
+                </p>
+            </div>
+
+            <p>To je dôvod, prečo trpíš: pretože odporuješ pravde. Naťahuješ sa tak ďaleko od nej, že máš pocit, akoby
+                si lapal po dychu. Tvoje emócie sú tvoje vnútorné GPS, nasleduj ich. Počúvaj pozorne, buď vnímavý a
+                nalaď sa. Zaujímaj sa viac o to, ako sa cítiš, než o čokoľvek vonkajšie. Urob zo svojich emócií svoju
+                najvyššiu prioritu.</p>
+
+            <p>Pocit, že sa cítiš zle, by ťa mal zastaviť na mieste. Keď sa objaví negativita, nechaj všetko tak, sadni
+                si so sebou a odhaľ koreň toho pocitu. Identifikuj a eliminuj myšlienky, ktoré ho spôsobujú, jednu po
+                druhej, bez ohľadu na to, ako dlho to potrvá. Urob čokoľvek, čo je potrebné, aby si sa znovu zosúladil s
+                pocitom, že sa cítiš dobre.</p>
+
+            <div class="quote-block">
+                "Dôveruj mi, keď ti hovorím toto: vonkajší svet bude vždy, a tým myslím vždy, odrážať to, čo cítiš vo
+                vnútri."
+            </div>
+
+            <p>Tvoje myšlienky a emócie sa môžu zdať osobné a intímne, ale nie sú. Svet okolo teba pozorne počúva a
+                zhmotňuje tvoje myšlienky zakaždým, bez výnimky.</p>
+
+            <h3 class="sub-heading" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">Strach</h3>
+
+            <p><strong style="color: #ef4444;">Strach je ilúzia</strong>, podvodník. Šepká klamstvá, presviedča ťa,
+                že nie si schopný, že to najhoršie sa určite stane, že si malý, bezmocný a obmedzený. A ty tomu
+                veríš. Ale strach má moc len vtedy, keď ho počúvaš. Veci, ktorých sa bojíš, existujú len preto, že ich
+                prijímaš ako pravdu. V momente, keď ich potvrdíš, integruješ do svojho systému a rozhodneš sa, že sú
+                logické a pravdepodobné, dávaš im moc a robíš ich skutočnými.</p>
+
+            <p>Kŕmia sa z teba. Ale v sekunde, keď sa rozhodneš, že čokoľvek, čo strach šepká, nie je pravda, jeho
+                zovretie zoslabne. Prekážky, ktoré vytvára, sa rozplynú vo vzduchu. Nemajú na čom stáť.</p>
+
+            <p>Pretože nič nemôže existovať, pokiaľ to nedovolíš. Nič nad tebou nemá moc, pokiaľ to vnútorne neprijmeš.
+                Je to také jednoduché, priateľ môj. Takže sa osloboď. A ja viem, že strach, tvoj najväčší nepriateľ,
+                prichádza prezlečený za priateľa. Približuje sa k tebe jemne, predstierajúc, že mu ide o tvoje dobro.
+                Prezentuje sa ako ochranca, varuje ťa pred možnými nebezpečenstvami, presviedča ťa, že ťa chce len
+                udržať v bezpečí. Ale strach je prefíkaný podvodník.</p>
+
+            <p>Strach je hráč, pokrytec, falošný priateľ. Správa sa, akoby pre teba chcel to najlepšie, ale v
+                skutočnosti ťa chce len udržať v stagnácii, uzamknutého na mieste. Vie, čo ťa čaká na druhej strane
+                tvojich pochybností. Vie, že budeš vždy podporovaný. Vie, že si už v bezpečí, že čokoľvek potrebuješ, si
+                k tebe nájde cestu, že čokoľvek, o čo požiadaš, ti bude dané. Vie, že si bezpodmienečne milovaný a
+                nenávidí to priznať. Takže strach hrá každý trik v knihe, aby ťa udržal zaseknutého. Paralyzuje ťa,
+                oslepuje ťa, núti ťa pochybovať o sebe.</p>
+
+            <div class="highlight-box">
+                <p>Ale chcem, aby si bol dostatočne odvážny na to, aby si sa mu pozrel do očí a odmietol uveriť jedinému
+                    slovu, ktoré hovorí. Smej sa mu. Vysmievaj sa mu. Povedz mu, nech sa ide hrať niekam inam, pretože
+                    ty vieš, kto si. <strong>Ty si Boh. Absolútno. Nekonečno zažívajúce samo seba cez sen tejto fyzickej
+                        reality.</strong> Nie si oddelený od božského, ty si božské, skúmajúce samo seba, nachádzajúce
+                    sa v každom kúte existencie.</p>
+            </div>
+
+            <p>Bol si naprogramovaný veriť, že bez úsilia, bolesti a boja k tebe nikdy nič dobré nepríde. Učili ťa, že
+                úspech si treba zaslúžiť cez ťažkosti, že musíš o všetko bojovať, bojovať o lásku, bojovať o úspech,
+                bojovať o prežitie. Aj keď ide život dobre, pripravuješ sa na pád, presvedčený, že po každom vrchole
+                musí prísť dno. Bol si naprogramovaný prijať boj ako normu a bez toho, aby si to spochybňoval,
+                nasleduješ tento scenár.</p>
+
+            <p>Ale pozrime sa na prírodu. Bojuje o existenciu? Namáha sa slnko, aby každé ráno vyšlo? Nútia sa rieky,
+                aby tiekli? Váhajú stromy rásť smerom k nebu? Nie. Všetko nasleduje prirodzený rytmus, bez námahy,
+                nezaťažene, v súlade. Taký má byť život. Svet, ako ho poznáš, sa ti rozpadne pred očami v momente, keď
+                prestaneš akceptovať utrpenie ako svoj predvolený stav. Život nikdy nemal byť ťažký. Nikdy nemusel byť.
+            </p>
+
+            <h3 class="sub-heading">Pozitívne Emócie</h3>
+            <p>Teraz sa porozprávajme o druhej strane spektra: pozitívnych emóciách. Keď pomyslíš na myšlienku, ktorá v
+                tebe zapáli ľahký pocit, keď sa ti z žalúdka zdvihne ťažoba a cítiš jemný prílev energie alebo šťastia,
+                vedz, že tieto emócie sú tvojím vnútorným potvrdením, že myslíš myšlienky, ktoré sú pravdivé, ktoré sú v
+                harmónii s tvojou pravou podstatou. Sú v súlade s tvojím poslaním a volaním.</p>
+
+            <p>Pretože, priateľ môj, si tu na Zemi, aby si nasledoval volanie, účel, ktorý prispieva k evolúcii tvojej
+                duše. Nie si tu len na to, aby si pracoval, predával svoj čas a zomrel. Nasleduj to, kam ťa vedú
+                pozitívne emócie, a dostaneš sa do svojho cieľa v čo najkratšom čase. Pozitívne emócie sú vnútorný
+                navigačný systém, ktorý ti hovorí, že si na správnej ceste.</p>
+
+            <p>Musíš si urobiť prioritou číslo jedna zostať v tomto stave za každú cenu. Tvoje myslenie je príčina a to,
+                čo sa deje v tvojom svete, je následok. Čo si myslíš, to tvoríš. Čo držíš
+                v mysli, to udržiavaš. Čo prijmeš ako pravdu, nad čím sa zamýšľaš, do čoho emočne investuješ, to stuhne
+                do tvojej reality. Toto nie je poetická metafora. Toto je zákon.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-battery-full"
+                    style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.5rem;"></i>
+                <h4 style="color: #fff; text-transform: uppercase;">Tvoja Najcennejšia Mena</h4>
+                <p>Začni vnímať svoje emócie ako svoju najcennejšiu menu, energiu, ktorá určuje všetko, čo zažívaš.
+                    <br><span class="highlight">Zaobchádzaj so svojimi emóciami s rovnakou úrovňou priority ako so
+                        svojím fyzickým zdravím.</span>
+                </p>
+            </div>
+
+            <p>Presne tak, ako by si neskonzumoval
+                niečo toxické pre svoje telo, nemal by si si dovoliť zotrvať v stave mysle, ktorý je toxický pre
+                tvoju realitu. Zakaždým, keď sa ocitneš v stave tiesne alebo negativity, pripomeň si: <em>Práve
+                    teraz si vyberám svoju budúcu realitu. Je toto to, čoho chcem viac?</em> Ak nie, potom sa jemne
+                naveď k niečomu, čo sa cíti aspoň o trochu lepšie, než kde si teraz.</p>
+
+            <p>Nemusíš vyriešiť každý problém predtým, než sa budeš môcť cítiť lepšie, len musíš prestať kŕmiť problém
+                svojou pozornosťou. V momente, keď sa odpojíš od boja, vytvoríš priestor na to, aby sa riešenia
+                prirodzene vynorili. Správne okolnosti sa predstavia nie preto, že si ich vynútil, ale preto, že si im
+                prestal klásť odpor.</p>
+
+            <p>Takže uprednostni svoje emócie ako prvé a nechaj realitu nasledovať. Namiesto otázky: "Čo musím urobiť,
+                aby som to opravil?", sa začni pýtať: "Ako sa môžem cítiť lepšie práve teraz?" Len čo sa zosúladíš s tým
+                lepšie sa cítiacim stavom, náprava sa odhalí bez námahy.</p>
+
+            <h3 class="sub-heading">Chráň si Svoju Energiu</h3>
+
+            <p>Tvoja energia je tá najvzácnejšia vec, ktorú máš. Je to tvoja skutočná mena. Je to to, čo používaš na
+                nákup vecí z nekonečnej zásoby vesmíru. Každá jedna vec, ktorú manifestuješ, či už sú to peniaze,
+                úspech, príležitosti, alebo len dobré zážitky, prichádza výmenou za tvoju mentálnu energiu. A ak ju
+                plytváš na nesprávnych miestach, s nesprávnymi ľuďmi, doslova zahadzuješ svoju moc.</p>
+
+            <p>Keď vojdeš do miestnosti, sadneš si s určitými ľuďmi a sú to samé klebety, sťažovanie sa, samé na strachu
+                založené nezmysly o tom, aký je život nefér, aké sú veci príliš ťažké, ako sú sny nereálne a ako by si
+                mal byť "realista" namiesto toho, aby si mieril za tým, čo skutočne chceš – možno si ani neuvedomujú, že
+                to robia, ale títo ľudia na teba projektujú svoje vlastné limitujúce presvedčenia. A ak tam budeš sedieť
+                dosť dlho, ak budeš počúvať tento druh rečí dosť často, začne to presakovať do tvojej mysle.</p>
+
+            <div class="highlight-box"
+                style="border-left-color: #ef4444; background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), transparent);">
+                <p style="font-style: italic; font-size: 1.2rem; text-align: center;">"Kto žije so skupinou ľudí 40 dní,
+                    stáva sa jedným z nich."</p>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">Prečítaj si to znova. A nechaj to
+                    preniknúť hlboko.</p>
+            </div>
+
+            <p>Pretože presne takto sa to deje. Nie je to okamžité. Je to postupné. Prvýkrát, keď počuješ niekoho
+                povedať: "To je nemožné," odmietneš to. Desiaty raz im oponuješ. Stý raz? Začneš o tom uvažovať. A skôr,
+                než si to vôbec uvedomíš, rozmýšľaš ako oni. Spochybňuješ sám seba. Váhaš. Pochybuješ. A to všetko len
+                preto, že si si dovolil zostať v prostredí, ktoré kúsok po kúsku osekávalo tvoj systém presvedčení, až
+                kým ťa nepreprogramovalo.</p>
+
+            <p>To je dôvod, prečo si musíš svoju energiu strážiť neľútostne. Ak situácia, prostredie alebo skupina ľudí
+                neustále plní tvoju myseľ strachom, obmedzením alebo negativitou, nemal by si tam byť. Ak ťa pobyt v ich
+                blízkosti vyčerpáva, zbavuje inšpirácie alebo v tebe vzbudzuje pochybnosti o tvojom vlastnom potenciáli,
+                musíš si vytvoriť odstup.</p>
+
+            <p>Musíš začať vnímať svoju energiu ako posvätný zdroj. Ak ju niečo vyčerpáva, odíď. Ak ju niečo znečisťuje,
+                odstrihni to. A ak je jedinou možnosťou byť sám? Tak buď sám. Pretože byť sám a chrániť si svoju energiu
+                je nekonečne lepšie, než obklopovať sa ľuďmi, ktorí pomaly otravujú tvoju myseľ obmedzeniami.</p>
+
+            <p>Ak chceš žiť výnimočný život, nemôžeš si dovoliť myslieť ako masy. Nemôžeš si dovoliť, aby sa pochybnosti
+                iných ľudí stali tvojimi vlastnými. Takže buď opatrný v tom, kde tráviš svoj čas. Buď vnímavý k tomu,
+                koho vpustíš do svojho priestoru. A čo je najdôležitejšie, uisti sa, že konverzácie, do ktorých sa
+                zapájaš, tvoju myseľ rozširujú, nie zmenšujú.</p>
+
+            <p class="highlight" style="text-align: center; font-size: 1.3rem; margin-top: 3rem;">Pretože na konci dňa
+                je tvoja energia tým, čo tvorí tvoju realitu. Chráň si ju za každú cenu.</p>
+
+        </div>
+    </section>
+
+    <!-- NEW INTERACTIVE TOOLS SECTION -->
+    <section class="tools-section"
+        style="background: linear-gradient(to bottom, var(--primary-bg), #1a1a2e); padding: 5rem 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <h3 style="text-align: center; color: var(--accent-gold); margin-bottom: 3rem; font-size: 2.5rem;">Tréning
+            Vnútorného GPS</h3>
+
+        <div style="max-width: 1000px; margin: 0 auto;">
+
+            <!-- Tool 1: GPS Simulator -->
+            <div class="gps-tool-container">
+                <h4 style="margin-bottom: 1rem; color: #fff;">Ako sa momentálne cítiš?</h4>
+                <p style="margin-bottom: 2rem; color: #cbd5e1; font-size: 0.9rem;">Klikni na emóciu a pozri sa, čo ti
+                    tvoje
+                    GPS hovorí.</p>
+
+                <div class="gps-display">
+                    <div class="gps-needle" id="gpsNeedle"></div>
+                    <div class="gps-center"></div>
+                    <div class="gps-labels">
+                        <span
+                            style="top: 10px; left: 50%; transform: translateX(-50%); color: var(--accent-gold);">SÚLAD</span>
+                        <span style="bottom: 10px; left: 50%; transform: translateX(-50%); color: #ef4444;">ODPOR</span>
+                        <span style="left: 10px; top: 50%; transform: translateY(-50%);">NIE</span>
+                        <span style="right: 10px; top: 50%; transform: translateY(-50%);">ÁNO</span>
+                    </div>
+                </div>
+                <div id="gpsStatus" class="gps-status-text" style="color: #64748b;">Čakám na signál...</div>
+
+                <div class="emotion-buttons">
+                    <button class="emotion-btn" onclick="setGps('fear')">Strach / Úzkosť</button>
+                    <button class="emotion-btn" onclick="setGps('doubt')">Pochybnosť</button>
+                    <button class="emotion-btn" onclick="setGps('joy')">Radosť / Nadšenie</button>
+                    <button class="emotion-btn" onclick="setGps('peace')">Mier / Úľava</button>
+                    <button class="emotion-btn" onclick="setGps('frustration')">Frustrácia</button>
+                </div>
+            </div>
+
+            <!-- Tool 2: Fear Busters -->
+            <div class="fear-buster-section">
+                <h3 style="color: var(--accent-gold);">Odhalenie Ilúzie Strachu</h3>
+                <p>Klikni na kartu a premeň strach na pravdu.</p>
+
+                <div class="fear-cards-container">
+                    <!-- Card 1 -->
+                    <div class="fear-card" onclick="this.classList.toggle('flipped')">
+                        <div class="fear-card-inner">
+                            <div class="fear-front">
+                                <i class="fas fa-ghost" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <h3>"Je to príliš ťažké"</h3>
+                                <p>"Možno to nikdy nedokážem. Sny sú pre iných, nie pre mňa."</p>
+                            </div>
+                            <div class="fear-back">
+                                <i class="fas fa-lightbulb"
+                                    style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-gold);"></i>
+                                <h3>PRAVDA</h3>
+                                <p>"Nekonečná inteligencia, ktorá riadi hviezdy, ťa podporuje. Pre vesmír nie je nič
+                                    'ťažké'. Je to len odpor v tvojej mysli."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="fear-card" onclick="this.classList.toggle('flipped')">
+                        <div class="fear-card-inner">
+                            <div class="fear-front">
+                                <i class="fas fa-clock" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <h3>"Trvá to dlho"</h3>
+                                <p>"Už by to tu malo byť. Asi to nefunguje. Zlyhal som."</p>
+                            </div>
+                            <div class="fear-back">
+                                <i class="fas fa-hourglass-half"
+                                    style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-gold);"></i>
+                                <h3>PRAVDA</h3>
+                                <p>"Semienko pod zemou rastie, aj keď ho nevidíš. Oneskorenie nie je zlyhanie. Je to čas
+                                    potrebný na dozretie reality."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="fear-card" onclick="this.classList.toggle('flipped')">
+                        <div class="fear-card-inner">
+                            <div class="fear-front">
+                                <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <h3>"Čo povedia iní?"</h3>
+                                <p>"Budú si myslieť, že som blázon. Musím byť realista."</p>
+                            </div>
+                            <div class="fear-back">
+                                <i class="fas fa-shield-alt"
+                                    style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-gold);"></i>
+                                <h3>PRAVDA</h3>
+                                <p>"Ľudia projektujú svoje limity. Ich pochybnosti nie sú tvoje. Ty si tvorca svojej
+                                    reality, nie oni."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h3 style="color: var(--accent-gold); margin-bottom: 1.5rem;"><i class="fas fa-question-circle"></i>
+                    Často
+                    Kladené Otázky</h3>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        "Čo ak sa cítim zle a neviem to hneď zmeniť?"
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nemusíš okamžite "skočiť" do radosti. Stačí, ak prestaneš kŕmiť negatívnu myšlienku. Urob si
+                            pauzu. Dýchaj. Povedz si: "Je v poriadku, že sa takto cítim, ale viem, že je to len signál."
+                            Cieľom nie je potlačiť emóciu, ale pochopiť ju a jemne sa presunúť k niečomu
+                            neutrálnejšiemu.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        "Je každá negatívna emócia zlá?"
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nie "zlá" v morálnom zmysle, ale "nezosúladená". Úzkosť, hnev alebo smútok sú dôležité
+                            indikátory. Hovoria ti: "Pozor, veríš niečomu, čo nie je pravda o tvojej podstate." Sú to
+                            poslovia. Poďakuj im za správu a zmeň smer.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        "Ako sa chrániť pred negatívnymi ľuďmi v rodine?"
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ak nemôžeš fyzicky odísť, vytvor si mentálny štít. Keď hovoria negatívne veci, v duchu si
+                            opakuj:
+                            "Toto je ich realita, nie moja." Nezapájaj sa do drámy. Buď pozorovateľ, nie účastník. A
+                            obmedz
+                            čas strávený s nimi na nutné minimum, kým si nevybuduješ silnejšiu vlastnú vibráciu.</p>
+                    </div>
+                </div>
+
+            </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script>
+        // --- GPS SIMULATOR LOGIC ---
+        function setGps(emotion) {
+            const needle = document.getElementById('gpsNeedle');
+            const status = document.getElementById('gpsStatus');
+
+            // needle rotation: 0deg is vertical (Up/Aligned). 
+            // -135deg is Left/Down (Resistance). 
+            // 135deg is Right/Down (Maybe confusing).
+            // Let's stick to compass: Up (North) = Aligned. Down (South) = Resistance.
+
+            switch (emotion) {
+                case 'joy':
+                case 'peace':
+                    needle.style.transform = "translateX(-50%) rotate(0deg)"; // Points UP (Súlad)
+                    needle.style.background = "#22d3ee";
+                    needle.style.boxShadow = "0 0 15px #22d3ee";
+                    status.innerText = "SIGNÁL: Si v súlade. Pokračuj!";
+                    status.style.color = "#22d3ee";
+                    break;
+                case 'fear':
+                case 'frustration':
+                case 'doubt':
+                    needle.style.transform = "translateX(-50%) rotate(180deg)"; // Points DOWN (Odpor)
+                    needle.style.background = "#ef4444";
+                    needle.style.boxShadow = "0 0 15px #ef4444";
+                    status.innerText = "SIGNÁL: Odpor detekovaný. Zastav sa a zmeň myšlienku.";
+                    status.style.color = "#ef4444";
+                    break;
+            }
+        }
+
+        // --- FAQ LOGIC ---
+        function toggleFaq(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+
+            const icon = header.querySelector('i');
+            if (item.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // --- AUDIO PLAYER LOGIC ---
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        // Toggle Play/Pause
+        function togglePlay() {
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Playback failed:", error);
+                        // Reset icon if play failed immediately
+                        playIcon.className = 'fas fa-play';
+                        alert("Nepodarilo sa spustiť audio. (Chyba: " + error.message + ")");
+                    });
+                }
+            } else {
+                audio.pause();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        // Update UI based on actual audio state
+        audio.addEventListener('play', () => {
+            playIcon.className = 'fas fa-pause';
+        });
+
+        audio.addEventListener('pause', () => {
+            playIcon.className = 'fas fa-play';
+        });
+
+        audio.addEventListener('ended', () => {
+            playIcon.className = 'fas fa-play';
+        });
+
+        // Update Progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Load Metadata
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        // Error Handling
+        audio.addEventListener('error', (e) => {
+            console.error("Audio error:", e);
+        });
+
+        // Setup duration if already loaded
+        if (audio.readyState >= 1) {
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = pos * audio.duration;
+            }
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+    </script>
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
 </body>
+
 </html>
