@@ -1,24 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('shared-header');
-    if (!container) return;
+        const container = document.getElementById('shared-header');
+        if (!container) return;
 
-    container.innerHTML = `
-    <nav class="shared-nav">
-        <div class="logo">The World is as You Are</div>
-        <div class="nav-links">
-            <a href="index.html">Domov</a>
-            <a href="Uvod.html">O Knihe</a>
-            <a href="#chapters">Kapitoly</a>
-        </div>
-        <div class="nav-actions">
-            <div class="search-container">
-                <input id="siteSearchInput" placeholder="Hľadať kapitoly..." aria-label="Search" />
-                <div id="siteSearchResults" class="search-results" aria-hidden="true"></div>
+        // Modern, compact header matching site's design language
+        container.innerHTML = `
+        <header class="shared-nav">
+            <div class="nav-left">
+                <a class="logo" href="index.html">Svet je taký, aký si ty</a>
             </div>
-            <a href="Uvod.html" class="cta-btn">Začať Čítať</a>
-        </div>
-    </nav>
-    `;
+            <div class="nav-center">
+                <nav class="nav-links">
+                    <a href="index.html">Domov</a>
+                    <a href="Uvod.html">O Knihe</a>
+                    <a href="#chapters">Kapitoly</a>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <div class="search-container">
+                    <input id="siteSearchInput" placeholder="Hľadať..." aria-label="Search" autocomplete="off" />
+                    <div id="siteSearchResults" class="search-results" aria-hidden="true"></div>
+                </div>
+                <a href="Uvod.html" class="cta-btn">Začať</a>
+                <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+            </div>
+        </header>
+        `;
 
-    // basic styling hook for shared nav (keeps styles local to pages' stylesheet)
+        // mobile menu toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                const nav = container.querySelector('.nav-links');
+                nav.classList.toggle('open');
+            });
+        }
 });

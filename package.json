@@ -1,0 +1,12 @@
+{
+  "name": "world-is-as-you-site-tools",
+  "version": "1.0.0",
+  "description": "Helper scripts for the static site (search index generator)",
+  "main": "tools/generate_search_index.js",
+  "scripts": {
+    "build-search": "node tools/generate_search_index.js"
+  },
+  "dependencies": {
+    "jsdom": "^22.1.0"
+  }
+}
