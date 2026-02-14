@@ -119,6 +119,90 @@
                 transform: scale(1);
             }
         }
+
+
+        /* --- NEW VISUAL ELEMENTS --- */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border-left: 3px solid var(--accent-mirror);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+
+        .duality-container {
+            display: flex;
+            gap: 20px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .duality-card {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .duality-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-mirror);
+        }
+
+        .timeline-box {
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--accent-silver);
+            margin: 2rem 0;
+        }
+
+        .timeline-box::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-mirror);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-mirror);
+        }
+
+        .power-statement {
+            background: linear-gradient(to right, rgba(56, 189, 248, 0.1), transparent);
+            border: 1px solid var(--accent-mirror);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .interactive-toggle {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            padding: 5px;
+            display: inline-flex;
+            margin: 1rem 0;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-opt {
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: #94a3b8;
+            transition: 0.3s;
+        }
+
+        .toggle-opt.active {
+            background: var(--accent-mirror);
+            color: #000;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -177,12 +261,25 @@
         <div class="paragraph-wrapper">
             <p>Predstav si fyzickú realitu ako obrovské, komplexné, viacrozmerné zrkadlo, ktoré ti neustále odráža to,
                 čo sa deje v tvojom vnútri. Zrkadlo tak obrovské, tak pohlcujúce a tak zložité, že sa zdá, akoby malo
-                vlastný život. Zrkadlo zhmotňuje tvoje najsilnejšie predpoklady o živote, tvoje očakávania, to, čo
-                považuješ za najpravdepodobnejšie, tvoje strachy a tvoje presvedčenia. V podstate ti ukazuje, kto si.
-                Zrkadlo nemá vlastnú myseľ, aby rozhodlo, čo je pre teba najlepšie, alebo aby poznalo túžby tvojho srdca
-                a dalo ti ich. Nie je to sila mimo teba. Nemá nezávislú autoritu. Neháda sa. Neprotirečí. Nesúdi.
-                Jednoducho odráža. A predsa, pretože je toto zrkadlo tak pohlcujúce, tak detailné a presvedčivé, často v
-                ňom samého seba nespoznáš.</p>
+                vlastný život.</p>
+
+            <div class="highlight-box">
+                <p><span class="highlight">Zrkadlo zhmotňuje tvoje najsilnejšie predpoklady o živote.</span> Tvoje
+                    očakávania, to, čo považuješ za najpravdepodobnejšie, tvoje strachy a tvoje presvedčenia. V podstate
+                    ti ukazuje, kto si.</p>
+            </div>
+
+            <p>Zrkadlo nemá vlastnú myseľ, aby rozhodlo, čo je pre teba najlepšie, alebo aby poznalo túžby tvojho srdca
+                a dalo ti ich. Nie je to sila mimo teba.</p>
+            <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem; color: var(--accent-silver);">
+                <li><i class="fas fa-times" style="color: #ef4444; margin-right: 10px;"></i> Nemá nezávislú autoritu.
+                </li>
+                <li><i class="fas fa-times" style="color: #ef4444; margin-right: 10px;"></i> Neháda sa.</li>
+                <li><i class="fas fa-times" style="color: #ef4444; margin-right: 10px;"></i> Neprotirečí.</li>
+                <li><i class="fas fa-times" style="color: #ef4444; margin-right: 10px;"></i> Nesúdi.</li>
+            </ul>
+            <p><strong>Jednoducho odráža.</strong> A predsa, pretože je toto zrkadlo tak pohlcujúce, tak detailné a
+                presvedčivé, často v ňom samého seba nespoznáš.</p>
 
             <div class="note-anchor">
                 <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
@@ -206,12 +303,30 @@
             vždy bolo, také jednoduché.</p>
 
         <div class="paragraph-wrapper">
+            <!-- Interactive Truth Toggle -->
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h4 style="color: #fff; margin-bottom: 1rem;">Ako zrkadlo funguje?</h4>
+                <div class="interactive-toggle">
+                    <span class="toggle-opt" id="optReality" onclick="toggleMirrorTruth('reality')">Ľudská Logika</span>
+                    <span class="toggle-opt active" id="optMirror" onclick="toggleMirrorTruth('mirror')">Zákon
+                        Zrkadla</span>
+                </div>
+                <div id="truthText" style="margin-top: 1rem; color: var(--accent-silver); min-height: 60px;">
+                    "Nepýtam si povolenie od tvojej súčasnej reality. Pozerám sa na to, čomu veríš."
+                </div>
+            </div>
+
             <p>Zrkadlo nerozlišuje medzi tým, čo je realistické alebo nerealistické, či sa to už stalo predtým, alebo či
                 to tvoja súčasná realita dovoľuje. Nepýta si povolenie od tvojej súčasnej reality, aby zhmotnilo tú
-                ďalšiu. Jednoducho sa pozrie hlboko do teba, aby videlo, čomu veríš, čo predpokladáš a očakávaš. A dá ti
-                za pravdu, zakaždým. Bol si naprogramovaný veriť, že určité veci sú možné a realistické, zatiaľ čo iné
-                nie, ale zrkadlo takú vec nepozná, poslúcha iba tvoje presvedčenia, bez ohľadu na to, ako "skutočné"
-                alebo "nemožné" sa môžu zdať.</p>
+                ďalšiu.</p>
+
+            <p><i class="fas fa-arrow-right" style="color: var(--accent-mirror);"></i> Jednoducho sa pozrie hlboko do
+                teba, aby videlo, čomu veríš, čo predpokladáš a očakávaš. <strong>A dá ti za pravdu, zakaždým.</strong>
+            </p>
+
+            <p>Bol si naprogramovaný veriť, že určité veci sú možné a realistické, zatiaľ čo iné nie, ale zrkadlo takú
+                vec nepozná, poslúcha iba tvoje presvedčenia, bez ohľadu na to, ako "skutočné" alebo "nemožné" sa môžu
+                zdať.</p>
 
             <div class="note-anchor">
                 <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
@@ -229,170 +344,261 @@
         </div>
 
         <div class="paragraph-wrapper">
-            <p>Zrkadlo má moc urobiť aj tie najneuveriteľnejšie veci možnými, ak v ne skutočne veríš. Vezmi si napríklad
-                lietadlá: ak by si tento koncept predstavil ľuďom v minulosti, nazvali by takú vec nemožnou, ale pretože
-                sa v ňu silne verilo, zrkadlo poskytlo logický rámec pre jej existenciu. To isté platí pre mnoho iných
-                veľkých vynálezov. Uverili by ti ľudia v minulosti, keby si im povedal, že iná osoba na druhom konci
-                sveta môže okamžite počuť tvoj hlas a odpovedať ti? Nie. Myšlienke sa najprv uverí, bez ohľadu na to,
-                ako nereálne sa môže zdať, a potom sa pre ňu objaví logický rámec. Keď si udržíš presvedčenie vo svojej
-                vízii bez ohľadu na logiku alebo okolnosti, uvedomíš si, že realita sa ohýba podľa teba.</p>
+            <div class="paragraph-wrapper">
+                <p>Zrkadlo má moc urobiť aj tie najneuveriteľnejšie veci možnými, ak v ne skutočne veríš. Vezmi si
+                    napríklad lietadlá: ak by si tento koncept predstavil ľuďom v minulosti, nazvali by takú vec
+                    nemožnou.</p>
 
-            <div class="note-anchor">
-                <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
-                        class="fas fa-brain"></i></button>
-                <div class="note-content side-popup">
-                    <h5 style="color: var(--accent-purple);">Logika prichádza druhá</h5>
-                    <p style="font-size: 0.9rem;">Väčšina ľudí čaká na logický dôkaz, aby uverili. Tvorca najprv uverí,
-                        a realita je potom nútená vytvoriť logické vysvetlenie (most incidentov), aby sa to stalo.</p>
+                <div class="timeline-box">
+                    <h4 style="color: var(--accent-mirror); margin-bottom: 0.5rem;">Cesta Vynálezu</h4>
+                    <p>1. <strong>Viera (Neviditeľné):</strong> Pretože sa v myšlienku lietania silne verilo...</p>
+                    <p>2. <strong>Rámec (Logika):</strong> ...zrkadlo poskytlo logický rámec pre jej existenciu.</p>
+                    <p>3. <strong>Realita (Viditeľné):</strong> To isté platí pre mnoho iných veľkých vynálezov.</p>
+                </div>
+
+                <p>Uverili by ti ľudia v minulosti, keby si im povedal, že iná osoba na druhom konci sveta môže okamžite
+                    počuť tvoj hlas a odpovedať ti? Nie.</p>
+
+                <p class="highlight-box" style="border-color: var(--accent-purple);">Myšlienke sa najprv uverí, bez
+                    ohľadu na to, ako nereálne sa môže zdať, a potom sa pre ňu objaví logický rámec. Keď si udržíš
+                    presvedčenie vo svojej vízii bez ohľadu na logiku alebo okolnosti, uvedomíš si, že <strong>realita
+                        sa ohýba podľa teba</strong>.</p>
+
+                <div class="note-anchor">
+                    <button class="note-toggle-btn small" onclick="toggleSideNote(this)"><i
+                            class="fas fa-brain"></i></button>
+                    <div class="note-content side-popup">
+                        <h5 style="color: var(--accent-purple);">Logika prichádza druhá</h5>
+                        <p style="font-size: 0.9rem;">Väčšina ľudí čaká na logický dôkaz, aby uverili. Tvorca najprv
+                            uverí,
+                            a realita je potom nútená vytvoriť logické vysvetlenie (most incidentov), aby sa to stalo.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <p>Teraz sa rozhliadni okolo seba a všimneš si, že celý tvoj život je odrazom toho, čomu si veril, že je pre
-            teba
-            možné. Tvoje okolnosti, tvoje vzťahy, tvoje úspechy, tvoje boje, všetko okolo teba je fyzickou
-            reprezentáciou predpokladov, ktoré si držal, či už vedome alebo nevedome. Spomeň si na čas, keď si bol
-            absolútne presvedčený, že sa niečo pokazí. Možno si sa bál zlyhania, straty príležitosti, alebo že ťa niekto
-            sklame. A potom, takmer ako hodinky, stalo sa to. Nie preto, že to bolo súdené, nie preto, že život je
-            nespravodlivý, ale preto, že si nevedomky kŕmil ten predpoklad dostatočnou vierou na to, aby nabral formu.
-            Zrkadlo ti jednoducho ukázalo to, čo si očakával.
-            <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
-                <i class="fas fa-book-open"></i> Hlbší rozbor
-            </button>
-        </p>
-
-        <div class="deep-dive-content">
-            <h5 style="color: var(--accent-silver); margin-bottom: 1.5rem;">Rozbor: Mechanizmus Zrkadlenia</h5>
-            <p><strong>Z metafyzickej perspektívy</strong> je zrkadlo symbolom vedomia. Realita tu nie je chápaná ako
-                nezávislá entita s vlastnou vôľou, ale ako pole, ktoré reaguje na nastavenie pozorovateľa. Zrkadlo nemá
-                úmysel, nehodnotí a nerozhoduje, čo by „malo“ človek dostať. Len odráža. To je kľúčové: ak človek
-                očakáva boj, realita sa mu javí ako boj; ak očakáva nedostatok, jeho skúsenosť sveta sa usporiada tak,
-                aby tento nedostatok potvrdila. Nie preto, že by svet trestal alebo odmeňoval, ale preto, že vedomie
-                selektuje, interpretuje a aktivuje presne tie aspekty reality, ktoré sú v súlade s vnútorným nastavením.
+            <p>Teraz sa rozhliadni okolo seba a všimneš si, že celý tvoj život je odrazom toho, čomu si veril, že je pre
+                teba
+                možné. Tvoje okolnosti, tvoje vzťahy, tvoje úspechy, tvoje boje, všetko okolo teba je fyzickou
+                reprezentáciou predpokladov, ktoré si držal, či už vedome alebo nevedome. Spomeň si na čas, keď si bol
+                absolútne presvedčený, že sa niečo pokazí. Možno si sa bál zlyhania, straty príležitosti, alebo že ťa
+                niekto
+                sklame. A potom, takmer ako hodinky, stalo sa to. Nie preto, že to bolo súdené, nie preto, že život je
+                nespravodlivý, ale preto, že si nevedomky kŕmil ten predpoklad dostatočnou vierou na to, aby nabral
+                formu.
+                Zrkadlo ti jednoducho ukázalo to, čo si očakával.
+                <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                    <i class="fas fa-book-open"></i> Hlbší rozbor
+                </button>
             </p>
 
-            <p><strong>Psychologicky</strong> sa tento princíp opiera o dobre zdokumentované mechanizmy vnímania a
-                správania. Ľudský mozog nevidí realitu objektívne, ale filtruje ju cez presvedčenia, očakávania a
-                naučené vzorce. Fenomény ako konfirmačné skreslenie, selektívna pozornosť a sebanaplňujúce proroctvá
-                ukazujú, že ak niečo považujeme za pravdepodobné alebo nevyhnutné, budeme si všímať dôkazy, ktoré to
-                potvrdzujú, a zároveň sa budeme správať spôsobmi, ktoré tento výsledok podporujú. Z tohto hľadiska
-                „zrkadlo“ neznamená magické vytváranie udalostí z ničoho, ale konzistentné zosúladenie vnímania,
-                rozhodovania a konania s vnútorným presvedčením.</p>
+            <div class="deep-dive-content">
+                <h5 style="color: var(--accent-silver); margin-bottom: 1.5rem;">Rozbor: Mechanizmus Zrkadlenia</h5>
+                <p><strong>Z metafyzickej perspektívy</strong> je zrkadlo symbolom vedomia. Realita tu nie je chápaná
+                    ako
+                    nezávislá entita s vlastnou vôľou, ale ako pole, ktoré reaguje na nastavenie pozorovateľa. Zrkadlo
+                    nemá
+                    úmysel, nehodnotí a nerozhoduje, čo by „malo“ človek dostať. Len odráža. To je kľúčové: ak človek
+                    očakáva boj, realita sa mu javí ako boj; ak očakáva nedostatok, jeho skúsenosť sveta sa usporiada
+                    tak,
+                    aby tento nedostatok potvrdila. Nie preto, že by svet trestal alebo odmeňoval, ale preto, že vedomie
+                    selektuje, interpretuje a aktivuje presne tie aspekty reality, ktoré sú v súlade s vnútorným
+                    nastavením.
+                </p>
 
-            <p>Keď text tvrdí, že zrkadlo vždy dáva za pravdu, poukazuje na fakt, že realita je prežívaná subjektívne.
-                Ak niekto verí, že niečo bude ťažké, vstupuje do situácie s napätím, opatrnosťou a očakávaním prekážok.
-                Tým sa zvyšuje pravdepodobnosť, že si prekážky všimne, že ho rýchlejšie vyčerpajú a že ich vyhodnotí ako
-                dôkaz svojej pôvodnej viery. Rovnaký princíp platí aj opačne: presvedčenie o možnostiach, hojnosti alebo
-                zvládnuteľnosti mení spôsob, akým človek koná, aké riešenia hľadá a aké príležitosti rozpozná.</p>
+                <p><strong>Psychologicky</strong> sa tento princíp opiera o dobre zdokumentované mechanizmy vnímania a
+                    správania. Ľudský mozog nevidí realitu objektívne, ale filtruje ju cez presvedčenia, očakávania a
+                    naučené vzorce. Fenomény ako konfirmačné skreslenie, selektívna pozornosť a sebanaplňujúce proroctvá
+                    ukazujú, že ak niečo považujeme za pravdepodobné alebo nevyhnutné, budeme si všímať dôkazy, ktoré to
+                    potvrdzujú, a zároveň sa budeme správať spôsobmi, ktoré tento výsledok podporujú. Z tohto hľadiska
+                    „zrkadlo“ neznamená magické vytváranie udalostí z ničoho, ale konzistentné zosúladenie vnímania,
+                    rozhodovania a konania s vnútorným presvedčením.</p>
 
-            <p><strong>Empiricky</strong> je podložené, že presvedčenia ovplyvňujú výkon, kreativitu a schopnosť učiť
-                sa. Výskumy v oblasti placeba, mindsetu, očakávaní a neuroplasticity ukazujú, že to, čo človek považuje
-                za možné alebo nemožné, má priamy vplyv na fyziologické procesy, rozhodovanie a dlhodobé výsledky. Text
-                ide ešte ďalej a naznačuje, že samotný rámec „realistické verzus nerealistické“ je historicky a kultúrne
-                podmienený. Príklady technológií ako lietanie alebo okamžitá komunikácia na diaľku ilustrujú, že to, čo
-                bolo kedysi považované za nemožné, sa stalo možným až po tom, čo tomu niekto dokázal uveriť natoľko, že
-                začal konať v súlade s touto víziou.</p>
+                <p>Keď text tvrdí, že zrkadlo vždy dáva za pravdu, poukazuje na fakt, že realita je prežívaná
+                    subjektívne.
+                    Ak niekto verí, že niečo bude ťažké, vstupuje do situácie s napätím, opatrnosťou a očakávaním
+                    prekážok.
+                    Tým sa zvyšuje pravdepodobnosť, že si prekážky všimne, že ho rýchlejšie vyčerpajú a že ich vyhodnotí
+                    ako
+                    dôkaz svojej pôvodnej viery. Rovnaký princíp platí aj opačne: presvedčenie o možnostiach, hojnosti
+                    alebo
+                    zvládnuteľnosti mení spôsob, akým človek koná, aké riešenia hľadá a aké príležitosti rozpozná.</p>
 
-            <p>Dôležitý bod je, že zrkadlo nereaguje na logiku v zmysle súčasných obmedzení, ale na hlboké presvedčenia.
-                Logický rámec často vzniká až dodatočne. Najprv sa objaví vízia alebo viera, a až potom sa nájdu
-                prostriedky, ako ju uskutočniť. To neznamená popretie fyzikálnych zákonov, ale poukazuje na to, že
-                hranice možného sa v praxi neustále posúvajú tam, kde sa mení kolektívne aj individuálne presvedčenie o
-                tom, čo je dosiahnuteľné.</p>
+                <p><strong>Empiricky</strong> je podložené, že presvedčenia ovplyvňujú výkon, kreativitu a schopnosť
+                    učiť
+                    sa. Výskumy v oblasti placeba, mindsetu, očakávaní a neuroplasticity ukazujú, že to, čo človek
+                    považuje
+                    za možné alebo nemožné, má priamy vplyv na fyziologické procesy, rozhodovanie a dlhodobé výsledky.
+                    Text
+                    ide ešte ďalej a naznačuje, že samotný rámec „realistické verzus nerealistické“ je historicky a
+                    kultúrne
+                    podmienený. Príklady technológií ako lietanie alebo okamžitá komunikácia na diaľku ilustrujú, že to,
+                    čo
+                    bolo kedysi považované za nemožné, sa stalo možným až po tom, čo tomu niekto dokázal uveriť natoľko,
+                    že
+                    začal konať v súlade s touto víziou.</p>
 
-            <p style="border-left: 2px solid var(--accent-silver); padding-left: 15px;"><strong>Záver:</strong><br>
-                V kontexte knihy má tento text jasný zámer: presunúť pocit moci späť k čitateľovi. Nie tým, že by mu
-                sľuboval okamžité zázraky, ale tým, že mu ukazuje, že realita, ktorú prežíva, nie je neutrálna ani
-                náhodná. Je neustále formovaná jeho vnútorným nastavením. Zrkadlo je presvedčivé práve preto, že pôsobí
-                objektívne a „vonkajšie“. A práve preto si v ňom človek často neuvedomí, že sa pozerá sám na seba.</p>
-        </div>
+                <p>Dôležitý bod je, že zrkadlo nereaguje na logiku v zmysle súčasných obmedzení, ale na hlboké
+                    presvedčenia.
+                    Logický rámec často vzniká až dodatočne. Najprv sa objaví vízia alebo viera, a až potom sa nájdu
+                    prostriedky, ako ju uskutočniť. To neznamená popretie fyzikálnych zákonov, ale poukazuje na to, že
+                    hranice možného sa v praxi neustále posúvajú tam, kde sa mení kolektívne aj individuálne
+                    presvedčenie o
+                    tom, čo je dosiahnuteľné.</p>
 
-        <p>Teraz si spomeň na čas, keď si veril, že všetko bude v poriadku, aj keď nebol žiadny logický dôvod tomu
-            veriť. Možno si nemal ani tušenia, ako sa situácia vyrieši, no rozhodol si sa mať vieru a nejakým spôsobom
-            to všetko vyšlo. V momente, keď si sa odovzdal istote, realita sa podľa toho zarovnala. Prečo? Pretože si
-            predpokladal priaznivý výsledok. A presne tak ako predtým, zrkadlo nemalo inú možnosť, než ti to odraziť
-            späť.</p>
+                <p style="border-left: 2px solid var(--accent-silver); padding-left: 15px;"><strong>Záver:</strong><br>
+                    V kontexte knihy má tento text jasný zámer: presunúť pocit moci späť k čitateľovi. Nie tým, že by mu
+                    sľuboval okamžité zázraky, ale tým, že mu ukazuje, že realita, ktorú prežíva, nie je neutrálna ani
+                    náhodná. Je neustále formovaná jeho vnútorným nastavením. Zrkadlo je presvedčivé práve preto, že
+                    pôsobí
+                    objektívne a „vonkajšie“. A práve preto si v ňom človek často neuvedomí, že sa pozerá sám na seba.
+                </p>
+            </div>
 
-        <p>Dvaja ľudia môžu žiť v tom istom svete, ale zažívať úplne odlišné reality. Jeden človek predpokladá, že život
-            je boj, že úspech si vyžaduje ťažkosti, že dobré veci sú vzácne a že musí bojovať o to, čo chce. Druhý
-            predpokladá, že život je ľahký, že úspech prichádza bez námahy, že je vždy podporovaný a že veci idú
-            prirodzene jeho smerom. A tak život dá obidvom za pravdu.</p>
+            <p>Teraz si spomeň na čas, keď si veril, že všetko bude v poriadku, aj keď nebol žiadny logický dôvod tomu
+                veriť. Možno si nemal ani tušenia, ako sa situácia vyrieši, no rozhodol si sa mať vieru a nejakým
+                spôsobom
+                to všetko vyšlo. V momente, keď si sa odovzdal istote, realita sa podľa toho zarovnala. Prečo? Pretože
+                si
+                predpokladal priaznivý výsledok. A presne tak ako predtým, zrkadlo nemalo inú možnosť, než ti to odraziť
+                späť.</p>
 
-        <img src="https://realita.mywire.org/images/uvod/uvod2.webp" alt="Dve Reality"
-            style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.3s;"
-            onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"
-            onclick="openModal(this.src)">
+            <p>Dvaja ľudia môžu žiť v tom istom svete, ale zažívať úplne odlišné reality. A tak život dá obidvom za
+                pravdu.</p>
 
-        <p>Tvoje presvedčenia sú plány, ktoré realita nasleduje s absolútnou presnosťou. Ak neustále
-            očakávaš ťažkosti, život sa vytvaruje tak, aby to odrážal, a vytvorí viac prekážok, ktorým budeš čeliť. Ak
-            očakávaš, že ťa ľudia zradia, zradia ťa. Ak predpokladáš, že peniaze sa získavajú ťažko, finančné
-            príležitosti sa ti jednoducho neukážu a okolnosti sa zarovnajú tak, aby udržali peniaze mimo tvojho dosahu.
-            <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
-                <i class="fas fa-book-open"></i> Hlbší rozbor
-            </button>
-        </p>
+            <div class="duality-container">
+                <!-- Person A -->
+                <div class="duality-card" style="border-left: 3px solid #ef4444;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🥵</div>
+                    <h4 style="color: #ef4444; margin-bottom: 0.5rem;">Bojovník</h4>
+                    <p style="font-size: 0.9rem; color: #cbd5e1;">"Jeden človek predpokladá, že život je boj, že úspech
+                        si vyžaduje ťažkosti, že dobré veci sú vzácne a že musí bojovať o to, čo chce."</p>
+                    <div
+                        style="margin-top: 1rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                        Výsledok: <strong>Utrpenie</strong>
+                    </div>
+                </div>
 
-        <div class="deep-dive-content">
-            <h5 style="color: var(--accent-silver); margin-bottom: 1.5rem;">Rozbor: Presvedčenia Tvoria Realitu</h5>
+                <!-- Person B -->
+                <div class="duality-card" style="border-left: 3px solid #2ed573;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🏄</div>
+                    <h4 style="color: #2ed573; margin-bottom: 0.5rem;">Tvorca</h4>
+                    <p style="font-size: 0.9rem; color: #cbd5e1;">"Druhý predpokladá, že život je ľahký, že úspech
+                        prichádza bez námahy, že je vždy podporovaný a že veci idú prirodzene jeho smerom."</p>
+                    <div
+                        style="margin-top: 1rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                        Výsledok: <strong>Flow (Prúd)</strong>
+                    </div>
+                </div>
+            </div>
 
-            <p>Tieto pasáže rozvíjajú myšlienku, že život, ako ho človek prežíva, nie je náhodnou sériou udalostí, ale
-                dôsledným odrazom jeho dlhodobých vnútorných predpokladov. Nehovoria o jednorazových myšlienkach ani o
-                vedomom „pozitívnom myslení“, ale o hlbokých presvedčeniach, ktoré sa formovali rokmi skúseností,
-                výchovy a opakovaných interpretácií reality. Práve tieto presvedčenia určujú, čo človek považuje za
-                možné, pravdepodobné alebo nevyhnutné, a podľa toho sa jeho život prirodzene usporadúva.</p>
+            <img src="https://realita.mywire.org/images/uvod/uvod2.webp" alt="Dve Reality"
+                style="width: 100%; max-width: 800px; border-radius: 10px; margin: 2rem auto; display: block; box-shadow: 0 0 20px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.3s;"
+                onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"
+                onclick="openModal(this.src)">
 
-            <p><strong>Z metafyzického hľadiska</strong> text nadväzuje na princíp, že vedomie je primárne a skúsenosť
-                reality sekundárna. To, čo človek dlhodobo predpokladá, sa stáva akoby „inštrukciou“ pre to, akým
-                spôsobom sa realita prejaví. Nejde o osud ani trest, ale o konzistentnú spätnú väzbu. Keď niekto
-                vnútorne očakáva zlyhanie, konflikt alebo stratu, ladí sa na frekvenciu týchto skúseností a realita mu
-                ich začne potvrdzovať. Zrkadlo, o ktorom text hovorí, v tomto zmysle nevyberá ani nehodnotí – len
-                zhmotňuje to, čo je vnútorne považované za „pravdu“.</p>
+            <p>Tvoje presvedčenia sú plány, ktoré realita nasleduje s absolútnou presnosťou. Ak neustále
+                očakávaš ťažkosti, život sa vytvaruje tak, aby to odrážal, a vytvorí viac prekážok, ktorým budeš čeliť.
+                Ak
+                očakávaš, že ťa ľudia zradia, zradia ťa. Ak predpokladáš, že peniaze sa získavajú ťažko, finančné
+                príležitosti sa ti jednoducho neukážu a okolnosti sa zarovnajú tak, aby udržali peniaze mimo tvojho
+                dosahu.
+                <button class="deep-dive-btn" onclick="toggleDeepDive(this)">
+                    <i class="fas fa-book-open"></i> Hlbší rozbor
+                </button>
+            </p>
 
-            <p><strong>Psychologicky</strong> je tento mechanizmus dobre vysvetliteľný. Očakávania výrazne ovplyvňujú
-                správanie, rozhodovanie aj emočné reakcie. Ak človek verí, že sa niečo pokazí, správa sa opatrnejšie,
-                menej otvorene, viac defenzívne. Zvyšuje sa jeho stres, znižuje flexibilita myslenia a rastie
-                pravdepodobnosť chýb. Zároveň si viac všíma signály, ktoré jeho obavy potvrdzujú, a ignoruje tie, ktoré
-                by im odporovali. Výsledkom je situácia, ktorá sa skutočne „pokazí“, a spätne posilní pôvodné
-                presvedčenie. Text to popisuje nie ako náhodu, ale ako dôsledok dlhodobého mentálneho nastavenia.</p>
+            <div class="deep-dive-content">
+                <h5 style="color: var(--accent-silver); margin-bottom: 1.5rem;">Rozbor: Presvedčenia Tvoria Realitu</h5>
 
-            <p>Rovnaký princíp funguje aj opačne. Keď človek nemá jasný plán ani logické vysvetlenie, ale zachová si
-                vnútorný pokoj a dôveru, jeho nervový systém zostáva v stave, ktorý podporuje tvorivé riešenia, lepšiu
-                komunikáciu a schopnosť rozpoznať príležitosti. <strong>Empirické výskumy</strong> ukazujú, že pokoj,
-                dôvera a pozitívne očakávania zlepšujú rozhodovanie, zvyšujú vytrvalosť a umožňujú lepšie využívať
-                dostupné zdroje. To, čo sa subjektívne javí ako „zázračné vyriešenie“, je často výsledkom toho, že
-                človek neblokoval riešenia strachom a odporom.</p>
+                <p>Tieto pasáže rozvíjajú myšlienku, že život, ako ho človek prežíva, nie je náhodnou sériou udalostí,
+                    ale
+                    dôsledným odrazom jeho dlhodobých vnútorných predpokladov. Nehovoria o jednorazových myšlienkach ani
+                    o
+                    vedomom „pozitívnom myslení“, ale o hlbokých presvedčeniach, ktoré sa formovali rokmi skúseností,
+                    výchovy a opakovaných interpretácií reality. Práve tieto presvedčenia určujú, čo človek považuje za
+                    možné, pravdepodobné alebo nevyhnutné, a podľa toho sa jeho život prirodzene usporadúva.</p>
 
-            <p>Myšlienka, že dvaja ľudia môžu žiť v tom istom svete, no zažívať úplne odlišné reality, poukazuje na
-                rozdiel medzi objektívnymi okolnosťami a subjektívnou skúsenosťou. Rovnaké udalosti môžu byť
-                interpretované ako dôkaz boja alebo ako prirodzený proces rastu. Presvedčenie, že život je ťažký, vedie
-                k neustálemu očakávaniu odporu, a tým aj k jeho častejšiemu prežívaniu. Presvedčenie, že veci idú
-                prirodzene, zas vytvára vnútorný stav, v ktorom sa človek menej bráni, viac spolupracuje a ľahšie sa
-                prispôsobuje. Realita následne „potvrdí“ obidva prístupy, pretože správanie a vnímanie sa im
-                prispôsobia.</p>
+                <p><strong>Z metafyzického hľadiska</strong> text nadväzuje na princíp, že vedomie je primárne a
+                    skúsenosť
+                    reality sekundárna. To, čo človek dlhodobo predpokladá, sa stáva akoby „inštrukciou“ pre to, akým
+                    spôsobom sa realita prejaví. Nejde o osud ani trest, ale o konzistentnú spätnú väzbu. Keď niekto
+                    vnútorne očakáva zlyhanie, konflikt alebo stratu, ladí sa na frekvenciu týchto skúseností a realita
+                    mu
+                    ich začne potvrdzovať. Zrkadlo, o ktorom text hovorí, v tomto zmysle nevyberá ani nehodnotí – len
+                    zhmotňuje to, čo je vnútorne považované za „pravdu“.</p>
 
-            <p>Keď text tvrdí, že presvedčenia sú „plány“, ktoré realita nasleduje, nejde o popretie vonkajších
-                faktorov, ale o zdôraznenie ich filtrovania cez vnútorné nastavenie. Očakávanie zrady vedie k nedôvere,
-                napätiu vo vzťahoch a výberu partnerov či situácií, ktoré túto vieru potvrdia. Presvedčenie o nedostatku
-                peňazí ovplyvňuje rizikové správanie, schopnosť vidieť príležitosti a ochotu konať. Okolnosti sa potom
-                usporiadajú tak, že človek má „pravdu“, nie preto, že by svet bol proti nemu, ale preto, že jeho
-                vnútorný model sveta bol dôsledne premietnutý do skúsenosti.</p>
+                <p><strong>Psychologicky</strong> je tento mechanizmus dobre vysvetliteľný. Očakávania výrazne
+                    ovplyvňujú
+                    správanie, rozhodovanie aj emočné reakcie. Ak človek verí, že sa niečo pokazí, správa sa
+                    opatrnejšie,
+                    menej otvorene, viac defenzívne. Zvyšuje sa jeho stres, znižuje flexibilita myslenia a rastie
+                    pravdepodobnosť chýb. Zároveň si viac všíma signály, ktoré jeho obavy potvrdzujú, a ignoruje tie,
+                    ktoré
+                    by im odporovali. Výsledkom je situácia, ktorá sa skutočne „pokazí“, a spätne posilní pôvodné
+                    presvedčenie. Text to popisuje nie ako náhodu, ale ako dôsledok dlhodobého mentálneho nastavenia.
+                </p>
 
-            <p style="border-left: 2px solid var(--accent-silver); padding-left: 15px;"><strong>Záver:</strong><br>
-                V kontexte celej knihy tieto pasáže posilňujú zodpovednosť bez obviňovania. Nehovoria, že človek je
-                vinný za všetko, čo sa mu stalo, ale že má omnoho väčší vplyv na svoju skúsenosť reality, než si
-                uvedomuje. Zmena života sa tu nezačína vonkajšími okolnosťami, ale prehodnotením toho, čomu človek
-                dlhodobo veril o sebe, o živote a o tom, čo je pre neho možné.</p>
-        </div>
+                <p>Rovnaký princíp funguje aj opačne. Keď človek nemá jasný plán ani logické vysvetlenie, ale zachová si
+                    vnútorný pokoj a dôveru, jeho nervový systém zostáva v stave, ktorý podporuje tvorivé riešenia,
+                    lepšiu
+                    komunikáciu a schopnosť rozpoznať príležitosti. <strong>Empirické výskumy</strong> ukazujú, že
+                    pokoj,
+                    dôvera a pozitívne očakávania zlepšujú rozhodovanie, zvyšujú vytrvalosť a umožňujú lepšie využívať
+                    dostupné zdroje. To, čo sa subjektívne javí ako „zázračné vyriešenie“, je často výsledkom toho, že
+                    človek neblokoval riešenia strachom a odporom.</p>
 
-        <p>Tvoja intuícia funguje presne tým istým spôsobom. Mal si niekedy silný vnútorný pocit o niečom, či už to
-            bolo, že ti niekto zavolá, že stretneš určitú osobu, alebo že sa niečo stane, a potom sa to stalo? To, čo
-            nazývame intuíciou, nie je nič iné ako uverený predpoklad. Zrkadlo vždy počúva šepot tvojej mysle a
-            odpovedá: "Ak tak povieš, tak sa staň!"</p>
+                <p>Myšlienka, že dvaja ľudia môžu žiť v tom istom svete, no zažívať úplne odlišné reality, poukazuje na
+                    rozdiel medzi objektívnymi okolnosťami a subjektívnou skúsenosťou. Rovnaké udalosti môžu byť
+                    interpretované ako dôkaz boja alebo ako prirodzený proces rastu. Presvedčenie, že život je ťažký,
+                    vedie
+                    k neustálemu očakávaniu odporu, a tým aj k jeho častejšiemu prežívaniu. Presvedčenie, že veci idú
+                    prirodzene, zas vytvára vnútorný stav, v ktorom sa človek menej bráni, viac spolupracuje a ľahšie sa
+                    prispôsobuje. Realita následne „potvrdí“ obidva prístupy, pretože správanie a vnímanie sa im
+                    prispôsobia.</p>
 
-        <p>Ty si príčina. Ty si pôvod. Ty si ten, kto generuje obraz, ktorý zrkadlo odráža. A ak si nespokojný s tým, čo
-            vidíš, existuje len jedno riešenie: zmeň to, čo vysielaš, a zrkadlo sa musí zmeniť tiež. Ak sa postavíš pred
-            zrkadlo a zamračíš sa, usmeje sa odraz späť? Samozrejme, že nie. Zrkadlo ťa neľutuje. Nevyjednáva. Nehovorí:
-            "Vidím, že si smutný, ale aj tak ti odrazím šťastnú verziu teba." Nie. Zrkadlo je neutrálne. Jednoducho
-            vracia to, čo dostane. A tak, ak chceš vidieť úsmev, musíš sa usmiať prvý.</p>
+                <p>Keď text tvrdí, že presvedčenia sú „plány“, ktoré realita nasleduje, nejde o popretie vonkajších
+                    faktorov, ale o zdôraznenie ich filtrovania cez vnútorné nastavenie. Očakávanie zrady vedie k
+                    nedôvere,
+                    napätiu vo vzťahoch a výberu partnerov či situácií, ktoré túto vieru potvrdia. Presvedčenie o
+                    nedostatku
+                    peňazí ovplyvňuje rizikové správanie, schopnosť vidieť príležitosti a ochotu konať. Okolnosti sa
+                    potom
+                    usporiadajú tak, že človek má „pravdu“, nie preto, že by svet bol proti nemu, ale preto, že jeho
+                    vnútorný model sveta bol dôsledne premietnutý do skúsenosti.</p>
+
+                <p style="border-left: 2px solid var(--accent-silver); padding-left: 15px;"><strong>Záver:</strong><br>
+                    V kontexte celej knihy tieto pasáže posilňujú zodpovednosť bez obviňovania. Nehovoria, že človek je
+                    vinný za všetko, čo sa mu stalo, ale že má omnoho väčší vplyv na svoju skúsenosť reality, než si
+                    uvedomuje. Zmena života sa tu nezačína vonkajšími okolnosťami, ale prehodnotením toho, čomu človek
+                    dlhodobo veril o sebe, o živote a o tom, čo je pre neho možné.</p>
+            </div>
+
+            <p>Tvoja intuícia funguje presne tým istým spôsobom. Mal si niekedy silný vnútorný pocit o niečom, či už to
+                bolo, že ti niekto zavolá, že stretneš určitú osobu, alebo že sa niečo stane, a potom sa to stalo? To,
+                čo
+                nazývame intuíciou, nie je nič iné ako uverený predpoklad. Zrkadlo vždy počúva šepot tvojej mysle a
+                odpovedá: "Ak tak povieš, tak sa staň!"</p>
+
+            <div class="power-statement">
+                <h3 style="color: var(--accent-mirror); margin-bottom: 1.5rem;">Ty si Príčina</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Ty si pôvod. Ty si ten, kto generuje obraz, ktorý zrkadlo odráža. A ak si nespokojný s tým, čo
+                    vidíš, existuje len jedno riešenie: <span class="highlight">zmeň to, čo vysielaš, a zrkadlo sa musí
+                        zmeniť tiež.</span>
+                </p>
+
+                <p style="margin-top: 1.5rem;">Ak sa postavíš pred zrkadlo a zamračíš sa, usmeje sa odraz späť?
+                    Samozrejme, že nie. Zrkadlo ťa neľutuje. Nevyjednáva. Nehovorí: "Vidím, že si smutný, ale aj tak ti
+                    odrazím šťastnú verziu teba." Nie. Zrkadlo je neutrálne. Jednoducho vracia to, čo dostane.</p>
+
+                <div style="margin-top: 2rem;">
+                    <span
+                        style="font-size: 1.2rem; border: 1px solid var(--accent-mirror); padding: 10px 20px; border-radius: 30px;">
+                        A tak, ak chceš vidieť úsmev, <strong>musíš sa usmiať prvý</strong>.
+                    </span>
+                </div>
+            </div>
     </section>
 
     <!-- Key Points Summary -->
@@ -586,6 +792,26 @@
             }
         }
 
+        // --- NEW INTERACTIVE TOGGLE LOGIC ---
+        function toggleMirrorTruth(mode) {
+            const text = document.getElementById('truthText');
+            const optR = document.getElementById('optReality');
+            const optM = document.getElementById('optMirror');
+
+            if (mode === 'reality') {
+                text.innerText = "\"Toto nie je možné, lebo sa to ešte nikdy nestalo. Musím byť realista.\"";
+                text.style.color = "#94a3b8";
+                optR.classList.add('active');
+                optM.classList.remove('active');
+            } else {
+                text.innerText = "\"Nepýtam si povolenie od tvojej súčasnej reality. Pozerám sa na to, čomu veríš.\"";
+                text.style.color = "var(--accent-silver)";
+                optR.classList.remove('active');
+                optM.classList.add('active');
+            }
+        }
+
+
         // --- AUDIO PLAYER LOGIC ---
         const audio = document.getElementById('chapterAudio');
         const playPauseBtn = document.getElementById('playPauseBtn');
@@ -708,6 +934,7 @@
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
+    <script src="components/scroll-top.js"></script>
 </body>
 
 </html>
