@@ -1,69 +1,572 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 5</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Specific Styles for Chapter 5 */
+
+        /* Hero - Blue/Time Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+        }
+
+        .hero h4 {
+            color: var(--accent-cyan);
+        }
+
+        /* Tools Section */
+        .time-tool-container {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+        }
+
+        /* 1. SEED GAME */
+        .seed-game-area {
+            height: 250px;
+            position: relative;
+            background: linear-gradient(to bottom, #0f172a 60%, #3a2818 60%);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .seed {
+            width: 20px;
+            height: 20px;
+            background: #d4a373;
+            border-radius: 50% 0 50% 50%;
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 1s;
+        }
+
+        .plant {
+            position: absolute;
+            bottom: 40%;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            transform-origin: bottom center;
+            transition: all 0.5s;
+            font-size: 4rem;
+            color: #4ade80;
+        }
+
+        .dirt-particles {
+            position: absolute;
+            width: 100%;
+            height: 40%;
+            bottom: 0;
+            opacity: 0;
+            background-image: radial-gradient(#8d6e63 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+
+        .game-status {
+            font-size: 1.1rem;
+            min-height: 2rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        .btn-game {
+            background: var(--accent-cyan);
+            color: #000;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .btn-game:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.5);
+        }
+
+        .btn-disrupt {
+            background: transparent;
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .btn-disrupt:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #fff;
+        }
+
+        /* 2. BELIEF SLIDER */
+        .belief-slider-container {
+            margin-top: 4rem;
+        }
+
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #334155;
+            border-radius: 5px;
+            outline: none;
+            margin: 2rem 0;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .time-result {
+            font-size: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: #fff;
+            margin-top: 1rem;
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?clock,hourglass,time'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 5</h4>
-            <h1>Čas (Ilúzia meškania)</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px;">KAPITOLA 5</h4>
+            <h1>Čas: Ochranná Bariéra</h1>
+            <p>Prečo veci trvajú? Čas nie je tvoj nepriateľ, je to priestor na vylepšenie tvojej tvorby.</p>
         </div>
     </section>
+
+    <!-- Audio Section Placeholder (Commented out until file is ready) -->
+    <!-- 
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                 ... 
+            </div>
+            ...
+        </div>
+    </section>
+    -->
 
     <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Čas (Ilúzia meškania).[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
+        <div class="paragraph-wrapper">
+            <p>Možno sa pýtaš, prečo tvojim myšlienkam trvá, kým sa zhmotnia, alebo prečo sa tvoje predpoklady nestanú
+                okamžite faktami. Prečo ti auto nespadne do lona v momente, keď si ho vizualizuješ? Prečo sa milióny
+                neobjavia na tvojom účte okamžite potom?</p>
 
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Čas (Ilúzia meškania)" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
+            <p>Odpoveď je veľmi jednoduchá: <span class="highlight">čas existuje na to, aby zabezpečil, že letmé
+                    pochybnosti, náhodné obavy a negatívny myšlienkový šum nebudú okamžite formovať tvoju
+                    skúsenosť.</span> Je to priestor medzi myšlienkou a manifestáciou, ktorý ti je daný, aby si mohol
+                vylepšovať, zosúlaďovať a vedome si vyberať, čo si praješ priniesť na svet.</p>
 
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
-                </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
-                </div>
+            <div class="highlight-box" style="border-left-color: var(--accent-cyan);">
+                <i class="fas fa-bolt" style="color: var(--accent-cyan); font-size: 1.5rem; margin-bottom: 1rem;"></i>
+                <p><strong>Predstav si, že by sa každá tvoja myšlienka zhmotnila v momente, keď na ňu pomyslíš.</strong>
+                    Pomyslíš na slona a slon sa objaví v miestnosti. Svet by bol v absolútnom chaose. Jediný moment
+                    strachu by okamžite manifestoval negatívnu udalosť a prechodná obava by sa okamžite zmenila na zlý
+                    výsledok.</p>
             </div>
-        </div>
-    </section>
 
-    <div id="shared-footer"></div>
+            <p>Alebo si predstav, že by sa každá tvoja túžba splnila v tú istú minútu. Na niečo pomyslíš a ono sa to
+                objaví. Prežiješ vzrušenie z toho, že to máš, na krátky okamih, a potom, po pár dňoch, sa to stane
+                všedným. Vzrušenie vyprchá. A tak prejdeš k ďalšej túžbe, a ďalšej, a ďalšej, všetko sa odvíja okamžite,
+                bez námahy, predvídateľne.</p>
 
-    <script src="components/header.js"></script>
-    <script src="components/search.js"></script>
-    <script src="components/footer.js"></script>
+            <p>Najprv by sa to mohlo zdať ako raj, ale čoskoro by sa život stal nudným a fádnym. Neexistovala by žiadna
+                cesta, žiadne očakávanie, žiadna hĺbka. Kde by prebiehalo učenie? Kde by nastal rast? Ako by sa tvoja
+                duša vyvíjala, keby si nikdy nezažil kontrast, lekcie alebo expanziu?</p>
 
-    <script src="components/scroll-top.js"></script>
+            <h3 class="sub-heading" style="color: var(--accent-cyan); border-color: rgba(34, 211, 238, 0.3);">Čas ako
+                Ochrana</h3>
+
+            <p>Čas funguje ako poistka, zabezpečuje, že len myšlienky, v ktorých vytrváš, tie, ktorým skutočne veríš a
+                ku ktorým sa konzistentne vraciaš, naberú formu vo tvojej realite. Je to nástroj, ktorý pracuje vo tvoj
+                prospech a umožňuje ti doladiť tvoje zameranie.</p>
+
+            <p>Čas nie je niečo, čo pracuje proti tebe. Neoddiaľuje tvoje manifestácie ani ťa nebrzdí. Jednoducho
+                umožňuje odvíjanie udalostí organizovaným, štruktúrovaným spôsobom, pričom zabezpečuje, že každý kúsok
+                do seba dokonale zapadne. To, čo vnímaš ako meškanie, je často len realita, ktorá sa presúva,
+                preusporadúva a pripravuje scénu pre najlepší možný výsledok.</p>
+
+            <div class="quote-block" style="border-color: var(--accent-cyan); color: #a5f3fc;">
+                "Tvojou úlohou nie je proces unáhliť, ale zosúladiť sa s ním."
+            </div>
+
+            <section class="tools-section" style="padding: 2rem 0;">
+                <!-- Tool 1: Seed Analogy -->
+                <div class="time-tool-container">
+                    <h3 style="color: #fff; margin-bottom: 1rem;">Hra Trpezlivosti</h3>
+                    <p style="margin-bottom: 2rem; color: #cbd5e1;">Zasadil si semienko svojej túžby. Čo urobíš teraz?
+                    </p>
+
+                    <div class="seed-game-area" id="gameArea">
+                        <div class="seed" id="seed"></div>
+                        <div class="plant" id="plant"><i class="fas fa-seedling"></i></div>
+                        <div class="dirt-particles" id="dirt"></div>
+                    </div>
+                    <div class="game-status" id="gameStatus">Čakám na akciu...</div>
+
+                    <button class="btn-game" id="plantBtn" onclick="plantSeed()">Zasadiť Túžbu</button>
+                    <button class="btn-game btn-disrupt" id="checkBtn" onclick="checkRoots()" disabled>Skontrolovať či
+                        rastie
+                        (Pochybovať)</button>
+                </div>
+            </section>
+
+            <p>Ak zasadíš semienko a každý deň ho vykopávaš, aby si skontroloval, či rastie, brániš jeho vývoju. To isté
+                platí pre tvoje manifestácie. Nepýtaj sa neustále, kde sú, či prichádzajú, alebo či sa niečo pokazilo,
+                jednoducho spočiň vo vedomí a istote, že tvoja túžba je už uvedená do pohybu.</p>
+
+            <h3 class="sub-heading">Rýchlosť Manifestácie</h3>
+
+            <p>Ale to neznamená, že veci musia trvať dlho. V skutočnosti sa tvoje manifestácie môžu odvinúť tak rýchlo,
+                ako za pár dní alebo týždňov, niektoré predpoklady sa môžu dokonca manifestovať okamžite. Čas, ktorý to
+                potrvá, je úplne založený na tvojich presvedčeniach a zosúladení s tvojou túžbou. Ak veríš, že sa to
+                môže stať čoskoro, stane sa. Ak veríš, že to potrvá rok, potrvá.</p>
+
+            <p>Ty máš kontrolu nad časom, pretože neustále prideľuješ neviditeľný časový rámec svojim cieľom a prianiam.
+                Vezmi si ako príklad manifestáciu novej práce. Vieš, že je to možné. Ale očakávaš, že perfektná pracovná
+                ponuka pristane v tvojej schránke zajtra? Pravdepodobne nie. Väčšina ľudí predpokladá, že niečo také
+                potrvá čas, očakávajú, že to potrvá pár týždňov alebo dokonca mesiacov, kým sa ich cieľ zrealizuje, ale
+                nemusí to tak byť.</p>
+
+            <p>Tá vysnívaná práca by ti mohla byť ponúknutá do zajtrajška, ale pretože pochybuješ, že taká rýchla
+                manifestácia je možná, skončíš tak, že sa uspokojíš s dlhším čakaním. Presvedčíš sám seba, že to
+                potrebuje čas, a tak sa čas stane tvojou realitou.</p>
+
+            <!-- Tool 2: Belief Slider -->
+            <div class="time-tool-container belief-slider-container">
+                <i class="fas fa-stopwatch"
+                    style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 1rem;"></i>
+                <h3 style="color: #fff;">Ako dlho to podľa teba potrvá?</h3>
+                <p style="margin-bottom: 2rem;">Vesmír sa prispôsobí tvojmu presvedčeniu o čase.</p>
+
+                <div style="display: flex; justify-content: space-between; color: #94a3b8; font-size: 0.9rem;">
+                    <span>Je to ťažké (Veľký odpor)</span>
+                    <span>Je to ľahké (Nulový odpor)</span>
+                </div>
+                <input type="range" class="range-slider" id="beliefSlider" min="0" max="100" value="10">
+
+                <div class="time-result" id="timeResult">1 Rok</div>
+                <p id="beliefComment" style="margin-top: 0.5rem; color: #ef4444;">Tvoje pochybnosti predlžujú proces.
+                </p>
+            </div>
+
+            <p>Vesmír je nekonečne schopný a dokáže doručiť čokoľvek, po čom túžiš, rýchlo. Vonkajší svet bude vždy
+                odrážať tvoje presvedčenia, vrátane tvojich presvedčení o čase.</p>
+
+            <div class="highlight-box">
+                <p>Takže keď sa pýtaš: <strong>"Ako dlho to potrvá?"</strong>, skutočná otázka znie: <strong>"Ako dlho
+                        veríš, že to potrvá?"</strong> Ak si myslíš, že to potrvá mesiac, potom to tak bude. Ak veríš,
+                    že sa to môže stať za deň, potom sa to stane. Časový rámec je formovaný výlučne tvojím presvedčením.
+                </p>
+            </div>
+
+            <p>Sme naprogramovaní prideľovať časové rámce našim cieľom, pretože sme zvyknutí vidieť veci odvíjať sa v
+                predvídateľných vzorcoch. Ale len preto, že niečo zvyčajne trvá určitý čas, neznamená to, že je to
+                jediný spôsob, ako sa to môže stať.</p>
+
+
+            <!-- SUPPORT MATERIAL SECTION -->
+            <section class="support-section"
+                style="padding: 4rem 2rem; background: rgba(15, 23, 42, 0.95); border-top: 1px solid rgba(34, 211, 238, 0.1);">
+                <div style="max-width: 800px; margin: 0 auto;">
+
+                    <h3 style="text-align: center; color: var(--accent-cyan); margin-bottom: 3rem; font-size: 2rem;">
+                        <i class="fas fa-layer-group"></i> Prehĺbenie Poznania
+                    </h3>
+
+                    <!-- 1. Interactive Quote Revealer -->
+                    <div class="reveal-quote-container"
+                        style="margin-bottom: 4rem; text-align: center; cursor: pointer;"
+                        onclick="this.classList.toggle('revealed')">
+                        <div class="quote-overlay"
+                            style="background: linear-gradient(135deg, #1e293b, #0f172a); padding: 3rem; border-radius: 15px; border: 1px dashed var(--accent-cyan); transition: 0.5s;">
+                            <i class="fas fa-hand-pointer"
+                                style="font-size: 2rem; color: var(--accent-cyan); margin-bottom: 1rem; animation: bounce 2s infinite;"></i>
+                            <h4 style="color: #fff;">Klikni pre odhalenie pravdy o meškaní</h4>
+                        </div>
+                        <div class="quote-hidden"
+                            style="display: none; background: rgba(34, 211, 238, 0.1); padding: 3rem; border-radius: 15px; border: 1px solid var(--accent-cyan); animation: fadeIn 0.5s;">
+                            <p
+                                style="font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; color: #fff; font-style: italic;">
+                                "Vesmír sa nikdy neopozdí. To, čo ty nazývaš čakaním, je v skutočnosti čas, ktorý
+                                potrebuješ na to, aby si uveril, že si to zaslúžiš."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 2. FAQ Accordion -->
+                    <div class="faq-section" style="margin-bottom: 4rem;">
+                        <h4
+                            style="color: #fff; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem;">
+                            Často Kladené Otázky</h4>
+
+                        <div class="faq-item"
+                            style="border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem;">
+                            <div class="faq-question" onclick="toggleFaq(this)"
+                                style="padding: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--accent-cyan); font-weight: 500;">
+                                "Čo ak už čakám roky a stále nič?"
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer"
+                                style="max-height: 0; overflow: hidden; transition: 0.3s ease; padding: 0 1rem; color: #cbd5e1;">
+                                <p style="padding-bottom: 1rem;">Ak čakáš roky, znamená to, že si roky udržiavaš stav
+                                    "čakania". Vesmír ti len zrkadlí tvoje nastavenie. Prestaň čakať. Začni žiť, akoby
+                                    to už bolo tu. Čakanie je stav nedostatku. Mať to, je stav naplnenia.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item"
+                            style="border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem;">
+                            <div class="faq-question" onclick="toggleFaq(this)"
+                                style="padding: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--accent-cyan); font-weight: 500;">
+                                "Mám si stanoviť dátum, kedy sa to má stať?"
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer"
+                                style="max-height: 0; overflow: hidden; transition: 0.3s ease; padding: 0 1rem; color: #cbd5e1;">
+                                <p style="padding-bottom: 1rem;">Ak ti dátum pomáha uveriť, áno. Ale ak ti dátum
+                                    spôsobuje stres a pochybnosti ("Čo ak to nestihnem?"), potom nie. Lepšie je veriť v
+                                    "božské načasovanie" než si vynucovať termín, ktorému v hĺbke neveríš.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item"
+                            style="border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem;">
+                            <div class="faq-question" onclick="toggleFaq(this)"
+                                style="padding: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--accent-cyan); font-weight: 500;">
+                                "Ako urýchlim čas?"
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer"
+                                style="max-height: 0; overflow: hidden; transition: 0.3s ease; padding: 0 1rem; color: #cbd5e1;">
+                                <p style="padding-bottom: 1rem;">Paradoxne, čas urýchliš tým, že naň prestaneš myslieť.
+                                    Keď sa ponoríš do prítomného okamihu a užívaš si cestu, odpor mizne. A bez odporu sa
+                                    manifestácie dejú bleskovo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Final Affirmation / Exercise -->
+                    <div class="highlight-box"
+                        style="background: linear-gradient(to right, rgba(34, 211, 238, 0.1), transparent); border-left: 4px solid var(--accent-cyan); padding: 2rem; border-radius: 0 10px 10px 0;">
+                        <h4 style="color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;">
+                            Cvičenie na tento týždeň</h4>
+                        <p>Nájdi si jednu vec, pri ktorej si netrpezlivý. A povedz si:</p>
+                        <p style="font-size: 1.2rem; color: var(--accent-cyan); font-weight: 600; margin-top: 1rem;">
+                            "Dávam tomuto semienku čas, ktorý potrebuje. Viem, že rastie. A ja sa zatiaľ budem venovať
+                            životu."
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <footer>
+                <a href="Kapitola4.html" class="nav-btn">&larr; Späť na Kapitolu 4</a>
+                <a href="Kapitola6.html" class="nav-btn">Pokračovať na Kapitolu 6 &rarr;</a>
+                <div id="shared-footer"></div>
+            </footer>
+
+            <script src="components/header.js"></script>
+            <script src="components/search.js"></script>
+            <script src="components/footer.js"></script>
+            <script src="components/scroll-top.js"></script>
+
+            <script>
+                // --- QUOTE REVEAL LOGIC ---
+                const quoteContainer = document.querySelector('.reveal-quote-container');
+                const quoteOverlay = document.querySelector('.quote-overlay');
+                const quoteHidden = document.querySelector('.quote-hidden');
+
+                if (quoteContainer) {
+                    quoteContainer.addEventListener('click', () => {
+                        const isRevealed = quoteContainer.classList.contains('revealed');
+                        if (isRevealed) {
+                            quoteOverlay.style.display = 'none';
+                            quoteHidden.style.display = 'block';
+                        } else {
+                            quoteOverlay.style.display = 'block';
+                            quoteHidden.style.display = 'none';
+                        }
+                    });
+                }
+
+                // --- FAQ LOGIC ---
+                function toggleFaq(header) {
+                    const item = header.parentElement;
+                    const answer = item.querySelector('.faq-answer');
+                    const icon = header.querySelector('i');
+
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                }
+
+
+                // --- SEED GAME LOGIC ---
+                let growthTimer;
+                let growthStage = 0;
+                const seed = document.getElementById('seed');
+                const plant = document.getElementById('plant');
+                const status = document.getElementById('gameStatus');
+                const checkBtn = document.getElementById('checkBtn');
+                const plantBtn = document.getElementById('plantBtn');
+                const dirt = document.getElementById('dirt');
+
+                function plantSeed() {
+                    // Reset
+                    clearTimeout(growthTimer);
+                    growthStage = 0;
+                    seed.style.bottom = "20%";
+                    seed.style.opacity = "1";
+                    plant.style.transform = "translateX(-50%) scale(0)";
+                    dirt.style.opacity = "0";
+
+                    status.innerText = "Semienko je zasadené. Teraz dôveruj a čakaj...";
+                    status.style.color = "#cbd5e1";
+
+                    plantBtn.disabled = true;
+                    checkBtn.disabled = false;
+                    plantBtn.style.opacity = "0.5";
+                    checkBtn.style.opacity = "1";
+
+                    // Start growth process
+                    startGrowth();
+                }
+
+                function startGrowth() {
+                    growthTimer = setTimeout(() => {
+                        growthStage++;
+
+                        if (growthStage === 1) {
+                            status.innerText = "Niečo sa deje pod povrchom... (Ty to nevidíš)";
+                            startGrowth();
+                        } else if (growthStage === 2) {
+                            status.innerText = "Korene silnejú... (Stále neviditeľné)";
+                            startGrowth();
+                        } else if (growthStage === 3) {
+                            // Sprout
+                            seed.style.opacity = "0"; // Seed becomes plant
+                            plant.style.transform = "translateX(-50%) scale(0.5)";
+                            plant.innerHTML = '<i class="fas fa-seedling"></i>';
+                            status.innerText = "Pozri! Prvé výsledky sa objavujú!";
+                            status.style.color = "#4ade80";
+                            startGrowth();
+                        } else if (growthStage === 4) {
+                            // Full Flower
+                            plant.style.transform = "translateX(-50%) scale(1.2)";
+                            plant.innerHTML = '<i class="fas fa-tree" style="color: #22c55e;"></i>';
+                            status.innerText = "MANIFESTÁCIA DOKONČENÁ! Tvoja trpezlivosť priniesla ovocie.";
+                            checkBtn.disabled = true;
+                            checkBtn.style.opacity = "0.5";
+                            plantBtn.disabled = false;
+                            plantBtn.innerText = "Zasadiť novú túžbu";
+                            plantBtn.style.opacity = "1";
+                        }
+
+                    }, 2500); // 2.5 seconds per stage
+                }
+
+                function checkRoots() {
+                    clearTimeout(growthTimer);
+                    growthStage = 0;
+
+                    // Visual disruption
+                    dirt.style.opacity = "1";
+                    setTimeout(() => { dirt.style.opacity = "0"; }, 500);
+
+                    seed.style.bottom = "20%";
+                    plant.style.transform = "translateX(-50%) scale(0)";
+
+                    status.innerHTML = "<span style='color: #ef4444;'>Vykopal si to! Proces sa zastavil. Musíš začať odznova.</span>";
+
+                    plantBtn.disabled = false;
+                    plantBtn.style.opacity = "1";
+                    plantBtn.innerText = "Skúsiť znova (S dôverou)";
+                    checkBtn.disabled = true;
+                    checkBtn.style.opacity = "0.5";
+                }
+
+
+                // --- BELIEF SLIDER LOGIC ---
+                const slider = document.getElementById('beliefSlider');
+                const result = document.getElementById('timeResult');
+                const comment = document.getElementById('beliefComment');
+
+                slider.addEventListener('input', (e) => {
+                    const val = parseInt(e.target.value);
+
+                    if (val < 20) {
+                        result.innerText = "1 - 5 Rokov";
+                        result.style.color = "#ef4444";
+                        comment.innerText = "Tvoje pochybnosti a odpor sú obrovské.";
+                        comment.style.color = "#ef4444";
+                    } else if (val < 40) {
+                        result.innerText = "6 Mesiacov";
+                        result.style.color = "#f97316"; // Orange
+                        comment.innerText = "Stále veríš, že to musí byť ťažké.";
+                        comment.style.color = "#f97316";
+                    } else if (val < 60) {
+                        result.innerText = "1 Mesiac";
+                        result.style.color = "#fbbf24"; // Yellow
+                        comment.innerText = "Začínaš veriť, že je to možné.";
+                        comment.style.color = "#fbbf24";
+                    } else if (val < 80) {
+                        result.innerText = "1 Týždeň";
+                        result.style.color = "#a3e635"; // Lime
+                        comment.innerText = "Tvoj odpor mizne. Si blízko.";
+                        comment.style.color = "#a3e635";
+                    } else {
+                        result.innerText = "DNES / OKAMŽITE";
+                        result.style.color = "#22d3ee"; // Cyan
+                        comment.innerText = "Si v absolútnom súlade. Čas neexistuje.";
+                        comment.style.color = "#22d3ee";
+                    }
+                });
+
+            </script>
+
 </body>
+
 </html>
