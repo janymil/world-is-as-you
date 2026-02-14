@@ -357,20 +357,26 @@ footer {
 .search-results .no-results { padding:8px 12px; color:var(--text-muted); }
 
 /* Header layout tweaks */
-.shared-nav { display:flex; align-items:center; justify-content:space-between; padding:12px 28px; position:fixed; top:0; left:0; right:0; z-index:1000; background:linear-gradient(180deg, rgba(2,6,23,0.92), rgba(2,6,23,0.8)); border-bottom:1px solid var(--border-glass); }
-.shared-nav .logo { font-family: 'Cormorant Garamond', serif; color:var(--gold); font-size:1.15rem; text-decoration:none; }
-.shared-nav .nav-links { display:flex; gap:22px; align-items:center; }
-.shared-nav .nav-links a { color:var(--text-color); font-size:0.9rem; opacity:0.9; }
+.shared-nav { display:flex; align-items:center; justify-content:space-between; padding:8px 20px; position:fixed; top:0; left:0; right:0; z-index:1000; background:linear-gradient(180deg, rgba(2,6,23,0.92), rgba(2,6,23,0.8)); border-bottom:1px solid var(--border-glass); flex-wrap:nowrap; }
+.shared-nav .nav-left { flex:0 0 auto; margin-right:12px; }
+.shared-nav .nav-center { flex:1 1 auto; display:flex; justify-content:center; min-width:0; }
+.shared-nav .nav-right { flex:0 0 auto; display:flex; gap:12px; align-items:center; }
+.shared-nav .logo { font-family: 'Cormorant Garamond', serif; color:var(--gold); font-size:1.05rem; text-decoration:none; white-space:nowrap; }
+.shared-nav .nav-links { display:inline-flex; gap:18px; align-items:center; white-space:nowrap; overflow:hidden; }
+.shared-nav .nav-links a { color:var(--text-color); font-size:0.9rem; opacity:0.95; }
 .shared-nav .nav-links a:hover { color:var(--accent-cyan); }
-.shared-nav .nav-right { display:flex; gap:12px; align-items:center; }
-.shared-nav .cta-btn { padding:8px 18px; border-radius:20px; font-size:0.85rem; }
+.shared-nav .cta-btn { padding:7px 16px; border-radius:18px; font-size:0.82rem; }
 .mobile-menu-btn { display:none; background:transparent; border:none; color:var(--text-color); font-size:1.1rem; }
 
+/* ensure search input doesn't force wrapping */
+.search-container input { min-width:140px; max-width:260px; padding:8px 10px; }
+
 @media(max-width:900px) {
+    .shared-nav { padding:10px 14px; }
     .shared-nav .nav-center { display:none; }
     .mobile-menu-btn { display:inline-block; }
     .nav-links.open { display:flex; position:absolute; left:12px; top:64px; flex-direction:column; background:var(--primary-bg); padding:12px; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.4); }
-    .search-container input { min-width:120px; }
+    .search-container input { min-width:100px; }
 }
 
 
