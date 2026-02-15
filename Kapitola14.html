@@ -1,69 +1,509 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 14</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Chapter 14 Specific Styles - Command / Authority Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #3b82f6);
+            /* Royal Blue */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        /* The Decree Visual */
+        .decree-paper {
+            background: #fff;
+            color: #0f172a;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform: rotate(0.5deg);
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+        }
+
+        .decree-paper::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #0f172a;
+        }
+
+        .wax-seal {
+            width: 80px;
+            height: 80px;
+            background: #b91c1c;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3), 3px 3px 10px rgba(0, 0, 0, 0.3);
+            font-size: 0.8rem;
+            transform: rotate(-15deg);
+        }
+
+        /* Restaurant Ticket Visual */
+        .restaurant-ticket {
+            background: #fef3c7;
+            color: #451a03;
+            max-width: 400px;
+            margin: 3rem auto;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: rotate(-2deg);
+        }
+
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #92400e;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .ticket-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .ticket-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-style: italic;
+            color: #92400e;
+        }
+
+        /* Hope vs Knowing Comparison */
+        .power-scale {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin: 4rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .scale-weak {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            text-align: center;
+            color: #94a3b8;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .scale-strong {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            padding: 2rem;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scale-strong::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.4), transparent);
+        }
+
+        /* Interactive Command Button */
+        .command-btn-wrapper {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #1e3a8a;
+            border-radius: 12px;
+        }
+
+        .command-btn {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            padding: 1rem 3rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .command-btn:hover {
+            background: #3b82f6;
+            color: #fff;
+            box-shadow: 0 0 30px #3b82f6;
+            transform: scale(1.05);
+        }
+
+        .command-btn.activated {
+            background: #fff;
+            color: #0f172a;
+            border-color: #fff;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
+        }
+
+        .command-feedback {
+            margin-top: 1.5rem;
+            color: #fff;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .lead-paragraph::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: #3b82f6;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?throne,king,mountain_peak,storm'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 14</h4>
-            <h1>Najmocnejšia technika (Knowingness)</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px; color: #3b82f6;">KAPITOLA 14</h4>
+            <h1>Najmocnejšia Technika</h1>
+            <p>Fyzická realita s tebou nediskutuje. Podrobuje sa tvojmu vedeniu.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Najmocnejšia technika (Knowingness).[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Najmocnejšia technika (Knowingness)" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">14 - Vedenie (Knowingness)</h3>
+                </div>
+            </div>
+            <!-- Standard Placeholder Controls -->
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/14kapitola-vedenie.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading" style="color: #3b82f6;">Manifestácia Bez Pochybností</h3>
+
+            <p class="lead-paragraph">Vedenie ("Knowingness") je zďaleka najmocnejšia technika. Keď zhromaždíš všetku
+                svoju vôľu a vieru a nariadiš niečo do existencie, keď povieš: <em>"Takto to je,"</em> alebo <em>"Takto
+                    to bude,"</em> a už nad tým druhýkrát nepremýšľaš. Keď niečo "vieš do existencie", pochop, že v tom
+                presnom momente sa to stáva pravdou. Fyzická realita s tebou nediskutuje. V momente, keď niečo vieš,
+                stáva sa to faktom.</p>
+
+            <!-- Visual: The Decree -->
+            <div class="decree-paper">
+                <h2
+                    style="font-size: 2.5rem; border-bottom: 2px solid #0f172a; display: inline-block; padding-bottom: 10px; margin-bottom: 2rem;">
+                    DEKRÉT</h2>
+                <p style="font-size: 1.25rem; font-style: italic; margin-bottom: 3rem;">
+                    "Týmto vyhlasujem, že moja túžba je už splnená. O tom sa nediskutuje. Je to hotové."
+                </p>
+                <div
+                    style="font-family: 'Montserrat', sans-serif; font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 2rem;">
+                    Podpísaný: __________________
+                </div>
+                <div class="wax-seal">
+                    FAKT
+                </div>
+            </div>
+
+            <p>Musíš pochopiť, že fyzická realita nie je pevná, nepohnuteľná stena; je to mechanizmus spätnej väzby. Je
+                to zrkadlo, ktoré odráža tvoj dominantný stav bytia s absolútnou neutralitou. Zrkadlo nemá žiadne
+                preferencie, žiadny súd a žiadnu vlastnú vôľu. Ak sa postavíš pred zrkadlo a zamračíš sa, nemôžeš
+                prinútiť odraz usmiať sa. Ty sa musíš usmiať prvý. "Vedenie" je ten vnútorný úsmev. Je to neoblomné
+                presvedčenie, že odraz sa musí zmeniť, pretože zdroj odrazu - ty - sa zmenil.</p>
+
+            <p>Ak by si videl šmuhu na svojej tvári v zrkadle, nesnažil by si sa drhnúť zrkadlo, aby si ju odstránil. To
+                by
+                bolo márne. Utreli by si vlastnú tvár a zrkadlo by okamžite odrazilo zmenu. Predsa však, presne toto
+                robíš, keď sa snažíš prinútiť svet, aby sa zmenil, bez zmeny svojho vnútorného presvedčenia. Drhneš
+                sklo. Vedenie je akt utretia vlastnej tváre - zmeny svojho vnútorného stavu - a vedenia, bez pozerania
+                sa, že odraz nemá inú možnosť, len nasledovať.</p>
+
+            <p>Využitie sily jednoduchého "vedenia" vecí do existencie je jednou z najmocnejších zručností, ktoré môžeš
+                rozvíjať. Čím viac to praktizuješ, tým odvážnejším sa stávaš. V momente, keď začneš vyhlasovať veci do
+                existencie s absolútnou istotou, bez spochybňovania, bez váhania, realita ti začne dávať za pravdu. A
+                zakaždým, keď tak urobí, nazhromaždíš viac a viac dôkazov, že vedenie je všetko, čo potrebuješ.</p>
+
+            <p>Premýšľaj o tom ako o chôdzi. Keď urobíš krok, nedúfaš, že tam bude zem, aby ťa chytila. Nemodlíš sa, aby
+                fungovala gravitácia. Vieš, že podlaha ťa podoprie, takže sa hýbeš s dôverou a ľahkosťou. Netrasieš sa
+                pri každom kroku, premýšľajúc, či spadneš do prázdna. Manifestácia vyžaduje rovnakú úroveň predpokladu
+                (assumption). Musíš kráčať v ústrety svojej túžbe s rovnakým vedením, že zem tam bude, aby ťa stretla.
+            </p>
+
+            <p>Väčšina ľudí zlyháva, pretože čakajú, kým sa zmení odraz, predtým, než zmenia svoj výraz. Hovoria:
+                "Uverím tomu, keď to uvidím." Ale zákon zrkadla funguje naopak: "Uvidíš to, keď to budeš vedieť."
+                Vedenie je príčina; fyzický svet je iba následok. Zrkadlo nemôže meškať večne; musí sa zosúladiť s
+                obrazom, ktorý mu prezentuješ. Ak prezentuješ stav absolútneho vedenia, zrkadlo nemá na výber, len
+                odraziť tú realitu späť k tebe.</p>
+
+            <p>Spočiatku môžeš začať s malými vecami, vecami, ktoré sa ti zdajú uveriteľné. A ako budeš sledovať, že sa
+                zhmotňujú bez námahy, získaš sebavedomie ísť do väčších vecí, stať sa ešte odvážnejším vo svojich
+                vyhláseniach. Dosiahneš bod, kde už nebudeš váhať, kde už nebudeš "dúfať" alebo "premýšľať", budeš
+                jednoducho vedieť. Uvedomíš si, že nič nie je skutočne "nereálne", boli to len tvoje presvedčenia, ktoré
+                to takými robili. A keď budeš mať dôkaz, že vedenie funguje zakaždým, nebudeš váhať vyhlásiť nemožné a
+                sledovať, ako sa to stáva realitou.</p>
+
+            <p>Nakoniec začneš predpokladať veci, ktoré sa ti v určitom bode mohli zdať úplne nereálne. Ale vtedy už
+                budeš mať dokázané sám sebe, že vedenie funguje úplne vždy. Už nebudeš pochybovať, už sa nebudeš pýtať
+                "ako" alebo "kedy", jednoducho sa rozhodneš, a tak to bude.</p>
+
+            <p>"Ako" nie je nikdy tvoja zodpovednosť. Zrkadlo sa ťa nepýta, ako chceš, aby sa odraz objavil; jednoducho
+                odráža. Keď sa zasekneš v logistike toho, ako sa tvoja túžba prejaví, vypadávaš zo stavu vedenia späť do
+                stavu vymýšľania. Vedenie obchádza "ako". Skáče rovno na koniec. Predpokladá, že prianie je splnené, a
+                necháva preskupenie udalostí na inteligenciu vesmíru.</p>
+
+            <!-- Visual: Restaurant Ticket -->
+            <div class="restaurant-ticket">
+                <div class="ticket-header">
+                    VEČERA U VESMÍRU<br>
+                    Objednávka č. #1111
+                </div>
+                <div class="ticket-item">
+                    <span>1x Tvoje Prianie</span>
+                </div>
+                <div class="ticket-item">
+                    <span>1x Dokonalé Načasovanie</span>
+                </div>
+                <div class="ticket-footer">
+                    Pripravuje sa.<br>
+                    (Netreba kontrolovať kuchára)
+                </div>
+            </div>
+
+            <p>Uvažuj o tom, keď si objednávaš jedlo v reštaurácii. Pozrieš sa na menu, urobíš rozhodnutie a zadáš svoju
+                objednávku čašníkovi. Keď je objednávka zadaná, nesedíš tam a nestrachuješ sa. Nepobehuješ po kuchyni a
+                nepýtaš sa kuchára, či to naozaj ide uvariť. Nepremýšľaš, či dorazí zelenina. Uvoľníš sa, rozprávaš sa s
+                priateľmi a piješ vodu. Prečo? Pretože vieš, že to prichádza. Zadal si objednávku a považuješ to za
+                vybavené. Toto je stav vedenia. Musíš zaobchádzať so svojimi túžbami ako s objednávkou zadanou vesmíru.
+                Zadaj objednávku a potom sa usaď s absolútnou istotou, že sa pripravuje.</p>
+
+            <p>A čím viac budeš dôverovať tejto sile, tým ľahšie sa realita ohne v tvoj prospech, až kým sa to stane
+                tvojou druhou prirodzenosťou, takou jednoduchou a automatickou ako dýchanie.</p>
+
+            <!-- Visual: Hope vs Knowing Comparison -->
+            <div class="power-scale">
+                <div class="scale-weak">
+                    <i class="fas fa-question" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                    <h4 style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; color: #cbd5e1;">
+                        Nádej</h4>
+                    <p style="font-style: italic;">"Dúfam, že sa to stane..."</p>
+                    <p style="font-size: 0.85rem; margin-top: 1rem;">Obsahuje pochybnosť.<br>Implikuje
+                        neistotu.<br>Čakanie na povolenie.</p>
+                </div>
+                <div class="scale-strong">
+                    <i class="fas fa-gavel" style="font-size: 2rem; margin-bottom: 1rem; color: #60a5fa;"></i>
+                    <h4 style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; color: #fff;">
+                        Vedenie</h4>
+                    <p style="font-weight: bold;">"TAKTO TO JE."</p>
+                    <p style="font-size: 0.85rem; margin-top: 1rem; color: #bfdbfe; position: relative; z-index: 2;">
+                        Absolútna istota.<br>Vnútorné rozhodnutie.<br>Vydanie rozkazu.</p>
+                </div>
+            </div>
+
+            <p>Nepristupuj k životu s nádejou, že sa veci stanú, nádej je slabá. Nádej nesie pochybnosť. Hovorí:
+                <em>"Dúfam, že sa to stane, ale nie som si istý."</em> Implikuje neistotu, nedostatok kontroly a možnosť
+                zlyhania. Fyzická realita nereaguje na "ja dúfam". Reaguje na absolútnu istotu. Vedenie je
+                neotrasiteľné. Nezaoberá sa "ak" alebo "možno". Nepotrebuje vonkajší dôkaz. Je to vnútorné rozhodnutie,
+                že niečo už "je". Keď povieš: <em>"Viem, že sa to deje. Viem, že je to už moje,"</em> realita nemá na
+                výber a musí vyhovieť. V momente, keď sa posunieš od želania k vedeniu, posúvaš sa od čakania k
+                prijímaniu.
+            </p>
+
+            <p>Nádej čaká na povolenie. Vedenie vydáva rozkaz. Keď dúfaš, hovoríš vesmíru, že si neúplný a že sila leží
+                mimo teba. Keď vieš, nárokuješ si svoju silu. Hovoríš vesmíru, že je to hotové. Zrkadlo nikdy neodráža
+                "chcenie"; odráža len "mať". Musíš mať pocit splneného priania v sebe predtým, než ti ho zrkadlo môže
+                ukázať mimo teba.</p>
+
+            <div class="highlight-box"
+                style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 2rem;">
+                <p style="font-size: 1.2rem; color: #fff; font-weight: 500;">
+                    Vedenie nevyžaduje dôkazy, ono vytvára dôkazy.
+                </p>
+            </div>
+
+            <p>A čím viac to praktizuješ, tým ľahšie to bude. Ak dokážeš zotrvať vo vedení niečoho bez potreby
+                uisťovania, dosiahneš bod, kde nad tým už ani nebudeš premýšľať, jednoducho sa to stane faktom v tvojej
+                mysli. A keď je niečo faktom v tvojej mysli, musí sa to stať faktom v realite.</p>
+
+            <p>Toto je prechod od "snahy uveriť" k "prirodzenosti". Keď niečo skutočne vieš, nebojuješ o to. Nenamáhaš
+                sa. Neustále to nekontroluješ. Uvoľníš sa, pretože je to už fakt. Zobúdza sa miliardár každé ráno so
+                snahou presvedčiť sám seba, že je bohatý? Nie, on to jednoducho vie. Táto prirodzenosť je frekvencia
+                vedenia.</p>
+
+            <p>Mysli na kľúče vo svojom vrecku. Vieš, že tam sú. Nemusíš si ich vizualizovať každých päť minút. Nemusíš
+                si opakovať "mám kľúče, mám kľúče", aby si ich urobil skutočnými. Jednoducho kráčaš k autu, siahneš dnu
+                a použiješ ich. To je pocit prirodzenosti. Keby si si neustále poklepával po vrecku, aby si
+                skontroloval, či tam stále sú, to by bola úzkosť, nie vedenie. Vedenie je tiché. Je pokojné. Nepotrebuje
+                kontrolovať, pretože vie, že kľúče tam sú.</p>
+
+            <p>Príde moment, kedy ťa nič neprinúti pochybovať. Kedy nebudeš potrebovať vidieť dôkaz, pretože vieš, že
+                dôkaz nasleduje vedenie, nie naopak. Prestaneš reagovať na fyzickú realitu a začneš ju riadiť. Uvidíš,
+                že fyzická realita je niečo, čo ovládaš. A vtedy sa vedenie stane druhou prirodzenosťou. Už sa nebudeš
+                "snažiť" manifestovať, jednoducho sa rozhodneš, a tak to bude.</p>
+
+            <!-- Interactive Command Button -->
+            <div class="command-btn-wrapper">
+                <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Vyskúšaj si ten pocit. Klikni a rozhodni.</p>
+                <button class="command-btn" onclick="activateCommand(this)">
+                    VIEM TO
+                </button>
+                <div id="commandFeedback" class="command-feedback">
+                    "A tak to je."
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #111827);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div
+                style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid #3b82f6;">
+                <h4 style="color: #3b82f6; margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie Kapitoly</h4>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Najvyššia forma manifestácie nie je pýtanie sa, dúfanie, ani vizualizácia. Je to "DEKRETOVANIE". Ako
+                    objednávka v reštaurácii. Ako kľúče vo vrecku. Vieš, že to je.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola13.html" class="nav-btn">&larr; Späť na Kapitolu 13</a>
+        <a href="Kapitola15.html" class="nav-btn">Pokračovať na Kapitolu 15 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Interactive Command Logic
+        function activateCommand(btn) {
+            btn.classList.add('activated');
+            btn.innerHTML = '<i class="fas fa-check"></i> ROZHODNUTÉ';
+            document.getElementById('commandFeedback').style.opacity = '1';
+
+            // Screen flash effect
+            document.body.style.transition = 'background 0.1s';
+            const oldBg = document.body.style.background;
+            document.body.style.background = '#fff';
+            setTimeout(() => {
+                document.body.style.background = ''; // Revert to CSS
+            }, 100);
+        }
+
+        // Audio Player Logic
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    console.error("Audio error:", e);
+                    alert("Audio file not found (placeholder).");
+                });
+            } else { audio.pause(); }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeEl.textContent = `${mins}:${secs}`;
+            }
+        });
+    </script>
+
 </body>
+
 </html>

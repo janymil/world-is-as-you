@@ -1,69 +1,347 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 11</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Chapter 11 Specific Styles - False Gods / Freedom Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #a855f7);
+            /* Purple-500 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        /* Permission Slip Box */
+        .permission-slip-box {
+            background: #fff;
+            color: #0f172a;
+            padding: 2rem;
+            border-radius: 4px;
+            margin: 3rem 0;
+            position: relative;
+            transform: rotate(-1deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .permission-slip-box::before {
+            content: 'POVOLENIE';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #a855f7;
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .highlight-text {
+            color: #a855f7;
+            font-weight: 600;
+        }
+
+        .quote-block {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #e2e8f0;
+            border-left: 2px solid #a855f7;
+            padding-left: 2rem;
+            margin: 3rem 0;
+            line-height: 1.6;
+            background: linear-gradient(to right, rgba(168, 85, 247, 0.05), transparent);
+            padding: 2rem;
+        }
+
+        /* Lighthouse/Soul Visuals */
+        .analogy-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            /* Fixed syntax error here */
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?temple,statue,ruins,mystery'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 11</h4>
-            <h1>Falošní bohovia</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px; color: #a855f7;">KAPITOLA 11</h4>
+            <h1>Falošní Bohovia</h1>
+            <p>Všetko vonkajšie je len povolenka, ktorú si dávaš sám sebe.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Falošní bohovia.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Falošní bohovia" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">11 - Falošní Bohovia</h3>
+                </div>
+            </div>
+            <!-- Standard Placeholder Controls -->
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/11kapitola-falosni-bohovia.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <!-- FALSE GODS SECTION -->
+            <h3 class="sub-heading" style="color: #a855f7;">Falošní Bohovia</h3>
+
+            <p class="lead-paragraph" style="color: #fff; font-size: 1.2rem; margin-bottom: 2rem;">
+                Počas celej ľudskej histórie sa ľudia upínali k vonkajším silám, bohom, božstvám, rituálom, predmetom a
+                kozmickým princípom, akoby ich vlastné ja nikdy nestačilo. Vždy hľadali niečo mimo seba, čomu by mohli
+                dôverovať a do čoho by vložili svoju vieru, aby to fungovalo ako most medzi nimi a ich túžbami.
+            </p>
+
+            <p>Niektorí sa modlia k bohom na nebi. Niektorí uctievajú kamene, symboly alebo mesiac. Niektorí sa obracajú
+                na čarodejníctvo, tarot, astrológiu alebo duchovných sprievodcov. Iní prisahajú na techniky
+                manifestácie, afirmácie, rituály alebo talizmany pre šťastie. Ale žiadna z týchto vecí nemá žiadnu
+                vlastnú moc. Sú to len <strong>priepustky ("povolenky")</strong>, ktoré používaš na ospravedlnenie toho,
+                prečo by niečo malo fungovať.</p>
+
+            <div class="permission-slip-box">
+                <p
+                    style="font-family: 'Courier New', monospace; font-size: 1.1rem; margin-bottom: 1rem; color: #334155;">
+                    Týmto udeľujem povolenie, aby sa moja túžba splnila:
+                </p>
+                <div
+                    style="border-bottom: 2px dashed #94a3b8; margin-bottom: 1.5rem; padding-bottom: 5px; color: #0f172a; font-weight: bold;">
+                    Pretože som UROBIL RITUÁL / POMODLIL SA / ZAPÁLIL SVIEČKU...
+                </div>
+                <p style="font-size: 0.9rem; color: #64748b; text-align: right;">
+                    Podpis: <span style="font-family: 'Sacramento', cursive; font-size: 1.4rem; color: #a855f7;">Tvoja
+                        Viera</span>
+                </p>
+            </div>
+
+            <p>Ak veríš, že rituál ti/ prinesie to, čo chceš, prinesie, nie preto, že rituál samotný má nejakú vnútornú
+                moc, ale preto, že si mu dal moc prostredníctvom svojej viery.</p>
+
+            <p>Ak sa modlíš k bohu a dokončíš svoju modlitbu s absolútnym presvedčením, že tvoja žiadosť bola vypočutá,
+                bude, nie preto, že sa nejaké vonkajšie božstvo rozhodlo odpovedať ti, ale preto, že tvoje očakávanie
+                dalo veci do pohybu.</p>
+
+            <p>Ak si vytiahneš tarotovú kartu, veríš v jej význam a očakávaš, že tvoj život sa bude odvíjať podľa nej,
+                bude, nie kvôli mystickým silám v hre, ale preto, že si to prijal ako pravdu a tým si to tak urobil.</p>
+
+            <div class="quote-block">
+                "Každá technika, každá prax a každý vonkajší systém viery je len maska, ktorá zakrýva silu tvojho
+                vlastného očakávania, tvojho vlastného presvedčenia a tvojej vlastnej schopnosti 'predpokladať'
+                realitu."
+            </div>
+
+            <p>To je dôvod, prečo rôzni ľudia, praktizujúci úplne odlišné systémy viery, všetci zažívajú "dôkaz", že ich
+                cesta je tá správna. Kresťan sa modlí a vidí zázraky. Astrológ sleduje pohyby planét a nachádza vzorce
+                vo svojom živote. Človek praktizujúci techniky manifestácie dosahuje výsledky. Všetci majú pravdu. Nie
+                preto, že ich metódy sú pravdivé, ale preto, že ich viera v ne ich robí pravdivými pre nich.</p>
+
+            <p>Preto by si nikdy nemal strácať čas hádaním sa s niekým o tom, čo je "skutočné" alebo "falošné". Ak
+                človek verí vo vyššiu moc a vidí dôkazy o nej vo svojom živote, nemýli sa. Ak iný človek verí v kúzla,
+                prácu s energiou alebo posvätnú geometriu a nachádza úspech prostredníctvom týchto prostriedkov, tiež sa
+                nemýli. Ak niekto verí, že napísanie svojich túžob na kus papiera a jeho spálenie mu prinesie výsledky,
+                a dostane presne to, o čo žiadal, má tiež pravdu. Nie preto, že metóda samotná je mocná, ale preto, že
+                on je.</p>
+
+            <p>Ale rozdiel je v tom, že tí, ktorí sa spoliehajú na "priepustky", tú priepustku potrebujú. Nedokážu veriť
+                v silu svojej vlastnej mysle bez vonkajšieho potvrdenia. Potrebujú techniku, rituál, božstvo alebo súbor
+                pravidiel, ktorými sa musia riadiť. Vkladajú svoju dôveru do niečoho mimo seba, neuvedomujúc si, že to,
+                čomu v skutočnosti dôverujú, je ich vlastná viera, prezlečená do inej formy.</p>
+
+            <p>Tí najmúdrejší medzi nami, tí, ktorí skutočne chápu mechaniku reality, sú tí, ktorí ušetria sami seba
+                potreby falošných bohov. Chápu, že všetko je priepustka, ale skutočná moc spočíva vo viere samotnej, nie
+                v predmete viery.</p>
+
+            <p>Prečo vytvárať zbytočné vrstvy medzi sebou a svojou mocou? Prečo sa spoliehať na sprostredkovateľa, keď
+                môžeš ísť priamo k zdroju? Nepotrebuješ tarotové karty, aby si predpovedal svoju budúcnosť.
+                Nepotrebuješ, aby sa hviezdy zoradili, aby si vedel, že veci pracujú v tvoj prospech.</p>
+
+            <p>Nepotrebuješ talizman pre šťastie, aby si veril, že máš šťastie. Potrebuješ len jednu vec: presvedčenie o
+                svojej vlastnej schopnosti priviesť niečo do existencie predpokladom.</p>
+
+            <p>Tým nechcem povedať, že by ľudia mali opustiť svoje presvedčenia. Ak niekto nachádza útechu vo svojich
+                rituáloch, nechaj ho. Ak sa cítia mocní vďaka svojim praktikám, nechaj ich. Kráčajú svojou vlastnou
+                cestou a ich viera to robí pre nich reálnym.</p>
+
+            <div
+                style="background: rgba(168, 85, 247, 0.1); border-left: 4px solid #a855f7; padding: 2rem; margin: 3rem 0; border-radius: 0 12px 12px 0;">
+                <p style="font-size: 1.2rem; color: #fff; margin-bottom: 1rem;">Ale v tejto knihe ti odovzdávam hlbšiu
+                    pravdu, ktorá ťa oslobodzuje od všetkých vonkajších závislostí: <strong>Ty si zdroj.</strong></p>
+                <p style="font-size: 1rem; color: #cbd5e1; margin: 0;">Nie si vydaný na milosť planétam, božstvám,
+                    číslam alebo rituálom. Ty si tvorca, dirigent, sila za tým všetkým.</p>
+            </div>
+
+            <p>Takže ušetri sa falošných bohov. Prestaň hľadať validáciu, moc alebo povolenie mimo seba. Nepotrebuješ
+                zapaľovať sviečky, sledovať lunárne cykly alebo recitovať zaklínadlá, pokiaľ ťa to nebaví. Jediná vec,
+                ktorú kedy potrebuješ, je tvoja vlastná viera. Predpokladaj to, čo chceš, do existencie, očakávaj to bez
+                pochybností a sleduj, ako sa realita podrobí tvojmu príkazu.</p>
+
+            <!-- EXTRA VISUAL: Placebo Effect -->
+            <div class="analogy-card">
+                <h4 style="color: #a855f7; margin-bottom: 1rem; text-transform: uppercase;"><i class="fas fa-pills"
+                        style="margin-right: 10px;"></i> Analógia Placeba</h4>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">
+                    V medicíne pacient užije cukrovú tabletku (falošný liek), ale verí, že je to liek. A vylieči sa.
+                    Cukor nemal moc. <strong>Moc mala pacientova viera, že cukor má moc.</strong>
+                    Rituály a talizmany sú duchovné placebá. Fungujú, ale ty si ten, kto ich nabíja.
+                </p>
+            </div>
+
+
+            <!-- LIVE AND LET LIVE SECTION -->
+            <h3 class="sub-heading" style="color: #a855f7; margin-top: 5rem;">Ži a Nech Žiť</h3>
+
+            <p>Keď sa prvýkrát prebudíš do sily svojej mysle, do povahy reality a manifestácie, je prirodzené cítiť
+                ohromnú túžbu zdieľať to s každým, najmä s tými, ktorých miluješ. Vidíš život tak jasne. Chápeš, prečo
+                sa veci dejú tak, ako sa dejú. Uvedomuješ si, koľko zbytočného utrpenia si ľudia spôsobujú jednoducho
+                preto, že nevedia nič lepšie. A tak chceš pomôcť. Chceš nimi zatriasť, aby sa prebrali, a povedať:
+                <em>"Pozri! Nemusíš takto žiť! Nemusíš sa trápiť!"</em> Ale nemôžeš niekoho donútiť prebudiť sa skôr,
+                než je pripravený.
+            </p>
+
+            <p>Nie každý je na rovnakom mieste svojej cesty. Niektorí ľudia sú staré duše, bytosti, ktoré už prešli
+                životom za životom, hromadiac múdrosť, zažívajúc kontrast, učiac sa lekcie. A v tomto živote dosiahli
+                bod, kde sú konečne pripravení pochopiť tieto pravdy. To si ty. To je dôvod, prečo si ťa toto poznanie
+                našlo.</p>
+
+            <p>Ale iní sú nové duše, čerstvé v skúsenosti fyzickej reality, ktoré sa stále potrebujú učiť cez boj,
+                zlomené srdce, obmedzenia a kontrast. Potrebujú prejsť určitými skúsenosťami, pretože tak sa ich duša
+                vyvíja. Nemôžeš im skrátiť cestu. Nemôžeš ich donútiť pochopiť to, čo ešte nie sú pripravení vidieť.</p>
+
+            <div
+                style="display: flex; gap: 1rem; align-items: flex-start; background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+                <i class="fas fa-calculator" style="color: #a855f7; font-size: 1.5rem; margin-top: 5px;"></i>
+                <p style="margin: 0; font-style: italic; color: #cbd5e1;">"Predstav si, že sa snažíš vysvetliť pokročilú
+                    matematiku dieťaťu, ktoré sa ešte nenaučilo ani základnú aritmetiku. Nezáležalo by na tom, ako
+                    vášnivo by si sa snažil ich to naučiť, len by ich to zahltilo. Odmietli by to, nie preto, že sa
+                    nechcú učiť, ale preto, že ešte nie sú v tom štádiu. To isté platí pre duchovné prebúdzanie. Každý
+                    sa učí svojím vlastným tempom."</p>
+            </div>
+
+            <p>Čím viac sa snažíš vnútiť svoj nový spôsob myslenia iným, tým viac odporu vytváraš. Ľudia lipnú na
+                svojich presvedčeniach, pretože pre nich sú tieto presvedčenia ich realitou. Keď sa im to snažíš vziať
+                skôr, než sú pripravení, cítia sa ohrození. Môžu sa dokonca stať defenzívnymi a úplne odmietnuť tvoje
+                slová. A ak si nedáš pozor, začneš voči nim cítiť zášť, frustráciu, že nevidia to, čo vidíš ty. Ale to
+                nie je tvoja práca. Nie si tu na to, aby si budil ľudí. Si tu na to, aby si stelesňoval to, čo si sa
+                naučil, a kráčal svojou cestou s presvedčením.</p>
+
+            <p>Keď bude niekto skutočne pripravený, spýta sa. Vycíti, že sa hýbeš inak, že si pokojný, kým oni sú
+                úzkostliví, a že prosperuješ, kým oni sa trápia. Všimnú si rozdiel v energii a budú sa pýtať: <em>"Ako
+                    to robia?"</em> A keď je ich zvedavosť skutočná a keď sa úprimne chcú učiť, vtedy môžeš zdieľať. Nie
+                z pozície snahy presvedčiť, ale z pozície ponúkania toho, čo vieš, tým, ktorí to hľadajú.</p>
+
+            <!-- EXTRA VISUAL: Lighthouse -->
+            <div class="analogy-card" style="border-top: 3px solid #facc15;">
+                <h4 style="color: #facc15; margin-bottom: 1rem; text-transform: uppercase;"><i class="fas fa-lighthouse"
+                        style="margin-right: 10px;"></i> Buď Majákom</h4>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">
+                    Maják nebehá okolo ostrova a nehľadá lode, ktoré by zachránil. Len stojí na svojom mieste a svieti.
+                    Lode, ktoré hľadajú svetlo, ho nájdu. Lode, ktoré nie sú pripravené, ho minú. <strong>Len
+                        svieť.</strong>
+                </p>
+            </div>
+
+            <p>Ale ak to odmietnu, nechaj ich. Rešpektuj ich cestu. Nechaj ich veriť tomu, čomu potrebujú veriť. Nechaj
+                ich trápiť sa, ak si to ich duša zvolila. Nie je to tvoje bremeno. Nekonečná Inteligencia má dokonalé
+                načasovanie a keď budú pripravení, poznanie si ich nájde, presne tak, ako si našlo teba.</p>
+
+        </div>
+    </section>
+
+    <!-- Footer Navigation (Assumed Chapter 12 exists or will exist) -->
+    <footer>
+        <a href="Kapitola10.html" class="nav-btn">&larr; Späť na Kapitolu 10</a>
+        <a href="Kapitola12.html" class="nav-btn">Pokračovať na Kapitolu 12 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Audio Player Logic
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    console.error("Audio error:", e);
+                    alert("Audio file not found (placeholder).");
+                });
+            } else { audio.pause(); }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeEl.textContent = `${mins}:${secs}`;
+            }
+        });
+    </script>
+
 </body>
+
 </html>

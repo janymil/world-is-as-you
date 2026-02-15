@@ -1,69 +1,856 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 9</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Specific Styles for Chapter 9 - The Winner's Attitude (Gold/Victory Theme) */
+
+        /* Hero - Gold Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #f59e0b);
+            /* Amber-500 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+        }
+
+        .hero h4 {
+            color: #f59e0b;
+        }
+
+        /* Content Standard Palette (Gold/White) applies generally */
+
+        /* Interactive/Visual Elements for this Chapter */
+
+        /* Perspective Toggle Container */
+        .perspective-container {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toggle-switch-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .perspective-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .perspective-btn.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            border-color: #f59e0b;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+            transform: scale(1.05);
+        }
+
+        .scenario-content {
+            min-height: 150px;
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: 0.3s;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .scenario-content.active {
+            display: block;
+        }
+
+        .scenario-negative {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+        }
+
+        .scenario-positive {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+        }
+
+        /* Segment Intending Cards */
+        .segment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .segment-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .segment-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            background: rgba(251, 191, 36, 0.05);
+        }
+
+        .segment-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .sub-heading {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive Note Styling */
+        .note-container-wrapper {
+            position: relative;
+        }
+
+        .note-anchor-desktop {
+            position: absolute;
+            right: -120px;
+            /* Farther out */
+            top: 0;
+            display: block;
+        }
+
+        .mobile-note-block {
+            display: none;
+            /* Hidden on desktop */
+            background: rgba(245, 158, 11, 0.05);
+            border-left: 3px solid var(--accent-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        @media (max-width: 1200px) {
+            .note-anchor-desktop {
+                display: none;
+                /* Hide icon on smaller screens */
+            }
+
+            .mobile-note-block {
+                display: block;
+                /* Show inline block on mobile/tablet */
+            }
+        }
+
+
+
+        /* Lead Paragraph Styling */
+        .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .lead-paragraph::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: var(--accent-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* Styled Thought Block */
+        .thought-block {
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #e2e8f0;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?gold,trophy,sunrise,peak'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 9</h4>
-            <h1>Víťazný postoj (Winner's Attitude)</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px;">KAPITOLA 9</h4>
+            <h1>Postoj Víťaza</h1>
+            <p>Tajomstvo nie je v technike. Je v očakávaní, že život je blažená jazda.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Víťazný postoj (Winner's Attitude).[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Víťazný postoj (Winner's Attitude)" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">09 - Postoj Víťaza</h3>
+                </div>
+            </div>
+            <!-- Standard Placeholder Controls -->
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/9kapitola-postoj-vitaza.mp3"></audio>
+                <!-- Intentional Placeholder -->
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading">Postoj Víťaza</h3>
+
+            <p class="lead-paragraph">Prezradím ti malé tajomstvo o ľuďoch, ktorí uspejú vo všetkom, čo robia, o tých,
+                ktorí premenia všetko,
+                čoho sa dotknú, na zlato. O tých, ktorým sa okolnosti dokonale zoraďujú jedna za druhou a život sa pre
+                nich stáva radostnou, blaženou jazdou plnou vzrušujúcich a pozitívnych udalostí.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-key" style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-gold);"></i>
+                <p>Ich tajomstvo nie je nejaký skrytý vzorec alebo technika. Je to systém presvedčení, nastavenie mysle,
+                    ktoré pracuje v ich prospech. Títo ľudia nemusia tvrdo pracovať na premýšľaní o svojich túžbach
+                    alebo ich vedome vizualizovať. Nemusia vynakladať extra úsilie na "manifestovanie", pretože sú už
+                    hlboko zakorenení v presvedčení, že život je hra, v ktorej sa vyhráva.</p>
+            </div>
+
+            <p>Vidíš, títo ľudia očakávajú, že všetko pre nich vždy dopadne perfektne. Kráčajú životom s istotou, že
+                čokoľvek, po čom túžia, je už na ceste k nim. Viedia, hlboko v kostiach, že život nie je o prebíjaní sa
+                cez vzostupy a pády. V skutočnosti neveria na vzostupy a pády tak, ako väčšina ľudí. Pre nich život nie
+                je horská dráha. Je to hladká jazda, kde jediná cesta je hore a každý moment je príležitosťou na rast,
+                radosť a expanziu.</p>
+
+            <p>Títo jednotlivci si sú vedomí, že život má byť blažený. Veria, bez akýchkoľvek pochybností, že sú
+                podporovaní vo všetkých možných smeroch, že vesmír im "kryje chrbát" a že nič im nikdy nemôže ublížiť.
+                To nie je arogancia, je to jednoducho ich realita. Sú v bezpečí, istote a nekonečne podporovaní na
+                každom kroku. Vedia, že nikdy nie sú sami a že všetko, čo potrebujú, im bude vždy poskytnuté, či už je
+                to láska, peniaze, príležitosti alebo skúsenosti.</p>
+
+            <p>Vedia, že nakoniec dostanú všetko, po čom túžia. V ich mysliach nie je žiadna pochybnosť. Či sa to stane
+                dnes, zajtra alebo v budúcnosti, dôverujú, že ich túžby sú vždy na ceste k nim. Možno nevedia presne,
+                ako sa veci vyvinú, ale vedia, že vesmír neustále pracuje v ich prospech a že všetko sa dokonale
+                zoraďuje, presne tak, ako má.</p>
+
+            <div class="quote-block">
+                "Títo jednotlivci nepustia strach, pochybnosti alebo obavy do svojich myslí. Nezaoberajú sa myšlienkami
+                na zlyhanie alebo nedostatok."
+            </div>
+
+            <p>Namiesto toho sa rozhodnú zamerať sa na to, čo chcú, a veria, že je to už ich. Žijú svoje životy v stave
+                radostného očakávania, plne ponorení do vedomia, že život je ich ihrisko a oni sú tí, ktorí rozdávajú
+                karty.</p>
+
+            <p>Ak niečo nejde podľa plánu, nevidia to ako prehru. Vedia, že je to len súčasť procesu, obchádzka vedúca k
+                niečomu ešte lepšiemu. V ich svete chyby neexistujú, len príležitosti na expanziu. Dôverujú, že všetko
+                sa odvíja v perfektnom načasovaní a že každá jedna udalosť, osoba a situácia slúži ich najvyššiemu
+                dobru. Vedia, že sú hodní všetkého, po čom túžia, a že ich túžby sú nielen možné, ale nevyhnutné.</p>
+
+            <h3 class="sub-heading">Dve Perspektívy</h3>
+
+            <p>Ak spadne pohár a rozbije sa, neoznačia to ako smolu, nepohodlie alebo znamenie niečoho negatívneho.
+                Namiesto reakcie frustráciou, predpokladajú, bez zaváhania, že sa to muselo stať z dobrého dôvodu, aj
+                keď ešte nevedia, aký ten dôvod je.</p>
+
+            <p>Možno im rozbitý pohár zabráni vypiť niečo, z čoho by im bolo zle. Možno posun v čase pri upratovaní ich
+                zosúladí so šťastnou udalosťou. Nech je to akokoľvek, odmietnutím priradiť situácii negatívny význam
+                nedávajú priestor tomu, aby ich to negatívne ovplyvnilo. A čoskoro život odhalí, prečo to bolo v
+                skutočnosti pre to najlepšie.</p>
+
+            <p>Vezmime si ďalší príklad. Predstav si dvoch ľudí, ktorí zmeškajú ten istý vlak.</p>
+
+            <p>Jeden zareaguje frustráciou a okamžite si pomyslí: <em>"To je hrozné! Teraz budem meškať, môj deň je
+                    zničený."</em> Jeho myseľ sa špirálovito rúti do negativity a predpokladá to najhoršie. A
+                samozrejme, keď konečne dorazí do práce, jeho šéf je zúrivý. Zmeškaný vlak viedol k hádke, stresu a
+                zlému dňu.</p>
+
+            <p>Teraz, druhý človek zaujme iný prístup. Namiesto negatívnej reakcie si pomyslí: <em>"Fajn, zmeškal som
+                    vlak. Neviem prečo, ale som si istý, že sa to stalo z dobrého dôvodu. Čoskoro zistím prečo."</em>
+                Zostáva pokojný a dôveruje, že život pracuje v jeho prospech. Kým čaká na ďalší vlak, stretne starého
+                priateľa, ktorého nevidel roky, niekoho, kto zhodou okolností hľadá človeka na novú pozíciu. Táto
+                "nehoda" práve viedla k neuveriteľnej pracovnej ponuke, oveľa lepšej než tá, do ktorej pôvodne smeroval.
+            </p>
+
+            <!-- Interactive Perspective Tool -->
+            <div class="perspective-container">
+                <h3 style="color: #fff; margin-bottom: 1.5rem;">Simulátor Reakcií: Zmeškaný Vlak</h3>
+
+                <div class="toggle-switch-wrapper">
+                    <button class="perspective-btn active" onclick="showScenario('negative', this)" id="btnNeg">Bežná
+                        Reakcia</button>
+                    <button class="perspective-btn" onclick="showScenario('positive', this)" id="btnPos">Postoj
+                        Víťaza</button>
+                </div>
+
+                <div id="scenarioNegative" class="scenario-content scenario-negative active">
+                    <h4 style="color: #ef4444; margin-bottom: 1rem;">Obeť Reaguje:</h4>
+                    <p style="font-style: italic; color: #cbd5e1;">"To je hrozné! Teraz budem meškať, celý môj deň je
+                        zničený."</p>
+                    <hr style="border: 0; border-top: 1px solid rgba(239, 68, 68, 0.3); margin: 1rem 0;">
+                    <p><strong>Výsledok:</strong> Myseľ špiráluje do negativity. Keď konečne dorazia do práce, šéf je
+                        zúrivý. Zmeškaný vlak viedol k hádke, stresu a zlému dňu.</p>
+                </div>
+
+                <div id="scenarioPositive" class="scenario-content scenario-positive">
+                    <h4 style="color: #22c55e; margin-bottom: 1rem;">Víťaz Reaguje:</h4>
+                    <p style="font-style: italic; color: #fff;">"Okej, zmeškal som vlak. Neviem prečo, ale som si istý,
+                        že sa to stalo z dobrého dôvodu. Čoskoro zistím prečo."</p>
+                    <hr style="border: 0; border-top: 1px solid rgba(34, 197, 94, 0.3); margin: 1rem 0;">
+                    <p><strong>Výsledok:</strong> Zostávajú pokojní. Počas čakania na ďalší vlak stretnú starého
+                        priateľa, ktorý práve hľadá niekoho na novú pozíciu. Táto "nehoda" viedla k neuveriteľnej
+                        pracovnej ponuke.</p>
+                </div>
+            </div>
+
+            <p>Rovnaká situácia. Dve rôzne perspektívy. Dva úplne odlišné výsledky.</p>
+
+            <p>Život naberá tvar tvojich predpokladov. Situácie sa odvíjajú na základe významu, ktorý im dáš. Keď
+                predpokladáš to najhoršie, vytváraš realitu, ktorá to potvrdzuje. Keď predpokladáš, že všetko pracuje v
+                tvoj prospech, život sa zariadi podľa toho.</p>
+
+            <p>Takže keď sa nabudúce stane niečo neočakávané, namiesto negatívnej reakcie sa zastav a povedz si:
+                <em>"Neviem, prečo sa to stalo, ale verím, že je to z dobrého dôvodu. Čoskoro uvidím prečo."</em> A
+                potom čakaj. Život ti dá za pravdu, pretože takto to vždy funguje.
+            </p>
+
+
+
+            <h3 class="sub-heading">Trénovanie Víťazného Postoja</h3>
+
+            <p>Aj ty sa môžeš vytrénovať veriť, že život je blažená cesta. Že si podporovaný. Že ti nič nemôže skutočne
+                ublížiť. A že každá jedna vec, po ktorej túžiš, je už na ceste k tebe.</p>
+
+            <p>Tá istá nekonečná inteligencia, ktorá slúži týmto ľuďom, slúži aj tebe. Aj ty máš schopnosť žiť život
+                podľa vlastných podmienok, očakávať len to najlepšie a vedieť, že všetko sa pre teba vždy vyvinie
+                dokonale.</p>
+
+            <div class="thought-block">
+                <p>Postoj víťaza nie je niečo, s čím sa jedného dňa zobudíš; je to niečo, do čoho sa vytrénuješ.
+                    <strong>Je to sval, zvyk, spôsob myslenia</strong>, ktorý sa po zvládnutí stane druhou
+                    prirodzenosťou. A všetko to začína malými vecami. Nemusíš hneď v prvý deň prenášať hory; stačí, ak
+                    začneš svoje myšlienky smerovať zámerne, moment za momentom, voľbu za voľbou.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h4 style="color: var(--accent-gold); text-transform: uppercase; margin-bottom: 0.5rem;">Segmentový
+                    Zámer (Segment Intending)</h4>
+                <p>Začni praktizovať rozhodovanie vopred o tom, ako sa každá časť tvojho dňa vyvinie. Nenechaj život,
+                    aby sa ti "dial" a nebuď v ňom len pasívnou postavou, ktorá iba reaguje na okolnosti. Postoj víťaza
+                    znamená, že nič nenechávaš na náhodu, berieš štetec do ruky a maľuješ výsledok ešte predtým, ako
+                    príde.</p>
+                <div class="note-container-wrapper">
+                    <p>Tvoj deň sa skladá z mnohých malých úsekov – moment, keď vstaneš, cesta autom, pracovná porada,
+                        chvíľa, keď varíš večeru. Segmentový zámer znamená, že sa na prahu každého tohto úseku na chvíľu
+                        zastavíš a určíš, aký bude. Než dvihneš telefón, povedz si: "Tento hovor bude príjemný a
+                        efektívny."
+                        Než sadneš do auta, povedz si: "Cesta bude bezpečná a plynulá." Týmto vedomým aktom vysielaš
+                        svoj
+                        zámer dopredu a pripravuješ energiu, aby sa realita mohla prispôsobiť tvojmu očakávaniu.</p>
+
+                    <!-- VISUAL: Before vs After -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0;">
+                        <!-- Without Segmenting -->
+                        <div
+                            style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; border-top: 3px solid #ef4444;">
+                            <h5
+                                style="color: #ef4444; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.8rem;">
+                                Bez Zámeru (Reakcia)</h5>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #cbd5e1;">
+                                <li style="margin-bottom: 5px;"><i class="fas fa-times"
+                                        style="color: #ef4444; margin-right: 5px;"></i> "Dúfam, že to vyjde."</li>
+                                <li style="margin-bottom: 5px;"><i class="fas fa-times"
+                                        style="color: #ef4444; margin-right: 5px;"></i> Stres a neistota.</li>
+                                <li><i class="fas fa-times" style="color: #ef4444; margin-right: 5px;"></i> Výsledok:
+                                    Náhodný.</li>
+                            </ul>
+                        </div>
+
+                        <!-- With Segmenting -->
+                        <div
+                            style="background: rgba(34, 197, 94, 0.1); padding: 1rem; border-radius: 8px; border-top: 3px solid #22c55e;">
+                            <h5
+                                style="color: #22c55e; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.8rem;">
+                                So Zámerom (Tvorba)</h5>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #cbd5e1;">
+                                <li style="margin-bottom: 5px;"><i class="fas fa-check"
+                                        style="color: #22c55e; margin-right: 5px;"></i> "Bude to úžasné."</li>
+                                <li style="margin-bottom: 5px;"><i class="fas fa-check"
+                                        style="color: #22c55e; margin-right: 5px;"></i> Pokoj a istota.</li>
+                                <li><i class="fas fa-check" style="color: #22c55e; margin-right: 5px;"></i> Výsledok:
+                                    Cielený.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Desktop Note (Detailed Icon Popup) -->
+                    <div class="note-anchor-desktop">
+                        <button class="note-toggle-btn" onclick="toggleSideNote(this)"
+                            style="background: transparent; color: #f59e0b; border: 2px solid #f59e0b; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);">
+                            <i class="fas fa-magic"></i>
+                        </button>
+                        <!-- Popup Opens to the RIGHT (away from text) -->
+                        <div class="note-content side-popup"
+                            style="display: none; position: absolute; left: 70px; top: 0; width: 350px; background: rgba(15, 23, 42, 0.98); border: 1px solid #f59e0b; padding: 2rem; border-radius: 12px; z-index: 100; box-shadow: 0 10px 40px rgba(0,0,0,0.8); text-align: left;">
+                            <h4
+                                style="color: #f59e0b; margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; font-family: 'Cormorant Garamond', serif; border-bottom: 1px solid rgba(245, 158, 11, 0.3); padding-bottom: 0.5rem;">
+                                Technika: Vedomá Príprava</h4>
+
+                            <p style="font-size: 0.95rem; color: #fff; margin-bottom: 1rem; line-height: 1.6;">Väčšina
+                                ľudí žije v reakcii. Vchádzajú do situácií nepripravení a "dúfajú", že to dobre dopadne.
+                                Víťaz situáciu netipuje, víťaz ju tvorí vopred.</p>
+
+                            <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1rem;"><strong>Prečo to
+                                    funguje:</strong> Tvoj mozog potrebuje jasné inštrukcie. Ak mu ich nedáš, spustí
+                                autopilota (návyky, stres, obavy). Segmentový zámer je vedomý príkaz pre tvoju myseľ, na
+                                čo sa máamerať.</p>
+
+                            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                                <p
+                                    style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem; text-transform: uppercase; font-weight: bold;">
+                                    Postup:</p>
+                                <ul
+                                    style="padding-left: 1rem; margin: 0; font-size: 0.9rem; color: #cbd5e1; list-style: none;">
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right"
+                                            style="color: #f59e0b; margin-right: 8px; font-size: 0.8rem;"></i><strong>1.
+                                            Stop:</strong> Uvedom si zmenu činnosti (napr. vstup do kancelárie).</li>
+                                    <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right"
+                                            style="color: #f59e0b; margin-right: 8px; font-size: 0.8rem;"></i><strong>2.
+                                            Cieľ:</strong> Povedz si presne, čo chceš zažiť ("Chcem jasnú a rýchlu
+                                        dohodu").</li>
+                                    <li><i class="fas fa-arrow-right"
+                                            style="color: #f59e0b; margin-right: 8px; font-size: 0.8rem;"></i><strong>3.
+                                            Pocit:</strong> Navoď si pocit hotového výsledku (sebadôvera, pokoj)
+                                        <em>predtým</em>, než otvoríš dvere.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Note (Inline Block) -->
+                    <div class="mobile-note-block">
+                        <h4
+                            style="color: #f59e0b; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-magic"></i> Technika: Vedomá Príprava
+                        </h4>
+                        <p style="font-size: 0.95rem; color: #fff; margin-bottom: 1rem; line-height: 1.6;">Väčšina ľudí
+                            žije v reakcii. Vchádzajú do situácií nepripravení a "dúfajú", že to dobre dopadne. Víťaz
+                            situáciu netipuje, víťaz ju tvorí vopred.</p>
+
+                        <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1rem;"><strong>Prečo to
+                                funguje:</strong> Tvoj mozog potrebuje jasné inštrukcie. Ak mu ich nedáš, spustí
+                            autopilota (návyky, stres, obavy). Segmentový zámer je vedomý príkaz pre tvoju myseľ, na čo
+                            sa máamerať.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conclusion / Call to Action Block -->
+            <div
+                style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(245, 158, 11, 0.2); padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center;">
+                <p style="font-size: 1.1rem; color: #fff; margin-bottom: 1.5rem; line-height: 1.8;">
+                    Nenechávaj svoj život na autopilotovi so skríženými prstami hovoriac: "Dúfam, že dnešok bude dobrý,"
+                    alebo ešte horšie: "Uvidíme, čo sa stane." To je pasívne. To je slabé. To je vzdanie sa svojej moci.
+                    <span style="color: var(--accent-gold); font-weight: 600;">Víťaz to nikdy nerobí. Víťaz si vyberá.
+                        Víťaz sa rozhoduje vopred.</span>
+                </p>
+
+                <p style="font-size: 1rem; color: #cbd5e1; line-height: 1.8;">
+                    Maľuješ svoju realitu každú sekundu každého dňa, či si to uvedomuješ alebo nie. Prestaň nechávať
+                    prázdne
+                    miesta, aby ich vyplnil "osud". Bombarduj svoju realitu preferovanými výsledkami. Predpokladaj, že
+                    veci
+                    pôjdu dobre. Predpokladaj, že máš šťastie. Predpokladaj, že veci vždy pracujú pre teba. Rob to
+                    neúprosne, dôsledne, bez ospravedlňovania. Pretože v momente, keď sa rozhodneš, ako veci pôjdu, a
+                    odmietneš uvažovať o inej možnosti, <span style="color: #fff; font-weight: 600;">vesmír nemá na
+                        výber a musí vyhovieť.</span>
+                </p>
+            </div>
+
+            <h3 class="sub-heading">Začni v Malom</h3>
+
+            <div class="segment-grid">
+
+                <!-- Full Text Paragraphs -->
+                <!-- Full Text Paragraphs - Enhanced Formatting -->
+                <div style="grid-column: 1 / -1; margin-bottom: 2rem;">
+
+                    <!-- Challenge 1 -->
+                    <div
+                        style="margin-bottom: 2rem; border-left: 3px solid rgba(255,255,255,0.1); padding-left: 1.5rem;">
+                        <h5
+                            style="color: var(--accent-gold); margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">
+                            Cvičenie 1: Schránka</h5>
+                        <p>Začni s niečím malým, niečím jednoduchým. Chystáš sa otvoriť schránku? <strong>Zastav sa na
+                                sekundu</strong> a pomysli si: <em>"Viem, že sú tam dobré správy."</em> Nehovor to len
+                            tak neprítomne, cíť to. Dovoľ si tomu na chvíľu uveriť, kým nepocítiš ten malý nával istoty,
+                            ten malý výbuch uspokojenia. Potom otvor schránku a sleduj, čo sa stane. Možno je to list od
+                            starého priateľa, zľava na niečo, čo si chcel, alebo jednoducho deň bez otravných účtov.
+                            <strong>Na detailoch nezáleží.</strong> Dôležité je, že vidíš, že to funguje, a tento dôkaz
+                            začne prekáblovať tvoju myseľ.
+                        </p>
+                    </div>
+
+                    <!-- Challenge 2 -->
+                    <div
+                        style="margin-bottom: 2rem; border-left: 3px solid rgba(255,255,255,0.1); padding-left: 1.5rem;">
+                        <h5
+                            style="color: var(--accent-gold); margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">
+                            Cvičenie 2: Platenie</h5>
+                        <p>Keď budeš nabudúce za niečo platiť, čokoľvek, či už je to káva alebo účet, <strong>na sekundu
+                                sa zastav</strong>. Namiesto toho, aby si videl, ako peniaze odchádzajú, predpokladaj,
+                            že sa čoskoro vrátia desaťnásobne. Vedz to. Nehovor len "dúfam", rozhodni sa, že tak to je.
+                            A potom znova pocíť tú malú iskru uspokojenia, ten pocit istoty, že nekonečná inteligencia
+                            sa už preusporadúva, aby doručila to, čo si práve vyhlásil.</p>
+                    </div>
+
+                    <!-- Challenge 3 -->
+                    <div
+                        style="margin-bottom: 1rem; border-left: 3px solid rgba(255,255,255,0.1); padding-left: 1.5rem;">
+                        <h5
+                            style="color: var(--accent-gold); margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">
+                            Cvičenie 3: Stretnutie</h5>
+                        <p>Chystáš sa vstúpiť na stretnutie, mať prejav alebo dôležitý rozhovor? <strong>Nechoď tam
+                                naslepo.</strong> Nastav tón ešte predtým, ako vstúpiš. Povedz si: <em>"Podám životný
+                                výkon. Moje slová budú plynúť bez námahy. Ľudia budú počúvať, budú zaujatí a budú
+                                reagovať pozitívne."</em> A potom to cíť. Aj keď je to len na pár sekúnd, cíť, aké by to
+                            bolo vyjsť z tej miestnosti s vedomím, že si to úplne zvládol.</p>
+                    </div>
+
+                </div>
+
+                <!-- Visual Summaries -->
+                <!-- Mailbox Segment -->
+                <div class="segment-card">
+                    <i class="fas fa-envelope-open-text segment-icon"></i>
+                    <h4>Schránka</h4>
+                    <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 0.5rem;">Pred otvorením sa zastav: "Viem,
+                        že sú tam dobré správy." Cíť ten malý nával istoty.</p>
+                </div>
+
+                <!-- Payment Segment -->
+                <div class="segment-card">
+                    <i class="fas fa-money-bill-wave segment-icon"></i>
+                    <h4>Platenie</h4>
+                    <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 0.5rem;">Namiesto pocitu straty: "Vráti sa
+                        mi to čoskoro desaťnásobne." Rozhodni, že tak to je.</p>
+                </div>
+
+                <!-- Meeting Segment -->
+                <div class="segment-card">
+                    <i class="fas fa-handshake segment-icon"></i>
+                    <h4>Stretnutie</h4>
+                    <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 0.5rem;">Pred vstupom: "Podám životný
+                        výkon. Ľudia budú počúvať." Cíť to.</p>
+                </div>
+            </div>
+
+            <!-- Momentum Insight - Restored Full Text -->
+            <div
+                style="border-right: 3px solid var(--accent-gold); padding-right: 2rem; margin: 3rem 0; text-align: right; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); padding: 2rem; border-radius: 10px 0 0 10px;">
+                <p style="font-size: 1.1rem; color: #fff; line-height: 1.8; margin-bottom: 0;">
+                    Čím viac to budeš robiť, tým rýchlejšie si uvedomíš, že to nie je len nejaké mentálne cvičenie, je
+                    to skutočné. <span style="color: var(--accent-gold); font-weight: 600;">Realita sa ohýba. Situácie
+                        sa menia. Veci sa odvíjajú v tvoj prospech, pretože si sa rozhodol, že budú.</span> A keď začneš
+                    experimentovať s malými vecami, uvedomíš si, že ich nedostávaš preto, že sú malé alebo ľahké.
+                    Dostávaš ich preto, že skutočne veríš, že sa môžu stať. Jediný dôvod, prečo sa zdajú malé, je ten,
+                    že voči nim nemáš odpor. Nepremýšľaš nad nimi príliš. Neobsedíš otázkou, ako, kedy alebo či prídu.
+                    Jednoducho stanovíš zámer, necháš to tak a stane sa to.
+                </p>
+            </div>
+
+            <!-- TYPOGRAPHY SECTION: Illusion of Difficulty -->
+            <div
+                style="margin: 4rem 0; padding: 4rem 2rem; background: radial-gradient(circle at center, rgba(245, 158, 11, 0.05) 0%, rgba(15, 23, 42, 0) 70%); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center;">
+
+                <h3
+                    style="color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; margin-bottom: 3rem; letter-spacing: 2px;">
+                    ILÚZIA VEĽKOSTI</h3>
+
+                <div style="max-width: 900px; margin: 0 auto; text-align: left;">
+                    <p style="font-size: 1.1rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 2rem;">
+                        Rovnaký princíp platí pre veci, ktoré nazývaš <span
+                            style="color: #ef4444; border-bottom: 1px dotted #ef4444;">obrovskými</span>, bláznivými a
+                        nemožnými. Jediný rozdiel sú <strong>tvoje vlastné mentálne bloky</strong>. Jediný dôvod, prečo
+                        si myslíš, že tie "veľké" veci sú mimo dosahu, je ten, že si sa rozhodol, že sú. Keby si nemal
+                        žiadny odpor, keby si nemal v mysli príbehy, ktoré ti hovoria: "To je príliš veľké," "To je
+                        nereálne," "To bude trvať roky," manifestoval by si ich rovnako ľahko ako tie malé veci.
+                    </p>
+
+                    <p style="font-size: 1.1rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 2rem;">
+                        Proces sa nemení. Spôsob, akým si manifestoval dobré správy v schránke alebo úžasný prejav, je
+                        rovnaký spôsob, akým manifestuješ milión dolárov alebo život meniacu príležitosť. Jediná vec,
+                        ktorá ťa brzdí, je tvoje vnímanie obtiažnosti.
+                    </p>
+
+                    <div
+                        style="border-left: 3px solid var(--accent-gold); padding-left: 1.5rem; margin-bottom: 2rem; background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                        <p style="font-size: 1.1rem; color: #fff; line-height: 1.8; margin-bottom: 1rem;">
+                            Teraz aplikuj tú istú energiu na veľké veci. Namiesto toho, aby si ich považoval za nemožné
+                            hory, pristupuj k nim presne tak, ako by si pristupoval k malej manifestácii. Rozhodni sa,
+                            že je to hotové. Predpokladaj, že to prichádza. Nepripúšťaj pochybnosti.
+                        </p>
+                        <p
+                            style="font-size: 1.25rem; color: var(--accent-gold); font-family: 'Cormorant Garamond', serif; font-weight: 600; font-style: italic;">
+                            "Nekonečná inteligencia nepozná rozdiel medzi centom a miliónom dolárov. Reaguje iba na tvoj
+                            predpoklad."
+                        </p>
+                    </div>
+
+                    <p style="font-size: 1.1rem; color: #cbd5e1; line-height: 1.8;">
+                        Takže prestaň robiť rozdiely. Prestaň kŕmiť ilúziu, že niektoré veci sú "ťažšie" ako iné. Nie je
+                        to o veľkosti. Je to o istote. V momente, keď začneš pristupovať ku všetkému, veľkému či malému,
+                        s rovnakou nenútenou sebadôverou, uvedomíš si, že <strong>realita ti nikdy nič
+                            neodopierala</strong>. Len čakala na to, kým prestaneš váhať.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION & SUPPORT MATERIAL -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #111827);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+
+            <h2
+                style="text-align: center; color: #fff; margin-bottom: 3rem; font-family: 'Cormorant Garamond', serif; letter-spacing: 2px;">
+                <i class="fas fa-sync-alt" style="color: var(--accent-gold); margin-right: 1rem;"></i> REKAPITULÁCIA
+            </h2>
+
+            <!-- Summary & Key Words Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+
+                <!-- Summary Box -->
+                <div
+                    style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid #fff;">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie
+                        Kapitoly</h4>
+                    <p style="color: #cbd5e1; line-height: 1.6;">
+                        Tajomstvo úspešných nie je v technike, ale v neochvejnom presvedčení, že život je blažená hra,
+                        ktorá sa hrá v ich prospech. Víťaz nenecháva veci na náhodu; rozhoduje o výsledku vopred
+                        (Segment Intending). Nezáleží na veľkosti túžby, ale na istote, s akou ju očakávaš.
+                    </p>
+                </div>
+
+                <!-- Key Words Box -->
+                <div
+                    style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--accent-gold); display: flex; flex-direction: column; justify-content: center;">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Kľúčové Slová
+                    </h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span
+                            style="background: rgba(245, 158, 11, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#PostojVíťaza</span>
+                        <span
+                            style="background: rgba(245, 158, 11, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#SegmentovýZámer</span>
+                        <span
+                            style="background: rgba(245, 158, 11, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Očakávanie</span>
+                        <span
+                            style="background: rgba(245, 158, 11, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Istota</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deepening Knowledge -->
+            <h3 style="text-align: center; color: var(--accent-gold); margin-bottom: 3rem; font-size: 1.8rem;">
+                <i class="fas fa-balance-scale"></i> Reakcia vs. Voľba
+            </h3>
+
+            <!-- Comparison Table style -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 4rem;">
+                <div style="padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 10px;">
+                    <h4 style="color: #94a3b8; text-align: center; margin-bottom: 1rem;">Pasívny (Reagujúci)</h4>
+                    <p style="color: #cbd5e1; font-style: italic; text-align: center;">"Dúfam, že to dobre dopadne..."
+                    </p>
+                    <p style="color: #cbd5e1; font-style: italic; text-align: center;">"Prečo sa mi to stalo?"</p>
+                    <p style="color: #cbd5e1; font-style: italic; text-align: center;">"Uvidíme, čo prinesie deň."</p>
+                </div>
+                <div
+                    style="padding: 1.5rem; background: rgba(245, 158, 11, 0.05); border-radius: 10px; border: 1px solid rgba(245, 158, 11, 0.2);">
+                    <h4 style="color: var(--accent-gold); text-align: center; margin-bottom: 1rem;">Aktívny (Víťaz)</h4>
+                    <p style="color: #fff; font-weight: 500; text-align: center;">"Viem, že to bude úžasné."</p>
+                    <p style="color: #fff; font-weight: 500; text-align: center;">"Stalo sa to pre moje dobro."</p>
+                    <p style="color: #fff; font-weight: 500; text-align: center;">"Ja určujem tón tohto dňa."</p>
+                </div>
+            </div>
+
+            <div class="highlight-box"
+                style="background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent); border-left: 4px solid var(--accent-gold); padding: 2rem; border-radius: 0 10px 10px 0;">
+                <h4 style="color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;">Výzva</h4>
+                <p>Nabudúce, keď budeš platiť účet alebo otvárať dvere, zastav sa na sekundu. Rozhodni o výsledku. Cíť
+                    to uspokojenie vopred. A sleduj, ako sa vesmír podriadi.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola8.html" class="nav-btn">&larr; Späť na Kapitolu 8</a>
+        <a href="Kapitola10.html" class="nav-btn">Pokračovať na Kapitolu 10 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // --- SCENARIO SWITCHER LOGIC ---
+        function showScenario(type, btn) {
+            // Buttons
+            document.querySelectorAll('.perspective-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Content
+            document.querySelectorAll('.scenario-content').forEach(c => c.classList.remove('active'));
+            if (type === 'negative') {
+                document.getElementById('scenarioNegative').classList.add('active');
+            } else {
+                document.getElementById('scenarioPositive').classList.add('active');
+            }
+        }
+
+        // --- AUDIO PLAYER LOGIC ---
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        // Toggle Play/Pause
+        function togglePlay() {
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Playback failed:", error);
+                        playIcon.className = 'fas fa-play';
+                        alert("Nepodarilo sa spustiť audio. (Chyba: " + error.message + ")");
+                    });
+                }
+            } else {
+                audio.pause();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        // Update UI
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+        audio.addEventListener('ended', () => { playIcon.className = 'fas fa-play'; });
+
+        // Update Progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Load Metadata
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        if (audio.readyState >= 1) {
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = pos * audio.duration;
+            }
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+        // Toggle Side Note
+        function toggleSideNote(btn) {
+            const content = btn.nextElementSibling;
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                btn.style.background = 'rgba(245, 158, 11, 0.2)';
+                btn.style.color = '#f59e0b';
+                btn.querySelector('i').className = 'fas fa-magic';
+            } else {
+                content.style.display = 'block';
+                // Anim
+                content.animate([
+                    { opacity: 0, transform: 'translateY(10px)' },
+                    { opacity: 1, transform: 'translateY(0)' }
+                ], { duration: 300, fill: 'forwards' });
+
+                btn.style.background = '#f59e0b';
+                btn.style.color = '#000';
+                btn.querySelector('i').className = 'fas fa-times'; // Change to close icon
+            }
+        }
+    </script>
 </body>
+
 </html>

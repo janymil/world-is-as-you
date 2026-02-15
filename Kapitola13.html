@@ -1,69 +1,430 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 13</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Chapter 13 Specific Styles - Gratitude / Abundance Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #fb923c);
+            /* Orange-400 (Warmth) */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(251, 146, 60, 0.5);
+        }
+
+        /* Visual: Real vs Fake Gratitude */
+        .gratitude-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .gratitude-card {
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .gratitude-fake {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+        }
+
+        .gratitude-real {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+        }
+
+        .internal-voice {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        /* Envy Transformation Card */
+        .envy-transform {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .arrow-transform {
+            font-size: 2rem;
+            color: #fb923c;
+        }
+
+        /* Infinite Pie Visual */
+        .pie-visual {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+        }
+
+        .pie-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#fb923c 0% 100%);
+            margin: 0 auto 1.5rem auto;
+            position: relative;
+            box-shadow: 0 0 30px rgba(251, 146, 60, 0.3);
+        }
+
+        .pie-circle::after {
+            content: '∞';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .lead-paragraph::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: #fb923c;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?sunrise,warmth,abundance,gold'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 13</h4>
-            <h1>Sila vďačnosti & Závisť</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px; color: #fb923c;">KAPITOLA 13</h4>
+            <h1>Sila Vďačnosti</h1>
+            <p>Vďačnosť nie je trik na manipuláciu reality. Je to prepínač prijímania.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Sila vďačnosti & Závisť.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Sila vďačnosti & Závisť" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">13 - Sila Vďačnosti</h3>
+                </div>
+            </div>
+            <!-- Standard Placeholder Controls -->
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/13kapitola-vdacnost.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading" style="color: #fb923c;">Vďačnosť ako Mechanizmus Tvorby</h3>
+
+            <p class="lead-paragraph">Áno, viem, že to znie ako klišé, ale zostaň so mnou. Nehovorím ti, aby si cítil
+                vďačnosť len preto, aby si toleroval život, ktorý ťa neuspokojuje. Nežiadam ťa, aby si romantizoval
+                mizernú existenciu alebo sa uspokojil s niečím menším, než po čom skutočne túžiš. Táto kniha nie je o
+                "mindfulness" alebo duchovnom obchádzaní (spiritual bypassing). Táto kniha je o tom, ako dostať presne
+                to, čo chceš, rýchlo.</p>
+
+            <p>Vďačnosť nie je mechanizmus zvládania (coping), je to mechanizmus tvorby. Keď cítiš vďačnosť, zosúlaďuješ
+                sa s energiou prijímania. V momente, keď sa zameriaš na to, čo je už v tvojom živote dobré, okamžite
+                meníš svoj stav.</p>
+
+            <div
+                style="border-left: 3px solid #fb923c; padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: #e2e8f0;">
+                <p>Dokonca aj v ťažkých časoch je vždy niečo, za čo môžeš byť vďačný. Teplo slnka na tvojej pokožke.
+                    Zvuk vtákov spievajúcich ráno. Pocit čerstvého vzduchu plniaceho tvoje pľúca. Pohodlie teplej
+                    postele v noci. Nájdi krásu v obyčajnosti. V momente, keď začneš oceňovať všetko okolo seba, otváraš
+                    dvere pre väčšie a väčšie požehnania, aby prúdili do tvojho života.</p>
+            </div>
+
+            <p>Urob z vďačnosti svoj denný návyk. Počas dňa si nájdi chvíľu na vyjadrenie vďačnosti. Nielen za to, čo už
+                máš, ale aj za to, čo prichádza. Vďačnosť hovorí: <em>"Už mám dosť a som otvorený ešte viac."</em> Urob
+                z vďačnosti denný rituál.</p>
+
+            <div class="highlight-box"
+                style="background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent); border-left: 4px solid #ef4444;">
+                <h4 style="color: #ef4444; margin-bottom: 1rem;"><i class="fas fa-times-circle"
+                        style="margin-right: 10px;"></i>Varovanie</h4>
+                <p>Ale vďačnosť nie je nástroj na manipuláciu reality. Ak si myslíš, že keď jednoducho povieš "ďakujem"
+                    dostatočne veľakrát, vesmír ti konečne dá to, čo chceš, mýliš sa. Môžeš opakovať afirmácie, písať
+                    zoznamy vďačnosti a nútiť sa hovoriť: <em>"Som taký vďačný za moju hojnosť!"</em>, zatiaľ čo vo
+                    vnútri cítiš nedostatok, zúfalstvo a frustráciu. A potom, keď sa nič nestane, čuduješ sa prečo.</p>
+            </div>
+
+            <p>Vďačnosť nie je trik alebo "hack" na obídenie tvojich skutočných myšlienok a prinútenie nekonečnej
+                inteligencie, aby vyhovela. Nemôžeš predstierať vďačnosť. Nemôžeš klamať sám sebe.</p>
+
+            <p>Ak tvoja myseľ vie, že sa skutočne necítiš v hojnosti a hlboko vo vnútri stále vibruješ na frekvencii
+                nedostatku, potom bez ohľadu na to, koľkokrát povieš "ďakujem", nič sa nezmení. Pretože nezáleží na
+                slovách. Záleží na stave bytia.</p>
+
+            <!-- EXTRA VISUAL: Real vs Fake Gratitude -->
+            <div class="gratitude-split">
+                <div class="gratitude-card gratitude-fake">
+                    <h4 style="color: #ef4444; margin-bottom: 0.5rem;">Falošná Vďačnosť</h4>
+                    <p style="color: #cbd5e1;">"Ďakujem za tieto peniaze..."</p>
+                    <div class="internal-voice" style="color: #fca5a5;">
+                        <i class="fas fa-volume-up"></i> Vnútorný hlas:<br>
+                        "Kde to je?! Prečo to tu ešte nie je?? Potrebujem to hneď!"
+                    </div>
+                    <p style="margin-top: 1rem; font-weight: bold; color: #ef4444;">Výsledok: Odpor / Nedostatok</p>
+                </div>
+                <div class="gratitude-card gratitude-real">
+                    <h4 style="color: #22c55e; margin-bottom: 0.5rem;">Skutočná Vďačnosť</h4>
+                    <p style="color: #fff;">"Ďakujem."</p>
+                    <div class="internal-voice" style="color: #86efac;">
+                        <i class="fas fa-volume-up"></i> Vnútorný hlas:<br>
+                        "Je to hotové. Cítim pokoj. Už to mám."
+                    </div>
+                    <p style="margin-top: 1rem; font-weight: bold; color: #22c55e;">Výsledok: Prijímanie / Prúd</p>
+                </div>
+            </div>
+
+            <p>Vďačnosť je mocná, ale len vtedy, keď je skutočná. Nie keď sa používa ako zúfalý pokus urýchliť
+                manifestáciu alebo prinútiť vesmír dodať to, čo chceš. Ak hovoríš "ďakujem", zatiaľ čo vnútorne kričíš:
+                <em>"Kde to je? Prečo to tu ešte nie je?"</em>, potom v skutočnosti nie si vo vďačnosti. Si v
+                nedostatku. Nekonečná inteligencia nereaguje na to, čo hovoríš, reaguje na to, čo si myslíš. Tvoja
+                energia je vždy ten skutočný signál. Môžeš to obliecť do pekných slov, ale ak je podkladová vibrácia
+                zúfalstvo, pochybnosť a frustrácia, potom práve to v skutočnosti potvrdzuješ ("afirmuješ").</p>
+
+            <p>Na druhej strane, frustrácia veci spomaľuje. Keď si frustrovaný z konkrétnej situácie a snažíš sa vynútiť
+                riešenie, či už mentálnym úsilím alebo fyzickou akciou, často to pôsobí, akoby sa nič nemenilo, alebo
+                horšie, akoby sa situácia ešte viac zasekla. To je preto, že tlačíš proti prúdu.</p>
+
+            <p>Tvrdé úsilie, ktoré pôsobí ťažko, nič nevyrieši. Boj a odpor vytvárajú len ďalšie prekážky. Musíš to
+                pustiť. Najprv sa prelaď do stavu ocenenia. Pozri sa na situáciu a povedz: <em>"Okej, s týmto pracujeme.
+                    Je to fajn. Bude to ľahké. Viem to. Všetko je dobré. Všetko sa to rieši. Vždy sa to vyriešilo."</em>
+                Upokoj sa do lepšie pociťovaného stavu predtým, než vykonáš akúkoľvek akciu, a všimneš si, ako hladko sa
+                veci odvíjajú, bez námahy, ako kĺzanie na ľade.</p>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <p style="font-size: 1.5rem; color: #fb923c; font-weight: 600;">Ale čím viac tlačíš proti prúdu, tým
+                    ťažšie, náročnejšie a frustrujúcejšie sa všetko stáva. Ľahkosť je kľúč. Najprv zosúladenie, potom
+                    akcia.</p>
+            </div>
+
+            <h3 class="sub-heading" style="color: #fb923c;">Sleduj to (Keep Track)</h3>
+
+            <p>Zaobstaraj si malý zápisník, diár, alebo si vyhraď miesto v telefóne a začni si zapisovať každú chvíľu,
+                kedy si mal predpoklad, ktorý sa ukázal ako pravdivý. Zakaždým, keď si niečo očakával a skutočne sa to
+                stalo, a každý moment, keď si pustil odpor a dostal to, čo si chcel, zapíš si to. Udržuj si priebežný
+                zoznam a nechaj ho časom rásť, pridávaj doň pri každej príležitosti. Zakaždým, keď sa predpoklad zhmotní
+                do reality, zdokumentuj to. Môže to byť niečo jednoduché, pomyslenie na starého priateľa a náhle
+                prijatie správy od neho, predpoklad, že tvoj deň pôjde hladko a sledovanie, ako sa odvíja bez námahy,
+                alebo vyhlásenie, že nájdeš parkovacie miesto presne tam, kde potrebuješ, a videnie, ako sa to stane.
+            </p>
+
+            <p>Spočiatku sa tieto malé manifestácie nemusia zdať prelomové, ale časom, ako budeš plniť stránky svojho
+                denníka, začneš vidieť vzorec. Prídu momenty, keď sa vkradne pochybnosť a pristihneš sa, ako
+                spochybňuješ, či je toto všetko skutočné. Možno budeš premýšľať, či máš skutočne kontrolu, alebo či je
+                to len želanie. A v tých momentoch prichádza na rad tvoj manifestačný denník. Vráť sa a prečítaj si
+                svoje záznamy. Viď dôkaz vo svojom vlastnom rukopise. Uznaj, že zakaždým, keď si niečo predpokladal s
+                istotou, realita poslúchla. Tvoja myseľ nemôže argumentovať proti písomnému dôkazu.</p>
+
+            <h3 class="sub-heading" style="color: #fb923c;">Závisť</h3>
+
+            <p>Závisť znamená jednu vec: že veríš, že čokoľvek, čo má ten človek, ty nemôžeš mať. Pretože prečo by si im
+                závidel, keby si skutočne vedel, že je to možné aj pre teba a že by si to mohol ľahko priviesť k sebe?
+                Všimni si seba, kedykoľvek cítiš závisť voči komukoľvek, a keďže je to nepríjemný pocit, pochop, že sa
+                ti snaží niečo povedať. Spýtaj sa sám seba: <em>Čo mi tento pocit hovorí?</em> Hovorí ti, že veríš, že
+                čokoľvek má tento človek, ty by si nikdy nemohol mať, pretože sú buď bohatší ako ty, múdrejší, krajší
+                alebo šťastnejší. A toto je nesprávne. Samozrejme, že môžeš mať presne to, čo majú oni, alebo ešte
+                lepšie. Nekonečná inteligencia je na tvoj príkaz a pripravená doručiť v momente, keď očakávaš a veríš.
+            </p>
+
+            <p>Vidíš, ako ťa už len táto myšlienka robí lepším? To preto, že je viac v súlade s tvojou pravdou.</p>
+
+            <p>Závisť je jednoducho signál, správa od tvojho vyššieho ja, odhaľujúca, kde držíš limitujúce presvedčenia.
+                Vnímaj to ako príležitosť, ako dvere do svojej vlastnej mysle. Pretože jediný dôvod, prečo závisť
+                existuje, je ten, že hlboko vo vnútri veríš, že to, po čom túžiš, nie je pre teba dostupné.</p>
+
+            <p>Neexistuje žiadne pravidlo v existencii, ktoré by hovorilo, že bohatstvo, úspech, láska alebo šťastie sú
+                obmedzené len pre vyvolených pár. Vesmír takto nefunguje. Jediný rozdiel medzi tými, ktorí majú to, čo
+                chcú, a tými, ktorí nie, je ten, že tí, ktorí to majú, očakávajú, že to budú mať. Predpokladajú, že je
+                to ich. Kráčajú životom s vnútorným vedomím, že čokoľvek, po čom túžia, si k nim nájde cestu. A práve
+                preto si ju nájde.</p>
+
+            <p>Takže, keď sa objaví závisť, namiesto scvrkávania sa do pochybností o sebe, použi ju na svoje posilnenie.
+                Nech je pripomienkou, že to, čo vidíš u niekoho iného, je jednoducho zrkadlom toho, čo je možné pre
+                teba. Namiesto myslenia: <em>"Prečo oni a nie ja?"</em> zmeň svoju perspektívu na: <em>"Ak to majú oni,
+                    znamená to, že to môžem mať aj ja."</em> Cíť, ako táto myšlienka okamžite dvíha ťažobu. Nabudúce,
+                keď pocítiš závisť, namiesto posilňovania nedostatku ju použi ako dôkaz možnosti. Premeň ju na vzrušenie
+                a palivo.</p>
+
+            <!-- EXTRA VISUAL: Envy Transform -->
+            <div class="envy-transform">
+                <div style="flex: 1; text-align: right; opacity: 0.7;">
+                    <h5 style="color: #ef4444; margin-bottom: 0.5rem;">ZÁVISŤ</h5>
+                    <p style="color: #94a3b8; font-style: italic;">"Prečo oni? Ja to nemôžem mať..."</p>
+                </div>
+                <div class="arrow-transform"><i class="fas fa-arrow-right"></i></div>
+                <div style="flex: 1; text-align: left;">
+                    <h5 style="color: #fb923c; margin-bottom: 0.5rem; text-shadow: 0 0 10px rgba(251, 146, 60, 0.5);">
+                        INŠPIRÁCIA</h5>
+                    <p style="color: #fff; font-weight: bold;">"Aha! Dôkaz, že je to možné. Ďalší som na rade ja!"</p>
+                </div>
+            </div>
+
+            <h3 class="sub-heading" style="color: #fb923c;">Neexistuje Žiadna Súťaž</h3>
+
+            <p>Možno veríš, že život je súťaž, že na vrchole je len obmedzený počet miest, že na to, aby si ty vyhral,
+                niekto iný musí prehrať. Že úspech sú preteky a len tí najrýchlejší, najmúdrejší alebo najšťastnejší
+                získajú cenu. Ale toto absolútne nie je pravda. Nemusíš bojovať o príležitosti, ani nemusíš nikoho
+                prepracovať, prekabátiť alebo prekonať. Keď veríš, že musíš súťažiť, potvrdzuješ nedostatok. Hovoríš:
+                <em>"Nie je dosť pre každého. Musím sa dokázať. Musím bojovať, aby som sa dostal dopredu."</em> A tým
+                vytváraš odpor a tlačíš svoje túžby ďalej od seba.</p>
+
+            <p>Ale keď pochopíš, že existuje nekonečná hojnosť, nekonečný úspech a nekonečné príležitosti, prestaneš
+                bojovať. Prestaneš sa trápiť tým, čo robia ostatní, pretože vieš, že ich úspech nemá nič spoločné s
+                tvojím. Nikto ti nemôže vziať to, čo je určené pre teba. Nikto.</p>
+
+            <p>Nezáleží na tom, koľko ľudí je v tvojom odvetví, koľko iných nasleduje rovnaké sny, koľko ľudí sa uchádza
+                o rovnakú prácu, predáva rovnaký produkt alebo naháňa rovnakú víziu. Vesmír nefunguje na princípe "kto
+                prv príde, ten prv melie". Nehovorí: <em>"Prepáč, všetok úspech už bol rozdaný."</em></p>
+
+            <p>Neexistuje žiadny limit. A jediná vec, ktorá rozhoduje o tom, či prijímeš alebo nie, je tvoja vlastná
+                viera.</p>
+
+            <p>Takže sa netráp tým, čo robia ostatní. Úspech niekoho iného neznamená, že pre teba zostalo menej. Úspech
+                nie je koláč s ôsmimi kúskami. Úspech je koláč s nekonečným počtom kúskov. Jediná vec, na ktorej záleží,
+                je tvoje zosúladenie. Tvoja viera v tvoj vlastný nevyhnutný úspech. Tvoje očakávanie, že to, po čom
+                túžiš, je už tvoje.</p>
+
+            <!-- EXTRA VISUAL: Infinite Pie -->
+            <div class="pie-visual">
+                <div class="pie-circle"></div>
+                <p style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;">Teória Nekonečného Koláča</p>
+                <p style="color: #cbd5e1; font-size: 0.9rem;">Úspech iných neukrajuje z tvojho. Kuchyňa vesmíru pečie
+                    neustále.</p>
+            </div>
+
+            <p>Súťažíš vždy len s jednou vecou – s tvojou vlastnou pochybnosťou o sebe. Ľudia, ktorí v živote zdanlivo
+                "vyhrávajú", nie sú nevyhnutne tí najmúdrejší, najtalentovanejší alebo najpracovitejší. Sú to jednoducho
+                tí, ktorí veria, bez zaváhania, že si to zaslúžia. Takže zahoď myšlienkové nastavenie súťaže, nedostatku
+                a strachu, že musíš prekonať ostatných, aby si uspel. Si na svojej vlastnej ceste. Tvoríš si svoju
+                vlastnú realitu. A v tvojej realite neexistuje žiadna súťaž. Existuješ len ty, zosúlaďujúci sa so
+                všetkým, čo na teba vždy čakalo. To, čo hľadáš, hľadá teba, doslova.</p>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #331505);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div
+                style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid #fb923c;">
+                <h4 style="color: #fb923c; margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie Kapitoly</h4>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Vďačnosť nie je povinnosť, je to magnet. Závisť nie je hriech, je to kompas ukazujúci na to, čo
+                    chceš. Súťaž je ilúzia nedostatku. V nekonečnom vesmíre neexistuje "vypredané".
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola12.html" class="nav-btn">&larr; Späť na Kapitolu 12</a>
+        <a href="Kapitola14.html" class="nav-btn">Pokračovať na Kapitolu 14 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Audio Player Logic
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    console.error("Audio error:", e);
+                    alert("Audio file not found (placeholder).");
+                });
+            } else { audio.pause(); }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeEl.textContent = `${mins}:${secs}`;
+            }
+        });
+    </script>
+
 </body>
+
 </html>

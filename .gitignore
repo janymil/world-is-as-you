@@ -16,3 +16,7 @@ zaloha/
 
 # Temporary files
 *.tmp
+
+# Large files
+audiobook-app/audiobook.zip
+audiobook-app/assets/meditation.mp3

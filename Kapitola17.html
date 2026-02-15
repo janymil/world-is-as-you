@@ -1,69 +1,606 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 17</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600;800&family=Courier+Prime&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
+        /* Chapter 17 Specific Styles - Illusion / Trap / Reality Theme */
         :root {
-            --accent-cyan: #22d3ee;
+            --accent-purple: #8b5cf6;
+            /* Hero Accent */
+            --accent-gold: #fbbf24;
+            /* Body Accent */
+            --accent-gold-light: #fef3c7;
+        }
+
+        .hero h1 {
+            background: linear-gradient(to right, #fff, var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .hero h4 {
+            color: var(--accent-purple) !important;
+        }
+
+        /* Visual: The Trap Box */
+        .trap-visual {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 4rem 0;
+            perspective: 1000px;
+        }
+
+        .box-container {
+            width: 320px;
+            height: 220px;
+            border: 6px solid #475569;
+            /* Thick walls representing limitation */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #0f172a;
+            /* Dark cell */
+            box-shadow: inset 0 0 30px #000;
+        }
+
+        .box-label {
+            position: absolute;
+            top: -20px;
+            background: #ef4444;
+            /* Warning Red */
+            color: white;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: 0.5s;
+        }
+
+        .man-icon {
+            font-size: 4rem;
+            color: #64748b;
+            /* Sad grey */
+            transition: 0.5s;
+        }
+
+        /* Broken State */
+        .box-container.broken {
+            border-color: rgba(251, 191, 36, 0.1);
+            /* Walls dissolve */
+            border-style: dotted;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+            /* Light emerges */
+            box-shadow: 0 0 60px rgba(251, 191, 36, 0.2);
+            transform: scale(1.05);
+        }
+
+        .box-container.broken .man-icon {
+            color: var(--accent-gold);
+            transform: scale(1.2) translateY(-15px);
+            text-shadow: 0 0 25px var(--accent-gold);
+            filter: drop-shadow(0 0 10px gold);
+        }
+
+        .visual-caption {
+            text-align: center;
+            color: #94a3b8;
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .walls {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+        }
+
+        .break-btn {
+            margin-top: 2rem;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 1rem 2rem;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .break-btn:hover {
+            background: var(--accent-gold);
+            color: #000;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        }
+
+        /* OS Analogy */
+        .os-card {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 2rem;
+            font-family: 'Courier Prime', monospace;
+            border-left: 4px solid #ef4444;
+            /* Error red */
+            margin: 3rem 0;
+            color: #e2e8f0;
+        }
+
+        .os-update {
+            border-color: var(--accent-gold);
+            background: linear-gradient(to right, #1e293b, rgba(251, 191, 36, 0.05));
+        }
+
+        /* Toggle Switch Visual */
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #64748b;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--accent-gold);
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px var(--accent-gold);
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Architect Analogy Card */
+        .architect-card {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--accent-purple);
+            padding: 2rem;
+            margin: 2rem 0;
+            color: #ddd;
+            font-style: italic;
+        }
+
+        .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .lead-paragraph::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: var(--accent-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?fog,labyrinth,glass,illusion'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 17</h4>
-            <h1>Byť "realistom" je pasca</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px; color: var(--accent-purple);">KAPITOLA 17</h4>
+            <h1>Byť Realista je Pasca</h1>
+            <p>Prečo by si chcel byť normálny v systéme, ktorý je navrhnutý pre nešťastie?</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Byť "realistom" je pasca.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Byť "realistom" je pasca" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones" style="color: var(--accent-gold);"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">17 - Realita vs. Ilúzia</h3>
+                </div>
+            </div>
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/17kapitola-realista.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn" style="background: var(--accent-gold); color: #000;"><i
+                        class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill" style="background: var(--accent-gold);"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Pocit Šialenstva</h3>
+
+            <p class="lead-paragraph">V určitom bode na tejto ceste sa môžeš začať cítiť ako blázon. Možno sa
+                rozhliadneš po svete a budeš sa pýtať: <em>Strácam kontakt s realitou?</em> Môžeš počuť ľudí, ako ti
+                hovoria: "Život nie je taký ľahký. Nemôžeš jednoducho očakávať, že všetko vyjde dokonale. Takto život
+                nefunguje."</p>
+
+            <p>Budú ti hovoriť, aby si bol realista, aby si prestal byť naivný, aby si prijal, že život je plný
+                vzostupov a pádov a že sa nemôžeš len "premyslieť" do dokonalej reality. A ak si nedáš pozor, môžeš im
+                začať veriť. Môžeš začať spochybňovať sám seba, pochybovať o vlastnej mysli, premýšľať, či sa náhodou
+                neklameš všetkou tou pozitivitou.</p>
+
+            <p>Tento pocit je prirodzenou súčasťou procesu prebúdzania. Je to ako keď sa prvýkrát snažíš plávať proti
+                prúdu. Celá rieka spoločenského presvedčenia tečie opačným smerom – smerom k sťažovaniu sa, k obavám a k
+                priemernosti. Keď sa postavíš a povieš "Nie, ja idem inam", tlak vody bude silný. Ale ty nie si blázon.
+                Ty si len jediný, kto sa prestal nechať unášať.</p>
+
+            <p>Ale ver mi, oni sa mýlia. Presne takto realita funguje. Spočiatku to môže pôsobiť neprirodzene, pretože
+                si strávil celý život podmieňovaním, aby si veril v boj. Učili ťa, že utrpenie je normálne, že ťažkosti
+                sú nevyhnutné, že nič neprichádza ľahko. Takže, samozrejme, keď začneš meniť svoje nastavenie mysle a
+                očakávať dobré veci, bude to pôsobiť zvláštne. Bude to pôsobiť, akoby si robil niečo radikálne a veľmi
+                odvážne. Pretože to robíš.</p>
+
+            <div class="toggle-wrapper">
+                <div style="text-align: right; opacity: 0.6;" id="modeLeft">
+                    <strong>Režim Prežitia</strong><br>
+                    <small>Strach, Boj, "Realita"</small>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="mindsetToggle" onchange="toggleMindset()">
+                    <span class="slider"></span>
+                </label>
+                <div style="text-align: left; color: var(--accent-gold);" id="modeRight">
+                    <strong>Režim Tvorcu</strong><br>
+                    <small>Viera, Ľahkosť, Mágia</small>
+                </div>
+            </div>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Pasca Zvaná "Realizmus"</h3>
+
+            <p>Musíš pochopiť, čo to slovo "realistický" v skutočnosti znamená. Byť realistom znamená pozerať sa na
+                svoje súčasné okolnosti, na svoj bankový účet, na svoje vzťahy, na svoje zdravie, a povedať: <em>"Toto
+                    je pravda. Toto je nemenné. Toto je všetko, čo existuje."</em></p>
+
+            <p>Ale to je pasca. "Realita", ktorú vidíš práve teraz, je v skutočnosti minulosť. Je to echo tvojich
+                včerajších myšlienok, včerajších presvedčení a včerajších činov. Je to ako svetlo hviezd, ktoré k nám
+                letí milióny rokov. Keď sa pozeráš na hviezdu, nepozeráš sa na jej prítomnosť, pozeráš sa na jej
+                minulosť. To isté platí pre tvoju fyzickú realitu.</p>
+
+            <p>Ak si "realistický" ohľadom svojej súčasnej situácie, doslova recykluješ minulosť. Prijímaš staré správy
+                ako konečný verdikt. A tým, že sa na ne sústredíš a reaguješ na ne emocionálne, ich znova vytváraš aj
+                pre zajtrašok. To je cyklus, v ktorom je väčšina ľudí uväznená.</p>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Mýtus Zodpovednosti</h3>
+
+            <p>Spoločnosť nás naučila, že byť "realistom" je znakom dospelosti a zodpovednosti. Veríme, že robiť si
+                starosti je cnostné. Ak sa bojíš o svoju budúcnosť, považuje sa to za "zodpovedné". Ak si bezstarostný
+                a veríš, že všetko dopadne dobre, ľudia ťa označia za nezodpovedného snílka.</p>
+
+            <p>Ale zamysli sa nad tým: Aký úžitok prináša starosť? Vyriešila niekedy nejaký problém? Nie. Starosť je len
+                modlitba za to, čo nechceš. Je to zneužitie tvojej predstavivosti. Skutočná zodpovednosť nie je v tom,
+                že sa trápiš nad "faktami". Skutočná zodpovednosť je v tom, že prevezmeš kontrolu nad svojou vnútornou
+                energiou. Je oveľa ťažšie (a zodpovednejšie) udržať si vieru v ťažkých časoch, než sa poddať strachu ako
+                všetci ostatní.</p>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Rozbitý "Normál"</h3>
+
+            <p>"Normálne" nastavenie mysle je pokazené, priemerný človek očakáva ťažkosti. Pripravujú sa na najhoršie
+                možné scenáre. Hovoria si: <em>"Nerob si plané nádeje. Život nie je fér. Musíš tvrdo pracovať na
+                    všetko."</em></p>
+
+            <div class="os-card">
+                <i class="fas fa-exclamation-triangle" style="color: #ef4444; margin-right: 10px;"></i>
+                SYSTÉMOVÁ CHYBA: Očakávanie úspechu.<br>
+                Väčšina ľudí beží na operačnom systéme <strong>Prežitie 1.0</strong>. Tento systém je navrhnutý tak, aby
+                hľadal hrozby, nie šťastie. Keď sa pokúsiš byť šťastný bez dôvodu, ich systém to vyhodnotí ako chybu.
+            </div>
+
+            <p>A čo dostanú? Presne to, čo očakávajú. Rozhliadni sa okolo seba. Väčšina ľudí verí, že život je neustály
+                boj, a tak presne to zažívajú. Veria, že úspech je vzácny a vyhradený pre pár šťastlivcov, a tak zostáva
+                mimo ich dosahu. Ich realistické nastavenie mysle je to, čo ich väzní.</p>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Architekt a Prázdny Pozemok</h3>
+
+            <p>Predstav si architekta, ktorý stojí na prázdnom, zaburinenom pozemku. Keby bol "realista", pozrel by sa
+                na burinu a povedal: <em>"Tu nie je žiadna budova. Realita je hlina a blato. Nemá zmysel predstierať, že
+                    tu stojí mrakodrap."</em> Keby takto rozmýšľal, nikdy by nič nepostavil.</p>
+
+            <div class="architect-card">
+                Architekt ignoruje "súčasnú realitu" prázdneho pozemku. Pozerá sa do svojho plánu. Vidí vežu zo skla a
+                ocele tam, kde ostatní vidia len blato. A pretože je verný svojej vízii, nie "realite", nakoniec tú
+                realitu zmení.
+            </div>
+            <p>Ty si architektom svojho života. Tvoje súčasné okolnosti sú len prázdny pozemok (alebo možno pozemok plný
+                sutín z minulých búrok). To nevadí. Nezáleží na tom, čo tam je teraz. Záleží len na pláne, ktorý držíš
+                vo svojej mysli. Buď verný plánu, nie hline.</p>
+
+            <p class="visual-caption">
+                (Interaktívna ukážka: Tvoja myseľ tvorí toto väzenie. Klikni na tlačidlo, aby si ho rozbil.)
+            </p>
+
+            <div class="trap-visual">
+                <div class="box-container" id="realismBox">
+                    <div class="box-label" id="boxLabel">VÄZENIE REALIZMU</div>
+                    <i class="fas fa-user-lock man-icon"></i>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button class="break-btn" onclick="breakBox()">Rozbiť Ilúziu</button>
+            </div>
+
+            <p>Pretože byť realistom znamená limitovať sa len na to, čo už bolo stvorené. Ale ty si tu, aby si tvoril
+                nové. A tvorba vyžaduje, aby si bol, z definície, nerealistický. Všetci inovátori, všetci vizionári,
+                všetci, ktorí kedy pohli svetom dopredu, boli vo svojej dobe považovaní za nerealistických bláznov. Keby
+                boli "realisti", stále by sme sedeli pri ohni v jaskyni.</p>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Selektívny Realizmus</h3>
+
+            <p>Všimni si, ako selektívne ľudia používajú "realizmus". Nikto ti nepovie, aby si bol "realista", keď
+                veríš, že zajtra vyjde slnko. Nikto ti nepovie, že je naivné veriť, že gravitácia ťa udrží na zemi.
+                Tieto veci sú neviditeľné sily alebo budúce udalosti, a predsa im veríme s absolútnou istotou.</p>
+
+            <p>Ale v momente, keď tú istú istotu aplikuješ na svoje sny, zrazu je to problém. Prečo? Pretože sme boli
+                naučení veriť vonkajším zákonom, ale pochybovať o tých vnútorných. Veríme fyzike, ale neveríme
+                metafyzike. Pritom sú to dve strany tej istej mince. Ak dokážeš veriť, že tvoje srdce bude biť aj v
+                spánku bez tvojho zásahu, prečo nemôžeš veriť, že tvoj život sa bude vyvíjať v tvoj prospech bez tvojho
+                neustáleho strachovania sa?</p>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Experiment Odvahy</h3>
+
+            <p>Spočiatku bude udržiavanie pozitívneho nastavenia mysle pôsobiť zvláštne. Budeš mať pocit, že ideš proti
+                všetkému, čo ti kedy bolo povedané. Ale ak sa vďaka očakávaniu najlepšieho cítiš dobre, prečo by si si
+                vybral očakávať to najhoršie? Ak viera v ľahký život robí život ľahším, prečo by si si vybral veriť, že
+                je ťažký? Ak predpoklad, že veci pôjdu vždy tvojím smerom, spôsobí, že skutočne pôjdu tvojím smerom,
+                prečo by si predpokladal opak? Toto nie je klam alebo slepý optimizmus. Toto je spôsob, akým realita
+                funguje.</p>
+
+            <p>Vyskúšaj to. Len na pár týždňov predpokladaj, že sa všetko vždy vyvíja v tvoj prospech. Očakávaj len
+                dobré veci. Odmietni zaoberať sa negatívnymi možnosťami. Jednoducho to skús. Budeš šokovaný, ako rýchlo
+                sa tvoj život začne meniť.</p>
+
+            <p>Nie si v tejto fyzickej sfére, aby si bojoval. Nie si tu na to, aby si žil život neustálych vzostupov a
+                pádov. Si tu, aby si tvoril, aby si zažíval radosť, aby si ovládol svoju vlastnú moc. Takže nech si iní
+                ľudia veria, čomu chcú. Nech ťa volajú nerealistickým. Nech o tebe pochybujú. To nevadí. Na čom záleží,
+                je, že ty poznáš pravdu. A čoskoro budú tvoje výsledky hovoriť samy za seba a tí istí ľudia sa ťa budú
+                pýtať, ako to robíš.</p>
+
+            <div class="highlight-box"
+                style="border-left: 4px solid var(--accent-gold); background: rgba(139, 92, 246, 0.1); padding: 2rem; margin: 3rem 0;">
+                <h4 style="color: var(--accent-gold); margin-bottom: 0.5rem;"><i class="fas fa-key"></i> Kľúčová
+                    Myšlienka</h4>
+                <p style="color: #fff; font-style: italic; font-size: 1.1rem;">
+                    "Realizmus je len hranica, ktorú si nakreslili iní ľudia, aby sa cítili bezpečne vo svojich
+                    obmedzeniach. Ty tú hranicu môžeš kedykoľvek prekročiť."
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #4c1d95);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div
+                style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--accent-gold);">
+                <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie Kapitoly
+                </h4>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Byť "realistom" znamená recyklovať minulosť. Súčasná realita je len ozvena včerajších myšlienok. Buď
+                    architektom, ktorý sa pozerá do plánu, nie na prázdny pozemok.
+                </p>
+
+                <!-- Affirmations Section -->
+                <div style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+                    <h4
+                        style="color: #fff; margin-bottom: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem;">
+                        <i class="fas fa-star"
+                            style="color: var(--accent-gold); margin-right: 10px; font-size: 1.2rem;"></i>
+                        Afirmácie pre Nerealistický Život
+                    </h4>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; text-align: left;">
+                        <!-- General Principles -->
+                        <div>
+                            <ul style="color: #e2e8f0; list-style: none; padding: 0; line-height: 1.8;">
+                                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                                    <i class="fas fa-check"
+                                        style="color: var(--accent-gold); margin-right: 10px; margin-top: 6px;"></i>
+                                    <span>"Odmietam byť priemerný. Vyberám si byť výnimočný."</span>
+                                </li>
+                                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                                    <i class="fas fa-check"
+                                        style="color: var(--accent-gold); margin-right: 10px; margin-top: 6px;"></i>
+                                    <span>"Moje očakávania tvoria moju realitu, nie názory iných."</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Specific Examples -->
+                        <div>
+                            <div
+                                style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 6px; font-style: italic; color: #fff;">
+                                "Všetko sa mi darí. Svet sa mi prispôsobuje. Mám šialené šťastie."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola16.html" class="nav-btn">&larr; Späť na Kapitolu 16</a>
+        <a href="Kapitola18.html" class="nav-btn">Pokračovať na Kapitolu 18 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Visual Logic: Break the Box
+        function breakBox() {
+            const box = document.getElementById('realismBox');
+            const label = document.getElementById('boxLabel');
+            const icon = box.querySelector('.man-icon');
+
+            if (box.classList.contains('broken')) {
+                // Reset
+                box.classList.remove('broken');
+                label.innerText = 'VÄZENIE REALIZMU';
+                label.style.background = '#ef4444';
+                label.style.color = '#fff';
+                icon.className = 'fas fa-user-lock man-icon';
+            } else {
+                // Break
+                box.classList.add('broken');
+                label.innerText = 'SLOBODA TVORCU';
+                label.style.background = '#fbbf24';
+                label.style.color = '#1e293b'; /* Dark Text on Gold */
+                icon.className = 'fas fa-dove man-icon';
+            }
+        }
+
+
+        // Toggle Switch Logic
+        function toggleMindset() {
+            const checkbox = document.getElementById('mindsetToggle');
+            const left = document.getElementById('modeLeft');
+            const right = document.getElementById('modeRight');
+
+            if (checkbox.checked) {
+                // Creative Mode
+                left.style.opacity = '0.3';
+                left.style.transform = 'scale(0.9)';
+                right.style.opacity = '1';
+                right.style.transform = 'scale(1.1)';
+                right.style.textShadow = '0 0 10px rgba(251, 191, 36, 0.5)';
+            } else {
+                // Survival Mode
+                left.style.opacity = '1';
+                left.style.transform = 'scale(1.1)';
+                right.style.opacity = '0.3';
+                right.style.transform = 'scale(0.9)';
+                right.style.textShadow = 'none';
+            }
+        }
+
+        // Init toggle state check
+        toggleMindset();
+
+        // Audio Player Logic
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    console.error("Audio error:", e);
+                    alert("Audio file not found (placeholder).");
+                });
+            } else { audio.pause(); }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeEl.textContent = `${mins}:${secs}`;
+            }
+        });
+    </script>
 </body>
+
 </html>

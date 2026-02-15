@@ -1,69 +1,396 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 15</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Chapter 15 Specific Styles - Flow / Abundance Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #14b8a6);
+            /* Teal-500 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+        }
+
+        /* Visual: River vs Pond */
+        .flow-analogy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .flow-card {
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stagnant {
+            background: #334155;
+            border: 1px solid #475569;
+            color: #94a3b8;
+        }
+
+        .flowing {
+            background: linear-gradient(135deg, #0f766e, #14b8a6);
+            border: 1px solid #2dd4bf;
+            color: #fff;
+        }
+
+        .flowing::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 200%;
+            }
+        }
+
+        /* Coin Interaction */
+        .coin-wrapper {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px dashed #14b8a6;
+        }
+
+        .coin-btn {
+            background: #eab308;
+            color: #713f12;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #fef08a;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(234, 179, 8, 0.4);
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coin-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .coin-btn:active {
+            transform: scale(0.95);
+        }
+
+        .coin-result {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            height: 2rem;
+            color: #14b8a6;
+            font-weight: bold;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .highlight-box {
+            background: rgba(20, 184, 166, 0.1);
+            border-left: 4px solid #14b8a6;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .lead-paragraph::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: #14b8a6;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?river,waterfall,money,treasure'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 15</h4>
-            <h1>Buď darcom (Be a Giver)</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px; color: #14b8a6;">KAPITOLA 15</h4>
+            <h1>Buď Darcom</h1>
+            <p>Lakomí vždy strácajú, pretože sa snažia zadržať vodu v dlaniach. Dávajúci sa stávajú riekou.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Buď darcom (Be a Giver).[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Buď darcom (Be a Giver)" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">15 - Hojnosť a Dávanie</h3>
+                </div>
+            </div>
+            <!-- Standard Placeholder Controls -->
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/15kapitola-davanie.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading" style="color: #14b8a6;">Zrkadlo Hojnosti</h3>
+
+            <p class="lead-paragraph">Spôsob, akým <strong>narábaš</strong> s peniazmi, zdrojmi a hojnosťou, je priamym
+                odrazom toho, čo veríš, že je o vesmíre pravdivé. Ak hromadíš, lipneš a konáš z miesta strachu a
+                nedostatku, vyhlasuješ tým, že veríš v nedostatok. A keďže realita zrkadlí tvoje presvedčenia s
+                absolútnou presnosťou, budeš manifestovať okolnosti, ktoré tento nedostatok potvrdia.</p>
+
+            <p>Musíš pochopiť, že svet mimo teba je len projekciou toho, čo sa deje vnútri teba. Neexistuje žiadna
+                vonkajšia sila, ktorá rozhoduje, či budeš bohatý alebo chudobný. <strong>Ty si tá hybná sila.</strong>
+                Vesmír je dokonalé zrkadlo a nemôže odrážať hojnosť, ak pred ním stojíš v postoji
+                lakomca. Aby si zmenil odraz, musíš zmeniť obraz, ktorý premietaš.</p>
+
+            <p>Na druhej strane, keď dávaš slobodne, robíš mocné vyhlásenie: <em>"Mám viac než dosť. Je pre mňa dostupná
+                    nekonečná hojnosť. Nebojím sa nedostatku, pretože nedostatok v mojej realite neexistuje."</em> A
+                vesmír reaguje adekvátne tým, že ti dáva za pravdu.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-gift" style="font-size: 1.5rem; color: #14b8a6; margin-bottom: 10px;"></i>
+                <p style="font-size: 1.1rem; color: #fff;">Dávanie je fyzické stelesnenie stavu "mať".</p>
+                <p style="margin-top: 0.5rem; color: #ccfbf1;">Je nemožné dať to, čo nemáš. Preto samotný akt dávania
+                    presviedča tvoje podvedomie, že už vlastníš bohatstvo. Keď dávaš, hovoríš pravdu o svojej hojnosti,
+                    a pravda ťa vždy oslobodí. Meníš svoju identitu z toho, kto potrebuje, na toho, kto má.</p>
+            </div>
+
+            <p>Zakaždým, keď dávaš, či už sú to peniaze, čas, láskavosť alebo zdroje, vysielaš signál hojnosti.
+                Potvrdzuješ, že dôveruješ toku života, že vieš, že je o teba vždy postarané, že nepotrebuješ lipnúť na
+                tom, čo máš, pretože je toho vždy viac.</p>
+
+            <p>Uvažuj o povahe vody. Rieka, ktorá tečie, zostáva čerstvá, čistá a plná života. Ale voda, ktorá je
+                zastavená, prehradená a odmieta prúdiť, sa stáva stojatým močiarom. Peniaze sú tiež prúd (v angličtine
+                'currency' znamená prúd). Sú určené na to, aby prúdili. Keď zastavíš cirkuláciu v snahe udržať si to, čo
+                máš, odrežeš sa od čerstvého prísunu. Tým, že sa snažíš ušetriť to málo, čo máš, strácaš spojenie s
+                oceánom nekonečného zdroja.</p>
+
+            <!-- Visual: River vs Pond -->
+            <div class="flow-analogy">
+                <div class="flow-card stagnant">
+                    <i class="fas fa-hand-holding"
+                        style="font-size: 2rem; margin-bottom: 1rem; transform: rotate(90deg);"></i>
+                    <h4 style="margin-bottom: 0.5rem; color: #cbd5e1;">Močiar (Hromadenie)</h4>
+                    <p style="font-size: 0.9rem;">Voda stojí. Kazí sa. Prítok sa zastaví, pretože nie je
+                        miesto.<br><strong>Výsledok:</strong> Odrezanie od Zdroja.</p>
+                </div>
+                <div class="flow-card flowing">
+                    <i class="fas fa-water" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h4 style="margin-bottom: 0.5rem; color: #fff;">Rieka (Prúdenie)</h4>
+                    <p style="font-size: 0.9rem;">Voda odteká a nová, čerstvá voda
+                        priteká.<br><strong>Výsledok:</strong> Nekonečný Život.</p>
+                </div>
+            </div>
+
+            <p>V momente, keď dávaš, spúšťaš reťazovú reakciu. Otváraš sa prijímaniu, často spôsobmi, ktoré by si nikdy
+                nemohol predpovedať. To, čo dáš, sa k tebe vráti znásobené.</p>
+
+            <p>Toto je <strong>Zákon Prázdnoty</strong>. Príroda neznáša vákuum. Keď rozdáš to, čo
+                máš, vytvoríš prázdny priestor, ktorý sa vesmír ponáhľa zaplniť. Ale nezaplní ho len na predchádzajúcu
+                úroveň; natlačí ho, natrasie a nechá pretiecť. Nemôžeš "predbehnúť" vesmír v dávaní. Čím viac priestoru
+                vytvoríš uvoľnením, tým viac miesta máš na prijímanie.</p>
+
+            <p>Žehnanie iným je žehnanie sebe, pretože všetci sme jedno. Takže keď dávaš, dávaš sebe. Čím viac dávaš,
+                tým viac prúdi späť k tebe, pretože meníš svoj vnútorný stav na stav hojnosti. A keď si v stave
+                hojnosti, fyzický svet nemá inú možnosť, len to odrážať späť.</p>
+
+            <p>Avšak, pocit za darom je všetko. Nemôžeš dávať s ťažkým srdcom, vypočítavajúc, čo dostaneš na oplátku, a
+                očakávať požehnanie. To nie je dávanie; to je obchodovanie. Skutočné dávanie vychádza z miesta "mám tak
+                veľa, že pretekám". Je to radostné uvoľnenie, oslava tvojej vlastnej prosperity. Ak dávaš s odporom
+                alebo strachom, sadíš semená odporu a strachu, a presne to budeš žať.</p>
+
+            <p>Ak cítiš nutkanie lipnúť, hromadiť alebo zadržiavať, spýtaj sa sám seba: <em>"Čoho sa naozaj bojím?"</em>
+                Strach z dávania je strach z nedostatku. A strach nie je nič iné ako viera v negatívny výsledok.</p>
+
+            <div
+                style="text-align: center; margin: 3rem 0; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <p
+                    style="font-size: 1.4rem; color: #fca5a5; font-family: 'Cormorant Garamond', serif; font-style: italic;">
+                    "Strach je viera. Viera, že prehráš. Viera, že nie je dosť."
+                </p>
+            </div>
+
+            <p>Ale toto je skreslený spôsob myslenia. Jediný spôsob, ako mať nedostatok, je veriť v nedostatok, jediný
+                spôsob, ako prehrať, je očakávať stratu, a jediný spôsob, ako sa trápiť, je predpokladať, že trápenie je
+                nevyhnutné.</p>
+
+            <p>Svoje peniaze hromadením nikdy nechrániš; iba ich väzníš. A tým väzníš sám seba. Skutočná bezpečnosť
+                nepochádza z čísel na bankovom účte, ale z vnútorného vedomia, že ty si zdrojom svojho vlastného
+                zaopatrenia. Keď vieš, že dokážeš generovať bohatstvo podľa vlastnej vôle prostredníctvom svojho stavu
+                vedomia, už sa nebojíš pustiť fyzické mince. Vieš, že studňa je hlboká a nikdy nevyschne.</p>
+
+            <p>A ak sa neustále bojíš straty toho, čo máš, a cítiš potrebu chrániť a strážiť svoje zdroje tak zúfalo,
+                potom samozrejme, nakoniec o všetko prídeš. Prečo? Pretože to očakávaš. Pretože to nevedome potvrdzuješ.
+            </p>
+
+            <p>Nedostatok nie je skutočný, viera v nedostatok je to, čo ho robí skutočným, a lakomí vždy prehrávajú.
+                Všimol si si niekedy, že ľudia, ktorí sú posadnutí držaním sa každého centu, ktorí sa boja míňať a ktorí
+                odmietajú dávať, sa vždy zdajú mať finančné problémy? A predsa tí, ktorí dávajú bez zaváhania, ktorí sú
+                štedrí a ktorí dôverujú toku hojnosti, sa vždy zdajú mať viac než dosť? Keď operuješ z miesta
+                nedostatku, zmenšuješ svoju realitu. Blokuješ príležitosti. Stávaš sa magnetom na problémy, straty a
+                finančné nezdary.</p>
+
+            <p>Nečakaj, kým budeš mať "dosť", aby si začal dávať. To je pasca. Nikdy nebudeš mať dosť, pokiaľ čakáš, kým
+                to príde, predtým než začneš konať. Ty musíš byť ten, kto začne cyklus. Musíš byť
+                <strong>Iniciátor</strong>. Dávanie je iskra, ktorá zapaľuje motor hojnosti. Ak chceš viac lásky, dávaj
+                lásku.
+                Ak chceš viac úspechu, pomôž iným uspieť. Ak chceš viac peňazí, nechaj prúdiť to, čo máš, s vierou a
+                sebadôverou.</p>
+
+            <p>Ale keď dávaš odvážne, bez strachu, bez zaváhania, rozširuješ svoju realitu. Vítaš hojnosť. Prikazuješ
+                bohatstvu. Robíš zo seba kanál pre nekonečný zdroj.</p>
+
+            <!-- Interactive Spark/Ignition -->
+            <!-- Interactive Coin Game -->
+            <div class="coin-wrapper">
+                <p style="color: #cbd5e1; margin-bottom: 1rem;">Skúška Dôvery: Klikni, aby si daroval mincu.</p>
+                <button class="coin-btn" onclick="tossCoin(this)">
+                    <i class="fas fa-coins"></i>
+                </button>
+                <div id="coinResult" class="coin-result">...</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #134e4a);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div
+                style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid #14b8a6;">
+                <h4 style="color: #14b8a6; margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie Kapitoly</h4>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Dávanie nie je strata, je to dôkaz, že "máš". Ty si operantná moc. Nečakaj na "dosť". Buď iskrou,
+                    ktorá roztočí motor.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola14.html" class="nav-btn">&larr; Späť na Kapitolu 14</a>
+        <a href="Kapitola16.html" class="nav-btn">Pokračovať na Kapitolu 16 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Coin Logic
+        function tossCoin(btn) {
+            btn.style.transform = 'scale(0.8) translateY(-20px)';
+            btn.style.opacity = '0.5';
+
+            const resultDiv = document.getElementById('coinResult');
+            resultDiv.style.opacity = '0';
+
+            setTimeout(() => {
+                btn.style.transform = 'scale(1) translateY(0)';
+                btn.style.opacity = '1';
+                resultDiv.innerHTML = '<i class="fas fa-plus"></i> PRIJAL SI 3x VIAC!';
+                resultDiv.style.opacity = '1';
+            }, 600);
+        }
+
+        // Audio Player Logic
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    console.error("Audio error:", e);
+                    alert("Audio file not found (placeholder).");
+                });
+            } else { audio.pause(); }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeEl.textContent = `${mins}:${secs}`;
+            }
+        });
+    </script>
+
 </body>
+
 </html>

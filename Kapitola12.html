@@ -1,69 +1,387 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 12</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Chapter 12 Specific Styles - Water / Action Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #38bdf8);
+            /* Sky-400 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Visual Metaphor: The Pool Split */
+        .pool-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .pool-dry {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 2rem;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .pool-wet {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .pool-wet::after {
+            content: 'SKUTOČNÉ';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            border-radius: 4px;
+        }
+
+        /* Evidence Log Visual */
+        .evidence-log {
+            background: #fff;
+            color: #0f172a;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            transform: rotate(1deg);
+            border-left: 5px solid #0f172a;
+            /* Binder style */
+        }
+
+        .evidence-item {
+            border-bottom: 1px dashed #cbd5e1;
+            padding: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkbox-fake {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #0f172a;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .checkbox-fake.checked::after {
+            content: '✓';
+            display: block;
+            text-align: center;
+            line-height: 16px;
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        .highlight-box {
+            background: linear-gradient(to right, rgba(56, 189, 248, 0.1), transparent);
+            border-left: 4px solid #38bdf8;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .lead-paragraph::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: #38bdf8;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?ocean,swimming,diving,underwater'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 12</h4>
+            <h4 style="letter-spacing: 3px; color: #38bdf8;">KAPITOLA 12</h4>
             <h1>Nenaučíš sa plávať čítaním o vode</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <p>Múdrosť bez aplikácie je len mentálny neporiadok.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Nenaučíš sa plávať čítaním o vode.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Nenaučíš sa plávať čítaním o vode" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">12 - Prax vs Teória</h3>
+                </div>
+            </div>
+            <!-- Standard Placeholder Controls -->
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/12kapitola-prax.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading" style="color: #38bdf8;">Akcia vs. Teória</h3>
+
+            <p class="lead-paragraph">Môžeš prečítať stovky kníh, pozrieť si tisíce videí a vypočuť si nekonečné príbehy
+                o úspechu, ale ak nikdy neaplikuješ to, čo si sa naučil, je to všetko márne. Žiadne množstvo teórie
+                nemôže nahradiť skúsenosť. Nezáleží na tom, koľko ti toho poviem, nezáleží na tom, koľko duchovných
+                učiteľov sa ťa snaží presvedčiť, jediná vec, ktorá ťa kedy skutočne presvedčí, sú tvoje vlastné
+                výsledky.</p>
+
+            <p>Kým nezačneš tieto princípy aplikovať vo svojom živote, zostanú len slovami poletujúcimi v tvojej mysli.
+                Ale v momente, keď ich uvedieš do praxe a uvidíš na vlastné oči, ako fungujú, vtedy sa pre teba stanú
+                pravdivými a vrytými do tvojej bytosti.</p>
+
+            <!-- EXTRA VISUAL: The Pool Split -->
+            <div class="pool-split">
+                <div class="pool-dry">
+                    <i class="fas fa-book" style="font-size: 2.5rem; margin-bottom: 1rem; color: #94a3b8;"></i>
+                    <h4 style="margin-bottom: 0.5rem; color: #0f172a;">Teoretik</h4>
+                    <p style="font-size: 0.9rem;">Číta o vode. Analyzuje zloženie H2O. Študuje uhol záberu pri kraule.
+                        <br><strong>Výsledok:</strong> Stále suchý.
+                    </p>
+                </div>
+                <div class="pool-wet">
+                    <i class="fas fa-swimmer" style="font-size: 2.5rem; margin-bottom: 1rem; color: #fff;"></i>
+                    <h4 style="margin-bottom: 0.5rem; color: #fff;">Praktik</h4>
+                    <p style="font-size: 0.9rem;">Skočí dnu. Hltá vodu. Robí chyby. Ale
+                        pláva.<br><strong>Výsledok:</strong> Skúsenosť.</p>
+                </div>
+            </div>
+
+            <p>Nenaučíš sa plávať čítaním o vode. Môžeš študovať každú techniku, analyzovať každý záber a sledovať
+                profesionálov, ako to robia bezchybne, ale kým nevstúpiš do vody sám, žiadna z tých vedomostí nebude nič
+                znamenať. Skutočné učenie sa deje v konaní.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-exclamation-triangle"
+                    style="color: #fca5a5; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                <p>Existuje nebezpečná ilúzia, ktorá prichádza s konzumovaním vedomostí, viera, že chápanie niečoho je
+                    to isté ako ovládanie toho. Žijeme v dobe, kde sú informácie hojné, kde je múdrosť len na jedno
+                    kliknutie. Ale <strong>múdrosť bez aplikácie nie je nič iné ako mentálny neporiadok
+                        ("clutter")</strong>.</p>
+            </div>
+
+            <p>Koľko svojpomocných kníh si prečítal? Koľko motivačných prejavov si vypočul? Koľkokrát si prikyvoval s
+                myšlienkou: <em>"Áno, toto dáva zmysel,"</em> len aby si zavrel knihu a vrátil sa priamo k svojim starým
+                návykom? Myseľ miluje pocit, že napreduje, aj keď nenapreduje. Je pohodlné sedieť v hľadisku, absorbovať
+                a intelektuálne súhlasiť, ale nič z toho nepohne ručičkou v tvojom živote. Jediná vec, ktorá to dokáže,
+                je akcia.</p>
+
+            <p>Ak si chceš vybudovať dôveru v manifestáciu, potrebuješ osobný dôkaz, nie príbehy z druhej ruky alebo
+                teórie, ale skutočné životné skúsenosti, ktoré ti ukážu, bez tieňa pochybností, že to funguje.</p>
+
+            <p>Prvý krok je vždy najťažší, pretože vyžaduje, aby si dôveroval skôr, než máš dôkaz. Musíš konať vo viere,
+                skôr než uvidíš výsledky. A to je miesto, kde väčšina ľudí zaváha. Chcú záruky. Chcú vedieť, že to
+                funguje, skôr než sa zaviažu. Ale takto to nefunguje. Nedostaneš dôkaz predtým, než uveríš; dostaneš
+                dôkaz preto, že si uveril.</p>
+
+            <div
+                style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px dashed #38bdf8; margin: 2rem 0; text-align: center;">
+                <h4 style="color: #38bdf8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;">Tvoja
+                    Výzva</h4>
+                <p style="color: #e2e8f0; font-size: 1.1rem; font-style: italic;">
+                    Vyber si niečo jednoduché. Niečo, čo sa nezdá nemožné alebo mimo dosahu. Možno predpokladaj, že dnes
+                    dostaneš kompliment, alebo že začuješ konkrétne slovo v konverzácii, alebo že nájdeš neočakávaný
+                    účet na zemi. Čokoľvek to je, vyber si niečo a "predpokladaj" to do existencie. Potom sleduj, čo sa
+                    stane.
+                </p>
+            </div>
+
+            <p>Prvýkrát, keď to bude fungovať, tvoja myseľ sa to možno pokúsi zamietnuť ako náhodu. Bude sa to snažiť
+                racionalizovať a presvedčiť ťa, že sa to aj tak muselo stať. Ignoruj ten hlas. Pokračuj. Čím viac budeš
+                experimentovať s týmito princípmi, tým viac dôkazov nazhromaždíš. A čím viac dôkazov nazhromaždíš, tým
+                viac to tvoje podvedomie začne prijímať ako pravdu.</p>
+
+            <p style="font-size: 1.15rem; color: #38bdf8; text-align: center; margin: 2rem 0; font-weight: 500;">
+                V určitom bode prestaneš premýšľať, či to funguje, a jednoducho budeš vedieť, že to funguje. Dôkaz je
+                priamo tam, hľadí ti do tváre. Už to nie je teória. Je to tvoja realita.
+            </p>
+
+            <p>Nezaseknite sa v cykle konzumovania nekonečných informácií bez toho, aby si niečo z toho aplikoval. Veľa
+                ľudí číta jednu knihu za druhou, pozerá videá, navštevuje semináre a robí kurzy, a predsa ich životy
+                zostávajú presne rovnaké, pretože vedieť niečo intelektuálne nie je to isté ako to žiť.</p>
+
+            <p>Možno vieš, že tvoje myšlienky tvoria tvoju realitu. Možno vieš, že tvoje predpoklady formujú tvoj svet.
+                Možno vieš, že tvoje viery diktujú tvoje skúsenosti. Ale kým nezačneš konať z tohto poznania, sú to
+                všetko len prázdne slová.</p>
+
+            <div
+                style="display: flex; gap: 1.5rem; align-items: center; margin: 2rem 0; background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 8px;">
+                <i class="fas fa-dumbbell" style="font-size: 3rem; color: #94a3b8;"></i>
+                <p style="margin: 0; color: #cbd5e1; font-style: italic;">
+                    "Je ľahké mať pocit, že napreduješ, keď sa učíš, ale učenie nie je to isté ako konanie. Mohol by si
+                    čítať o posilňovni, študovať rast svalov, pozerať fitness premeny celý deň, ale ak nikdy nedvihneš
+                    činku, nič sa nezmení."
+                </p>
+            </div>
+
+            <p>Tak to otestuj, dotlač sa k tomu, aby si to aplikoval v reálnom čase. Prestaň čakať na učiteľa, knihu
+                alebo video, ktoré ťa presvedčí nad rámec pochybností, že to funguje, skôr než sa zaviažeš. Pretože
+                takto to nefunguje. Musíš presvedčiť sám seba. Je rozdiel medzi chápaním konceptu a jeho stelesnením.
+                Chápanie je mentálne. Stelesnenie je zážitkové. Je to rozdiel medzi čítaním o láske a skutočným
+                zamilovaním sa.</p>
+
+            <p>Práve teraz, mysli na oblasť v tvojom živote, kde chceš vidieť zmenu. Nečítaj len o manifestácii, použi
+                ju. Predpokladaj niečo do existencie. Vytrvaj v tom predpoklade. Konaj, akoby to už bolo zaručené.
+                Otestuj realitu. A keď sa to stane, zapíš si to. Veď si záznam o každej jednej veci, ktorú si úspešne
+                manifestoval. Časom sa tento zoznam stane tvojou najsilnejšou zbraňou proti pochybnostiam. Kedykoľvek sa
+                tvoja myseľ pokúsi spochybniť, či je to skutočné, budeš mať dôkaz.</p>
+
+            <!-- EXTRA VISUAL: The Evidence Logbook -->
+            <div class="evidence-log">
+                <h4
+                    style="text-align: center; color: #0f172a; text-decoration: underline; margin-bottom: 2rem; text-transform: uppercase;">
+                    Záznam Manifestácií (Dôkazy)</h4>
+
+                <div class="evidence-item">
+                    <span><span class="checkbox-fake checked"></span> Kompliment od neznámeho</span>
+                    <span style="color: #64748b;">12. Máj</span>
+                </div>
+                <div class="evidence-item">
+                    <span><span class="checkbox-fake checked"></span> Voľné parkovacie miesto</span>
+                    <span style="color: #64748b;">14. Máj</span>
+                </div>
+                <div class="evidence-item">
+                    <span><span class="checkbox-fake checked"></span> Telefonát od ...</span>
+                    <span style="color: #64748b;">18. Máj</span>
+                </div>
+                <div class="evidence-item" style="border: none; margin-top: 1rem; color: #94a3b8; font-style: italic;">
+                    <span><span class="checkbox-fake"></span> (Tvoja ďalšia výhra...)</span>
+                </div>
+
+                <div
+                    style="position: absolute; bottom: 20px; right: 20px; transform: rotate(-10deg); border: 2px solid #ef4444; color: #ef4444; padding: 0.5rem 1rem; font-weight: bold; font-size: 1.2rem; opacity: 0.7;">
+                    OVERENÉ
+                </div>
+            </div>
+
+            <p>Príde bod, kedy už nebudeš musieť presviedčať sám seba. Kedy manifestácia prestane byť technikou a začne
+                byť tým, kým si.</p>
+
+            <p>Pozrieš sa späť na starú verziu seba, ktorá pochybovala, váhala a potrebovala neustále uisťovanie, a
+                zasmeješ sa. Pretože teraz vieš. Nie preto, že ti to niekto povedal, ale preto, že si to žil. Na konci
+                dňa ťa nikto nemôže naučiť plávať. Musíš skočiť do vody sám.</p>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #0c4a6e);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div
+                style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid #38bdf8;">
+                <h4 style="color: #38bdf8; margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie Kapitoly</h4>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Teória je bezpečná, ale nemení realitu. Jediný spôsob, ako uveriť, je vidieť výsledky. Jediný
+                    spôsob, ako vidieť výsledky, je aplikovať princípy ešte predtým, než uveríš. Skoč do vody.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola11.html" class="nav-btn">&larr; Späť na Kapitolu 11</a>
+        <a href="Kapitola13.html" class="nav-btn">Pokračovať na Kapitolu 13 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Audio Player Logic
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    console.error("Audio error:", e);
+                    alert("Audio file not found (placeholder).");
+                });
+            } else { audio.pause(); }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeEl.textContent = `${mins}:${secs}`;
+            }
+        });
+    </script>
+
 </body>
+
 </html>

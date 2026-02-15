@@ -1,69 +1,609 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 8</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Specific Styles for Chapter 8 - Beliefs Theme (Emerald/Growth) */
+
+        /* Hero - Emerald Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #34d399);
+            /* Emerald-400 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+        }
+
+        .hero h4 {
+            color: #34d399;
+        }
+
+        /* Content Standard Palette (Gold/White) applies generally */
+
+        /* Interactive/Visual Elements for this Chapter */
+
+        /* Rewrite Box - A container for Old Belief -> New Belief */
+        .rewrite-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s;
+        }
+
+        .rewrite-box:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .old-belief {
+            color: #94a3b8;
+            /* Slate-400 */
+            font-style: italic;
+            border-left: 3px solid #ef4444;
+            /* Red for negative */
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .new-belief {
+            color: #fff;
+            border-left: 3px solid #34d399;
+            /* Green for positive */
+            padding-left: 1rem;
+        }
+
+        .new-belief strong {
+            color: #34d399;
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Lists */
+        .belief-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .belief-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        .belief-list li::before {
+            content: '\f00d';
+            /* Times icon for negative beliefs */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: #ef4444;
+        }
+
+        .sub-heading {
+            color: var(--accent-gold);
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?roots,forest,reflection'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 8</h4>
-            <h1>Preskúmaj svoje presvedčenia</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px;">KAPITOLA 8</h4>
+            <h1>Preskúmaj Svoje Presvedčenia</h1>
+            <p>Nemôžeš zmeniť niečo, čo si nepriznáš. Odhaľ príbehy, ktoré riadia tvoj život.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Preskúmaj svoje presvedčenia.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Preskúmaj svoje presvedčenia" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">08 - Preskúmaj Svoje Presvedčenia</h3>
+                </div>
+            </div>
+            <!-- Standard Placeholder Controls -->
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/8kapitola-presvedcenia.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading">Preskúmajte Svoje Presvedčenia</h3>
+
+            <p>Ak sa v živote opakovane trápiš s niečím, či už ide o všeobecnú tému alebo konkrétnu výzvu, ktorá sa zdá
+                byť neprekonateľná, je načase urobiť krok späť a preskúmať svoje presvedčenia.</p>
+
+            <p>Koreň každej výzvy, ktorej môžeš čeliť, spočíva v tvojich presvedčeniach a predpokladoch, z ktorých mnohé
+                sú podvedomé a nepreskúmané. Takže, nájdi si chvíľu na to, aby si si sadol sám so sebou. Vezmi pero a
+                papier a polož si jednoduchú otázku: <strong>"Čomu v súvislosti s touto konkrétnou témou skutočne
+                    verím?"</strong></p>
+
+            <div class="highlight-box">
+                <p>Napríklad povedzme, že boj sa točí okolo peňazí. Musíš byť k sebe brutálne úprimný a ochotný
+                    konfrontovať svoje skryté presvedčenia. Nemôžeš zmeniť niečo, čo si nepriznáš.</p>
+            </div>
+
+            <ul class="belief-list">
+                <li>Veríš, že peniaze sa zarábajú ťažko?</li>
+                <li>Veríš vo frázu „bez utrpenia nie je zisku“?</li>
+                <li>Myslíš si, že peniaze sú zlo?</li>
+                <li>Veríš, že peniaze môžu zarobiť len múdri ľudia alebo ľudia s dobrými konexiami?</li>
+                <li>Myslíš si, že sú len pre elitu?</li>
+                <li>Veríš, že nemáš čo ponúknuť na výmenu?</li>
+            </ul>
+
+            <p>Zapíš si každé jedno presvedčenie, ktoré o tejto téme dokážeš odhaliť. Bez ohľadu na to, ako negatívne
+                alebo obmedzujúce môže znieť, zapíš ho. Nechaj to všetko vytiecť na papier. Nič nezadržiavaj ani
+                neprikrášľuj. Očisti sa od negativity. Všetky pochybnosti o sebe, obmedzujúce naratívy a príbehy, ktoré
+                ťa sabotovali, nechaj vyjsť na svetlo.</p>
+
+            <p>Potom si pamätaj toto: <strong>tieto presvedčenia nie sú fakty</strong>. Nie sú realitou. Mohli sa zdať
+                ako fakty, pretože si im veril, ale viera je to jediné, vďaka čomu sa zdali byť pravdivé. Keď viera
+                vyprchá, vyprchá aj ten "fakt". Sú to len príbehy, ktoré si si nahováral.</p>
+
+            <h3 class="sub-heading">Preformulovanie Presvedčení</h3>
+
+            <p>Keď to urobíš, máš za sebou už 50% práce. Teraz je čas preformulovať tieto presvedčenia. Ku každému
+                negatívnemu presvedčeniu napíš opačné tvrdenie. Tu je niekoľko príkladov, ako môžeš presvedčenia
+                prepísať:</p>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Peniaze sa zarábajú ťažko"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Peniaze reagujú na to, ako veľmi si myslím, že si ich zaslúžim. Nie sú ani ťažké, ani ľahké;
+                    jednoducho zrkadlia môj pocit vlastnej hodnoty. Ak sa ich dnes dokážem cítiť hoden, dnes zažijem
+                    hojnosť.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Bez utrpenia nie je zisku" (No pain, no gain)</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Ak sa zarábanie peňazí v minulosti zdalo ťažké, bolo to len preto, že som veril, že môžu prísť iba
+                    cez boj. Je mojím vrodeným právom byť v hojnosti a mať všetko, čo potrebujem, kedykoľvek to
+                    potrebujem, bez utrpenia alebo ťažkej driny. Je to o zosúladení, nie o bolesti.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Peniaze sú zlo"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Peniaze sú nástrojom dobra. Zvyšujú moju schopnosť tvoriť, pomáhať a podporovať ostatných. Sú
+                    neutrálne a môžem sa rozhodnúť použiť ich pre vyššie dobro. Čím viac mám, tým viac dávam, a tým
+                    inšpirujem ostatných a ukazujem im, čo je možné.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Len múdri ľudia zarábajú peniaze"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Peniaze sú dostupné pre každého, bez ohľadu na intelekt. Je mojím vrodeným právom ich mať.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Peniaze sú len pre elitu"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Hojnosť je pre každého. Zaslúžim si prosperitu a úspech. Vesmír je hojný a bohatstvo ku mne prúdi
+                    voľne, bez ohľadu na status.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Nemám čo ponúknuť na výmenu"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Peniaze nie sú o ponúkaní, sú o umožňovaní. Existuje nekonečné množstvo možností na bohatstvo a
+                    všetko, čo musím urobiť, je otvoriť sa im. Odhalia sa mi samé.
+                </div>
+            </div>
+
+            <p>Teraz, keď píšeš tieto nové tvrdenia, neponáhľaj sa. Nechaj ich vstrebať. Dovoľ každému z nich, aby
+                marinovalo v tvojej mysli a srdci. Vyslov ich nahlas, čítaj ich znova a znova a cíť, ako sa ich pravda v
+                tebe usádza, až kým ti neprinesú uspokojenie.</p>
+
+            <p>Časom tieto nové presvedčenia začnú zapúšťať korene, pomaly ale isto nahrádzajúc tie staré. Zakaždým, keď
+                sa pristihneš, že padáš späť do starého naratívu, pripomeň si tieto nové presvedčenia. Vráť sa k
+                papieru, ktorý si napísal, znovu si prečítaj tie posilňujúce tvrdenia a vedome sa rozhodni zosúladiť s
+                nimi namiesto tých obmedzujúcich.</p>
+
+            <h3 class="sub-heading">Vzťahy a Láska</h3>
+
+            <p>Teraz uplatnime rovnaký prístup pri láske a vzťahoch. Ak si sa trápil vo vzťahoch, či už priťahovaním
+                nesprávnych ľudí, zažívaním zlomeného srdca alebo pocitom nenaplnenia, je čas preskúmať, čomu o láske
+                skutočne veríš.</p>
+
+            <p>Opäť, vezmi pero a papier. Opýtaj sa sám seba:</p>
+
+            <div class="quote-block">
+                "Čomu verím o láske? Čomu verím o vzťahoch? Čomu verím o sebe, pokiaľ ide o lásku? Čomu verím o svojej
+                hodnote prijímať lásku?"
+            </div>
+
+            <p>Zapíš každé presvedčenie, ktoré vypláva na povrch, bez ohľadu na to, ako bolestivé alebo obmedzujúce sa
+                môže zdať. Vypusti to všetko von bez posudzovania. Tu je niekoľko bežných:</p>
+
+            <ul class="belief-list">
+                <li>Láska sa ťažko hľadá.</li>
+                <li>Všetci dobrí partneri sú už zadaní.</li>
+                <li>Láska vždy vedie k bolesti.</li>
+                <li>Vzťahy vyžadujú obetu a utrpenie.</li>
+                <li>Nie som hoden lásky taký, aký som.</li>
+                <li>Lásku si musím zaslúžiť dokazovaním svojej hodnoty.</li>
+                <li>Ľudia ma nakoniec vždy opustia.</li>
+                <li>Láska časom vyprchá.</li>
+                <li>Musím sa uspokojiť s málom, inak skončím sám.</li>
+                <li>Nikto mi skutočne nerozumie.</li>
+            </ul>
+
+            <p>Pamätaj, tieto presvedčenia nie sú fakty. Sú to jednoducho príbehy, ktoré si si zvnútornil, často z
+                detstva, minulých skúseností alebo podmieňovania. Dôvod, prečo sa zdajú skutočné, je ten, že si im tak
+                dlho veril. Ale rovnako ako si si tieto presvedčenia vytvoril, môžeš ich nahradiť lepšími. Teraz vezmi
+                každé obmedzujúce presvedčenie a prepíš ho na pozitívne:</p>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Láska sa ťažko hľadá"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Skutočná láska je všade a v mojom živote sa objaví bez námahy.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Všetci dobrí partneri sú už zadaní"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Svet je plný úžasných ľudí, ktorí tiež hľadajú lásku, na tejto zemi nás je 8 miliárd. Viem, že tá
+                    pravá osoba sa objaví prirodzene a bez námahy.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Láska vždy vedie k bolesti"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Láska samotná nie je bolestivá. Bolesť spôsobujú nezdravé vzťahy a nesprávne spojenia. Som hoden
+                    lásky, ktorá je radostná, láskavá a povznášajúca, a presne takú pritiahnem.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Vzťahy vyžadujú obetu a utrpenie"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Skutočná láska môj život obohatí. Budem v zdravom vzťahu, kde budeme obaja prekvitať, nie trpieť.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Nie som hoden lásky taký, aký som"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Som hoden lásky presne taký, aký som. Nemusím nič meniť ani dokazovať, aby som si lásku zaslúžil.
+                    Narodil som sa s právom na bezpodmienečnú lásku.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Lásku si musím zaslúžiť dokazovaním svojej hodnoty"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Láska nie je niečo, čo si musím zaslúžiť. Stačím taký aký som, a tá pravá osoba ma bude milovať pre
+                    to, kým som, nie pre to, čo robím.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Ľudia ma nakoniec vždy opustia"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Pritiahnem perfektný vzťah, kde obaja prekvitáme a nevieme sa jeden druhého nabažiť. Strávime spolu
+                    zvyšok našich dní, šťastní a hlboko zamilovaní.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Láska časom vyprchá"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Naša láska sa bude časom iba prehlbovať, obaja ju živíme starostlivosťou, prítomnosťou a vzájomným
+                    rešpektom.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Musím sa uspokojiť s málom, inak skončím sám"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Dokonalá láska je už na ceste ku mne. Taký vzťah, s ktorým budem skutočne spokojný. Strávim zvyšok
+                    svojich dní v šťastnom vzťahu.
+                </div>
+            </div>
+
+            <div class="rewrite-box">
+                <div class="old-belief">Ak veríš: "Nikto mi skutočne nerozumie"</div>
+                <div class="new-belief">
+                    <strong>Prepíš to na:</strong>
+                    Priťahujem len ľudí, ktorí ma vidia a oceňujú pre to, kým skutočne som.
+                </div>
+            </div>
+
+            <p>Teraz, keď čítaš tieto nové presvedčenia, vstrebávaj ich. Nechaj ich vniknúť do svojho vedomia. Vyslov
+                ich nahlas, opakuj ich denne a všímaj si, ako sa pri nich cítiš. Kedykoľvek sa pristihneš, že skĺzavaš
+                do starého presvedčenia, jemne si pripomeň to nové a presuň svoju pozornosť.</p>
+
+            <p>Keď zmeníš svoje presvedčenia o láske, zmenia sa aj tvoje skúsenosti s láskou. Či už ide o lásku,
+                peniaze, zdravie, úspech alebo vlastnú hodnotu, princíp zostáva rovnaký. Ak existuje oblasť, v ktorej sa
+                cítiš zaseknutý, pozri sa na svoje presvedčenia. Aký príbeh si rozprávaš? A čo je dôležitejšie, aký
+                príbeh chceš žiť namiesto toho?</p>
+
+            <div class="highlight-box">
+                <p>Nekonečná Inteligencia ťa vždy podporí. Ale môže ťa podporiť iba v tom smere, ktorý ty definuješ ako
+                    pravdivý pre seba. Ak sa definuješ ako nehodný, realita bude odrážať nehodnosť. Ak sa definuješ ako
+                    bohatý, realita bude odrážať hojnosť. Ak sa definuješ ako mocný, realita bude odrážať moc.</p>
+            </div>
+
+            <p>Nie je to preto, že vesmír je krutý alebo láskavý. Je to preto, že vesmír je neutrálny. Jednoducho
+                odráža. Ak veríš v obmedzenie, zažiješ obmedzenie. Ak veríš v expanziu, zažiješ expanziu.</p>
+
+            <p>Neexistuje žiadna objektívna realita, ktorá by sa ti vnucovala. Existuje iba realita, ktorú sa rozhodneš
+                zažívať na základe toho, čomu veríš. Takže si vyberaj vedome, potom ži svoju voľbu a spočiň vo vedomí,
+                že čo vydáš von, to sa ti vráti.</p>
+
+            <h3 class="sub-heading">Zradnosť Negatívnych Presvedčení</h3>
+
+            <p>Negatívne presvedčenia sú zradné. Neukážu sa s oznámením: "Hej, som tu, aby som ti zničil život!" Maskujú
+                sa za logiku, za realizmus, za zdravý rozum. Šepkajú ti v mysli, že sa ti len snažia pomôcť, že ťa
+                udržujú v bezpečí, že predstavenie si toho najhoršieho ťa na to pripraví. Presvedčia ťa, že sú jedinou
+                pravdou a že čokoľvek iné je len zbožné želanie.</p>
+
+            <p>A ak nedávaš pozor, uveríš im. Pretože sa necítia ako "presvedčenia". Cítia sa ako fakty. Mohol by si si
+                myslieť: "Som len racionálny." Negatívne presvedčenia budú bojovať o svoje prežitie. V momente, keď ich
+                začneš spochybňovať, vytiahnu každý trik z rukáva, aby ťa udržali v pasci.</p>
+
+            <p>Budú ti hovoriť, že ak nebudeš očakávať to najhoršie, budeš zaskočený, a že ak veríš v lepší výsledok,
+                pripravuješ sa na sklamanie, že takto to v živote chodí, že nemá zmysel predstierať opak, že musíš byť
+                pripravený na to, že sa veci pokazia, len pre istotu, a že to nie je negativita, to je len realizmus.
+            </p>
+
+            <p>Ale negatívne presvedčenia ťa nechránia. Obmedzujú ťa. Neukazujú ti pravdu. Ukazujú ti skreslenú realitu
+                založenú na strachu, minulých skúsenostiach a domnienkach, ktoré si cestou nazbieral.</p>
+
+            <div class="quote-block">
+                Presvedčenia nie sú fakty. Presvedčenia sa dajú zmeniť. Sú naučené a čokoľvek naučené sa dá odnaučiť.
+            </div>
+
+            <p>Takže keď tvoja myseľ nabudúce začne hrať hru najhorších možných scenárov, zastav sa. Opýtaj sa sám seba:
+                <strong>Je toto naozaj pravda, alebo je to len presvedčenie, ktoré som prijal za pravdu?</strong> Čo ak
+                by presný opak bol rovnako možný? Čo ak sa tak cítim len preto, že túto myšlienku stále kŕmim? Veril by
+                som tomu stále, keby mi to nikdy predtým nepovedali?
+            </p>
+
+            <p>Musíš byť múdrejší ako tvoje negatívne presvedčenia. Prekabáť ich. Vidz ich také, aké sú – len príbeh,
+                ktorý si si rozprával, nič viac. A akonáhle ich prehliadneš, vezmeš si svoju moc späť. V momente, keď
+                ich prestaneš považovať za fakty, stratia nad tebou moc a už nedokážu prežiť.</p>
+
+            <p>Vždy si pamätaj, že máš moc zvoliť si nové presvedčenie v ktoromkoľvek okamihu.</p>
+
+            <h3 class="sub-heading">Opakovanie je Kľúčom</h3>
+
+            <p>Nič sa nestane druhou prirodzenosťou cez noc. Nenarodil si sa s tým, že o sebe pochybuješ alebo veríš v
+                obmedzenia. Naučil si sa to opakovaním. V priebehu rokov ti bolo opakovane hovorené, kto si, čo je pre
+                teba možné a ako funguje svet. A pretože si to počul dostatočne veľakrát, prijal si to ako pravdu, ale
+                to sa môžeš odnaučiť.</p>
+
+            <p>Môžeš prekáblovať celú svoju myseľ. Môžeš nahradiť každé obmedzujúce presvedčenie posilňujúcim. Môžeš sa
+                naprogramovať na úspech, na sebavedomie, na hojnosť, rovnako ľahko, ako si bol kedysi naprogramovaný na
+                boj, pochybnosti a nedostatok. Proces je rovnaký: <strong>Opakovanie</strong>.</p>
+
+            <p>Transformácia je o tom, čo si opakovane hovoríš, na čo sa opakovane zameriavaš a čo opakovane očakávaš.
+                Ak si raz povieš: "Som úspešný," ale zvyšok dňa stráviš pochybovaním, nič sa nezmení. Ale ak si to
+                hovoríš znova a znova, deň čo deň, kým sa to nestane tvojím novým východiskovým presvedčením, realita
+                nebude mať na výber a bude to musieť odraziť. Tvoja myseľ je ako sval. Čo trénuješ, to silnie. Čo
+                zanedbávaš, to slabne. Každá myšlienka, ktorú si myslíš, je opakovanie. Každý predpoklad, ktorý
+                posilňuješ, sa hlbšie zakoreňuje.</p>
+
+            <div class="highlight-box">
+                <p>Tak sa pýtaj sám seba: Čo opakujem? Opakujem myšlienky strachu alebo myšlienky sebavedomia? Opakujem
+                    myšlienky boja alebo myšlienky ľahkosti? Opakujem myšlienky obmedzenia alebo myšlienky neobmedzeného
+                    potenciálu? Pretože čokoľvek opakuješ, stáva sa tým, kým si.</p>
+            </div>
+
+            <p>Neexistuje žiadny tajný vzorec. Neexistuje žiadna skratka. Ľudia, ktorí uspejú, sú tí, ktorí opakujú
+                úspech do svojej mysle, kým nie je nespochybniteľný.</p>
+
+            <p>Začni nahrádzať každú pochybnosť istotou. Začni opakovať: <strong>"Som schopný. Som mocný. Som
+                    nezastaviteľný."</strong> Hovor to dostatočne veľakrát a tvoja myseľ nebude mať inú možnosť, než to
+                prijať.</p>
+
+            <p>Tvoje podvedomie sa neháda. Nepýta sa. Iba absorbuje to, čím ho konzistentne kŕmiš. A keď ho kŕmiš
+                správnymi myšlienkami, správnymi presvedčeniami a správnymi očakávaniami, všetko v tvojom živote sa
+                posunie, aby im to zodpovedalo. Svet nie je nič iné ako odraz toho, čo si si nacvičil veriť. Takže
+                trénuj zámerne. A sleduj, ako sa tvoja realita formuje do podoby čohokoľvek, čo si praješ.</p>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION & SUPPORT MATERIAL -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #111827);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+
+            <h2
+                style="text-align: center; color: #fff; margin-bottom: 3rem; font-family: 'Cormorant Garamond', serif; letter-spacing: 2px;">
+                <i class="fas fa-sync-alt" style="color: var(--accent-gold); margin-right: 1rem;"></i> REKAPITULÁCIA
+            </h2>
+
+            <!-- Summary & Key Words Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+
+                <!-- Summary Box -->
+                <div
+                    style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid #fff;">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie
+                        Kapitoly</h4>
+                    <p style="color: #cbd5e1; line-height: 1.6;">
+                        Tvoje presvedčenia nie sú nemenné fakty, sú to iba opakované príbehy. Ak chceš zmeniť svoju
+                        realitu, či už v peniazoch alebo láske, musíš najprv brutálne úprimne odhaliť svoje skryté
+                        presvedčenia a vedome ich prepísať. Opakovanie je nástrojom, ktorým sa nové presvedčenia stávajú
+                        skutočnosťou.
+                    </p>
+                </div>
+
+                <!-- Key Words Box -->
+                <div
+                    style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--accent-gold); display: flex; flex-direction: column; justify-content: center;">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Kľúčové Slová
+                    </h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span
+                            style="background: rgba(52, 211, 153, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Presvedčenia</span>
+                        <span
+                            style="background: rgba(52, 211, 153, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Korene</span>
+                        <span
+                            style="background: rgba(52, 211, 153, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Opakovanie</span>
+                        <span
+                            style="background: rgba(52, 211, 153, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Prepisovanie</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola7.html" class="nav-btn">&larr; Späť na Kapitolu 7</a>
+        <a href="Kapitola9.html" class="nav-btn">Pokračovať na Kapitolu 9 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // --- AUDIO PLAYER LOGIC ---
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        // Toggle Play/Pause
+        function togglePlay() {
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Playback failed:", error);
+                        playIcon.className = 'fas fa-play';
+                        alert("Nepodarilo sa spustiť audio. (Chyba: " + error.message + ")");
+                    });
+                }
+            } else {
+                audio.pause();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        // Update UI
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+        audio.addEventListener('ended', () => { playIcon.className = 'fas fa-play'; });
+
+        // Update Progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Load Metadata
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        if (audio.readyState >= 1) {
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = pos * audio.duration;
+            }
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+    </script>
 </body>
+
 </html>

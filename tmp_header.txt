@@ -1,0 +1,37 @@
+﻿document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('shared-header');
+        if (!container) return;
+
+        // Modern, compact header matching site's design language
+        container.innerHTML = `
+        <header class="shared-nav">
+            <div class="nav-left">
+                <a class="logo" href="index.html">Svet je tak├¢, ak├¢ si ty</a>
+            </div>
+            <div class="nav-center">
+                <nav class="nav-links">
+                    <a href="index.html">Domov</a>
+                    <a href="Uvod.html">O Knihe</a>
+                    <a href="#chapters">Kapitoly</a>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <div class="search-container">
+                    <input id="siteSearchInput" placeholder="H─¥ada┼Ñ..." aria-label="Search" autocomplete="off" />
+                    <div id="siteSearchResults" class="search-results" aria-hidden="true"></div>
+                </div>
+                <a href="Uvod.html" class="cta-btn">Za─ìa┼Ñ</a>
+                <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+            </div>
+        </header>
+        `;
+
+        // mobile menu toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                const nav = container.querySelector('.nav-links');
+                nav.classList.toggle('open');
+            });
+        }
+});

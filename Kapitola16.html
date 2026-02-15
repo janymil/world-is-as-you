@@ -1,69 +1,626 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 16</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600;800&family=Courier+Prime&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
+        /* Chapter 16 Specific Styles - People / Mirror / Script Theme */
         :root {
-            --accent-cyan: #22d3ee;
+            --accent-rose: #db2777;
+            /* Pink-600 - HERO ONLY */
+            --accent-rose-light: #fce7f3;
+            --accent-rose-dark: #831843;
+            --accent-gold: #fbbf24;
+            /* Gold-400 - BODY TEXT */
+            --accent-gold-light: #fef3c7;
+            --accent-gold-dark: #b45309;
+        }
+
+        .hero h1 {
+            background: linear-gradient(to right, #fff, var(--accent-rose));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(219, 39, 119, 0.5);
+        }
+
+        .hero h4 {
+            color: var(--accent-rose) !important;
+        }
+
+        /* Visual: The Script */
+        .script-container {
+            background: #fdfbf7;
+            color: #1f2937;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 700px;
+            font-family: 'Courier Prime', monospace;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        .script-container::before {
+            content: 'SCENÁR: TVOJ ŽIVOT';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .script-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .crossed-out {
+            text-decoration: line-through;
+            color: #ef4444;
+            opacity: 0.6;
+        }
+
+        .handwritten {
+            font-family: 'Kalam', cursive;
+            /* Fallback to cursive if not loaded, used script font generally */
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+            transform: rotate(-2deg);
+            margin-left: 10px;
+        }
+
+        /* Visual: Infinite Versions Slider */
+        .versions-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .version-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #374151;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .version-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+
+        .version-display {
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: bold;
+            color: #fff;
+            min-height: 3rem;
+            transition: 0.3s;
+        }
+
+        /* Visual: The Scale */
+        .scale-visual {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 200px;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .balance-beam {
+            width: 300px;
+            height: 4px;
+            background: #94a3b8;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%) rotate(0deg);
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .pivot {
+            width: 20px;
+            height: 20px;
+            background: #cbd5e1;
+            position: absolute;
+            top: 42px;
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .plate {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            position: absolute;
+            top: 52px;
+            /* connected to beam */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 0.8rem;
+            transition: top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .plate.left {
+            left: 0;
+            transform: translateX(-50%);
+        }
+
+        .plate.right {
+            right: 0;
+            transform: translateX(50%);
+        }
+
+        .scale-controls {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .add-weight-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+
+        .add-weight-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .add-weight-btn.active {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: #000;
+        }
+
+        .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .lead-paragraph::first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: var(--accent-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?mirrors,faces,crowd,masks'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 16</h4>
-            <h1>Ľudia sú zrkadlá</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px; color: var(--accent-rose);">KAPITOLA 16</h4>
+            <h1>Ľudia</h1>
+            <p>Nie je to o tom, čo si myslíš, že urobia. Je to o tom, akú rolu si im pridelil.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Ľudia sú zrkadlá.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Ľudia sú zrkadlá" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section Placeholder -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">16 - Ľudia a Zrkadlá</h3>
+                </div>
+            </div>
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/16kapitola-ludia.mp3"></audio>
+                <button class="play-pause-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <div class="audio-progress-area">
+                    <div class="progress-time-info"><span id="currentTime">0:00</span><span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Ty si Režisér</h3>
+
+            <p class="lead-paragraph">Ľudia sú zrkadlá. Každá osoba v tvojom živote, bez výnimky, ti odráža späť tvoje
+                vlastné presvedčenia, predpoklady a očakávania. Hrajú podľa scenára, ktorý im nevedome podávaš, hrajú
+                rolu, ktorú si im vo svojej realite pridelil, či už si to uvedomuješ alebo nie.</p>
+
+            <p>Ak veríš, že je niekto neúprimný, dokáže ti, že máš pravdu. Ak predpokladáš, že tvoj partner je neverný,
+                potvrdí tento predpoklad. Ak sa bojíš, že ťa priateľ zradí, odrazí ti tento strach späť. Nie je to
+                preto, že by sa ľudia rozhodli ti ublížiť alebo ťa sklamať, je to preto, že nemajú na výber, len sa
+                prispôsobiť energii, ktorú na nich projektuješ.</p>
+
+            <div class="script-container">
+                <div class="script-text">
+                    [INTERIÉR - KANCELÁRIA - DEŇ]<br><br>
+                    <strong>ŠÉF:</strong> (prichádza k stolu)<br>
+                    <span class="crossed-out">Opäť začne kričať a bude nespokojný s mojou prácou.</span><br>
+                    <span class="handwritten">S úsmevom poďakuje za skvelý výkon a navrhne zvýšenie platu.</span>
+                </div>
+            </div>
+
+            <p>Ty si režisér tohto filmu zvaného tvoj život a všetci ostatní jednoducho hrajú svoju úlohu. Nesnaž sa
+                meniť ľudí silou, manipuláciou alebo nekonečnými diskusiami, mysliac si, že ak sa len dostatočne
+                vysvetlíš, budeš sa dosť hádať, dostatočne prosiť alebo dostatočne vyžadovať, tá osoba sa nakoniec
+                zmení. To je márne. Jediný spôsob, ako zmeniť niečie správanie, je zmeniť scenár, ktorý o nich držíš vo
+                svojej vlastnej mysli. Ľudia sa môžu objaviť len tak, ako ich očakávaš.</p>
+
+            <p>Nie je to len o tom, čo si myslíš, že niekto urobí, je to aj o tom, čoho sa bojíš, že urobia. V momente,
+                keď začneš od niekoho očakávať to najhoršie, začnú sa s týmto očakávaním zlaďovať. Spôsob, akým sa cítiš
+                ohľadom osoby, určuje verziu tej osoby, ktorú zažívaš.</p>
+
+            <p>To je dôvod, prečo niektorí ľudia stále zažívajú tie isté bolestivé vzorce dookola, len s inými ľuďmi.
+                Nie je to tým, že by mali smolu alebo že by bol svet krutý. Je to tým, že stále predpokladajú tie isté
+                veci o ľuďoch. Môžu vymeniť osobu, ale ak stále držia tie isté presvedčenia, budú zažívať presne tú istú
+                osobu, len s inou tvárou. V momente, keď zmeníš svoje vnímanie niekoho, dovolíš mu, aby sa v tvojom
+                živote ukázal inak. Ak zahodíš staré predpoklady, pustíš strach a zámerne od nich budeš očakávať to
+                najlepšie, odrazia ti túto zmenu späť.</p>
+
+            <p>Možno si myslíš: <em>"Ale čo ak mi už ublížili? Čo ak ich činy už dokázali, kto sú?"</em> Ale čo slobodná
+                vôľa? Čo voľby iných ľudí?</p>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Nekonečné Verzie</h3>
+
+            <p>Ľudia nie sú bábky, ale nie sú ani oddelení od reality, ktorú zažívaš. Každý, koho stretneš, má nekonečné
+                verzie seba samého, rovnako ako ty máš nekonečné verzie seba samého. Verzia, s ktorou interaguješ, je
+                tá, ktorá sa zlaďuje s tvojimi presvedčeniami. Keď zmeníš svoje predpoklady, nenútiš niekoho zmeniť sa
+                proti jeho vôli, jednoducho sa naladíš na tú verziu z nich, ktorá už existuje v poli možností.</p>
+
+            <!-- Interactive: Versions Slider -->
+            <div class="versions-wrapper">
+                <h4 style="color: #cbd5e1; margin-bottom: 2rem;">Ladička Reality: Ktorú verziu si vyberáš?</h4>
+                <div id="versionDisplay" class="version-display" style="color: #ef4444;">"Je odťažitý a chladný."</div>
+                <div class="slider-container">
+                    <input type="range" min="0" max="100" value="0" class="version-slider" id="realitySlider">
+                </div>
+                <div style="display: flex; justify-content: space-between; color: #6b7280; font-size: 0.8rem;">
+                    <span>Strach / Očakávanie zlého</span>
+                    <span>Láska / Očakávanie najlepšieho</span>
+                </div>
+            </div>
+
+            <p>Napríklad, ak vidíš niekoho ako chladného a odťažitého, budeš interagovať s tou verziou jeho ja, ktorá
+                zodpovedá tomuto predpokladu. Ak zmeníš svoje vnímanie a budeš ho vidieť ako vrelého, milujúceho a
+                podporujúceho, prirodzene budeš gravitovať k realite, kde táto verzia jeho ja existuje. To je dôvod,
+                prečo dvaja ľudia môžu poznať tú istú osobu a opisovať ju úplne odlišnými spôsobmi. Jeden môže
+                povedať: <em>"Je taký láskavý a štedrý,"</em> zatiaľ čo druhý trvá na tom: <em>"Je sebecký a
+                    manipulatívny."</em> Obaja majú pravdu. Obaja zažívajú iné verzie tej istej osoby, filtrované cez
+                ich vlastné predpoklady.</p>
+
+            <p>Toto platí aj pre vzťahy, priateľstvá a obchodné interakcie. Ak predpokladáš, že ľudia sú nedôveryhodní,
+                budeš neustále priťahovať nedôveryhodných jedincov, alebo presnejšie, budeš vnímať a zažívať len tú
+                nedôveryhodnú verziu ľudí vo svojom živote. Ak veríš, že ľudia sú láskaví a podporujúci, budeš namiesto
+                toho zažívať tieto verzie.</p>
+
+            <div class="highlight-box"
+                style="border-left: 4px solid var(--accent-gold); background: rgba(251, 191, 36, 0.1); padding: 2rem; margin: 2rem 0;">
+                <h4 style="color: var(--accent-gold); margin-bottom: 0.5rem;">Ako zmeniť ľudí vo svojej realite</h4>
+                <p style="color: #fff;">
+                    Skús to. Vyber si niekoho vo svojom živote, možno priateľa, ktorý bol odťažitý, šéfa, ktorý sa zdá
+                    byť ťažký, alebo člena rodiny, ktorý vždy prináša negativitu. Nasledujúcich pár dní úplne zmeň svoje
+                    vnímanie o nich. Predpokladaj, že sú láskaví. Predpokladaj, že sú podporujúci. Predpokladaj, že sú
+                    chápaví. Drž toto nové očakávanie pevne, bez zaváhania. Potom sleduj, čo sa stane.
+                </p>
+                <p style="color: #fce7f3; margin-top: 1rem; font-style: italic;">
+                    Uvidíš posun. Buď sa tá osoba začne správať inak, alebo z tvojej reality vybledne a bude nahradená
+                    niekým, kto sa zhoduje s tvojím novým predpokladom. Toto nie je mágia ani čarodejníctvo, je to
+                    mechanika reality. Neustále meníš časové línie, vstupuješ do rôznych verzií reality na základe
+                    svojich predpokladov. Keď predpokladáš to najlepšie, presúvaš sa do verzie reality, kde to najlepšie
+                    existuje.
+                </p>
+            </div>
+
+            <h3 class="sub-heading" style="color: var(--accent-gold);">Ilúzia Kontroly</h3>
+
+            <p>Zúfalstvo je odpudivá energia. Možno si myslíš, že ho dobre skrývaš, hráš to na "cool" a predstieraš, že
+                nie si príliš dychtivý, ale energia neklame. Keď veríš, že niekto má niečo, čo zúfalo potrebuješ, či už
+                je to obchodná príležitosť, práca, spojenie alebo dokonca ich uznanie, nevedome sa staviaš do pozície
+                nedostatku. Vytváraš energetickú nerovnováhu, kde predpokladáš, že oni držia všetku moc a ty nedržíš
+                žiadnu. A tým odtláčaš presne tú vec, ktorú sa snažíš pritiahnuť.</p>
+
+            <p>Možno si myslíš, že ak budeš pôsobiť príliš zúfalo, ľudia to "vycítia" a odtiahnu sa. Ale nie je to o
+                tom, že to cítia oni, je to o mechanike reality samotnej. Vesmír je ako váhy, dokonale neutrálne,
+                čakajúce
+                na to, kým ich prevážiš vo svoj prospech. Na jednej strane je realita, kde dostaneš to, čo chceš. Na
+                druhej strane je realita, kde nie. Každá jedna myšlienka, ktorú si myslíš, pridáva váhu na jednu alebo
+                druhú stranu.</p>
+
+            <!-- Visual: The Scale -->
+            <div class="scale-visual">
+                <div class="pivot"></div>
+                <!-- Beam -->
+                <div class="balance-beam" id="balanceBeam">
+                    <div class="plate left" id="plateLeft">
+                        <i class="fas fa-search-minus" style="font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        Nedostatok
+                    </div>
+                    <div class="plate right" id="plateRight">
+                        <i class="fas fa-check-circle" style="font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        Mať to
+                    </div>
+                </div>
+            </div>
+            <div class="scale-controls">
+                <button class="add-weight-btn" onclick="addWeight('bad')">Pridať: Pochybnosť/Strach</button>
+                <button class="add-weight-btn" onclick="addWeight('good')">Pridať: Istota/Vedenie</button>
+            </div>
+
+            <p>Ak je väčšina tvojich myšlienok o tom, že nedostaneš to, čo chceš - obavy, pochybnosti, spochybňovanie,
+                premýšľanie či si to niekto nerozmyslí - doslova pridávaš váhu na stranu váh, ktorá predstavuje "nemať
+                to". A čo sa stane, keď je jedna strana príliš ťažká? Váhy sa prevážia. A presne tak sa uzamkneš do
+                verzie reality, kde nedostaneš to, čo chceš.</p>
+
+            <p>Namiesto hrania sa na malého, prehnaného premýšľania a uvažovania, či nepôsobíš príliš zúfalo, presuň
+                svoju pozornosť. Prestaň kŕmiť energiu nedostatku. Vedome, zámerne, syp viac myšlienok na stranu "už to
+                mám". Predstavuj si dohodu ako už uzavretú, príležitosť ako už zaistenú, osobu ako už hovorí áno. Cíť,
+                aké by to bolo, keby bol výsledok zaručený.</p>
+
+            <p>Pravdou je, že nikto nie je nad tebou. Nikto nemá nič, k čomu by si nemal prístup. V momente, keď niekoho
+                postavíš na piedestál a povieš si "potrebujem to, čo majú oni", odtláčaš ich ďalej. Ale keď sa presunieš
+                do nastavenia mysle istoty, keď predpokladáš, že si rovnako mocný, rovnako hoden, rovnako majúci
+                situáciu pod kontrolou, zmeníš celú dynamiku.</p>
+
+            <p>Najmagnetickejší ľudia v akejkoľvek miestnosti sú tí, ktorí od nikoho nič nepotrebujú. Sú uvoľnení,
+                sebaistí a vedia, že život sa vyvinie v ich prospech. A pretože to predpokladajú, realita sa ohýba, aby
+                zodpovedala ich predpokladu. To je energia, do ktorej chceš vstúpiť. Takže nabudúce, keď sa ucítiš
+                skĺzavať do zúfalstva, zastav sa. Chyť sa. Nenechaj svoje myšlienky kopiť sa na nesprávnej strane váh.
+                Presmeruj ich. Povedz si: <em>"Toto je už moje."</em></p>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <p
+                    style="font-family: 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-rose);">
+                    Nekonečná Inteligencia zariaďuje všetko dokonale v môj prospech.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #831843);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div
+                style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--accent-gold);">
+                <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie Kapitoly
+                </h4>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Ľudia sú zrkadlá. Zmeň scenár vo svojej mysli a zmeníš rolu, ktorú hrajú. Zúfalstvo odtláča, istota
+                    priťahuje. Preváž váhy reality na svoju stranu.
+                </p>
+
+                <!-- New Affirmations Section -->
+                <div style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+                    <h4
+                        style="color: #fff; margin-bottom: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem;">
+                        <i class="fas fa-magic"
+                            style="color: var(--accent-gold); margin-right: 10px; font-size: 1.2rem;"></i>
+                        Afirmácie pre Zmenu Vzťahov
+                    </h4>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; text-align: left;">
+                        <!-- General Principles -->
+                        <div>
+                            <h5
+                                style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">
+                                Všeobecné Princípy</h5>
+                            <ul style="color: #e2e8f0; list-style: none; padding: 0; line-height: 1.8;">
+                                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                                    <i class="fas fa-check"
+                                        style="color: var(--accent-gold); margin-right: 10px; margin-top: 6px;"></i>
+                                    <span>"Každý človek mi odráža presne to, čo o ňom verím."</span>
+                                </li>
+                                <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                                    <i class="fas fa-check"
+                                        style="color: var(--accent-gold); margin-right: 10px; margin-top: 6px;"></i>
+                                    <span>"Zahadzujem staré scenáre a píšem nové, plné rešpektu."</span>
+                                </li>
+                                <li style="display: flex; align-items: flex-start;">
+                                    <i class="fas fa-check"
+                                        style="color: var(--accent-gold); margin-right: 10px; margin-top: 6px;"></i>
+                                    <span>"Očakávam od ľudí len to najlepšie a to aj dostávam."</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Specific Examples -->
+                        <div>
+                            <h5
+                                style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">
+                                Konkrétne Príklady</h5>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 0.3rem;">Pre ťažkého šéfa
+                                    / kolegu:</div>
+                                <div
+                                    style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 6px; font-style: italic; color: #fff;">
+                                    "Váži si moju prácu, rešpektuje ma a vždy ma podporuje."
+                                </div>
+                            </div>
+
+                            <div>
+                                <div style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 0.3rem;">Pre odťažitý
+                                    vzťah:</div>
+                                <div
+                                    style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 6px; font-style: italic; color: #fff;">
+                                    "Náš vzťah je plný lásky, porozumenia a blízkosti. Sme jeden tím."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola15.html" class="nav-btn">&larr; Späť na Kapitolu 15</a>
+        <a href="Kapitola17.html" class="nav-btn">Pokračovať na Kapitolu 17 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Versions Slider Logic
+        const slider = document.getElementById('realitySlider');
+        const display = document.getElementById('versionDisplay');
+
+        slider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            // Color Shift
+            const r = Math.floor(239 - (val * 1.6)); // Red reduction
+            const g = Math.floor(68 + (val * 1.8));  // Green increase
+            const b = Math.floor(68 + (val * 1));    // Blue adjustment
+
+            // Text Shift
+            if (val < 20) {
+                display.innerText = '"Je odťažitý, chladný a ignoruje ma."';
+                display.style.color = '#ef4444'; // Red
+            } else if (val < 50) {
+                display.innerText = '"Je neutrálny, občas milý, občas nie."';
+                display.style.color = '#9ca3af'; // Grey
+            } else if (val < 80) {
+                display.innerText = '"Je priateľský, otvorený a počúva ma."';
+                display.style.color = '#f472b6'; // Light Pink
+            } else {
+                display.innerText = '"Miluje ma, podporuje ma a váži si ma."';
+                display.style.color = '#db2777'; // Deep Rose/Pink
+            }
+        });
+
+        // Scale Logic
+        let balance = 0; // -100 to 100
+        const beam = document.getElementById('balanceBeam');
+        const plateLeft = document.getElementById('plateLeft');
+        const plateRight = document.getElementById('plateRight');
+
+        function addWeight(type) {
+            if (type === 'bad') {
+                balance -= 15;
+            } else {
+                balance += 15;
+            }
+
+            // Clamp
+            if (balance < -45) balance = -45;
+            if (balance > 45) balance = 45;
+
+            // Update Visual
+            beam.style.transform = `translateX(-50%) rotate(${balance * -1}deg)`;
+
+            // Counter-rotate plates so they stay upright
+            plateLeft.style.transform = `translateX(-50%) rotate(${balance}deg)`;
+            plateRight.style.transform = `translateX(50%) rotate(${balance}deg)`;
+
+            // Adjust vertical positions based on angle to simulate physics connection
+            // Simple visual approximation
+            const verticalOffset = balance * 1.5;
+            plateLeft.style.top = `${52 - verticalOffset}px`;
+            plateRight.style.top = `${52 + verticalOffset}px`;
+        }
+
+        // Audio Player Logic
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    console.error("Audio error:", e);
+                    alert("Audio file not found (placeholder).");
+                });
+            } else { audio.pause(); }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+
+                let mins = Math.floor(audio.currentTime / 60);
+                let secs = Math.floor(audio.currentTime % 60);
+                if (secs < 10) secs = '0' + secs;
+                currentTimeEl.textContent = `${mins}:${secs}`;
+            }
+        });
+    </script>
 </body>
+
 </html>

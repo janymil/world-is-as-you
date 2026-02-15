@@ -1,69 +1,583 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svet je taký, aký si ty - Kapitola 7</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        /* Chapter overrides */
-        :root {
-            --accent-cyan: #22d3ee;
+        /* Specific Styles for Chapter 7 - Negative Momentum / Red Theme */
+
+        /* Hero - Red/Orange Warning Theme */
+        .hero h1 {
+            background: linear-gradient(to right, #fff, #ef4444);
+            /* Red-500 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .hero h4 {
+            color: #ef4444;
+        }
+
+        /* --- CONTENT STANDARD PALETTE (GOLD) --- */
+        /* Strictly following instructions to use Gold for main content highlights */
+        .highlight {
+            color: var(--accent-gold);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+            border-left: 3px solid var(--accent-gold);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+
+        .quote-block {
+            border-color: rgba(251, 191, 36, 0.3);
+            color: #fde047;
+            /* Lighter gold */
+        }
+
+        .sub-heading {
+            color: var(--accent-gold);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- INTERACTIVE TOOLS (Red/Green Theme Allowed Here) --- */
+        .momentum-tool-container {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+        .momentum-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            border-top: 8px solid #ef4444;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            animation: spin 0.5s linear infinite;
+            /* Fast spin for negative momentum */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .stop-btn {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+            transition: 0.3s;
+            animation: pulse 1.5s infinite;
+        }
+
+        .stop-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* State when momentum is broken (Green) */
+        .momentum-tool-container.broken {
+            border-color: #22c55e;
+            /* Green */
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
+        }
+
+        .momentum-tool-container.broken .momentum-spinner {
+            border-top-color: #22c55e;
+            animation: spin 3s linear infinite;
+            /* Slow, calm spin */
+        }
+
+        .momentum-tool-container.broken .stop-btn {
+            background: #22c55e;
+            box-shadow: none;
+            cursor: default;
+            animation: none;
         }
     </style>
 </head>
+
 <body>
 
     <div id="shared-header"></div>
 
-    <section class="hero" style="background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://source.unsplash.com/random/1920x1080/?galaxy,abstract,mystery'); background-size: cover; background-position: center;">
+    <section class="hero"
+        style="background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://source.unsplash.com/random/1920x1080/?storm,vortex,spiral'); background-size: cover; background-position: center;">
         <div class="hero-content">
-            <h4>Kapitola 7</h4>
-            <h1>Prelomenie negatívneho momentu</h1>
-            <p>V tejto kapitole prenikneš hlbšie do poznania, že ty si tvorca.</p>
+            <h4 style="letter-spacing: 3px;">KAPITOLA 7</h4>
+            <h1>Prelomenie Negatívneho Hybného Momentu</h1>
+            <p>Ako zastaviť pád, keď sa zdá, že sa všetko rúca, a znovu nájsť pevnú pôdu pod nohami.</p>
         </div>
     </section>
 
-    <section class="book-content">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Prepis Kapitoly</h2>
-        <div class="book-text">
-            <p><em>(Text tejto kapitoly zatiaľ nebol pridaný. Prosím doplňte obsah tu.)</em></p>
-            
-            <p>[cite_start]Tu bude hlavná myšlienka kapitoly o Prelomenie negatívneho momentu.[cite: 1] Každý koncept v tejto knihe nadväzuje na ten predchádzajúci.</p>
-
-            <h3 class="sub-heading">Kľúčový koncept</h3>
-            <p>Pamätaj, že realita je zrkadlo. Čokoľvek cítiš vo vzťahu k tejto téme, to sa ti bude diať. Zmeň svoj vnútorní postoj k téme "Prelomenie negatívneho momentu" a vonkajší svet sa prispôsobí.</p>
-        </div>
-    </section>
-
-    <section class="duality-section">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Aplikácia v praxi</h2>
-        <div class="cards-wrapper">
-             <!-- Placeholder card -->
-            <div class="reveal-card">
-                <div class="reveal-overlay">
-                    <h3 class="overlay-text">Starý vzorec</h3>
-                    <p style="margin-top: 10px; color: #cbd5e1;">Ako si premýšľal doteraz?</p>
+    <!-- Audio Section -->
+    <section class="audio-section">
+        <div class="audio-player-container">
+            <div class="audio-header">
+                <div class="audio-icon-wrapper">
+                    <i class="fas fa-headphones"></i>
                 </div>
-                <div class="card-content">
-                    <h3 class="truth-text">Nová pravda</h3>
-                    <p>Ako premýšľa tvorca reality?</p>
+                <div class="audio-details">
+                    <span class="audio-label">Podcast / Audio verzia</span>
+                    <h3 class="audio-title-text">07 - Prelomenie Negatívneho Hybného Momentu</h3>
+                </div>
+            </div>
+
+            <div class="player-main-controls">
+                <audio id="chapterAudio" src="audio/7kapitola-negativny-moment.mp3"></audio>
+
+                <button class="play-pause-btn" id="playPauseBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+
+                <div class="audio-progress-area">
+                    <div class="progress-time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    <div class="custom-progress-bar" id="progressBar">
+                        <div class="progress-played" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div class="volume-control">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="shared-footer"></div>
+    <section class="book-content">
+        <div class="paragraph-wrapper">
+
+            <h3 class="sub-heading">Prelomenie Negatívneho Hybného Momentu</h3>
+
+            <p>Ovládnutie manifestácie je primárne o udržaní kontroly nad tvojím celkovým emocionálnym stavom. Tvoje
+                emócie sú priamo ovplyvnené tvojimi myšlienkami; keď myslíš negatívne, cítiš sa zle. Takže, ak sa naučíš
+                byť citlivý na spôsob, akým sa cítiš, a budeš po celý čas uprednostňovať svoj emocionálny stav, život sa
+                stane sledom pozitívnych udalostí. Keď sa vedome upokojíš, aby si sa cítil lepšie, bez ohľadu na
+                okolnosti, posunieš svoju energiu spôsobom, ktorý okamžite transformuje tvoju realitu.</p>
+
+            <p>Keď si v stave skutočnej pohody, prirodzene myslíš myšlienky, ktoré ťa podporujú a povznášajú. Vysielaš
+                frekvenciu, ktorá signalizuje, že si v harmónii s hojnosťou, radosťou, láskou a úspechom. Na oplátku ti
+                to život odráža späť prostredníctvom priaznivých okolností, neočakávaných príležitostí a synchronicít
+                bez námahy.</p>
+
+            <p>Ak si z dobrého pocitu urobíš svoju najvyššiu prioritu, začneš si všímať, ako ľahko sa život zoraďuje v
+                tvoj prospech. Tí správni ľudia, tie správne príležitosti a tie správne okolnosti budú k tebe prúdiť,
+                pretože si s nimi energeticky zosúladený.</p>
+
+            <p>Rozumiem, že niekedy sa zdá takmer nemožné myslieť pozitívne myšlienky, keď sa ocitneš zaseknutý v
+                negatívnom hybnom momente. Hybná sila negativity môže byť taká silná, že snažiť sa prinútiť do
+                pozitívneho nastavenia mysle pôsobí neprirodzene, dokonca nemožne. A to je v poriadku. Cesta von z
+                negatívnej špirály nespočíva v boji proti nej, pretože keď bojuješ, len ju kŕmiš ďalšou energiou.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-hand-paper"
+                    style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-gold);"></i>
+                <p>Namiesto boja sa toho pre daný moment jednoducho vzdaj. Priznaj porážku, nie v zmysle vzdania sa seba
+                    samého, ale v zmysle, že už nebudeš zápasiť s negativitou. Pusti potrebu okamžite to napraviť a
+                    namiesto toho presuň svoju pozornosť inam.</p>
+            </div>
+
+            <p>Urob niečo nesúvisiace, niečo neutrálne alebo dokonca mierne príjemné. Prečítaj si knihu, choď na
+                prechádzku, počúvaj hudbu, pozri si niečo odľahčené alebo si daj horúcu sprchu, čokoľvek, čo dá tvojej
+                mysli prestávku od špirály smerom nadol.</p>
+
+            <p>Keď to urobíš, všimneš si, že ťažoba sa začína dvíhať, aj keď len mierne. Tá úľava stačí na posunutie
+                hybného momentu. A z tohto miesta úľavy, namiesto toho, aby si sa ponoril späť do detailov problému,
+                choď na to všeobecne. Vyhni sa prehnanej analýze situácie. Namiesto toho si pripomeň jednu jednoduchú
+                pravdu: 'Na konci dňa všetko vždy dopadne dobre.' Opakuj si to, znova a znova: 'Bez ohľadu na všetko,
+                veci vždy dopadnú fajn. Nejako, nejakým spôsobom, všetko zapadne na svoje miesto.'</p>
+
+            <p>Pokračuj v opakovaní týchto upokojujúcich myšlienok, kým nenájdeš útechu. Nechaj ich usadiť sa v tvojej
+                mysli, kým nezačneš cítiť jemný pocit ľahkosti, tichú úľavu. Keď dosiahneš toto miesto pokoja, nechaj ho
+                chvíľu pôsobiť. Potom, keď sa budeš skutočne cítiť ľahšie, môžeš začať zavádzať pozitívnejšie
+                predpoklady o samotnej situácii. 'Veci sa už posúvajú v môj prospech.' 'Nepotrebujem vedieť ako, len
+                viem, že sú.' 'Všetko sa dokonale zoraďuje, aj keď to ešte nevidím.' Z tohto nového emocionálneho
+                stanoviska zistíš, že pozitívne myšlienky pôsobia oveľa prirodzenejšie a riešenia sa začnú odhaľovať bez
+                námahy.</p>
+
+            <div class="quote-block">
+                "Kľúčom je postupovať krok za krokom, od odporu k neutralite, od neutrality k úľave a od úľavy k viere.
+                Takto sa vymaneš z negatívneho hybného momentu, nie nútením zmeny, ale postupným vedením seba samého k
+                lepšie pociťovanému stavu."
+            </div>
+
+            <!-- Tool: Momentum Breaker -->
+            <section class="tools-section">
+                <div class="momentum-tool-container" id="momentumTool">
+                    <h3 style="color: #fff; margin-bottom: 2rem;">Zastav Špirálu</h3>
+                    <p style="color: #cbd5e1; margin-bottom: 2rem;">Cítiš, že padáš? Klikni na tlačidlo a mentálne
+                        povedz "DOSŤ".</p>
+
+                    <div class="momentum-spinner"></div>
+
+                    <button class="stop-btn" onclick="breakMomentum()">Zastaviť!</button>
+
+                    <div id="reliefMessage"
+                        style="display: none; margin-top: 2rem; color: #4ade80; font-size: 1.2rem; animation: fadeIn 1s;">
+                        <i class="fas fa-check-circle"></i> Hybný moment prerušený.<br>
+                        <span style="font-size: 1rem; color: #cbd5e1; display: block; margin-top: 0.5rem;">Teraz sa len
+                            nadýchni. Nemusíš nič riešiť. Len buď.</span>
+                    </div>
+                </div>
+            </section>
+
+            <h3 class="sub-heading">Ilúzia Role Obete</h3>
+
+            <p>Keď život zasadí úder a keď sa tvoj svet zatrasie, a všetko sa zdá, že sa rúca, môžeš mať pocit, že ťa
+                vesmír trestá, že osud sa obrátil proti tebe, že bez ohľadu na to, čo robíš, nemôžeš si vydýchnuť. Môžeš
+                sa cítiť bezmocne, stratene alebo zradený samotným životom. A v tom momente je lákavé poddať sa naratívu
+                obete. Do toho. Plač, ak potrebuješ. Zostaň v posteli. Utápaj sa v sebaľútosti. Ľutuj sa. Zúrivo sa
+                hnevaj na nespravodlivosť toho všetkého.</p>
+
+            <p>Môžeš romantizovať biedu, ak chceš. Môžeš premeniť svoju bolesť na poéziu, nosiť svoje utrpenie ako
+                odznak cti, spriateliť sa s bojom a vybudovať si okolo neho identitu. Môžeš si hovoriť, že temnota ťa
+                robí hlbokým, že smútok ťa robí zaujímavým, že ťažkosti ti dávajú nejaký druh vznešenej hrany. A na
+                chvíľu ťa to možno uteší. Možno to bude pôsobiť ako kontrola, ako validácia, ako dôkaz, že tvoje
+                utrpenie niečo znamená.</p>
+
+            <p>Ale nakoniec to divadlo zostarne. Nakoniec si uvedomíš, že bez ohľadu na to, ako veľmi to objímaš, bolesť
+                je stále bolesť. Bez ohľadu na to, ako veľmi sa ju snažíš urobiť krásnou, stále ťa ťaží. A keď skončíš s
+                predstavením, keď skončíš s hraním postavy tragickej duše, pochop jednu vec: nič to nezmení. Ani jednu
+                vec.</p>
+
+            <p>Žiadne množstvo biedy nepresvedčí realitu, aby ti dala pauzu. Neexistuje žiadna univerzálna sila čakajúca
+                na to, kým budeš trpieť "dosť", predtým ako sa rozhodne veci zvrátiť. Svet takto nefunguje. Neexistuje
+                žiadny kozmický sudca, ktorý si vedie skóre tvojej bolesti, čakajúci, kým dosiahneš prah utrpenia, kým
+                doručí úľavu. Ak niečo, čím viac sa ponáraš do zúfalstva, tým viac ti život bude zrkadliť dôvody na to,
+                aby si bol nešťastný. Vesmír nie je sentimentálny. Nereaguje na núdzu, zúfalstvo alebo žiaľ. Reaguje na
+                stav bytia. To je jediný zákon. Energia, ktorú vysielaš, je energia, ktorá sa ti odráža späť. A práve
+                teraz si v cykle, kde tvoje negatívne myšlienky manifestovali negatívne okolnosti, a tie okolnosti teraz
+                spúšťajú ešte viac negatívnych myšlienok. Je to slučka. Začarovaná, sama sa udržiavajúca slučka.</p>
+
+            <div class="highlight-box">
+                <p>Takže, máš na výber. Zostaň v slučke alebo sa vymaníš. Ak budeš pokračovať v kŕmení cyklu, bude sa
+                    len zintenzívňovať. Nájdeš viac dôvodov cítiť sa ako obeť. Viac vecí sa pokazí. Viac dôkazov sa
+                    nahromadí na "dokázanie", že život je nespravodlivý. Hybný moment bude narastať a skôr než sa
+                    nazdáš, zrútiš sa do hlbokej jamy frustrácie, odporu a beznádeje.</p>
+            </div>
+
+            <p>Ale ak prestaneš hrať obeť, všetko sa posunie. Okamžite. Začína to jedným rozhodnutím: Odmietam zostať v
+                tomto stave dlhšie. Nezáleží na tom, ako zlé sa veci zdajú. Nezáleží na tom, ako oprávnene sa cítiš vo
+                svojom hneve alebo smútku. Jediná cesta von je zmeniť svoj stav. A v momente, keď to urobíš, prerušíš
+                cyklus.</p>
+
+            <p>Spočiatku to nebude pôsobiť prirodzene. Tvoja myseľ bude klásť odpor. Bude si chcieť stále dookola
+                prehrávať tragédiu, analyzovať nespravodlivosť a ospravedlňovať bolesť. Ale nič z toho ti nepomôže.
+                Jediná vec, ktorá pomôže, je zámerne si vybrať lepšiu myšlienku. Jednu myšlienku po druhej. Jeden posun
+                po druhom. Nepotrebuješ skočiť zo smútku do radosti v jedinom kroku. To je nerealistické. Ale potrebuješ
+                prestať kŕmiť negatívnu špirálu a začať sa viesť smerom nahor. Nájdi jednu vec, ktorú oceníš, jednu
+                myšlienku, ktorá pôsobí o niečo lepšie. Sústreď sa na ňu. Potom nájdi ďalšiu. A ďalšiu. Stále siahaj po
+                lepšie pôsobiacich myšlienkach, kým sa ťažoba nezačne dvíhať.</p>
+
+            <p>A hneď ako to urobíš, realita bude nasledovať. Všimneš si malé zmeny, jemné posuny vo svojom vonkajšom
+                svete, ktoré odrážajú tvoj nový vnútorný stav.</p>
+
+            <p>Príležitosti sa objavia. Riešenia vyplávajú na povrch. Ľudia začnú na teba reagovať inak. Hmla sa
+                rozjasní a zrazu sa veci už nebudú zdať také zlé. Cesta von z temnoty nie je prosením vesmíru, aby
+                zmenil tvoje okolnosti, je to zmenou teba samého.</p>
+
+            <h3 class="sub-heading">Keď sa Rozpúta Peklo</h3>
+
+            <p>Ak sa jedného dňa ocitneš zahnaný do kúta, ak sa problém cíti, akoby bol priamo pred tvojou tvárou,
+                dýchal ti na krk bez úniku, a cítiš sa uväznený, zahltený alebo rovno vydesený, tvoja myseľ sa ťa bude
+                snažiť presvedčiť, že nie je nič, čo by si mohol urobiť. Že to najhoršie je nevyhnutné. Že si bezmocný.
+                Ale dovoľ mi povedať ti práve teraz, to je lož.</p>
+
+            <p>Cesta von je jednoduchá, ale vyžaduje si absolútnu mentálnu disciplínu. Musíš dostať svoje myšlienky pod
+                kontrolu, akoby na tom závisel tvoj život, pretože istým spôsobom závisí. Každá jedna myšlienka, ktorú v
+                takýchto momentoch prechovávaš, ťa buď zakopáva hlbšie do problému, alebo ťa z neho ťahá von. Neexistuje
+                nič medzi tým. A nehovor mi, že nemôžeš ovládať svoje myšlienky. To je len ďalšia výhovorka. Práve
+                teraz, mysli na žlté auto. Hotovo? Dobre. Teraz mysli na zelené nákladné auto. Vidíš? Práve si si
+                dokázal, že máš kontrolu. Ty si ten, kto vyberá, o čom premýšľaš.</p>
+
+            <div class="quote-block">
+                "Takže ako otočíš scenár, keď si po kolená v zlej situácii? Urobíš rozhodnutie: Budem myslieť iba, iba,
+                IBA na riešenie. To je všetko."
+            </div>
+
+            <p>Nezaoberáš sa problémom. Neanalyzuješ ho, nepitvaš ho, ani sa v ňom neutápaš. Nenecháš ho sedieť vo
+                svojej mysli ani o pol sekundy dlhšie, než je nutné. V sekunde, keď sa prichytíš pri špirále, preberieš
+                sa z toho a presmeruješ svoju pozornosť. Je to ako mentálna hra preťahovania lanom. Na jednej strane máš
+                myšlienky strachu, paniky a najhorších možných scenárov. Na druhej strane máš myšlienky istoty, sily a
+                výsledku, ktorý skutočne chceš. Ktorúkoľvek stranu kŕmiš najviac, tá strana vyhráva.</p>
+
+            <p>Premýšľanie o probléme je voľba. Môžeš tam sedieť, nechať svoju myseľ prehrávať najhoršie možné výsledky
+                ako zaseknutú platňu, ale nečuduj sa, prečo sa nič nemení. Alebo môžeš začať posúvať a zámerne,
+                agresívne presmerovať každú jednu myšlienku smerom k riešeniu, a uvidíš, ako rýchlo sa situácia otočí.
+            </p>
+
+            <p>Napríklad, ak tvoja myseľ začne hovoriť: Čo ak sa z tohto neviem dostať? okamžite to prepíšeš s: Už
+                nachádzam cestu von. Ak začneš premýšľať: Toto skončí zle, okamžite to nahradíš s: Toto sa vyvíja v môj
+                prospech. Žiadne váhanie. Žiadne meškanie. Nedáš strachu šancu zaseknúť svoje pazúry.</p>
+
+            <div class="highlight-box">
+                <p>A áno, spočiatku to vyžaduje úsilie. Tvoja myseľ sa ťa bude snažiť stiahnuť späť do módu paniky,
+                    pretože na to je zvyknutá. Ale ty jej to nedovolíš. Prevezmeš kontrolu. Držíš svoje zameranie pevne.
+                </p>
+            </div>
+
+            <p>Stále si vyberáš myšlienky, ktoré sú v súlade s realitou, ktorú chceš, znova a znova, kým sa nestanú
+                automatickými. A keď skutočne odmietneš nechať problém uniesť tvoju myseľ, situácia sa začne meniť pred
+                tvojimi očami. Príležitosti sa objavia. Riešenia prídu odnikiaľ. Problém zoslabne. A ty si uvedomíš,
+                možno po prvýkrát, že realita nie je niečo, čo sa ti deje. Je to niečo, čomu velíš.</p>
+
+        </div>
+    </section>
+
+    <!-- RECAPITULATION & SUPPORT MATERIAL -->
+    <section class="recap-section"
+        style="padding: 4rem 2rem; background: linear-gradient(to bottom, #0f172a, #1e293b);">
+        <div style="max-width: 1000px; margin: 0 auto;">
+
+            <h2
+                style="text-align: center; color: #fff; margin-bottom: 3rem; font-family: 'Cormorant Garamond', serif; letter-spacing: 2px;">
+                <i class="fas fa-sync-alt" style="color: var(--accent-gold); margin-right: 1rem;"></i> REKAPITULÁCIA
+            </h2>
+
+            <!-- Summary & Key Words Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+
+                <!-- Summary Box -->
+                <div
+                    style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid #fff;">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Zhrnutie
+                        Kapitoly</h4>
+                    <p style="color: #cbd5e1; line-height: 1.6;">
+                        Negatívny hybný moment je len zvyk mysle. Jeho prelomenie nevyžaduje boj, ale kapituláciu a
+                        presmerovanie. Keď prestaneš hrať obeť a prevezmeš kontrolu nad svojou pozornosťou, realita sa
+                        musí zmeniť. Vždy máš moc vybrať si riešenie namiesto problému.
+                    </p>
+                </div>
+
+                <!-- Key Words Box -->
+                <div
+                    style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--accent-gold); display: flex; flex-direction: column; justify-content: center;">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; text-transform: uppercase;">Kľúčové Slová
+                    </h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <span
+                            style="background: rgba(251, 191, 36, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#HybnýMoment</span>
+                        <span
+                            style="background: rgba(251, 191, 36, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#RolaObete</span>
+                        <span
+                            style="background: rgba(251, 191, 36, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Rozhodnutie</span>
+                        <span
+                            style="background: rgba(251, 191, 36, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Úľava</span>
+                        <span
+                            style="background: rgba(251, 191, 36, 0.2); color: #fff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">#Disciplína</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deepening Knowledge: Victim vs Creator Table -->
+            <h3 style="text-align: center; color: var(--accent-gold); margin-bottom: 3rem; font-size: 1.8rem;">
+                <i class="fas fa-balance-scale"></i> Obeť vs. Tvorca
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 4rem;">
+                <!-- Victim Column -->
+                <div style="padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 10px;">
+                    <h4 style="color: #ef4444; text-align: center; margin-bottom: 1rem;">Obeť hovorí:</h4>
+                    <ul style="color: #cbd5e1; font-style: italic; list-style: none; padding: 0;">
+                        <li
+                            style="margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+                            "Prečo sa mi to deje?"</li>
+                        <li
+                            style="margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+                            "Nemôžem s tým nič urobiť."</li>
+                        <li
+                            style="margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+                            "Svet je proti mne."</li>
+                    </ul>
+                </div>
+                <!-- Creator Column -->
+                <div
+                    style="padding: 1.5rem; background: rgba(34, 197, 94, 0.05); border-radius: 10px; border: 1px solid rgba(34, 197, 94, 0.2);">
+                    <h4 style="color: #22c55e; text-align: center; margin-bottom: 1rem;">Tvorca hovorí:</h4>
+                    <ul style="color: #fff; font-weight: 500; list-style: none; padding: 0;">
+                        <li
+                            style="margin-bottom: 1rem; border-bottom: 1px solid rgba(34, 197, 94, 0.1); padding-bottom: 0.5rem;">
+                            "Čo si z tohto vyberiem vytvoriť?"</li>
+                        <li
+                            style="margin-bottom: 1rem; border-bottom: 1px solid rgba(34, 197, 94, 0.1); padding-bottom: 0.5rem;">
+                            "Mám moc zmeniť môj postoj."</li>
+                        <li
+                            style="margin-bottom: 1rem; border-bottom: 1px solid rgba(34, 197, 94, 0.1); padding-bottom: 0.5rem;">
+                            "Všetko sa deje pre mňa."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Final Support -->
+            <div class="highlight-box"
+                style="background: linear-gradient(to right, rgba(251, 191, 36, 0.1), transparent); border-left: 4px solid var(--accent-gold); padding: 2rem; border-radius: 0 10px 10px 0;">
+                <h4 style="color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;">Prvá pomoc
+                    pri kríze</h4>
+                <p>Keď cítiš, že to na teba padá, zastav sa. Zhlboka sa nadýchni. A povedz si:</p>
+                <p style="font-size: 1.2rem; color: var(--accent-gold); font-weight: 600; margin-top: 1rem;">
+                    "Teraz nemusím vyriešiť celý svet. Stačí mi nájsť jednu myšlienku, ktorá bolí o trochu menej."
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <a href="Kapitola6.html" class="nav-btn">&larr; Späť na Kapitolu 6</a>
+        <!-- Ensure Chapter 8 link is provisional or correct -->
+        <a href="Kapitola8.html" class="nav-btn">Pokračovať na Kapitolu 8 &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
 
     <script src="components/header.js"></script>
     <script src="components/search.js"></script>
     <script src="components/footer.js"></script>
-
     <script src="components/scroll-top.js"></script>
+
+    <script>
+        // --- MOMENTUM TOOL LOGIC ---
+        function breakMomentum() {
+            const container = document.getElementById('momentumTool');
+            const btn = container.querySelector('.stop-btn');
+            const message = document.getElementById('reliefMessage');
+
+            // Visual Change
+            container.classList.add('broken');
+            btn.innerText = "HOTOVO";
+            btn.disabled = true;
+
+            // Show Message
+            setTimeout(() => {
+                message.style.display = "block";
+            }, 500);
+        }
+
+        // --- AUDIO PLAYER LOGIC ---
+        const audio = document.getElementById('chapterAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playIcon = playPauseBtn.querySelector('i');
+
+        // Toggle Play/Pause
+        function togglePlay() {
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Playback failed:", error);
+                        playIcon.className = 'fas fa-play';
+                        alert("Nepodarilo sa spustiť audio. (Chyba: " + error.message + ")");
+                    });
+                }
+            } else {
+                audio.pause();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+
+        // Update UI
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+        audio.addEventListener('ended', () => { playIcon.className = 'fas fa-play'; });
+
+        // Update Progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = `${progress}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Load Metadata
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        if (audio.readyState >= 1) {
+            durationEl.textContent = formatTime(audio.duration);
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = pos * audio.duration;
+            }
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+    </script>
 </body>
+
 </html>
