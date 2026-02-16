@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Add favicon dynamically to all pages
+    if (!document.querySelector('link[rel="icon"]')) {
+        const favicon = document.createElement('link');
+        favicon.rel = 'icon';
+        favicon.type = 'image/svg+xml';
+        favicon.href = 'favicon.svg';
+        document.head.appendChild(favicon);
+    }
+
     const container = document.getElementById('shared-header');
     if (!container) return;
 

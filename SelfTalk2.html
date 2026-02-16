@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Vnútorný Monológ 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Special Chapter Styles - Fear Eradication (Calm/Safety Theme) */
+        :root {
+            --bg-deep: #0f172a;
+            --text-silver: #e2e8f0;
+            --accent-truth: #a78bfa;
+            /* Soft Purple for Peace */
+            --accent-power: #34d399;
+            /* Emerald for Safety */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero {
+            min-height: 40vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 1)), url('https://source.unsplash.com/random/1920x1080/?calm,shield,protection,peace');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h4 {
+            color: var(--accent-truth) !important;
+        }
+
+        .instruction-box {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            text-align: center;
+            max-width: 700px;
+            margin: -2rem auto 4rem auto;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stanza Cards */
+        .stanza {
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            padding: 3rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 1px solid rgba(167, 139, 250, 0.3);
+            border-right: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 2px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .stanza:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(167, 139, 250, 0.8);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.1);
+        }
+
+        .stanza p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .stanza p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: var(--accent-truth);
+        }
+
+        /* Separator */
+        .separator {
+            text-align: center;
+            color: var(--accent-truth);
+            font-size: 1.5rem;
+            opacity: 0.5;
+            margin: 2rem 0;
+        }
+
+        /* Interactive "Claim It" Button */
+        .claim-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .claim-btn {
+            background: transparent;
+            border: 2px solid var(--accent-power);
+            color: var(--accent-power);
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .claim-btn:hover {
+            background: var(--accent-power);
+            color: #0f172a;
+            box-shadow: 0 0 30px var(--accent-power);
+        }
+
+        .claim-confirm {
+            margin-top: 1rem;
+            height: 20px;
+            color: var(--accent-power);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* Breathing Animation Background */
+        .pulse-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.05) 0%, rgba(15, 23, 42, 0) 70%);
+            z-index: -1;
+            animation: breathe 8s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pulse-bg"></div>
+    <div id="shared-header"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h4 style="letter-spacing: 3px;">VNÚTORNÝ MONOLÓG 2</h4>
+            <h1>Odstránenie Strachu</h1>
+        </div>
+    </section>
+
+    <!-- Instruction Section -->
+    <div class="instruction-box">
+        <p>Čítaj každú vetu pomaly, nechaj ju preniknúť do hĺbky a opakuj si ju, kým nepocítiš zmysel uspokojenia a
+            úľavy.</p>
+    </div>
+
+    <div class="book-content">
+
+        <!-- Stanza 1 -->
+        <div class="stanza">
+            <p>Strach je len myšlienka. Nie je skutočný.</p>
+            <p>Je to príbeh, ktorý mi hovorí moja myseľ, a ja mám moc ten príbeh zmeniť.</p>
+            <p>Strach nie je sila mimo mňa, existuje len vtedy, keď mu dám život.</p>
+            <p>A práve teraz odmietam dať mu život. Odmietam ho kŕmiť.</p>
+            <p>Odmietam ho nechať rásť.</p>
+            <p>Strach nemá žiadnu skutočnú moc, pokiaľ mu to nedovolím, a ja mu to nedovolím.</p>
+            <p>Práve teraz si vyberám uvoľniť strach. Nepotrebujem ho.</p>
+            <p>Nezabávam sa ním. Som v bezpečí.</p>
+            <p>Som chránený.</p>
+            <p>Život vždy pracuje v môj prospech, aj keď to ešte nevidím.</p>
+            <p>To, že nevidím celý obraz, neznamená, že sa veci pre mňa nedokonalé neusporadúvajú.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-shield-alt"></i></div>
+
+        <!-- Stanza 2 -->
+        <div class="stanza">
+            <p>Každá situácia, každá udalosť, každý moment ma vedie k môjmu najvyššiemu dobru.</p>
+            <p>Nie je sa čoho báť.</p>
+            <p>Strach existuje len v mojej mysli, ale ja som väčší ako moja myseľ.</p>
+            <p>Nedovolím prechodným myšlienkam obáv, aby ma ovládali. Nedovolím vymysleným nebezpečenstvám diktovať moju
+                realitu. Vyberám si dôveru.</p>
+            <p>Vyberám si veriť v nevidené sily, ktoré pre mňa pracujú.</p>
+            <p>Vyberám si stáť pevne v poznaní, že som vždy presne tam, kde potrebujem byť.</p>
+            <p>Nemusím ovládať všetko, stačí mi dôverovať.</p>
+            <p>Dôverovať sebe. Dôverovať vesmíru.</p>
+            <p>Dôverovať, že všetko sa odvíja v dokonalej harmónii.</p>
+            <p>Zhlboka dýcham. Spomalím.</p>
+            <p>Cítim silu vo svojom vnútri.</p>
+            <p>Som mocný nad rámec akejkoľvek miery.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-shield-alt"></i></div>
+
+        <!-- Stanza 3 -->
+        <div class="stanza">
+            <p>Žiadna vonkajšia sila nado mnou nemá moc, pokiaľ jej to nedovolím.</p>
+            <p>A ja nedovoľujem nič iné ako mier, sebavedomie a istotu, aby zapustili korene v mojej mysli.</p>
+            <p>Vítam mier do svojho bytia. Vítam jasnosť.</p>
+            <p>Vítam ľahkosť. Nie som malý. Nie som slabý. Som nekonečný.</p>
+            <p>Som tvorcom svojej reality a odmietam tvoriť zo strachu.</p>
+            <p>Strach skresľuje realitu, ale ja teraz vidím jasne. Vidím, že som v bezpečí.</p>
+            <p>Vidím, že som podporovaný.</p>
+            <p>Vidím, že ma vždy drží niečo väčšie ako ja sám.</p>
+            <p>Kráčam vpred s odvahou.</p>
+            <p>Kráčam vpred so sebavedomím.</p>
+            <p>Kráčam vpred s vedomím, že ku mne môže prísť len dobro.</p>
+            <p>Aj v momentoch neistoty si pripomínam, že nikdy nie som sám.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-shield-alt"></i></div>
+
+        <!-- Stanza 4 -->
+        <div class="stanza">
+            <p>Som vždy vedený.</p>
+            <p>Som vždy chránený.</p>
+            <p>Neznámo ma nedesí, vzrušuje ma, pretože viem, že ukrýva požehnania nad rámec mojej predstavivosti.</p>
+            <p>Vyberám si vieru namiesto strachu.</p>
+            <p>Vyberám si dôveru namiesto pochybností.</p>
+            <p>A pretože si vyberám toto, <strong>som slobodný.</strong></p>
+        </div>
+
+        <div class="claim-section">
+            <button class="claim-btn" onclick="claimTruth()">Som Slobodný</button>
+            <div id="claimMsg" class="claim-confirm">SLOBODA PRIJATÁ</div>
+        </div>
+
+    </div>
+
+    <footer>
+        <a href="SelfTalk1.html" class="nav-btn">&larr; Späť na Monológ 1</a>
+        <a href="SelfTalk3.html" class="nav-btn">Ďalší: Keď si Zahltený &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script src="components/header.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/scroll-top.js"></script>
+
+    <script>
+        function claimTruth() {
+            const btn = document.querySelector('.claim-btn');
+            const msg = document.getElementById('claimMsg');
+            const body = document.body;
+
+            // Visual Flash
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.top = '0';
+            flash.style.left = '0';
+            flash.style.width = '100vw';
+            flash.style.height = '100vh';
+            flash.style.backgroundColor = 'white';
+            flash.style.opacity = '0.8';
+            flash.style.zIndex = '9999';
+            flash.style.transition = 'opacity 1s ease-out';
+            flash.style.pointerEvents = 'none';
+            document.body.appendChild(flash);
+
+            requestAnimationFrame(() => {
+                flash.style.opacity = '0';
+            });
+            setTimeout(() => flash.remove(), 1000);
+
+            // Button State
+            btn.style.borderColor = '#34d399'; // Emerald success
+            btn.style.color = '#34d399';
+            btn.innerHTML = '<i class="fas fa-dove"></i> INTEGRÁCIA DOKONČENÁ';
+
+            // Show Message
+            msg.style.opacity = '1';
+            msg.innerText = "SI V BEZPEČÍ.";
+        }
+    </script>
+</body>
+
+</html>

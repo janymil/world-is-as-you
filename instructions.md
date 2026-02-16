@@ -1,9 +1,29 @@
+
 # Formatting Instructions for "World is as you are"
 
 ## General Rules
 1.  **NO Text Removal**: Never remove any original text, word, or paragraph. The content must remain verbatim.
 2.  **NO Replacement Summaries**: Do not summarize a paragraph and replace the original text with the summary. Summaries must be *additive*.
 3.  **Additions Allowed**: You may add extra text, summaries, metaphors, or explanations if they complement the chapter and enhance understanding.
+
+## Chapter Extension Rules (NEW - STRICT)
+1.  **Understand the Core Philosophy**: The author describes reality as a reflection of internal state. All extensions must support this viewpoint.
+2.  **NO External References**:
+    *   **NEVER** mention specific authors (Neville Goddard, Bashar, Vadim Zeland, etc.).
+    *   **NEVER** mention scientific fields explicitly (Quantum Physics, Mechanics).
+    *   **USE** the *concepts* (state, mirror, selection) but present them as the author's own direct observation.
+3.  **Voice & Tone**:
+    *   **Direct & Punchy**: "You are the creator." not "According to theory..."
+    *   **Metaphorical**: Use "Mirror", "Script", "Radio", "River" instead of "Superposition" or "Field".
+    *   **No Jargon**: Avoid academic language. Speak to the reader's daily experience.
+4.  **Add Constructive Analogies**:
+    *   *Physics*: Resonance, frequency, gravity, momentum (used metaphorically).
+    *   *Nature*: Growth, seasons, water flow.
+    *   *Technology*: Signals, blueprints, software.
+5.  **Placement**:
+    *   Insert extensions *between* original paragraphs to bridge ideas.
+    *   Add new sections *after* key concepts to deepen them.
+    *   Do *not* dilute the original text; amplify it.
 
 ## Creativity & Visuals (New Priority)
 1.  **Be Creative**: Do not just format text. **Invent visual metaphors** and **creative elements** to represent abstract concepts.
@@ -32,4 +52,24 @@
         *   Must include a **Chapter Summary** box.
         *   Must include a **Key Words** section (visual tags).
         *   Must include interactive supportive material (Quotes, FAQs, Exercises).
-    *   **Styling**: Use a distinct background (e.g., dark gradient) to separate it from the book text. Do **not** use a top border line unless requested.
+## Sequential Workflow Protocol (Virtual Agents)
+To ensure quality, every chapter must pass through these distinct "modes" or "agents":
+
+1.  **The Translator (Step 1)**:
+    *   **Goal**: Translate original text VERBATIM.
+    *   **Rule**: No changes, no deletions, no creative flair yet. Just pure accuracy. And natural slovak translation. So each native slovak understand it. And it is fluent in slovak language. 
+
+2.  **The Philosopher (Step 2)**:
+    *   **Goal**: Extend the text with new sections.
+    *   **Rule**: Apply "Author's Voice". No name-dropping. Use metaphors (Gardener, Radio, Mirror).
+    *   **Task**: Insert 3-4 deep analogies or "Paradox" sections.
+
+3.  **The Designer (Step 3)**:
+    *   **Goal**: Create the interactive visual.
+    *   **Rule**: No placeholders. Use custom SVG or CSS shapes.
+    *   **Task**: Design a visual that explains the core concept (e.g. Tunnel vs Light).
+
+4.  **The Coder (Step 4)**:
+    *   **Goal**: Assemble HTML/CSS/JS.
+    *   **Rule**: Clean code, mobile responsive, specific colors.
+    *   **Task**: Write the final file.

@@ -1,0 +1,2896 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Register Myšlienok</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Register Specific Styles - Neural Network / Modern Library */
+        :root {
+            --bg-deep: #0f172a;
+            --text-silver: #e2e8f0;
+            --accent-link: #38bdf8;
+            --accent-idea: #f472b6;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero {
+            min-height: 40vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1)), url('https://source.unsplash.com/random/1920x1080/?network,constellation,stars,library');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h4 {
+            color: var(--accent-link) !important;
+        }
+
+        /* Search Box */
+        .register-search {
+            max-width: 600px;
+            margin: -2rem auto 4rem auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .register-search input {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .register-search input:focus {
+            outline: none;
+            border-color: var(--accent-link);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .register-search .clear-filter-btn {
+            position: absolute !important;
+            right: 10px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+
+        /* Concept Grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .concept-grid.grid-view {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .concept-grid.grid-view .concept-card {
+            padding: 1.2rem;
+        }
+
+        .concept-grid.grid-view .concept-title {
+            font-size: 1.3rem;
+        }
+
+        .concept-grid.grid-view .concept-desc {
+            font-size: 0.8rem;
+            -webkit-line-clamp: 2;
+        }
+
+        .concept-grid.grid-view .link-cloud {
+            gap: 0.3rem;
+        }
+
+        .concept-grid.grid-view .chapter-tag {
+            font-size: 0.7rem;
+            padding: 4px 8px;
+        }
+
+        .concept-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.7);
+            border-color: var(--accent-link);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .concept-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        .concept-title i {
+            font-size: 1.2rem;
+            color: var(--accent-link);
+            opacity: 0.7;
+        }
+
+        .concept-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+        }
+
+        .concept-desc.expanded {
+            -webkit-line-clamp: unset;
+            display: block;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--accent-link);
+            font-size: 0.75rem;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease;
+            display: block;
+        }
+
+        .read-more-btn:hover {
+            color: #60d5f0;
+            text-decoration: underline;
+        }
+
+        .read-more-btn i {
+            margin-left: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* Link Cloud */
+        .link-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .chapter-tag {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-link);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .chapter-tag:hover {
+            background: var(--accent-link);
+            color: #0f172a;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .chapter-tag span {
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        /* Categories */
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #94a3b8;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cat-btn.active,
+        .cat-btn:hover {
+            border-color: var(--accent-link);
+            color: #fff;
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        /* Neural Background */
+        #neuralCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Secondary Filters */
+        .filters-secondary {
+            max-width: 1000px;
+            margin: 0 auto 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Chapter Dropdown */
+        .chapter-select {
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            min-width: 250px;
+        }
+
+        .chapter-select:hover,
+        .chapter-select:focus {
+            border-color: var(--accent-link);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        .chapter-select option {
+            background: #0f172a;
+            color: #fff;
+        }
+
+        /* Alphabet Bar */
+        .alphabet-bar {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .alpha-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: #64748b;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .alpha-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .alpha-btn.active {
+            background: var(--accent-link);
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .alpha-btn.disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .alpha-btn.disabled:hover {
+            background: transparent;
+            color: #64748b;
+        }
+
+        /* --- NEW UX FEATURES --- */
+
+        /* View Toggle Buttons */
+        .view-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .view-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #94a3b8;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .view-btn.active {
+            background: var(--accent-link);
+            border-color: var(--accent-link);
+            color: #0f172a;
+        }
+
+        .view-btn:hover {
+            border-color: var(--accent-link);
+            color: #fff;
+        }
+
+        /* Sorting & Controls */
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 2rem auto;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .sort-select,
+        .view-dropdown {
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+
+        .sort-select:hover,
+        .sort-select:focus,
+        .view-dropdown:hover,
+        .view-dropdown:focus {
+            border-color: var(--accent-link);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        .sort-select option,
+        .view-dropdown option {
+            background: #0f172a;
+            color: #fff;
+        }
+
+        .result-count {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Concept Grid - List View */
+        .concept-grid.list-view {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* ==================== LIST VIEW - COMPLETELY INDEPENDENT ==================== */
+        .concept-list-item {
+            display: grid;
+            grid-template-columns: 24px 500px 1fr 120px 24px;
+            gap: 0.8rem;
+            padding: 0.3rem 1rem;
+            align-items: center;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s ease;
+        }
+
+        .concept-list-item:hover {
+            background: rgba(30, 41, 59, 0.3);
+        }
+
+        .concept-list-item .list-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 4px;
+            color: var(--accent-link);
+            font-size: 0.85rem;
+        }
+
+        .concept-list-item .list-main {
+            min-width: 0;
+        }
+
+        .concept-list-item .list-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .concept-list-item .list-desc {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .concept-list-item .list-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            min-width: 0;
+        }
+
+        .concept-list-item .list-links .chapter-tag {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-link);
+            border-radius: 3px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .concept-list-item .list-meta {
+            display: flex;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+        }
+
+        .concept-list-item .list-meta span {
+            background: rgba(56, 189, 248, 0.08);
+            padding: 3px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+            color: #64748b;
+        }
+
+        .concept-list-item .list-bookmark {
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #94a3b8;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+
+        .concept-list-item:hover .list-bookmark {
+            opacity: 1;
+        }
+
+        .concept-list-item .list-bookmark.bookmarked {
+            color: #FFD700;
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            opacity: 1;
+        }
+
+        /* Chapter Color Coding for List */
+        .concept-list-item.chapter-color-k1 { border-left: 3px solid #FF6B6B; }
+        .concept-list-item.chapter-color-k2 { border-left: 3px solid #4ECDC4; }
+        .concept-list-item.chapter-color-k3 { border-left: 3px solid #45B7D1; }
+        .concept-list-item.chapter-color-k4 { border-left: 3px solid #FFA07A; }
+        .concept-list-item.chapter-color-k5 { border-left: 3px solid #98D8C8; }
+        .concept-list-item.chapter-color-k6 { border-left: 3px solid #F7DC6F; }
+        .concept-list-item.chapter-color-k7 { border-left: 3px solid #BB8FCE; }
+        .concept-list-item.chapter-color-k8 { border-left: 3px solid #85C1E2; }
+        .concept-list-item.chapter-color-k9 { border-left: 3px solid #F8B88B; }
+        .concept-list-item.chapter-color-st { border-left: 3px solid #F472B6; }
+
+        /* Chapter Color Coding */
+        .chapter-color-k1 { border-left: 4px solid #FF6B6B; }
+        .chapter-color-k2 { border-left: 4px solid #4ECDC4; }
+        .chapter-color-k3 { border-left: 4px solid #45B7D1; }
+        .chapter-color-k4 { border-left: 4px solid #FFA07A; }
+        .chapter-color-k5 { border-left: 4px solid #98D8C8; }
+        .chapter-color-k6 { border-left: 4px solid #F7DC6F; }
+        .chapter-color-k7 { border-left: 4px solid #BB8FCE; }
+        .chapter-color-k8 { border-left: 4px solid #85C1E2; }
+        .chapter-color-k9 { border-left: 4px solid #F8B88B; }
+        .chapter-color-st { border-left: 4px solid #A8E6CF; }
+        .chapter-color-other { border-left: 4px solid #38bdf8; }
+
+        /* New Badge */
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8A80);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Bookmark Button */
+        .bookmark-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #94a3b8;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .bookmark-btn:hover,
+        .bookmark-btn.bookmarked {
+            color: var(--accent-link);
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--accent-link);
+        }
+
+        .bookmark-btn.bookmarked {
+            color: #FFD700;
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Quick Preview */
+        .concept-preview {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: -10px;
+            right: -10px;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid var(--accent-link);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 10px;
+            z-index: 100;
+            box-shadow: 0 -5px 20px rgba(56, 189, 248, 0.3);
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.3s ease;
+        }
+
+        .concept-card:hover .concept-preview {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .preview-title {
+            font-weight: 700;
+            color: var(--accent-link);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-title i {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .preview-desc {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .preview-meta {
+            display: flex;
+            gap: 0.8rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .preview-category,
+        .preview-chapter {
+            background: rgba(56, 189, 248, 0.15);
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .preview-chapters {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .preview-chapters span {
+            background: rgba(56, 189, 248, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* Related Concepts */
+        .related-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .related-tag {
+            background: rgba(244, 114, 182, 0.1);
+            color: var(--accent-idea);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .related-tag:hover {
+            background: var(--accent-idea);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .related-label {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .related-label i {
+            font-size: 0.65rem;
+            color: var(--accent-idea);
+        }
+
+        /* Clear Filter Button */
+        .clear-filter-btn {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .clear-filter-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+        }
+
+        .active-filter-badge {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+            padding: 2rem;
+        }
+
+        .page-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #94a3b8;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--accent-link);
+            color: #fff;
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .page-btn.active {
+            background: var(--accent-link);
+            border-color: var(--accent-link);
+            color: #0f172a;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Bookmarks Tab */
+        .bookmarks-section {
+            display: none;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 12px;
+        }
+
+        .bookmarks-section.active {
+            display: block;
+        }
+
+        .bookmarks-empty {
+            text-align: center;
+            color: #64748b;
+            padding: 2rem;
+        }
+
+        .clear-bookmarks-btn {
+            background: transparent;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #ef4444;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .clear-bookmarks-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+        }
+
+        /* Search Highlight */
+        .search-highlight {
+            background: rgba(251, 191, 36, 0.3);
+            color: #FBF124;
+            padding: 0 3px;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .controls-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sort-select,
+            .view-dropdown {
+                width: 100%;
+            }
+
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .concept-list-item {
+                grid-template-columns: 24px 1fr 80px 24px;
+                gap: 0.4rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .concept-list-item .list-links {
+                display: none;
+            }
+
+            .concept-preview {
+                position: static;
+                display: none;
+                margin-top: 1rem;
+                margin-bottom: 0;
+            }
+
+            .concept-card:hover .concept-preview {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="neuralCanvas"></canvas>
+    <div id="shared-header"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h4 style="letter-spacing: 3px;">HOLOGRAFICKÁ PAMÄŤ KNIHY</h4>
+            <h1>Register Myšlienok a Kľúčových Slov</h1>
+        </div>
+    </section>
+
+    <div class="register-search">
+        <input type="text" id="searchInput" placeholder="Hľadať myšlienku, koncept alebo emóciu..."
+            oninput="filterConcepts()">
+        <button id="clearFilterBtn" class="clear-filter-btn" onclick="clearAllFilters()" style="display: none; position: absolute; right: 10px; top: 8px;">
+            <i class="fas fa-times"></i> Vynulovať filtry
+        </button>
+    </div>
+
+    <div class="categories-nav">
+        <button class="cat-btn active" onclick="setCategory('all')">Všetko</button>
+        <button class="cat-btn" onclick="setCategory('self')">Ja & Identita</button>
+        <button class="cat-btn" onclick="setCategory('universe')">Vesmír & Zákony</button>
+        <button class="cat-btn" onclick="setCategory('tools')">Nástroje & Prax</button>
+        <button class="cat-btn" onclick="setCategory('emotions')">Emócie & Stavy</button>
+    </div>
+
+    <div class="filters-secondary">
+        <div class="filter-row">
+            <select id="chapterSelect" class="chapter-select" onchange="setChapter(this.value)">
+                <option value="all">Všetky Kapitoly</option>
+                <!-- Generated by JS -->
+            </select>
+        </div>
+        <div class="filter-row alphabet-bar" id="alphabetBar">
+            <!-- Generated by JS -->
+        </div>
+    </div>
+
+    <!-- NEW: Controls Bar -->
+    <div class="controls-bar">
+        <div class="result-count" id="resultCount">Nájdené 0 konceptov</div>
+        
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <select id="sortSelect" class="sort-select" onchange="setSorting(this.value)">
+                <option value="az">Alfabeticky A-Z</option>
+                <option value="za">Alfabeticky Z-A</option>
+                <option value="chapter">Podľa Kapitoly</option>
+                <option value="newest">Najnovšie Pridané</option>
+            </select>
+
+            <select id="viewMode" class="sort-select" onchange="setViewMode(this.value)">
+                <option value="card">Karty</option>
+                <option value="list">Zoznam</option>
+                <option value="grid">Mriežka</option>
+            </select>
+        </div>
+
+        <button class="view-btn" id="bookmarksToggle" onclick="toggleBookmarks()" title="Zobraziť záložky">
+            <i class="fas fa-bookmark"></i> Moje Záložky (<span id="bookmarkCount">0</span>)
+        </button>
+    </div>
+
+    <!-- NEW: Bookmarks Section -->
+    <div class="bookmarks-section" id="bookmarksSection">
+        <h2 style="color: var(--accent-link); margin-bottom: 1.5rem;">
+            <i class="fas fa-bookmark"></i> Moje Záložky
+        </h2>
+        <div class="concept-grid" id="bookmarksGrid"></div>
+        <div class="bookmarks-empty" id="bookmarksEmpty" style="display: none;">
+            <p>Zatiaľ žiadne záložky. Klikni na srdce pri koncepte, aby si ho uložil.</p>
+        </div>
+        <button class="clear-bookmarks-btn" onclick="clearAllBookmarks()">Vymazať všetky záložky</button>
+    </div>
+
+    <div class="concept-grid" id="conceptGrid">
+        <!-- Content populated by JS -->
+    </div>
+
+    <!-- NEW: Pagination -->
+    <div class="pagination" id="pagination">
+        <!-- Generated by JS -->
+    </div>
+
+    <footer>
+        <a href="index.html" class="nav-btn">&larr; Späť na Obsah</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script src="components/header.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/scroll-top.js"></script>
+
+    <script>
+        // Database of Concepts
+        // Using Text Fragments: #:~:text=SearchTerm
+        const concepts = [
+
+            // --- SELF & IDENTITY (JA) ---
+            {
+                id: 'identity-base',
+                title: 'Identita (Ja som)',
+                desc: 'Základná otázka existencie. Nie si telo, meno, ani minulosť. Si Vedomie.',
+                category: 'self',
+                icon: 'fas fa-fingerprint',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Nie%20identita,%20ktorú%20nosíš', label: 'Nie si Meno' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Si%20vedomie,%20v%20ktorom%20sa%20toto%20všetko%20deje', label: 'Si Vedomie' },
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=vybudovať%20si%20okolo%20neho%20identitu', label: 'Identita Bojovníka' }
+                ]
+            },
+            {
+                id: 'consciousness',
+                title: 'Vedomie',
+                desc: 'Všetko sa deje vo vedomí. Vedomie je plátno reality.',
+                category: 'self',
+                icon: 'fas fa-eye',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=čisté,%20nekonečné%20vedomie', label: 'Nekonečné Vedomie' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=vedomie%20je%20primárne', label: 'Prvenstvo Vedomia' },
+                    { ch: 'Kapitola 10', url: 'Kapitola10.html#:~:text=Zmeníš%20svoj%20postoj,%20svoje%20vedomie', label: 'Zmena Vedomia' }
+                ]
+            },
+            {
+                id: 'god-source',
+                title: 'Boh / Zdroj',
+                desc: 'Ty nie si vo vesmíre, ty si vesmír. Ty si Boh v prestrojení.',
+                category: 'self',
+                icon: 'fas fa-sun',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Ty%20si%20Boh,%20ktorý%20sa', label: 'Boh v Maske' },
+                    { ch: 'Kapitola 11', url: 'Kapitola11.html#:~:text=Falošní%20bohovia', label: 'Falošní Bohovia' }
+                ]
+            },
+            {
+                id: 'purpose',
+                title: 'Poslanie & Účel',
+                desc: 'Prečo si tu? Nasledovanie vzrušenia ako kompasu duše.',
+                category: 'self',
+                icon: 'fas fa-compass',
+                links: [
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=fyzický%20signál%20z%20tvojho%20Vyššieho%20Ja', label: 'Signál Vyššieho Ja' },
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=nechávaš%20vo%20vesmíre%20dieru', label: 'Diera vo Vesmíre' }
+                ]
+            },
+            {
+                id: 'power-internal',
+                title: 'Vnútorná Sila',
+                desc: 'Moc nie je tam vonku. Je v tebe. Vždy bola.',
+                category: 'self',
+                icon: 'fas fa-fist-raised',
+                links: [
+                    { ch: 'Kapitola 20', url: 'Kapitola20.html#:~:text=sila', label: 'Zdroje sily' },
+                    { ch: 'SelfTalk 1', url: 'SelfTalk1.html#:~:text=mocný', label: 'Afirmácia sily' }
+                ]
+            },
+            {
+                id: 'responsibility',
+                title: 'Zodpovednosť',
+                desc: 'Prijatie autorstva. Nie je to vina, je to moc zmeniť scenár.',
+                category: 'self',
+                icon: 'fas fa-user-shield',
+                links: [
+                    { ch: 'Kapitola 10', url: 'Kapitola10.html#:~:text=Prevezmi%20Zodpovednosť', label: 'Kapitola Zodpovednosti' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Prijímam%20zodpovednosť', label: 'Prijatie Moci' }
+                ]
+            },
+            {
+                id: 'ego',
+                title: 'Ego',
+                desc: 'Malé Ja. Ochranca, ktorý sa bojí neznámeho a drží ťa v hmle.',
+                category: 'self',
+                icon: 'fas fa-mask',
+                links: [
+                    { ch: 'Kapitola 19', url: 'Kapitola19.html#:~:text=Tvoja%20myseľ%20(Ego)', label: 'Ego v hmle' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=ego%20ani%20naučené%20vzorce', label: 'Ego štruktúry' }
+                ]
+            },
+            {
+                id: 'beliefs',
+                title: 'Presvedčenia',
+                desc: 'Softvér reality. Čomu veríš, to zrkadlo odrazí.',
+                category: 'self',
+                icon: 'fas fa-code',
+                links: [
+                    { ch: 'Kapitola 8', url: 'Kapitola8.html#:~:text=Preskúmaj%20Svoje%20Presvedčenia', label: 'Preskúmanie Softvéru' },
+                    { ch: 'Kapitola 6', url: 'Kapitola6.html#:~:text=Zmeň%20presvedčenie', label: 'Zmena Kódu' }
+                ]
+            },
+            {
+                id: 'self-image',
+                title: 'Seba-obraz',
+                desc: 'Termostat tvojej reality. Nemôžeš dostať viac, než si myslíš, že si hoden.',
+                category: 'self',
+                icon: 'fas fa-portrait',
+                links: [
+                    { ch: 'Kapitola 5', url: 'Kapitola5.html#:~:text=obraz', label: 'Obraz v Zrkadle' },
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=termostat', label: 'Termostat Šťastia' }
+                ]
+            },
+
+
+            // --- UNIVERSE & MECHANICS (VESMÍR) ---
+            {
+                id: 'mirror',
+                title: 'Zrkadlo Reality',
+                desc: 'Svet nemá vlastnú vôľu. Len dokonale odráža tvoj vnútorný stav.',
+                category: 'universe',
+                icon: 'fas fa-mirror',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Realita%20je%20Zrkadlo', label: 'Princíp Zrkadla' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Zrkadlo%20nemá%20vlastnú%20myseľ', label: 'Neutralita' },
+                    { ch: 'Kapitola 15', url: 'Kapitola15.html#:~:text=Zrkadlo%20Hojnosti', label: 'Zrkadlo Hojnosti' }
+                ]
+            },
+            {
+                id: 'universe-support',
+                title: 'Vesmír ťa Podporuje',
+                desc: 'Vesmír ti chce dať všetko. Musíš mu to dovoliť.',
+                category: 'universe',
+                icon: 'fas fa-hand-holding-heart',
+                links: [
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=vesmír%20im%20kryje%20chrbát', label: 'Vesmír Kryje Chrbát' },
+                    { ch: 'Kapitola 14', url: 'Kapitola14.html#:~:text=inteligenciu%20vesmíru', label: 'Inteligencia' }
+                ]
+            },
+            {
+                id: 'pendulums',
+                title: 'Kyvadlá',
+                desc: 'Energetické štruktúry a kolektívne myšlienkové formy, ktoré sa živia bojom.',
+                category: 'universe',
+                icon: 'fas fa-users-slash',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=kyvadlo', label: 'Definícia Kyvadla' },
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=negatívny%20moment', label: 'Negatívny Moment' }
+                ]
+            },
+            {
+                id: 'time-illusion',
+                title: 'Čas (Ilúzia)',
+                desc: 'Čas je len nárazník. Opozdenie medzi myšlienkou a hmotou.',
+                category: 'universe',
+                icon: 'fas fa-hourglass-half',
+                links: [
+                    { ch: 'Kapitola 5', url: 'Kapitola5.html#:~:text=Čas%20slúži%20ako%20nárazník', label: 'Funkcia Času' },
+                    { ch: 'Kapitola 5', url: 'Kapitola5.html#:~:text=Vesmír%20sa%20prispôsobí', label: 'Relativita' }
+                ]
+            },
+            {
+                id: 'circumstances',
+                title: 'Okolnosti (Staré Správy)',
+                desc: 'Tomu, čo vidíš teraz, never. Je to len ozvena minulosti.',
+                category: 'universe',
+                icon: 'fas fa-newspaper',
+                links: [
+                    { ch: 'Kapitola 6', url: 'Kapitola6.html#:~:text=Okolnosti%20nie%20sú%20podstatné', label: 'Nepodstatnosť Okolností' },
+                    { ch: 'Kapitola 19', url: 'Kapitola19.html#:~:text=Cesta%20sa%20odhaľuje', label: 'Cesta vpred' }
+                ]
+            },
+            {
+                id: 'people-mirrors',
+                title: 'Ľudia sú Zrkadlá',
+                desc: 'Ostatní len odrážajú tvoj vzťah k sebe samému. Zmeň seba, zmenia sa oni.',
+                category: 'universe',
+                icon: 'fas fa-user-friends',
+                links: [
+                    { ch: 'Kapitola 16', url: 'Kapitola16.html#:~:text=Ľudia%20sú%20zrkadlá', label: 'Vzťahy' },
+                    { ch: 'Kapitola 8', url: 'Kapitola8.html#:~:text=láske', label: 'Presvedčenia o Láske' }
+                ]
+            },
+            {
+                id: 'vibration',
+                title: 'Vibrácia',
+                desc: 'Jazyk vesmíru. Vesmír nepočúva slová, cíti tvoju frekvenciu.',
+                category: 'universe',
+                icon: 'fas fa-wave-square',
+                links: [
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=vibrácia', label: 'Celková Vibrácia' },
+                    { ch: 'Kapitola 13', url: 'Kapitola13.html#:~:text=podkladová%20vibrácia', label: 'Skutočný Signál' }
+                ]
+            },
+            {
+                id: 'coincidence',
+                title: 'Náhoda (Neexistuje)',
+                desc: 'Nič nie je náhodné. Všetko je synchronicita.',
+                category: 'universe',
+                icon: 'fas fa-dice-d20',
+                links: [
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=náhodne', label: 'Nie si náhoda' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Náhoda', label: 'Iluźia náhody' }
+                ]
+            },
+
+
+            // --- EMOTIONS & STATES (EMÓCIE) ---
+            {
+                id: 'emotions-gps',
+                title: 'Emócie (GPS)',
+                desc: 'Emócie nie sú na to, aby si ich trpel, ale aby si ich čítal ako mapu.',
+                category: 'emotions',
+                icon: 'fas fa-map-marker-alt',
+                links: [
+                    { ch: 'Kapitola 4', url: 'Kapitola4.html#:~:text=Tvoje%20emócie%20sú%20Tvoje%20GPS', label: 'Emocionálne GPS' },
+                    { ch: 'Kapitola 4', url: 'Kapitola4.html#:~:text=Dobré%20a%20Zlé%20Emócie', label: 'Signál Súladu' }
+                ]
+            },
+            {
+                id: 'fear',
+                title: 'Strach & Ilúzia',
+                desc: 'Strach je len viera v nežiaduci výsledok. Falošný priateľ.',
+                category: 'emotions',
+                icon: 'fas fa-ghost',
+                links: [
+                    { ch: 'Kapitola 4', url: 'Kapitola4.html#:~:text=Strach%20je%20ilúzia', label: 'Strach je ilúzia' },
+                    { ch: 'Kapitola 19', url: 'Kapitola19.html#:~:text=Strach%20je%20len%20viera', label: 'Definícia Strachu' },
+                    { ch: 'SelfTalk 2', url: 'SelfTalk2.html#:~:text=strach', label: 'Monológ proti strachu' }
+                ]
+            },
+            {
+                id: 'gratitude',
+                title: 'Vďačnosť',
+                desc: 'Signál pre vesmír, že "už je to hotové". Najvyšší stav prijímania.',
+                category: 'emotions',
+                icon: 'fas fa-heart',
+                links: [
+                    { ch: 'Kapitola 13', url: 'Kapitola13.html#:~:text=Sila%20vďačnosti', label: 'Sila Vďačnosti' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Vďačnosť%20za%20Budúcnosť', label: 'Vďačnosť vopred' }
+                ]
+            },
+            {
+                id: 'envy',
+                title: 'Závisť',
+                desc: 'Závisť ti hovorí, že neveríš, že to môžeš mať tiež. Blokuje hojnosť.',
+                category: 'emotions',
+                icon: 'fas fa-eye-slash',
+                links: [
+                    { ch: 'Kapitola 13', url: 'Kapitola13.html#:~:text=Závisť', label: 'Pasca Závisti' },
+                    { ch: 'Kapitola 13', url: 'Kapitola13.html#:~:text=Súťaž%20je%20ilúzia', label: 'Ilúzia Súťaže' }
+                ]
+            },
+            {
+                id: 'resistance',
+                title: 'Odpor & Tlak',
+                desc: 'Na čo tlačíš, to tlačí späť. Uvoľnenie je kľúč.',
+                category: 'emotions',
+                icon: 'fas fa-hand-paper',
+                links: [
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Cesta%20najmenšieho%20odporu', label: 'Cesta najmenšieho odporu' },
+                    { ch: 'SelfTalk 3', url: 'SelfTalk3.html#:~:text=odpor', label: 'Uvoľnenie Odporu' }
+                ]
+            },
+            {
+                id: 'excitement',
+                title: 'Vzrušenie & Radosť',
+                desc: 'Frekvencia, na ktorej sa manifestujú zázraky.',
+                category: 'emotions',
+                icon: 'fas fa-bolt',
+                links: [
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=vzrušenie', label: 'Rozkvet' },
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=nadšenie', label: 'Signál duše' }
+                ]
+            },
+            {
+                id: 'trust',
+                title: 'Dôvera',
+                desc: 'Opak kontroly. Dôvera v proces a v načasovanie.',
+                category: 'emotions',
+                icon: 'fas fa-hands',
+                links: [
+                    { ch: 'Kapitola 19', url: 'Kapitola19.html#:~:text=Dôveruj%20načasovaniu', label: 'Dôvera v Načasovanie' },
+                    { ch: 'Kapitola 19', url: 'Kapitola19.html#:~:text=Dôvera%20je%20viera', label: 'Definícia Dôvery' }
+                ]
+            },
+            {
+                id: 'complaining',
+                title: 'Sťažovanie sa',
+                desc: 'Toxická modlitba. Žiadosť o viac toho, čo nechceš.',
+                category: 'emotions',
+                icon: 'fas fa-bullhorn',
+                links: [
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=sťažovanie', label: 'Sťažovanie je jed' },
+                    { ch: 'Kapitola 4', url: 'Kapitola4.html#:~:text=klebety', label: 'Vyhýbanie sa toxicite' }
+                ]
+            },
+
+
+            // --- TOOLS & PRACTICE (NÁSTROJE) ---
+            {
+                id: 'attention',
+                title: 'Pozornosť',
+                desc: 'Tvoja najdrahšia mena. Kam ide pozornosť, tam prúdi energia.',
+                category: 'tools',
+                icon: 'fas fa-search',
+                links: [
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=získať%20tvoju%20pozornosť', label: 'Boj o Pozornosť' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=presuň%20svoju%20pozornosť', label: 'Riadenie Pozornosti' }
+                ]
+            },
+            {
+                id: 'intention',
+                title: 'Zámer (Rozhodnutie)',
+                desc: 'Nie "dúfať", ale "rozhodnúť sa". Príkaz pre realitu.',
+                category: 'tools',
+                icon: 'fas fa-check-circle',
+                links: [
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=Segmentový%20zámer', label: 'Segmentový Zámer' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=stanov%20si%20špecifické%20zámery', label: 'Špecifický Zámer' }
+                ]
+            },
+            {
+                id: 'visualization',
+                title: 'Vizualizácia',
+                desc: 'Tvorba hologramu budúcnosti v prítomnosti.',
+                category: 'tools',
+                icon: 'fas fa-brain',
+                links: [
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=vizualizuj%20to', label: 'Ako vizualizovať' },
+                    { ch: 'Kapitola 14', url: 'Kapitola14.html#:~:text=Nemusíš%20si%20ich%20vizualizovať', label: 'Kedy nevizualizovať' }
+                ]
+            },
+            {
+                id: 'knowingness',
+                title: 'Vedenie (Knowingness)',
+                desc: 'Stav absolútnej istoty bez potreby dôkazu. Najvyššia technika.',
+                category: 'tools',
+                icon: 'fas fa-lightbulb',
+                links: [
+                    { ch: 'Kapitola 14', url: 'Kapitola14.html#:~:text=Najmocnejšia%20technika', label: 'Stav Vedenia' },
+                    { ch: 'Kapitola 14', url: 'Kapitola14.html#:~:text=Nádej%20čaká%20na%20povolenie', label: 'Nádej vs. Vedenie' }
+                ]
+            },
+            {
+                id: 'importance',
+                title: 'Zníženie Dôležitosti',
+                desc: 'Ak ti na tom príliš záleží, vytváraš odpor. Pusti to.',
+                category: 'tools',
+                icon: 'fas fa-weight-hanging',
+                links: [
+                    { ch: 'Kapitola 11', url: 'Kapitola11.html#:~:text=dôležitosť', label: 'Pasca Dôležitosti' },
+                    { ch: 'SelfTalk 3', url: 'SelfTalk3.html#:~:text=tlak', label: 'Uvoľnenie' }
+                ]
+            },
+            {
+                id: 'giving',
+                title: 'Dávanie (Be a Giver)',
+                desc: 'Dávanie signalizuje hojnosť. Nemôžeš dávať, ak neveríš, že máš.',
+                category: 'tools',
+                icon: 'fas fa-hand-holding-usd',
+                links: [
+                    { ch: 'Kapitola 15', url: 'Kapitola15.html#:~:text=Buď%20darcom', label: 'Buď Darcom' },
+                    { ch: 'SelfTalk 5', url: 'SelfTalk5.html#:~:text=Dávam', label: 'Afirmácia dávania' }
+                ]
+            },
+            {
+                id: 'selftalk',
+                title: 'Vnútorný Monológ',
+                desc: 'Slová, ktorými tvoríš svoj svet. Zmeň príbeh, zmeníš realitu.',
+                category: 'tools',
+                icon: 'fas fa-comment-dots',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=šepot%20tvojej%20mysle', label: 'Šepot Mysle' },
+                    { ch: 'SelfTalk 4', url: 'SelfTalk4.html', label: 'Monológ Úspechu' }
+                ]
+            },
+            {
+                id: 'action',
+                title: 'Inšpirovaná Akcia',
+                desc: 'Konanie z radosti, nie zo strachu. Rozdiel medzi drinou a flow.',
+                category: 'tools',
+                icon: 'fas fa-running',
+                links: [
+                    { ch: 'Kapitola 18', url: 'Kapitola18.html#:~:text=Pravda%20o%20tvrdej%20práci', label: 'Mýtus Tvrdej Práce' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Inšpirovaná%20akcia', label: 'Inšpirovaná Akcia' }
+                ]
+            },
+            {
+                id: 'realist-trap',
+                title: 'Pasca Realistu',
+                desc: 'Byť realistom znamená veriť obmedzeniam minulosti. Buď vizionár.',
+                category: 'tools',
+                icon: 'fas fa-user-tie',
+                links: [
+                    { ch: 'Kapitola 17', url: 'Kapitola17.html#:~:text=Byť%20Realista%20je%20Pasca', label: 'Ilúzia Realizmu' },
+                    { ch: 'Kapitola 4', url: 'Kapitola4.html#:~:text=realista', label: 'Obmedzujúci titul' }
+                ]
+            },
+            {
+                id: 'advice',
+                title: 'Rady (Nepýtaj si)',
+                desc: 'Rady iných sú len odrazom ich strachov. Počúvaj seba.',
+                category: 'tools',
+                icon: 'fas fa-ear-listen',
+                links: [
+                    { ch: 'Kapitola 20', url: 'Kapitola20.html#:~:text=Nepýtaj%20si%20rady', label: 'Prečo si nepýtať' },
+                    { ch: 'Kapitola 20', url: 'Kapitola20.html#:~:text=Oni%20nevedia', label: 'Oni nevedia' }
+                ]
+            },
+            {
+                id: 'false-gods',
+                title: 'Falošní Bohovia',
+                desc: 'Astrológia, vláda, "záchrancovia". Nevzdávaj sa svojej moci.',
+                category: 'tools',
+                icon: 'fas fa-church',
+                links: [
+                    { ch: 'Kapitola 11', url: 'Kapitola11.html#:~:text=Falošní%20bohovia', label: 'Zoznam modiel' },
+                    { ch: 'Kapitola 10', url: 'Kapitola10.html#:~:text=zodpovednosť', label: 'Koniec obviňovania' }
+                ]
+            },
+            {
+                id: 'canvas',
+                title: 'Plátno (Život)',
+                desc: 'Život je čisté plátno. Môžeš naň maľovať čokoľvek, bez ospravedlňovania.',
+                category: 'tools',
+                icon: 'fas fa-palette',
+                links: [
+                    { ch: 'Kapitola 21', url: 'Kapitola21.html#:~:text=Život%20je%20plátno', label: 'Metafora Plátna' },
+                    { ch: 'Kapitola 21', url: 'Kapitola21.html#:~:text=maľuješ%20sám', label: 'Sloboda tvorby' }
+                ]
+            },
+            {
+                id: 'thriving',
+                title: 'Prekvitanie (Thriving)',
+                desc: 'Koniec "prežívania". Režim rastu, expanzie a radosti.',
+                category: 'tools',
+                icon: 'fas fa-seedling',
+                links: [
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=Je%20čas%20prekvitať', label: 'Definícia Prekvitania' },
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=bezpečia', label: 'Od strachu k bezpečiu' }
+                ]
+            },
+            {
+                id: 'expectation',
+                title: 'Očakávanie',
+                desc: 'Realita sa neformuje podľa toho, čo chceš, ale podľa toho, čo očakávaš.',
+                category: 'tools',
+                icon: 'fas fa-hourglass-start',
+                links: [
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=očakávania', label: 'Sila Očakávania' },
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=dychtivého%20očakávania', label: 'Dychtivé Očakávanie' }
+                ]
+            },
+            {
+                id: 'validation',
+                title: 'Validácia (Potvrdenie)',
+                desc: 'Hľadanie potvrdenia vonku je odovzdaním svojej sily. Potvrď sa sám.',
+                category: 'tools',
+                icon: 'fas fa-stamp',
+                links: [
+                    { ch: 'Kapitola 20', url: 'Kapitola20.html#:~:text=validácia', label: 'Pasca Validácie' },
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=validácia', label: 'Sťažovanie ako Validácia' }
+                ]
+            },
+            {
+                id: 'past',
+                title: 'Minulosť',
+                desc: 'Mŕtve dáta. Nemajú žiadnu moc nad prítomnosťou, pokiaľ ich neoživuješ.',
+                category: 'self',
+                icon: 'fas fa-history',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Zabudni%20na%20svoju%20minulosť', label: 'Zabudni na Minulosť' },
+                    { ch: 'Kapitola 21', url: 'Kapitola21.html#:~:text=podkladová%20vrstva', label: 'Minulosť je Podklad' },
+                    { ch: 'Kapitola 17', url: 'Kapitola17.html#:~:text=recykluješ%20minulosť', label: 'Recyklácia' }
+                ]
+            },
+            {
+                id: 'game',
+                title: 'Hra (Život je Hra)',
+                desc: 'Neber život smrteľne vážne. Je to ihrisko, nie bojisko.',
+                category: 'universe',
+                icon: 'fas fa-gamepad',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=hra', label: 'Iluźia Hry' },
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=prestaň%20hrať%20obranu', label: 'Hraj Útok' },
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=život%20je%20hra', label: 'Blažená Hra' }
+                ]
+            },
+            {
+                id: 'failure',
+                title: 'Zlyhanie (Spätná väzba)',
+                desc: 'Neexistuje. Je to len informácia o tom, že treba upraviť smer.',
+                category: 'emotions',
+                icon: 'fas fa-exclamation-triangle',
+                links: [
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=oneskorenie,%20nikdy%20nie%20zlyhanie', label: 'Oneskorenie nie je Zlyhanie' },
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=strachom%20zo%20zlyhania', label: 'Strach zo Zlyhania' }
+                ]
+            },
+            {
+                id: 'flow',
+                title: 'Flow (Prúd)',
+                desc: 'Stav nulového odporu. Keď veci idú "samy od seba".',
+                category: 'emotions',
+                icon: 'fas fa-water',
+                links: [
+                    { ch: 'Kapitola 18', url: 'Kapitola18.html#:~:text=prúd', label: 'Vstúp do Prúdu' },
+                    { ch: 'Kapitola 15', url: 'Kapitola15.html#:~:text=tok', label: 'Vesmírny Tok' }
+                ]
+            },
+
+            // --- CHAPTER 1 EXPANSION ---
+            {
+                id: 'ja-som',
+                title: 'JA SOM (I AM)',
+                desc: 'Čisté uvedomovanie bez atributov. Základný fakt bytia bez prívlastkov.',
+                category: 'self',
+                icon: 'fas fa-star',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=čo%20zostane', label: 'Čo Zostane' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=čisté%20Vedomie', label: 'Čisté Vedomie' }
+                ]
+            },
+            {
+                id: 'separation-illusion',
+                title: 'Ilúzia Oddelenosti',
+                desc: 'Prvá veľká lož: viera, že svet je od teba oddelený a nezávislý.',
+                category: 'universe',
+                icon: 'fas fa-chain-broken',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Prvá%20lož:%20Oddelenosť', label: 'Prvá Lož' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Neexistuje%20žiadny%20vonkajší%20svet', label: 'Bez Vonkajšieho Sveta' }
+                ]
+            },
+            {
+                id: 'powerlessness-illusion',
+                title: 'Ilúzia Bezmocnosti',
+                desc: 'Druhá veľká lož: viera, že si bezmocný a život sa ti "deje".',
+                category: 'emotions',
+                icon: 'fas fa-person-hiking',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Druhá%20lož:%20Bezmocnosť', label: 'Druhá Lož' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Ty%20si%20snívajúci%20tohto%20sna', label: 'Ty Si Snívajúci' }
+                ]
+            },
+            {
+                id: 'holographic-universe',
+                title: 'Holografický Vesmír',
+                desc: 'Kvantová fyzika: Pozorovateľ ovplyvňuje pozorované. Neexistuje objektívny svet bez teba.',
+                category: 'universe',
+                icon: 'fas fa-cube',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Holografický%20Vesmír', label: 'Kvantová Realita' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=pozorovateľ%20ovplyvňuje%20pozorované', label: 'Pozorovateľ' }
+                ]
+            },
+            {
+                id: 'reality-translator',
+                title: 'Prekladač Reality',
+                desc: 'Náradie na preformulation vonkajších udalostí ako vnútorných správ. Mení vinu na moc.',
+                category: 'tools',
+                icon: 'fas fa-exchange-alt',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Prekladač%20Reality', label: 'Náradie Preformácie' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=To,%20čo%20ťa%20hnevá%20tam%20vonku', label: 'Správa Pre Teba' }
+                ]
+            },
+            {
+                id: 'peeling-layers',
+                title: 'Peeling Layers (Odlepovanie Vrstiev)',
+                desc: 'Proces identifikácie toho, čím SI vs. čím nie SI. Vrstvy: Meno, Minulosť, Presvedčenia, Telo.',
+                category: 'self',
+                icon: 'fas fa-layer-group',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Onion%20Container', label: 'Identity Peeling Tool' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Nie%20si%20telo', label: 'Co Nie Si' }
+                ]
+            },
+            {
+                id: 'command-not-request',
+                title: 'Príkaz, nie Žiadosť',
+                desc: 'Realita je vrátenie, nie milosť. Keď sa rozhodneš s istotou, vesmír musí poslúchnuť.',
+                category: 'tools',
+                icon: 'fas fa-wand-magic-sparkles',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Príkaz,%20nie%20Žiadosť', label: 'Príkaz pre Program' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=vesmír%20sa%20MUSÍ%20preskupiť', label: 'Vesmírny Preskup' }
+                ]
+            },
+            {
+                id: 'forgetting-as-tool',
+                title: 'Zabudnutie ako Nástroj',
+                desc: 'Zabudol si svojho vesmírneho pôvodu, aby si mohol zažiť novým spôsobom. Zabudnutie nie je chyba, ale mechanizmus skúsenosti.',
+                category: 'universe',
+                icon: 'fas fa-mist',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=rozhodol%20si%20sa%20zabudnúť', label: 'Zámer Zabudnutia' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=aby%20hra%20pôsobila%20skutočne', label: 'Ilúzia Hry' }
+                ]
+            },
+            {
+                id: 'remembering-awakening',
+                title: 'Pamätanie si / Prebudenie',
+                desc: 'Opätovný nástup toho, kto si v skutočnosti. Signály: intuícia, vzrušenie, momenty pokoja.',
+                category: 'self',
+                icon: 'fas fa-lightbulb',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=na%20tomto%20svete%20celkom%20nesedí', label: 'Hlasok z Vnútra' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=pocit,%20keď%20si%20spomenieš', label: 'Moment Pamätania' }
+                ]
+            },
+            {
+                id: 'lucid-dream-life',
+                title: 'Lucidný Sen Života',
+                desc: 'Život je ako sen v noci. Keď si uvedomíš, že je to sen, získaš kontrolu a strach zmizne.',
+                category: 'universe',
+                icon: 'fas fa-moon',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Lucidné%20Snívanie', label: 'Lucidné Snívanie' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=presne%20tak%20ako%20v%20tvojom%20sne', label: 'Svet Ako Sen' }
+                ]
+            },
+            {
+                id: 'you-are-universe',
+                title: 'Si Vesmír',
+                desc: 'Nie si vo vesmíre; ty si vesmír. Si Celok, nie časť.',
+                category: 'universe',
+                icon: 'fas fa-infinity',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Nie%20si%20vo%20vesmíre,%20ty%20si%20vesmír', label: 'Totožnosť Celku' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=všetko,%20čo%20je%20vonku,%20je%20vnútri%20teba', label: 'Vnútor vs. Vonku' }
+                ]
+            },
+            {
+                id: 'pure-awareness',
+                title: 'Čisté Pokoje / Vedomá Prítomnosť',
+                desc: 'Moment, keď si odstúpil od hluku mysle a jednoducho existoval. Bez myšlienok, ale s plnou ostražitosťou.',
+                category: 'emotions',
+                icon: 'fas fa-om',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=čistého%20pokoja', label: 'Moment Pokoja' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=čisté%20uvedomovanie', label: 'Čisté Uvedomovanie' }
+                ]
+            },
+            {
+                id: 'inner-voice-inspiration',
+                title: 'Vnútorný Hlas / Inšpirácia',
+                desc: 'Tvoje Vyššie Ja, ktoré ti hovorí cez intuíciu, vzrušenie a vnútorné vedenie. Nie cez strach.',
+                category: 'tools',
+                icon: 'fas fa-ear-listen',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=hlasu%20z%20vnútra%20šepký', label: 'Šepot Vyššieho Ja' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Hovorí%20cez%20inšpiráciu', label: 'Jazyk Inšpirácie' }
+                ]
+            },
+            {
+                id: 'beliefs-create-reality-k1',
+                title: 'Presvedčenia Tvoria Realitu',
+                desc: 'Tvoje presvedčenia sú softvér reality. Čomu veríš, to sa ti prispôsobí. Zmeň kód = Program sa zmení.',
+                category: 'self',
+                icon: 'fas fa-code',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Príkaz,%20nie%20Žiadosť', label: 'Softvér Reality' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=tvoje%20presvedčenia,%20ktoré%20ti%20tvrdia', label: 'Zmena Kódu' }
+                ]
+            },
+            {
+                id: 'self-image-vs-consciousness',
+                title: 'Seba-Obraz vs. Vedomie',
+                desc: 'Identita je konštrukt (roly, masky, socálne funkcie). Vedomie je to, čo existuje bez nástroja.',
+                category: 'self',
+                icon: 'fas fa-masks-theater',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Nie%20identita,%20ktorú%20nosíš', label: 'Identita ako Maska' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Nie%20si%20telo', label: 'Za Brúskami' }
+                ]
+            },
+            {
+                id: 'self-realization',
+                title: 'Seba-Realizácia',
+                desc: 'Okamihy väčšej jasnosti a rezonancie. Signály: intuičné tušenie, nevysvetliteľný ťah, pokajnosť.',
+                category: 'self',
+                icon: 'fas fa-crystal-ball',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=intuitívne%20tušenie', label: 'Intuičné Signály' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Čím%20viac%20mu%20dôveruješ', label: 'Cvičenie Dôvery' }
+                ]
+            },
+            {
+                id: 'identity-question',
+                title: 'Otázka Identity',
+                desc: 'Kto v skutočnosti si? Nie aby si odpoveď myslel, ale aby si ju zažil bez pomoci slov.',
+                category: 'self',
+                icon: 'fas fa-question',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Kto%20v%20skutočnosti%20si', label: 'Základná Otázka' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Čo%20zostane', label: 'Čo Zostáva' }
+                ]
+            },
+            {
+                id: 'consciousness-primary',
+                title: 'Vedomie ako Primárne',
+                desc: 'Vedomie nie je produkt vesmíru; vesmír je projekt vedomia. Si realita zažívajúca osobu, nie osoba zažívajúca realitu.',
+                category: 'universe',
+                icon: 'fas fa-brain',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Si%20realita%20samotná%20zažívajúca%20osobu', label: 'Vedomie Ako Základ' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=nekonečné%20vedomie', label: 'Nekonečnosť' }
+                ]
+            },
+            {
+                id: 'life-as-dream',
+                title: 'Život ako Sen',
+                desc: 'Svet nemá vlastnú vôľu. Všetko je tvoj vlastný výtvor - presne ako v sne, kde všetci sú tvojou mysľou.',
+                category: 'universe',
+                icon: 'fas fa-bed',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=presne%20tak%20ako%20v%20tvojom%20sne', label: 'Analógia Sna' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=všetko%20čo%20vidíš', label: 'Tvoj Výtvor' }
+                ]
+            },
+            {
+                id: 'higher-self-expanded',
+                title: 'Vyššie Ja (Rozšírené)',
+                desc: 'Tvoja verzia na vyššej úrovni vedomia. Nikdy sa nestratila v sne. Vždy ťa vedie cez znamy, postrkuje k pamätaniu si.',
+                category: 'self',
+                icon: 'fas fa-crown',
+                links: [
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Vyššie%20Ja%20si%20ty', label: 'Vyššia Verzia' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Vždy%20ťa%20vedie', label: 'Vedenie Vyššieho Ja' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Hovorí%20cez%20inšpiráciu', label: 'Jazyk Komunikácie' }
+                ]
+            },
+
+            // --- CHAPTER 2 EXPANSION ---
+            {
+                id: 'neutrality-mirror',
+                title: 'Neutralita Zrkadla',
+                desc: 'Zrkadlo nemá názor, nesúdi, neodmeňuje. Iba mechanicky odráža tvoj dominantný stav.',
+                category: 'universe',
+                icon: 'fas fa-balance-scale',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Zrkadlo%20nemá%20vlastnú%20myseľ', label: 'Mechanizmus Zrkadla' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Zrkadlo%20nerozlišuje', label: 'Bez Rozlišovania' }
+                ]
+            },
+            {
+                id: 'you-are-cause',
+                title: 'Ty Si Príčina',
+                desc: 'Ty si pôvod obrazu. Zrkadlo je len následok. Príčina = Ty, Následok = Svet.',
+                category: 'self',
+                icon: 'fas fa-arrow-right',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Ty%20si%20Príčina', label: 'Zdroj všetkého' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=ak%20je%20niečo%20tvoje', label: 'Zmena obrazu' }
+                ]
+            },
+            {
+                id: 'belief-before-logic',
+                title: 'Viera Pred Logikou',
+                desc: 'Logika a dôkazy prichádzajú AŽ POTOM, čo uveríš v "nemožné". Viera je prvá.',
+                category: 'tools',
+                icon: 'fas fa-lightbulb',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Logika%20prichádza%20druhá', label: 'Logika druha' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=lietadlá', label: 'Príklad lietadiel' }
+                ]
+            },
+            {
+                id: 'belief-as-blueprint',
+                title: 'Presvedčenie Ako Plán',
+                desc: 'Tvoje presvedčenia sú plány, ktoré realita nasleduje s absolútnou presnosťou.',
+                category: 'self',
+                icon: 'fas fa-drafting-compass',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Presvedčenia%20sú%20plány', label: 'Realita Ako Projekt' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Zrkadlo%20ti%20vždy', label: 'Vždy za pravdu' }
+                ]
+            },
+            {
+                id: 'intuition-assumption',
+                title: 'Intuícia Jako Predpoklad',
+                desc: 'To, čo nazývame intuíciou, je len silný predpoklad, ktorému veríš.',
+                category: 'tools',
+                icon: 'fas fa-brain',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=intuícou', label: 'Šepot Mysle' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Ak%20tak%20povieš', label: 'Realizácia slova' }
+                ]
+            },
+            {
+                id: 'two-realities-one-world',
+                title: 'Dve Reality Jedného Sveta',
+                desc: 'Dvaja ľudia v tom istom svete, ale zažívajú úplne odlišné reality.',
+                category: 'universe',
+                icon: 'fas fa-clone',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Dvaja%20ľudia', label: 'Bojovník vs. Tvorca' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=rozdielne%20reality', label: 'Paralelné Skúsenosti' }
+                ]
+            },
+            {
+                id: 'self-fulfilling-prophecy',
+                title: 'Samoplniacich sa Proroctva',
+                desc: 'Ak očakávaš zlyhanie, konáš spôsobom, ktorý zlyhanie vytvorí.',
+                category: 'emotions',
+                icon: 'fas fa-circle-notch',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=spomeň%20si%20na%20čas', label: 'Kruh Presvedčenia' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Spätná väzba', label: 'Posilnenie Viery' }
+                ]
+            },
+            {
+                id: 'emotion-first',
+                title: 'Prvosť Pocitu',
+                desc: 'Nemôžeš čakať, kým sa zmení realita, aby si sa cítil dobre. Pocit musí prísť prvý.',
+                category: 'emotions',
+                icon: 'fas fa-heart',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Pocit%20musí%20prísť%20prvý', label: 'Príčina Pocitu' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Úsmev%20musí%20prísť%20prvý', label: 'Prvý Úsmev' }
+                ]
+            },
+            {
+                id: 'no-permission-needed',
+                title: 'Bez Povolenia od Súčasnosti',
+                desc: 'Zrkadlo nepýta si povolenie od tvojej súčasnej reality, aby zhmotnilo novú.',
+                category: 'tools',
+                icon: 'fas fa-unlock',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Nepýta%20si%20povolenie', label: 'Voľnosť od Limitov' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=realistické%20alebo%20nerealistické', label: 'Za hranicami' }
+                ]
+            },
+            {
+                id: 'logic-comes-second',
+                title: 'Logika Prichádza Druha',
+                desc: 'Väčšina ľudí čaká na logický dôkaz. To je obrátené. Najprv uver, potom príde logika.',
+                category: 'tools',
+                icon: 'fas fa-search-plus',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Logika%20prichádza%20druha', label: 'Obrátené Poradie' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Most%20incidentov', label: 'Logické Mosty' }
+                ]
+            },
+            {
+                id: 'mirror-frequency',
+                title: 'Frekvencia Zrkadla',
+                desc: 'Zrkadlo vzorkuje frekvenciu tvojich hlbokých presvedčení, nie powierzchnú myšlienku.',
+                category: 'universe',
+                icon: 'fas fa-wave-square',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=frekvencia', label: 'Vibrujúca Energia' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=hlboké%20presvedčenie', label: 'Hĺbka viery' }
+                ]
+            },
+            {
+                id: 'people-as-mirrors',
+                title: 'Ľudia Ako Časti Zrkadla',
+                desc: 'Ostatní ľudia odrážajú to, čomu ty veríš. Zmena viery = zmena ľudí.',
+                category: 'universe',
+                icon: 'fas fa-users',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Ľudia%20odrážajú', label: 'Vzťahy ako Zrkadlo' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Partnerstvo', label: 'Dynamika Vzťahov' }
+                ]
+            },
+            {
+                id: 'mirror-simulator',
+                title: 'Simulátor Zrkadla',
+                desc: 'Interaktívny náradie na pochopenie príčiny a následku v praktickom kontexte.',
+                category: 'tools',
+                icon: 'fas fa-flask',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Simulátor%20Zrkadla', label: 'Interaktívny Test' }
+                ]
+            },
+            {
+                id: 'smile-first',
+                title: 'Úsmev Musí Prísť Prvý',
+                desc: 'Aby si zažil šťastie, buď šťastný najprv. Bez čakania na zmenu.',
+                category: 'tools',
+                icon: 'fas fa-smile',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Úsmev%20musí%20prísť%20prvý', label: 'Pocit Prvi' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=ak%20sa%20usmiješ%20prvý', label: 'Iniciácia zmeny' }
+                ]
+            },
+            {
+                id: 'mirror-mechanism-detailed',
+                title: 'Mechanizmus Zrkadla (Detailne)',
+                desc: 'Zrkadlo je neutrálny mechanizmus, nie vtelená sila. Vzorkuje presvedčenia a premieta ich do fyzickej skúsenosti.',
+                category: 'universe',
+                icon: 'fas fa-cog',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Mechanizmus', label: 'Ako Funguje' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=neutrálny%20mechanizmus', label: 'Bez Úmyslov' }
+                ]
+            },
+            {
+                id: 'beliefs-create-circumstances',
+                title: 'Presvedčenia Tvoria Okolnosti',
+                desc: 'Tvoje dlhodobé presvedčenia určujú, aké okolnosti sa ti objavujú v živote.',
+                category: 'self',
+                icon: 'fas fa-road',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=okolnosti', label: 'Plánovanie Reality' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=finančné%20príležitosti', label: 'Príklady' }
+                ]
+            },
+            {
+                id: 'logical-framework',
+                title: 'Logický Rámec',
+                desc: 'Realita vytvorí logické vysvetlenie pre tvoju vieru, ako hodinky.',
+                category: 'universe',
+                icon: 'fas fa-link',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Logický%20rámec', label: 'Mosty Náhod' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Post-hoc', label: 'Vysvetlenia' }
+                ]
+            },
+            {
+                id: 'mirror-affirmations',
+                title: 'Afirmácie Zrkadla',
+                desc: 'Mocné výroky, ktorými sa osúhlasuješ s princípom zrkadla a meniteľnosti reality.',
+                category: 'tools',
+                icon: 'fas fa-quote-left',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Afirmácie%20pre%20Zrkadlo', label: 'Mocné Vety' }
+                ]
+            },
+            {
+                id: 'focus-on-feeling',
+                title: 'Odsústrediť sa na Pocit',
+                desc: 'Mocnejšie ako myšlienka je pocit alebo emocionálny stav, ktorý spúšťa zmenu.',
+                category: 'emotions',
+                icon: 'fas fa-fire',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=stav', label: 'Frekvencia pocitu' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Frekvencia', label: 'Telová Odozva' }
+                ]
+            },
+            {
+                id: 'reality-without-morality',
+                title: 'Realita Bez Morálky',
+                desc: 'Zrkadlo nedáva "plusové body" za byť dobrý. Iba vzorkuje, čomu veríš.',
+                category: 'universe',
+                icon: 'fas fa-balance-scale-left',
+                links: [
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=Zrkadlo%20nedáva', label: 'Bez Posudzovania' },
+                    { ch: 'Kapitola 2', url: 'Kapitola2.html#:~:text=zaslúži', label: 'Oslobodzujúce' }
+                ]
+            },
+
+            // === CHAPTER 5-10 EXPANSION ===
+            {
+                id: 'time-as-buffer',
+                title: 'Čas ako Ochranná Poistka',
+                desc: 'Čas existuje na zabezpečenie, že letmé pochybnosti a strach nie sú okamžite materializované. Buffer medzi myšlienkou a manifestáciou na vylepšovanie a zarovnanie.',
+                category: 'universe',
+                icon: 'fas fa-hourglass-end',
+                links: [
+                    { ch: 'Kapitola 5', url: 'Kapitola5.html#:~:text=čas%20existuje', label: 'Čas ako Buffer' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Čas%20slúži', label: 'Funkcia Času' }
+                ]
+            },
+            {
+                id: 'seeds-not-to-dig',
+                title: 'Semienka Nesmú Byť Vykopaná',
+                desc: 'Keď zasadíš semienka zámerov, nechaj ich. Neodkopávaj ich každý deň pochybnosťou. Nechaj vesmír pracovať bez kontroly.',
+                category: 'tools',
+                icon: 'fas fa-leaf',
+                links: [
+                    { ch: 'Kapitola 5', url: 'Kapitola5.html#:~:text=semienka', label: 'Semeno a Pôda' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Semienka', label: 'Myšlienka ako Semienka' }
+                ]
+            },
+            {
+                id: 'circumstances-dont-matter',
+                title: 'Na Okolnostiach Nezáleží',
+                desc: 'Súčasné okolnosti sú len odrazom včerajšieho myslenia. Nie sú limitom budúcnosti. Zmeň presvedčenie a okolnosti sa zmenia.',
+                category: 'universe',
+                icon: 'fas fa-recycle',
+                links: [
+                    { ch: 'Kapitola 6', url: 'Kapitola6.html#:~:text=Sú%20len%20odrazom', label: 'Odraz Minulosti' },
+                    { ch: 'Kapitola 6', url: 'Kapitola6.html#:~:text=Okolnosti%20nie%20sú%20pevné', label: 'Fluidnosť Reality' }
+                ]
+            },
+            {
+                id: 'all-probabilities-equal',
+                title: 'Všetky Pravdepodobnosti Rovnako Platné',
+                desc: 'V každej chvíli existujú nekonečné pravdepodobnosti, všetky rovnako dostupné. Zažívaš jednu cez zarovnanie sa s ňou.',
+                category: 'universe',
+                icon: 'fas fa-dice-d20',
+                links: [
+                    { ch: 'Kapitola 6', url: 'Kapitola6.html#:~:text=Všetky%20pravdepodobnosti', label: 'Nekonečná Voľba' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=výber', label: 'Voľba Verzie' }
+                ]
+            },
+            {
+                id: 'negative-momentum-spiral',
+                title: 'Prelomenie Negatívneho Momentu',
+                desc: 'Negatívny moment je sebaprebujúca slučka: myšlienky → emócie → okolnosti. Kľúč nie je boj, ale uznanie a asertívne presmerovanie myšlienok.',
+                category: 'emotions',
+                icon: 'fas fa-spiral-up',
+                links: [
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=Negatívny%20hybný%20moment', label: 'Zákona Momentu' },
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=energiu%20odporu', label: 'Energia Odporu' }
+                ]
+            },
+            {
+                id: 'resistance-feeds-problem',
+                title: 'Odpor Kŕmi Problém',
+                desc: 'Keď sa s problémom bojuješ, len ho kŕmiš energiou. Riešením je ustúpenie, nie odpor. Energia, ktorú dáš problému, ho zosilňuje.',
+                category: 'tools',
+                icon: 'fas fa-ban',
+                links: [
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=bojuješ,%20len%20ju%20kŕmiš', label: 'Paradox Boja' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Odpor', label: 'Bez Odporu' }
+                ]
+            },
+            {
+                id: 'examine-beliefs',
+                title: 'Preskúmaj Svoje Presvedčenia',
+                desc: 'Koreň všetkých výziev spočíva v presvedčeniach. Napíš si všetky negatívne presvedčenia bez cenzúry, potom ich systematicky prepiš.',
+                category: 'self',
+                icon: 'fas fa-magnifying-glass',
+                links: [
+                    { ch: 'Kapitola 8', url: 'Kapitola8.html#:~:text=Vezmi%20pero', label: 'Papierová Technika' },
+                    { ch: 'Kapitola 8', url: 'Kapitola8.html#:~:text=Opakovanie%20je%20Kľúčom', label: 'Opakovanie Presvedčí' }
+                ]
+            },
+            {
+                id: 'subconscious-dominance',
+                title: 'Dominancia Podvedomia',
+                desc: 'Podvedomie riadi~95% tvého života bez vedomého povedomia. Afirmácie zlyhajú, keď sú podvedomé presvedčenia v rozpore s nimi.',
+                category: 'self',
+                icon: 'fas fa-brain',
+                links: [
+                    { ch: 'Kapitola 8', url: 'Kapitola8.html#:~:text=podvedomé', label: 'Nepreskúmané Kódy' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Vedomie', label: 'Primárne Vedomie' }
+                ]
+            },
+            {
+                id: 'repetition-rewires-mind',
+                title: 'Opakovanie Ako Preprogramovanie',
+                desc: 'Operácia tvého podvedomia je ako sval. Čo tréniš opakovaním, to silnie. Noví presvedčeniami musia byť vtlčované opakovaním, rovnako ako boli staré.',
+                category: 'tools',
+                icon: 'fas fa-rotate-right',
+                links: [
+                    { ch: 'Kapitola 8', url: 'Kapitola8.html#:~:text=Opakovanie%20je%20Kľúčom', label: 'Mocná Technika' },
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=Disciplína%20Myšlienok', label: 'Mentálna Disciplína' }
+                ]
+            },
+            {
+                id: 'winners-assumption',
+                title: 'Postoj Víťaza',
+                desc: 'Víťazi operujú z predpokladu, že všetko dopadne dokonale. Nie je to zaujatosť—je to systém presvedčení, ktorý spúšťa konkrétne správanie a výsledky.',
+                category: 'self',
+                icon: 'fas fa-crown',
+                links: [
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=Postoj%20Víťaza', label: 'Systém Víťaza' },
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=Segmentový%20Zámer', label: 'Príprava Vopred' }
+                ]
+            },
+            {
+                id: 'segment-intending',
+                title: 'Segmentový Zámer',
+                desc: 'Pred vstúpením do situácie si nastav emocionálnu/mentálnu pozíciu ako by všetko už išlo dokonale. Tvoj predpoklad určuje, ako sa situácia vyvinie.',
+                category: 'tools',
+                icon: 'fas fa-rocket',
+                links: [
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=Segmentový%20Zámer', label: 'Technika Prípravy' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Zámer', label: 'Moc Zámeru' }
+                ]
+            },
+            {
+                id: 'full-responsibility',
+                title: 'Prevezmi Úplnú Zodpovednosť',
+                desc: 'Všetko vo tvojom zážití sú tvoje projekcie. Nie si obeť. Ak si to vytvoril, môžeš to zmeniť za sekundu.',
+                category: 'self',
+                icon: 'fas fa-user-shield',
+                links: [
+                    { ch: 'Kapitola 10', url: 'Kapitola10.html#:~:text=Prevezmi%20Zodpovednosť', label: 'Autorstvo Reality' },
+                    { ch: 'Kapitola 10', url: 'Kapitola10.html#:~:text=projekcie%20tvého%20vedomia', label: 'Tvoj Svet' }
+                ]
+            },
+            {
+                id: 'permission-slips',
+                title: 'Povolenky (Permission Slips)',
+                desc: 'Rituály, amulety, astrológia—všetko sú len "povolenky", ktoré si sám daruješ, aby si si zdôvodnil, prečo by to malo fungovať. Zdroj sily je vždy tvoja viera.',
+                category: 'tools',
+                icon: 'fas fa-unlock',
+                links: [
+                    { ch: 'Kapitola 11', url: 'Kapitola11.html#:~:text=povolenky', label: 'Rituály ako Oprávnenie' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Príkaz', label: 'Tvoja Moc' }
+                ]
+            },
+            {
+                id: 'faith-as-source',
+                title: 'Viera ako Pravý Zdroj',
+                desc: 'Či veríš v Boha, kryštály alebo afirmácie—tvoja viera je to, čo skúšť vytváraš účinok. Bez viery, technika nemá silu.',
+                category: 'tools',
+                icon: 'fas fa-praying-hands',
+                links: [
+                    { ch: 'Kapitola 11', url: 'Kapitola11.html#:~:text=Faith%20as%20True%20Source', label: 'Moc Viery' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=Vedomie', label: 'Vedomie Ako Zdroj' }
+                ]
+            },
+            {
+                id: 'action-vs-theory',
+                title: 'Konanie vs. Teória',
+                desc: 'Teoretické chápanie jednotlivých konceptov sa nerovná ich zažívaniu. Musíš aplikovať a praxovať, aby bolo vnútorné preprogramovanie. Konanie vytvára vieru.',
+                category: 'tools',
+                icon: 'fas fa-person-hiking',
+                links: [
+                    { ch: 'Kapitola 12', url: 'Kapitola12.html#:~:text=Knowing%20is%20not%20doing', label: 'Z Mysli do Tela' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Konaj', label: 'Inšpirovaná Akcia' }
+                ]
+            },
+            {
+                id: 'gratitude-reception',
+                title: 'Vďačnosť Ako Prijímanie',
+                desc: 'Vďačnosť je signál \"to už mám\". Signalizuje hojnosť a prijímanie skôr, ako fyzicky prinesie. Najsilnejšia frekvencia manifestácie.',
+                category: 'emotions',
+                icon: 'fas fa-hands-praying',
+                links: [
+                    { ch: 'Kapitola 13', url: 'Kapitola13.html#:~:text=Vďačnosť%20ako%20Prijímanie', label: 'Signál Hojnosti' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Pasivní', label: 'Vďačnosť Vopred' }
+                ]
+            },
+            {
+                id: 'envy-as-compass',
+                title: 'Závisť ako Kompas',
+                desc: 'Závisť neukazuje, že to nemôžeš mať. Ukazuje, že chceš to istú vec. Premeni závisť na záujem a predstavu, že \"toto je možné zhora tebe\".',
+                category: 'emotions',
+                icon: 'fas fa-compass',
+                links: [
+                    { ch: 'Kapitola 13', url: 'Kapitola13.html#:~:text=Envy%20as%20Compass', label: 'Závisť ako Sprievodca' },
+                    { ch: 'Kapitola 6', url: 'Kapitola6.html#:~:text=Všetky%20Pravdepodobnosti', label: 'Možnosť pre Všetkých' }
+                ]
+            },
+            {
+                id: 'knowingness-decree',
+                title: 'Vedenie (Knowingness)',
+                desc: 'Stav absolútnej istoty bez potreby dôkazu. \"Viem, že sa to deje.\" Je to najvyšší stav prejavu, ktorý nedeklaruje ani nevyžaduje potvrdenie.',
+                category: 'tools',
+                icon: 'fas fa-eye-open',
+                links: [
+                    { ch: 'Kapitola 14', url: 'Kapitola14.html#:~:text=Knowingness', label: 'Stav Vedenia' },
+                    { ch: 'Kapitola 9', url: 'Kapitola9.html#:~:text=Čestnosť%20bez%20Pochybností', label: 'Istota Bez Dôkazu' }
+                ]
+            },
+            {
+                id: 'hard-work-myth',
+                title: 'Mýtus Tvrdej Práce',
+                desc: 'Tvrdá práca bez zarovnania neprinášadá úspech. Zarovnanie bez úsilia (inšpirovaná akcia) prináša viac ako drina bez viery.',
+                category: 'tools',
+                icon: 'fas fa-dumbbell',
+                links: [
+                    { ch: 'Kapitola 18', url: 'Kapitola18.html#:~:text=Hard%20Work%20Myth', label: 'Inšpirované Konanie' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=bez%20úsilia', label: 'Flow Bez Vypätia' }
+                ]
+            },
+            {
+                id: 'worry-as-prayer',
+                title: 'Znepokojenie Ako Modlitba',
+                desc: 'Keď sa znepokojiš, buď v modlitbe za to, o čom sa znepokojuješ. Modlí sa za nežiaduci výsledok. Zmeň frekvenciu—ver namiesto toho, aby si sa obával.',
+                category: 'emotions',
+                icon: 'fas fa-face-frown',
+                links: [
+                    { ch: 'Kapitola 19', url: 'Kapitola19.html#:~:text=Worry%20as%20Prayer', label: 'Negatívna Modlitba' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=Myšlienka', label: 'Myšlienka ako Modlitba' }
+                ]
+            },
+            {
+                id: 'vertical-vs-horizontal',
+                title: 'Vertikálne vs. Horizontálne Vedenie',
+                desc: 'Horizontálne: Rady od ľudí (prenášajú ich limity). Vertikálne: Priame vedenie od Zdroja/Vyššieho Ja. Vypnúť vonkajšie hlasy, aby si počul vnútorný signál.',
+                category: 'tools',
+                icon: 'fas fa-arrows-alt-v',
+                links: [
+                    { ch: 'Kapitola 20', url: 'Kapitola20.html#:~:text=Vertical%20vs%20Horizontal', label: 'Zdroj Vedenia' },
+                    { ch: 'Kapitola 1', url: 'Kapitola1.html#:~:text=vnútorného%20hlasu', label: 'Vnútorný Hlas' }
+                ]
+            },
+            {
+                id: 'life-as-canvas',
+                title: 'Život ako Plátno',
+                desc: 'Život je čisté, neutrálne plátno. Maľuješ naň farbami svojich myšlienok a presvedčení. Nemusíš sa ospravedlňovať ani dodržiavať pravidlá druhých.',
+                category: 'self',
+                icon: 'fas fa-palette',
+                links: [
+                    { ch: 'Kapitola 21', url: 'Kapitola21.html#:~:text=Život%20je%20plátno', label: 'Tvoj Masterpiece' },
+                    { ch: 'Kapitola 21', url: 'Kapitola21.html#:~:text=Chyby%20ako%20Textúra', label: 'Bez Chýb' }
+                ]
+            },
+            {
+                id: 'thriving-not-surviving',
+                title: 'Prekvitanie, Nie Prežívanie',
+                desc: 'Režim: Zmeň termostat svojej reality. Z \"musím prežiť\" na \"chcem prekvitať\". Základná zmena identity z bojovníka na tvorca.',
+                category: 'self',
+                icon: 'fas fa-seedling',
+                links: [
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=Thriving', label: 'Čas Rastu' },
+                    { ch: 'Kapitola 22', url: 'Kapitola22.html#:~:text=Thermostat', label: 'Základná Teplota' }
+                ]
+            },
+            {
+                id: 'excitement-as-compass',
+                title: 'Vzrušenie Ako Kompas',
+                desc: 'Vzrušenie je fyzický signál z Vyššieho Ja. Nie srdcový strach (panika), ale istý signál. Nasleduj vzrušenie, nie strach.',
+                category: 'emotions',
+                icon: 'fas fa-fire',
+                links: [
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=Excitement%20as%20Compass', label: 'Signál Duše' },
+                    { ch: 'Kapitola 4', url: 'Kapitola4.html#:~:text=Emócie%20sú%20GPS', label: 'Emocionálny GPS' }
+                ]
+            },
+            {
+                id: 'unique-frequency',
+                title: 'Tvoja Jedinečná Frekvencia',
+                desc: 'Ty máš jedinečnú vibrač—nič v univerze nedokáže presne repliku Tvoji frekvenciu. Tvoje poslanie si len Ty.',
+                category: 'self',
+                icon: 'fas fa-waveform-lines',
+                links: [
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=Unique%20Frequency', label: 'Jednotlivosť' },
+                    { ch: 'Kapitola 3', url: 'Kapitola3.html#:~:text=vibrácia', label: 'Tvoja Vlna' }
+                ]
+            },
+            {
+                id: 'start-before-ready',
+                title: 'Začni Predtým, Ako Si Pripravený',
+                desc: 'Čakanie na \"dokonalú chvíľu\" sa nikdy nepríde. Začni teraz, s tým, čo máš. Zdokonaľovanie príde cestou.',
+                category: 'tools',
+                icon: 'fas fa-play',
+                links: [
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=Start%20Before%20Ready', label: 'První Krok' },
+                    { ch: 'Kapitola 7', url: 'Kapitola7.html#:~:text=Rozhodnutie', label: 'Jedna Veta' }
+                ]
+            },
+            {
+                id: 'calling-vs-career',
+                title: 'Povolanie vs. Kariéra',
+                desc: 'Kariéra je to, čo robia ostatní. Povolanie je to, čo ťa volá. Ak chceš pravú naplnenosť, nasleduj svoju jedinečnú cestu, nie sociálnu očakávanú.',
+                category: 'self',
+                icon: 'fas fa-hand-fist',
+                links: [
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=Calling%20vs%20Career', label: 'Tvoje Poslanie' },
+                    { ch: 'Kapitola 23', url: 'Kapitola23.html#:~:text=hole%20in%20the%20universe', label: 'Diera vo Vesmíre' }
+                ]
+            },
+
+            // === SELFTALK KEYWORD REFERENCES ===
+            {
+                id: 'doubt-removal',
+                title: 'Prekonanie Pochybností',
+                desc: 'Reťaz vnútorných monológov a afirmácií na prekonanie pochybností a vybudovanie istoty vo svojej schopnosti tvorenia.',
+                category: 'self',
+                icon: 'fas fa-brain',
+                links: [
+                    { ch: 'SelfTalk 1', url: 'SelfTalk1.html', label: 'Vnútorný Monológ 1' }
+                ]
+            },
+            {
+                id: 'fear-removal',
+                title: 'Odstránenie Strachu',
+                desc: 'Transformácia strachu na vieru a dôveru. Vnútorné monológy na transmutáciu strachu zo svojej energetickej frekvencie.',
+                category: 'emotions',
+                icon: 'fas fa-heart-strong',
+                links: [
+                    { ch: 'SelfTalk 2', url: 'SelfTalk2.html', label: 'Vnútorný Monológ 2' }
+                ]
+            },
+            {
+                id: 'overwhelm-relief',
+                title: 'Úľava od Zahlcenia',
+                desc: 'Keď si zahlcený, tieto monológy ti pomôžu vrátiť sa do pokoja a dôvery v nekonečný prísun riešení.',
+                category: 'emotions',
+                icon: 'fas fa-wind',
+                links: [
+                    { ch: 'SelfTalk 3', url: 'SelfTalk3.html', label: 'Vnútorný Monológ 3' }
+                ]
+            },
+            {
+                id: 'success-affirmation',
+                title: 'Afirmácia Úspechu',
+                desc: 'Vnútorný monológ na zakotvenie mentality víťaza a prirodzené víťazstvo ako tvoj základný stav.',
+                category: 'self',
+                icon: 'fas fa-trophy',
+                links: [
+                    { ch: 'SelfTalk 4', url: 'SelfTalk4.html', label: 'Vnútorný Monológ 4' }
+                ]
+            },
+            {
+                id: 'abundance-affirmation',
+                title: 'Afirmácia Hojnosti',
+                desc: 'Deklarácia nekonečného prísunu a bohatstva. Tečie cez teba tok hojnosti v každej forme—peniaze, čas, láska, energia.',
+                category: 'emotions',
+                icon: 'fas fa-coins',
+                links: [
+                    { ch: 'SelfTalk 5', url: 'SelfTalk5.html', label: 'Vnútorný Monológ 5' }
+                ]
+            }
+        ];
+
+        // Render Concepts
+        // --- COMPREHENSIVE FILTER & UX LOGIC WITH ALL 10 FEATURES ---
+
+        // ==================== CONFIGURATION ====================
+        const ITEMS_PER_PAGE = 12;
+        const CHAPTER_COLORS = {
+            'Kapitola 1': 'k1', 'Kapitola 2': 'k2', 'Kapitola 3': 'k3', 
+            'Kapitola 4': 'k4', 'Kapitola 5': 'k5', 'Kapitola 6': 'k6',
+            'Kapitola 7': 'k7', 'Kapitola 8': 'k8', 'Kapitola 9': 'k9',
+            'Kapitola 10': 'k1', 'Kapitola 11': 'k2', 'Kapitola 12': 'k3',
+            'Kapitola 13': 'k4', 'Kapitola 14': 'k5', 'Kapitola 15': 'k6',
+            'Kapitola 16': 'k7', 'Kapitola 17': 'k8', 'Kapitola 18': 'k9',
+            'Kapitola 19': 'k1', 'Kapitola 20': 'k2', 'Kapitola 21': 'k3',
+            'Kapitola 22': 'k4', 'Kapitola 23': 'k5',
+            'SelfTalk 1': 'st', 'SelfTalk 2': 'st', 'SelfTalk 3': 'st',
+            'SelfTalk 4': 'st', 'SelfTalk 5': 'st'
+        };
+
+        // ==================== STATE MANAGEMENT ====================
+        const state = {
+            category: 'all',
+            search: '',
+            chapter: 'all',
+            letter: 'all',
+            sorting: 'az',
+            viewMode: 'card',
+            currentPage: 1,
+            bookmarks: JSON.parse(localStorage.getItem('conceptBookmarks')) || [],
+            showBookmarks: false,
+            filteredConcepts: []
+        };
+
+        // ==================== DOM ELEMENTS ====================
+        const grid = document.getElementById('conceptGrid');
+        const searchInput = document.getElementById('searchInput');
+        const chapterSelect = document.getElementById('chapterSelect');
+        const alphabetBar = document.getElementById('alphabetBar');
+        const catButtons = document.querySelectorAll('.cat-btn');
+        const sortSelect = document.getElementById('sortSelect');
+        const viewModeSelect = document.getElementById('viewMode');
+        const pagination = document.getElementById('pagination');
+        const resultCount = document.getElementById('resultCount');
+        const bookmarksSection = document.getElementById('bookmarksSection');
+        const bookmarksGrid = document.getElementById('bookmarksGrid');
+        const bookmarkCount = document.getElementById('bookmarkCount');
+        const bookmarksToggle = document.getElementById('bookmarksToggle');
+
+        // ==================== NORMALIZATION ====================
+        function normalize(str) {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+
+        // ==================== 1. PAGINATION ====================
+        function renderPagination(totalPages) {
+            pagination.innerHTML = '';
+            if (totalPages <= 1) return;
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn';
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.disabled = state.currentPage === 1;
+            prevBtn.onclick = () => {
+                if (state.currentPage > 1) {
+                    state.currentPage--;
+                    applyFilters();
+                    document.getElementById('conceptGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+            pagination.appendChild(prevBtn);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'page-btn';
+                if (i === state.currentPage) btn.classList.add('active');
+                btn.textContent = i;
+                btn.onclick = () => {
+                    state.currentPage = i;
+                    applyFilters();
+                    document.getElementById('conceptGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+                pagination.appendChild(btn);
+            }
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn';
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.disabled = state.currentPage === totalPages;
+            nextBtn.onclick = () => {
+                if (state.currentPage < totalPages) {
+                    state.currentPage++;
+                    applyFilters();
+                    document.getElementById('conceptGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+            pagination.appendChild(nextBtn);
+
+            const pageInfo = document.createElement('div');
+            pageInfo.className = 'page-info';
+            pageInfo.textContent = `Strana ${state.currentPage} z ${totalPages}`;
+            pagination.appendChild(pageInfo);
+        }
+
+        // ==================== 2. SORTING ====================
+        function applySorting(concepts) {
+            const sorted = [...concepts];
+            
+            switch(state.sorting) {
+                case 'az':
+                    sorted.sort((a, b) => a.title.localeCompare(b.title, 'sk'));
+                    break;
+                case 'za':
+                    sorted.sort((a, b) => b.title.localeCompare(a.title, 'sk'));
+                    break;
+                case 'chapter':
+                    sorted.sort((a, b) => {
+                        const chA = a.links[0]?.ch || '';
+                        const chB = b.links[0]?.ch || '';
+                        return chA.localeCompare(chB, 'sk');
+                    });
+                    break;
+                case 'newest':
+                    sorted.reverse(); // Most recently added first
+                    break;
+            }
+            return sorted;
+        }
+
+        window.setSorting = (val) => {
+            state.sorting = val;
+            state.currentPage = 1;
+            applyFilters();
+        };
+
+        // ==================== 3. VIEW MODES ====================
+        window.setViewMode = (mode) => {
+            state.viewMode = mode;
+            applyFilters();
+        };
+
+        // ==================== 4. BOOKMARKS (LOCAL STORAGE) ====================
+        function isBookmarked(conceptId) {
+            return state.bookmarks.includes(conceptId);
+        }
+
+        function toggleBookmark(conceptId) {
+            const index = state.bookmarks.indexOf(conceptId);
+            if (index > -1) {
+                state.bookmarks.splice(index, 1);
+            } else {
+                state.bookmarks.push(conceptId);
+            }
+            localStorage.setItem('conceptBookmarks', JSON.stringify(state.bookmarks));
+            bookmarkCount.textContent = state.bookmarks.length;
+            applyFilters();
+        }
+
+        function clearAllBookmarks() {
+            if (confirm('Naozaj chceš vymazať všetky záložky?')) {
+                state.bookmarks = [];
+                localStorage.removeItem('conceptBookmarks');
+                bookmarkCount.textContent = '0';
+                applyFilters();
+            }
+        }
+
+        window.toggleBookmark = toggleBookmark;
+        window.clearAllBookmarks = clearAllBookmarks;
+
+        window.toggleBookmarks = () => {
+            state.showBookmarks = !state.showBookmarks;
+            if (state.showBookmarks) {
+                bookmarksSection.classList.add('active');
+                bookmarksToggle.style.background = 'rgba(56, 189, 248, 0.2)';
+                bookmarksToggle.style.borderColor = 'var(--accent-link)';
+                renderBookmarks();
+            } else {
+                bookmarksSection.classList.remove('active');
+                bookmarksToggle.style.background = 'transparent';
+                bookmarksToggle.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            }
+        };
+
+        function renderBookmarks() {
+            bookmarksGrid.innerHTML = '';
+            
+            if (state.bookmarks.length === 0) {
+                bookmarksEmpty.style.display = 'block';
+                return;
+            }
+
+            bookmarksEmpty.style.display = 'none';
+            const bookmarkConcepts = concepts.filter(c => state.bookmarks.includes(c.id));
+            bookmarkConcepts.forEach(c => {
+                gridInstance.appendChild(createConceptCard(c));
+            });
+        }
+
+        // ==================== 5. SEARCH HIGHLIGHTING ====================
+        function highlightSearchTerm(text, searchTerm) {
+            if (!searchTerm) return text;
+            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
+        // ==================== 6. CHAPTER COLOR CODING ====================
+        function getChapterColor(concept) {
+            if (concept.links && concept.links.length > 0) {
+                const chapterKey = concept.links[0].ch;
+                return CHAPTER_COLORS[chapterKey] || 'other';
+            }
+            return 'other';
+        }
+
+        // ==================== 7. RELATED CONCEPTS ====================
+        function getRelatedConcepts(concept) {
+            const relatedByCategory = concepts
+                .filter(c => c.category === concept.category && c.id !== concept.id)
+                .slice(0, 2);
+            return relatedByCategory;
+        }
+
+        // ==================== CREATE CONCEPT CARD ====================
+        function createConceptCard(c, searchTerm = '') {
+            const card = document.createElement('div');
+            card.className = `concept-card chapter-color-${getChapterColor(c)}`;
+            card.id = `concept-${c.id}`;
+
+            // Chapter abbreviation
+            const chapterAbbr = c.links[0]?.ch || 'N/A';
+            
+            // Links HTML
+            let linksHTML = c.links.map(l =>
+                `<a href="${l.url}" class="chapter-tag"><span>${l.ch}:</span> ${l.label}</a>`
+            ).join('');
+
+            // Related concepts
+            const related = getRelatedConcepts(c);
+            let relatedHTML = '';
+            if (related.length > 0) {
+                relatedHTML = `<div class="related-label">
+                    <i class="fas fa-lightbulb"></i> Súvisiace koncepty
+                </div>
+                <div class="related-concepts">
+                    ${related.map(r => `<span class="related-tag" onclick="searchConcept('${r.title}')" title="Klikni na vyhľadávanie">${r.title}</span>`).join('')}
+                </div>`;
+            }
+
+            // Highlight search terms
+            const titleHighlighted = searchTerm ? highlightSearchTerm(c.title, searchTerm) : c.title;
+            const descHighlighted = searchTerm ? highlightSearchTerm(c.desc, searchTerm) : c.desc;
+
+            // Preview HTML
+            const previewHTML = `<div class="concept-preview">
+                <div class="preview-title"><i class="${c.icon}"></i> ${titleHighlighted}</div>
+                <div class="preview-desc">${descHighlighted}</div>
+                <div class="preview-meta">
+                    <span class="preview-category">${c.category}</span>
+                    <span class="preview-chapter">${chapterAbbr}</span>
+                </div>
+            </div>`;
+
+            // New badge (todos: mark new concepts)
+            const newBadge = c.isNew ? '<span class="new-badge">NEW</span>' : '';
+
+            const isBookmarkedClass = isBookmarked(c.id) ? 'bookmarked' : '';
+
+            // Check if description is long enough to need "read more"
+            const needsReadMore = c.desc.length > 150;
+            const readMoreBtn = needsReadMore ? `<button class="read-more-btn" onclick="toggleReadMore('${c.id}')">
+                <span class="read-more-text">Čítať viac</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>` : '';
+
+            if (state.viewMode === 'list') {
+                card.className = `concept-list-item chapter-color-${getChapterColor(c)}`;
+                card.id = `concept-${c.id}`;
+                card.innerHTML = `
+                    <div class="list-icon">
+                        <i class="${c.icon}"></i>
+                    </div>
+                    <div class="list-main">
+                        <div class="list-title">${titleHighlighted}</div>
+                        <div class="list-desc">${descHighlighted}</div>
+                    </div>
+                    <div class="list-links">
+                        ${c.links.slice(0, 3).map(l => `<a href="${l.url}" class="chapter-tag">${l.ch}</a>`).join('')}
+                    </div>
+                    <div class="list-meta">
+                        <span>${chapterAbbr}</span>
+                        <span>${c.category}</span>
+                    </div>
+                    <button class="list-bookmark ${isBookmarkedClass}" onclick="toggleBookmark('${c.id}')" title="Uložiť koncept">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                `;
+            } else {
+                card.innerHTML = `
+                    <button class="bookmark-btn ${isBookmarkedClass}" onclick="toggleBookmark('${c.id}')" title="Uložiť koncept">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                    ${newBadge}
+                    ${previewHTML}
+                    <div class="concept-title"><i class="${c.icon}"></i> ${titleHighlighted}</div>
+                    <div class="concept-desc" id="desc-${c.id}">${descHighlighted}</div>
+                    ${readMoreBtn}
+                    <div class="link-cloud">${linksHTML}</div>
+                    ${relatedHTML}
+                `;
+            }
+
+            return card;
+        }
+
+        // ==================== FILTER LOGIC ====================
+        function applyFilters() {
+            const searchNorm = normalize(state.search);
+
+            // Show/hide clear filter button
+            const clearBtn = document.getElementById('clearFilterBtn');
+            const hasActiveFilters = state.search !== '' || state.category !== 'all' || 
+                                   state.chapter !== 'all' || state.letter !== 'all';
+            
+            if (hasActiveFilters) {
+                clearBtn.style.display = 'flex';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+
+            // Filter concepts
+            let filtered = concepts.filter(c => {
+                // 1. Category
+                const matchCat = state.category === 'all' || c.category === state.category;
+
+                // 2. Search
+                const matchSearch = searchNorm === '' ||
+                    normalize(c.title).includes(searchNorm) ||
+                    normalize(c.desc).includes(searchNorm);
+
+                // 3. Chapter
+                const matchChapter = state.chapter === 'all' ||
+                    c.links.some(link => link.ch.toLowerCase() === state.chapter.toLowerCase());
+
+                // 4. Letter
+                const firstChar = normalize(c.title).charAt(0).toUpperCase();
+                let matchLetter = true;
+                if (state.letter !== 'all') {
+                    if (state.letter === '#') {
+                        matchLetter = !/[A-Z]/.test(firstChar);
+                    } else {
+                        matchLetter = firstChar === state.letter;
+                    }
+                }
+
+                return matchCat && matchSearch && matchChapter && matchLetter;
+            });
+
+            // Apply sorting
+            filtered = applySorting(filtered);
+
+            // Store filtered results
+            state.filteredConcepts = filtered;
+
+            // Update result count
+            resultCount.textContent = `Nájdené ${filtered.length} ${filtered.length === 1 ? 'koncept' : 'konceptov'}`;
+
+            // ==================== RENDER PAGINATION ====================
+            const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+            if (state.currentPage > totalPages && totalPages > 0) {
+                state.currentPage = totalPages;
+            }
+
+            // Handle empty results
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 2rem;">
+                    <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>Pre tento filter sa nenašli žiadne výsledky.</p>
+                </div>`;
+                pagination.innerHTML = '';
+                return;
+            }
+
+            // ==================== PAGINATION SLICING ====================
+            const startIdx = (state.currentPage - 1) * ITEMS_PER_PAGE;
+            const endIdx = startIdx + ITEMS_PER_PAGE;
+            const pageItems = filtered.slice(startIdx, endIdx);
+
+            // ==================== RENDER GRID ====================
+            grid.innerHTML = '';
+            grid.className = `concept-grid`;
+            if (state.viewMode === 'list') {
+                grid.classList.add('list-view');
+            } else if (state.viewMode === 'grid') {
+                grid.classList.add('grid-view');
+            }
+
+            pageItems.forEach(c => {
+                grid.appendChild(createConceptCard(c, state.search));
+            });
+
+            // Render pagination
+            renderPagination(totalPages);
+        }
+
+        // ==================== HELPER: SEARCH CONCEPT ====================
+        window.searchConcept = (title) => {
+            searchInput.value = title;
+            state.search = title;
+            state.currentPage = 1;
+            applyFilters();
+        };
+
+        // ==================== HELPER: TOGGLE READ MORE ====================
+        window.toggleReadMore = (conceptId) => {
+            const desc = document.getElementById(`desc-${conceptId}`);
+            const btn = event.target.closest('.read-more-btn');
+            const textSpan = btn.querySelector('.read-more-text');
+            const icon = btn.querySelector('i');
+            
+            if (desc.classList.contains('expanded')) {
+                desc.classList.remove('expanded');
+                textSpan.textContent = 'Čítať viac';
+                icon.className = 'fas fa-chevron-down';
+            } else {
+                desc.classList.add('expanded');
+                textSpan.textContent = 'Čítať menej';
+                icon.className = 'fas fa-chevron-up';
+            }
+        };
+
+        // ==================== HELPER: CLEAR ALL FILTERS ====================
+        window.clearAllFilters = () => {
+            searchInput.value = '';
+            state.search = '';
+            state.category = 'all';
+            state.chapter = 'all';
+            state.letter = 'all';
+            state.currentPage = 1;
+            
+            // Reset UI
+            chapterSelect.value = 'all';
+            sortSelect.value = 'az';
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.alpha-btn').classList.add('active');
+            catButtons.forEach(btn => btn.classList.remove('active'));
+            catButtons[0].classList.add('active');
+            
+            // Hide clear button
+            document.getElementById('clearFilterBtn').style.display = 'none';
+            
+            applyFilters();
+        };
+
+        // ==================== INITIALIZE UI ====================
+        function initControls() {
+            // Populate Chapters
+            const chaps = [];
+            for (let i = 1; i <= 23; i++) chaps.push(`Kapitola ${i}`);
+            for (let i = 1; i <= 5; i++) chaps.push(`SelfTalk ${i}`);
+
+            chaps.forEach(ch => {
+                const opt = document.createElement('option');
+                opt.value = ch;
+                opt.textContent = ch;
+                chapterSelect.appendChild(opt);
+            });
+
+            // Populate Alphabet
+            const letters = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+            alphabetBar.innerHTML = `<button class="alpha-btn active" onclick="setLetter('all')">Všetko</button>`;
+
+            letters.forEach(l => {
+                const btn = document.createElement('button');
+                btn.className = 'alpha-btn';
+                btn.textContent = l;
+                btn.onclick = () => setLetter(l);
+                alphabetBar.appendChild(btn);
+            });
+
+            // Update bookmark count
+            bookmarkCount.textContent = state.bookmarks.length;
+        }
+
+        // ==================== EVENT HANDLERS ====================
+        window.setCategory = (cat) => {
+            state.category = cat;
+            state.currentPage = 1;
+            catButtons.forEach(btn => btn.classList.remove('active'));
+            const targetBtn = Array.from(catButtons).find(b => b.getAttribute('onclick').includes(`'${cat}'`));
+            if (targetBtn) targetBtn.classList.add('active');
+            applyFilters();
+        };
+
+        window.setChapter = (val) => {
+            state.chapter = val;
+            state.currentPage = 1;
+            applyFilters();
+        };
+
+        window.setLetter = (l) => {
+            state.letter = l;
+            state.currentPage = 1;
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            const target = Array.from(document.querySelectorAll('.alpha-btn')).find(b => b.textContent === l);
+            if (target) target.classList.add('active');
+            applyFilters();
+        };
+
+        window.filterConcepts = () => {
+            state.search = searchInput.value;
+            state.currentPage = 1;
+            applyFilters();
+        };
+
+        // ==================== INITIALIZE ====================
+        initControls();
+        applyFilters();
+
+        //// LEGACY CODE REMOVED ////
+
+        // Neural Background Animation
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let points = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initPoints();
+        }
+        window.addEventListener('resize', resize);
+
+        function initPoints() {
+            points = [];
+            const count = width > 800 ? 50 : 30;
+            for (let i = 0; i < count; i++) {
+                points.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = '#38bdf8';
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+
+            points.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Connect
+                for (let j = i + 1; j < points.length; j++) {
+                    const p2 = points[j];
+                    const d = Math.sqrt((p.x - p2.x) ** 2 + (p.y - p2.y) ** 2);
+                    if (d < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        animate();
+
+    </script>
+</body>
+
+</html>

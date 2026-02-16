@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Vnútorný Monológ 5</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Special Chapter Styles - Abundance (Wealth Theme) */
+        :root {
+            --bg-deep: #0f172a;
+            --text-silver: #e2e8f0;
+            --accent-wealth: #10b981;
+            /* Emerald Green */
+            --accent-gold: #f59e0b;
+            /* Rich Gold */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero {
+            min-height: 40vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 1)), url('https://source.unsplash.com/random/1920x1080/?luxury,gold,emerald,flow');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h4 {
+            color: var(--accent-wealth) !important;
+        }
+
+        .instruction-box {
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: rgba(16, 185, 129, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            text-align: center;
+            max-width: 700px;
+            margin: -2rem auto 4rem auto;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stanza Cards */
+        .stanza {
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            padding: 3rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 1px solid rgba(16, 185, 129, 0.3);
+            border-right: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 2px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .stanza:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(245, 158, 11, 0.8);
+            /* Turns Gold on hover */
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .stanza p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .stanza p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: var(--accent-wealth);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Separator */
+        .separator {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            opacity: 0.6;
+            margin: 2rem 0;
+        }
+
+        /* Interactive "Claim It" Button */
+        .claim-section {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .claim-btn {
+            background: linear-gradient(45deg, var(--accent-wealth), #059669);
+            border: none;
+            color: #fff;
+            padding: 1rem 4rem;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .claim-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+        }
+
+        .claim-confirm {
+            margin-top: 2rem;
+            height: 20px;
+            color: var(--accent-gold);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.5s;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        /* Breathing Animation Background */
+        .pulse-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0) 70%);
+            z-index: -1;
+            animation: breathe 8s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pulse-bg"></div>
+    <canvas id="particleCanvas"></canvas>
+    <div id="shared-header"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h4 style="letter-spacing: 3px;">VNÚTORNÝ MONOLÓG 5</h4>
+            <h1>Pre Hojnosť</h1>
+        </div>
+    </section>
+
+    <!-- Instruction Section -->
+    <div class="instruction-box">
+        <p>Čítaj každú vetu pomaly, nechaj ju preniknúť do hĺbky a opakuj si ju, kým nepocítiš zmysel uspokojenia a
+            naplnenia.</p>
+    </div>
+
+    <div class="book-content">
+
+        <!-- Stanza 1 -->
+        <div class="stanza">
+            <p>Som hojnosť.</p>
+            <p>Bohatstvo ku mne prúdi bez námahy. Nenaháňam ho.</p>
+            <p>Nebojujem oň.</p>
+            <p>Je to jednoducho prirodzená súčasť mojej existencie. Neexistuje žiadny limit toho, čo môžem prijať,
+                žiadny limit toho, čo môžem vytvoriť.</p>
+            <p>Narodil som sa, aby som bol bohatý v každom smere, a teraz plne vstupujem do tejto pravdy.</p>
+            <p>Peniaze nie sú nedostatkové. Príležitosti nie sú nedostatkové. Úspech nie je nedostatkový.</p>
+            <p>Všetko, po čom túžim, existuje v nekonečnom množstve, a ja som plne otvorený prijať to všetko.</p>
+            <p>V mojej realite neexistuje nedostatok.</p>
+            <p>Vesmír je neobmedzený, prekypujúci bohatstvom, a ja som napojený na tento nekonečný tok.</p>
+            <p>Nebojím sa, že sa mi minie.</p>
+            <p>Nerobím si starosti o to, ako alebo kedy peniaze prídu.</p>
+            <p>Dôverujem tomu.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-gem"></i></div>
+
+        <!-- Stanza 2 -->
+        <div class="stanza">
+            <p>Dôverujem, že si ku mne vždy nájdu cestu spôsobmi, ktoré ani nedokážem predvídať.</p>
+            <p>Moje bohatstvo nie je viazané na jeden zdroj, peniaze ku mne prichádzajú očakávanými aj neočakávanými
+                kanálmi. Prúdia ku mne z viacerých smerov, vždy v rastúcom množstve.</p>
+            <p>Vítam hojnosť vo všetkých jej formách a viem, že každým dňom sa moja finančná realita rozširuje spôsobmi,
+                ktoré ma tešia.</p>
+            <p>Som hlboko vďačný za všetko bohatstvo, ktoré je už moje.</p>
+            <p>Už som bohatý.</p>
+            <p>Som bohatý na príležitosti, na zdroje, na podporu, na kreativitu.</p>
+            <p>Vidím hojnosť vo všetkom okolo seba, a pretože ju vidím, zažívam jej viac.</p>
+            <p>Čím viac oceňujem hojnosť vo svojom živote, tým viac sa jej násobí.</p>
+            <p>Som finančne slobodný. Som zabezpečený.</p>
+            <p>Som podporovaný.</p>
+            <p>Mám všetko, čo potrebujem, a ešte viac. Nie som tu na to, aby som trpel.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-gem"></i></div>
+
+        <!-- Stanza 3 -->
+        <div class="stanza">
+            <p>Nie som tu na to, aby som žil v nedostatku. Som tu na to, aby som prekvital.</p>
+            <p>Som tu, aby som prežil plnosť života bez obmedzení.</p>
+            <p>Nepotrebujem robiť nič, aby som dokázal svoju hodnosť.</p>
+            <p>Som hoden jednoducho preto, že existujem. Nepotrebujem povolenie byť bohatý.</p>
+            <p>Nepotrebujem bojovať, aby som si zaslúžil hojnosť. Je to moje rodné právo a ja si ho teraz nárokujem.</p>
+            <p>Púšťam všetky obmedzujúce presvedčenia, ktoré ma kedysi brzdili.</p>
+            <p>Uvoľňujem akékoľvek zastarané myšlienky, ktoré mi hovorili, že bohatstvo je ťažké získať.</p>
+            <p>Púšťam vinu, hanbu a strach okolo peňazí. Som slobodný mať, užívať si a rozširovať sa.</p>
+            <p>Som magnetom na prosperitu. Peniaze ma milujú.</p>
+            <p>Vyhľadávajú ma.</p>
+            <p>Lepia sa na mňa bez námahy.</p>
+            <p>Dovoľujem si prijímať veľké množstvá bohatstva s ľahkosťou.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-gem"></i></div>
+
+        <!-- Stanza 4 -->
+        <div class="stanza">
+            <p>Vítam finančné zázraky do môjho života denne. Všetko, čoho sa dotknem, sa mení na zlato.</p>
+            <p>Vyžarujem bohatstvo.</p>
+            <p>Stelesňujem prosperitu.</p>
+            <p>Je to môj prirodzený stav a ja sa s ním teraz plne zosúlaďujem. <strong>A tak to je.</strong></p>
+        </div>
+
+        <div class="claim-section">
+            <button class="claim-btn" onclick="claimAbundance()">Otvoriť sa Hojnosti</button>
+            <div id="claimMsg" class="claim-confirm">HOJNOSŤ AKTIVOVANÁ</div>
+        </div>
+
+    </div>
+
+    <footer>
+        <a href="SelfTalk4.html" class="nav-btn">&larr; Späť na Monológ 4</a>
+        <a href="index.html" class="nav-btn">Späť na Obsah <i class="fas fa-home"></i></a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script src="components/header.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/scroll-top.js"></script>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class GoldParticle {
+            constructor() {
+                this.x = width / 2;
+                this.y = height / 2;
+                this.vx = (Math.random() - 0.5) * 10;
+                this.vy = (Math.random() - 0.5) * 10;
+                this.life = 1;
+                this.size = Math.random() * 5 + 2;
+                this.color = Math.random() > 0.5 ? '#f59e0b' : '#10b981'; // Gold or Emerald
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.1; // Gravity
+                this.life -= 0.01;
+            }
+            draw() {
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles = particles.filter(p => p.life > 0);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            if (particles.length > 0) requestAnimationFrame(animateParticles);
+        }
+
+        function claimAbundance() {
+            const btn = document.querySelector('.claim-btn');
+            const msg = document.getElementById('claimMsg');
+
+            // Trigger Gold Rain
+            for (let i = 0; i < 300; i++) {
+                // Spawn particles from center
+                const p = new GoldParticle();
+                // Randomize spawn slightly
+                p.x = width / 2 + (Math.random() - 0.5) * 100;
+                p.y = height / 2 + (Math.random() - 0.5) * 50;
+                particles.push(p);
+            }
+            animateParticles();
+
+            // Button State
+            btn.style.background = '#f59e0b'; // Gold
+            btn.innerHTML = '<i class="fas fa-coins"></i> PRIJATÉ';
+
+            // Show Message
+            msg.style.opacity = '1';
+            msg.style.color = '#f59e0b';
+            msg.innerText = "SI MAGNETOM.";
+        }
+    </script>
+</body>
+
+</html>

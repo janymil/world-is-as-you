@@ -1,11 +1,17 @@
-const CACHE_NAME = 'audiobook-v4';
+const CACHE_NAME = 'audiobook-v5';
 const ASSETS = [
     './',
     './index.html',
     './style.css',
     './app.js',
     './manifest.json',
-    './assets/intro-slovak.srt'
+    './assets/intro-slovak.srt',
+    './assets/9kapitola-postoj-vitaza.mp3',
+    './assets/9kapitola-postoj-vitaza.srt',
+    './assets/10kapitola-zodpovednost.mp3',
+    './assets/10kapitola-zodpovednost.srt',
+    './assets/11kapitola-falosni-bohovia.mp3',
+    './assets/11kapitola-falosni-bohovia.srt'
 ];
 
 self.addEventListener('install', (event) => {

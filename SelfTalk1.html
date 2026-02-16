@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Vnútorný Monológ 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Special Chapter Styles - Intimate / Powerful */
+        :root {
+            --bg-deep: #0f172a;
+            --text-silver: #e2e8f0;
+            --accent-truth: #38bdf8;
+            /* Cyan for clarity */
+            --accent-power: #f472b6;
+            /* Pink for passion/conviction */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero {
+            min-height: 40vh;
+            /* Shorter header for these chapters */
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 1)), url('https://source.unsplash.com/random/1920x1080/?fog,mountain,clarity');
+        }
+
+        .instruction-box {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            text-align: center;
+            max-width: 700px;
+            margin: -2rem auto 4rem auto;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stanza Cards */
+        .stanza {
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            padding: 3rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 1px solid rgba(56, 189, 248, 0.3);
+            border-right: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 2px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .stanza:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(56, 189, 248, 0.8);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+        }
+
+        .stanza p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .stanza p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: var(--accent-truth);
+        }
+
+        /* Separator */
+        .separator {
+            text-align: center;
+            color: var(--accent-truth);
+            font-size: 1.5rem;
+            opacity: 0.5;
+            margin: 2rem 0;
+        }
+
+        /* Interactive "Claim It" Button */
+        .claim-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .claim-btn {
+            background: transparent;
+            border: 2px solid var(--accent-truth);
+            color: var(--accent-truth);
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .claim-btn:hover {
+            background: var(--accent-truth);
+            color: #0f172a;
+            box-shadow: 0 0 30px var(--accent-truth);
+        }
+
+        .claim-confirm {
+            margin-top: 1rem;
+            height: 20px;
+            color: var(--accent-truth);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* Breathing Animation Background */
+        .pulse-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, rgba(15, 23, 42, 0) 70%);
+            z-index: -1;
+            animation: breathe 8s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pulse-bg"></div>
+    <div id="shared-header"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h4 style="letter-spacing: 3px; color: var(--accent-truth);">VNÚTORNÝ MONOLÓG 1</h4>
+            <h1>Odstránenie Pochybností</h1>
+        </div>
+    </section>
+
+    <!-- Instruction Section -->
+    <div class="instruction-box">
+        <p>Tieto pasáže vnútorného monológu sú tu pre teba, aby si sa k nim vrátil, kedykoľvek sa začne zmocňovať
+            negativita alebo kedykoľvek jednoducho potrebuješ povzbudenie. Čítaj každú vetu pomaly, nechaj ju preniknúť
+            do hĺbky a opakuj si ju, kým nepocítiš zmysel uspokojenia a úľavy.</p>
+    </div>
+
+    <div class="book-content">
+
+        <!-- Stanza 1 -->
+        <div class="stanza">
+            <p>Pochybnosť je lož.</p>
+            <p>Nemá nado mnou žiadnu skutočnú moc, pokiaľ jej nevenujem pozornosť. A ja jej nebudem venovať pozornosť.
+            </p>
+            <p>Vyberám si istotu. Vyberám si vieru.</p>
+            <p>Vyberám si veriť v seba a svoju schopnosť vytvoriť život, po ktorom túžim.</p>
+            <p>Všetko, čo chcem, je už moje. Je to hotové.</p>
+            <p>Je to uvedené do pohybu.</p>
+            <p>Cesta sa predo mnou už odvíja spôsobmi, ktoré si ani neviem predstaviť.</p>
+            <p>Nepotrebujem vedieť "ako".</p>
+            <p>Mojou jedinou úlohou je dôverovať, vedieť a očakávať. Fyzická realita sa ohýba podľa môjho presvedčenia.
+            </p>
+        </div>
+
+        <div class="separator"><i class="fas fa-diamond"></i></div>
+
+        <!-- Stanza 2 -->
+        <div class="stanza">
+            <p>Pochybnosť je hlasom ilúzie, ktorá sa ma snaží presvedčiť, že som malý.</p>
+            <p>Ale ja nie som malý.</p>
+            <p>Som mocný nad rámec akejkoľvek miery.</p>
+            <p>Odmietam dovoliť prechodným myšlienkam neistoty, aby diktovali moju realitu.</p>
+            <p>Ja som ten, kto má kontrolu.</p>
+            <p>Ja som ten, kto rozhoduje, čo je pre mňa pravdou. A ja rozhodujem, práve teraz, že úspech, hojnosť a
+                radosť sú tie jediné možnosti.</p>
+            <p>Mám okolo seba dôkazy, že to, čomu verím, sa stáva mojou realitou.</p>
+            <p>Už predtým som videl veci, ako sa posunuli v môj prospech, a viem, že sa posunú znova.</p>
+            <p>Vesmír ma nikdy nesklamal.</p>
+            <p>Vždy reagoval na moje najhlbšie predpoklady, moje najsilnejšie presvedčenia.</p>
+            <p>Zakaždým, keď som očakával to najlepšie, dostal som to najlepšie. A to sa teraz nezmení. Pochybnosť nie
+                je nič iné ako ilúzia, šum, ktorý sa ma snaží odtiahnuť od mojej sily.</p>
+            <p>A ja nevyjednávam s ilúziami.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-diamond"></i></div>
+
+        <!-- Stanza 3 -->
+        <div class="stanza">
+            <p>Nedávam svoju energiu tomu, čo mi neslúži.</p>
+            <p>Nestrácam svoj čas spochybňovaním toho, o čom už viem, že je pravda.</p>
+            <p>Nie som dostupný pre pochybnosti.</p>
+            <p>Nie som dostupný pre váhanie.</p>
+            <p>Som dostupný len pre istotu, jasnosť a sebavedomie.</p>
+            <p>Viem, kto som.</p>
+            <p>Viem, čoho som schopný.</p>
+            <p>Viem, že v momente, keď niečo prehlásim za svoje, vesmír sa preskupí, aby to tak bolo.</p>
+            <p>Viem, že som plne podporovaný, že všetko vždy funguje v môj prospech a že nič mi nemôže stáť v ceste,
+                pokiaľ to nedovolím.</p>
+            <p>Pochybnosť je bezmocná v prítomnosti môjho poznania. Strach sa rozpúšťa v momente, keď sa rozhodnem
+                dôverovať.</p>
+            <p>Kráčam vpred s absolútnou istotou, že som na správnej ceste, že všetko, po čom túžim, prúdi ku mne, a že
+                život sa odvíja v dokonalom súlade s mojou víziou.</p>
+            <p>Nekolíšem sa.</p>
+            <p>Nespochybňujem.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-diamond"></i></div>
+
+        <!-- Stanza 4 -->
+        <div class="stanza">
+            <p>Nezabávam sa žiadnou myšlienkou, ktorá odporuje mojim túžbam.</p>
+            <p>Stojím pevne v mojom poznaní. Stojím pevne v mojej pravde.</p>
+            <p>Som si istý.</p>
+            <p>Som nezastaviteľný.</p>
+            <p>A pretože toto viem, <strong>je to hotové.</strong></p>
+        </div>
+
+        <div class="claim-section">
+            <button class="claim-btn" onclick="claimTruth()">Prijímam túto pravdu</button>
+            <div id="claimMsg" class="claim-confirm">INTEGROVANÉ</div>
+        </div>
+
+    </div>
+
+    <footer>
+        <a href="Kapitola23.html" class="nav-btn">&larr; Späť na Kapitolu 23</a>
+        <a href="SelfTalk2.html" class="nav-btn">Ďalší: Odstránenie Strachu &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script src="components/header.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/scroll-top.js"></script>
+
+    <script>
+        function claimTruth() {
+            const btn = document.querySelector('.claim-btn');
+            const msg = document.getElementById('claimMsg');
+            const body = document.body;
+
+            // Visual Flash
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.top = '0';
+            flash.style.left = '0';
+            flash.style.width = '100vw';
+            flash.style.height = '100vh';
+            flash.style.backgroundColor = 'white';
+            flash.style.opacity = '0.8';
+            flash.style.zIndex = '9999';
+            flash.style.transition = 'opacity 1s ease-out';
+            flash.style.pointerEvents = 'none';
+            document.body.appendChild(flash);
+
+            requestAnimationFrame(() => {
+                flash.style.opacity = '0';
+            });
+            setTimeout(() => flash.remove(), 1000);
+
+            // Button State
+            btn.style.borderColor = '#10b981'; // Green success
+            btn.style.color = '#10b981';
+            btn.innerHTML = '<i class="fas fa-check"></i> PRIJATÉ';
+
+            // Show Message
+            msg.style.opacity = '1';
+            msg.innerText = "TVOJE SLOVO JE ZÁKON.";
+        }
+    </script>
+</body>
+
+</html>

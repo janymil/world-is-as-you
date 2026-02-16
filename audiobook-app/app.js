@@ -53,12 +53,31 @@ const CHAPTERS = [
         subtitle: "Preskúmaj Svoje Presvedčenia",
         file: "assets/8kapitola-presvedcenia.mp3",
         srt: "assets/8kapitola-presvedcenia.srt"
+    },
+    {
+        title: "Kapitola 9",
+        subtitle: "Postoj Víťaza",
+        file: "assets/9kapitola-postoj-vitaza.mp3",
+        srt: "assets/9kapitola-postoj-vitaza.srt"
+    },
+    {
+        title: "Kapitola 10",
+        subtitle: "Prevezmi Zodpovednosť",
+        file: "assets/10kapitola-zodpovednost.mp3",
+        srt: "assets/10kapitola-zodpovednost.srt"
+    },
+    {
+        title: "Kapitola 11",
+        subtitle: "Falošní Bohovia",
+        file: "assets/11kapitola-falosni-bohovia.mp3",
+        srt: "assets/11kapitola-falosni-bohovia.srt"
     }
 ];
 
 // App State
 let currentChapterIndex = 0;
 let isPlaying = false;
+let continuousPlayback = true; // Auto-play next chapter
 let searchIndex = []; // Stores all parsed subtitles for search
 let currentSubtitles = []; // Stores subtitles for current track to display
 
@@ -85,6 +104,28 @@ async function initApp() {
     loadTrack(0, false); // Load first track, don't play
     await buildSearchIndex();
     setupEventListeners();
+    updateContinuousPlaybackIcon();
+}
+
+// Toggle continuous playback
+function toggleContinuousPlayback() {
+    continuousPlayback = !continuousPlayback;
+    updateContinuousPlaybackIcon();
+}
+
+// Update continuous playback icon
+function updateContinuousPlaybackIcon() {
+    const btn = document.getElementById('continuous-playback-btn');
+    if (btn) {
+        const icon = btn.querySelector('i');
+        if (continuousPlayback) {
+            btn.classList.add('active');
+            btn.setAttribute('title', 'Kontinuálne prehrávanie: Zapnuté');
+        } else {
+            btn.classList.remove('active');
+            btn.setAttribute('title', 'Kontinuálne prehrávanie: Vypnuté');
+        }
+    }
 }
 
 // --- PLAYER LOGIC ---
@@ -142,7 +183,12 @@ async function loadTrack(index, autoPlay = true) {
     renderPlaylist(); // Update active state
 
     if (autoPlay) {
-        audio.play();
+        audio.play().catch((error) => {
+            console.log('Autoplay prevented:', error);
+            // User interaction required, show play button ready
+            isPlaying = false;
+            renderPlaylist();
+        });
     }
 
     // Update Media Session (Lock Screen Controls)
@@ -367,9 +413,11 @@ function setupEventListeners() {
     // Audio Events
     audio.addEventListener('timeupdate', updateProgress);
     audio.addEventListener('ended', () => {
-        if (currentChapterIndex < CHAPTERS.length - 1) {
-            loadTrack(currentChapterIndex + 1);
+        if (continuousPlayback && currentChapterIndex < CHAPTERS.length - 1) {
+            // Auto-play next chapter
+            loadTrack(currentChapterIndex + 1, true);
         } else {
+            // Stop playback
             isPlaying = false;
             renderPlaylist();
             syncBackgroundAudio(false); // Stop bg music at end
@@ -404,6 +452,12 @@ function setupEventListeners() {
     nextBtn.addEventListener('click', () => {
         if (currentChapterIndex < CHAPTERS.length - 1) loadTrack(currentChapterIndex + 1);
     });
+
+    // Continuous Playback Toggle
+    const continuousBtn = document.getElementById('continuous-playback-btn');
+    if (continuousBtn) {
+        continuousBtn.addEventListener('click', toggleContinuousPlayback);
+    }
 
     progressContainer.addEventListener('click', setProgress);
 

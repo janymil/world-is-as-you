@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Vnútorný Monológ 4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Special Chapter Styles - Success (Victory Theme) */
+        :root {
+            --bg-deep: #0f172a;
+            --text-silver: #e2e8f0;
+            --accent-gold: #fbbf24;
+            /* Sovereign Gold */
+            --accent-win: #10b981;
+            /* Green for growth/result */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero {
+            min-height: 40vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 1)), url('https://source.unsplash.com/random/1920x1080/?skyscraper,peak,gold,winner');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h4 {
+            color: var(--accent-gold) !important;
+        }
+
+        .instruction-box {
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            background: rgba(251, 191, 36, 0.05);
+            /* Slight gold tint */
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            text-align: center;
+            max-width: 700px;
+            margin: -2rem auto 4rem auto;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stanza Cards */
+        .stanza {
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            padding: 3rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 2px solid rgba(251, 191, 36, 0.4);
+            /* Stronger border for success */
+            border-right: 2px solid rgba(251, 191, 36, 0.4);
+            border-radius: 2px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .stanza:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(251, 191, 36, 1);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .stanza p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .stanza p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Separator */
+        .separator {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            opacity: 0.6;
+            margin: 2rem 0;
+        }
+
+        /* Interactive "Claim It" Button */
+        .claim-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .claim-btn {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+        }
+
+        .claim-btn:hover {
+            background: var(--accent-gold);
+            color: #0f172a;
+            box-shadow: 0 0 50px var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .claim-confirm {
+            margin-top: 1rem;
+            height: 20px;
+            color: var(--accent-gold);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* Breathing Animation Background */
+        .pulse-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.05) 0%, rgba(15, 23, 42, 0) 60%);
+            z-index: -1;
+            animation: breathe 6s infinite ease-in-out;
+            /* Energetic pulse */
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pulse-bg"></div>
+    <div id="shared-header"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h4 style="letter-spacing: 3px;">VNÚTORNÝ MONOLÓG 4</h4>
+            <h1>Pre Úspech</h1>
+        </div>
+    </section>
+
+    <!-- Instruction Section -->
+    <div class="instruction-box">
+        <p>Čítaj každú vetu pomaly, nechaj ju preniknúť do hĺbky a opakuj si ju, kým nepocítiš zmysel uspokojenia a
+            sily.</p>
+    </div>
+
+    <div class="book-content">
+
+        <!-- Stanza 1 -->
+        <div class="stanza">
+            <p>Som úspešný.</p>
+            <p>Narodil som sa pre víťazstvo.</p>
+            <p>Úspech je môj prirodzený stav bytia.</p>
+            <p>Nenaháňam úspech, prúdi ku mne bez námahy, pretože som s ním v súlade.</p>
+            <p>Nosím v sebe nastavenie mysle niekoho, kto vždy vyhráva. Bez ohľadu na to, čo sa stane, vždy nájdem
+                cestu. Žiadna výzva nie je príliš veľká, žiadna prekážka nie je príliš silná a žiadne zdržanie nie je
+                trvalé.</p>
+            <p>Som stvorený pre veľkosť.</p>
+            <p>Každý krok, ktorý urobím, ma vedie bližšie k mojim snom.</p>
+            <p>Každý čin, ktorý vykonám, bez ohľadu na to, aký je malý, pripravuje pôdu pre môj úspech.</p>
+            <p>Vesmír sa sprisahal v môj prospech, neustále presúva veci v zákulisí, aby sa zosúladili s mojou víziou.
+            </p>
+            <p>Tomuto procesu úplne dôverujem. Už som vyhral.</p>
+            <p>Dôkazy možno ešte nie sú viditeľné, ale viem, že sa formujú.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-crown"></i></div>
+
+        <!-- Stanza 2 -->
+        <div class="stanza">
+            <p>Je to hotové.</p>
+            <p>Vždy som na správnom mieste v správnom čase. Správni ľudia, správne príležitosti a správne okolnosti si
+                ma neustále nachádzajú.</p>
+            <p>Som magnetom na úspech.</p>
+            <p>Vyžarujem energiu niekoho, kto vyhráva, a život na túto energiu reaguje.</p>
+            <p>Každé dvere, ktoré potrebujem otvoriť, sa otvoria. Každý zdroj, ktorý potrebujem, sa objaví.</p>
+            <p>Každá zručnosť, ktorú potrebujem rozvíjať, ku mne príde bez námahy.</p>
+            <p>Odmietam veriť na obmedzenia. Odmietam prijať boj.</p>
+            <p>Odmietam sa uspokojiť s niečím menším než s absolútnym maximom.</p>
+            <p>Nebol som umiestnený na túto zem, aby som žil priemerný život, som tu, aby som rozkvital.</p>
+            <p>Nevidím žiadne prekážky, iba príležitosti. Nevidím žiadne nezdary, iba odrazové mostíky k niečomu ešte
+                väčšiemu.</p>
+            <p>Moje nastavenie mysle je mojím najväčším aktívom a používam ho múdro.</p>
+            <p>Som opatrný so svojimi myšlienkami.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-crown"></i></div>
+
+        <!-- Stanza 3 -->
+        <div class="stanza">
+            <p>Nedovolím pochybnostiam ani strachu zapustiť korene v mojej mysli.</p>
+            <p>Strážim si svoju energiu. Obklopujem sa ľuďmi, nápadmi a prostrediami, ktoré poháňajú môj úspech.</p>
+            <p>Trénujem svoju myseľ očakávať víťazstvo vo všetkom, a pretože ho očakávam, musí sa stať.</p>
+            <p>Vidím sa, ako vyhrávam.</p>
+            <p>Cítim istotu svojho úspechu hlboko v kostiach.</p>
+            <p>Úspech nie je niečo, za čím sa načahujem, je to niečo, čo už vlastním.</p>
+            <p>Stelesňujem ho v každom kroku, ktorý urobím, v každom slove, ktoré vyslovím, v každom rozhodnutí, ktoré
+                urobím.</p>
+            <p>Pre mňa neexistuje iná možnosť ako víťazstvo.</p>
+            <p>Nezabávam sa neúspechom a nepripravujem sa na nezdary.</p>
+            <p>Pripravujem sa iba na úspech.</p>
+            <p>Robím miesto iba pre víťazstvo. Nedúfam v neho, očakávam ho. <strong>A tak to je.</strong></p>
+        </div>
+
+        <div class="claim-section">
+            <button class="claim-btn" onclick="claimTruth()">Prijímam Úspech</button>
+            <div id="claimMsg" class="claim-confirm">VÍŤAZSTVO PRIJATÉ</div>
+        </div>
+
+    </div>
+
+    <footer>
+        <a href="SelfTalk3.html" class="nav-btn">&larr; Späť na Monológ 3</a>
+        <a href="SelfTalk5.html" class="nav-btn">Ďalší: Pre Hojnosť &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script src="components/header.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/scroll-top.js"></script>
+
+    <script>
+        function claimTruth() {
+            const btn = document.querySelector('.claim-btn');
+            const msg = document.getElementById('claimMsg');
+            const body = document.body;
+
+            // Visual Flash
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.top = '0';
+            flash.style.left = '0';
+            flash.style.width = '100vw';
+            flash.style.height = '100vh';
+            flash.style.backgroundColor = '#fbbf24'; // Gold Flash
+            flash.style.opacity = '0.4';
+            flash.style.zIndex = '9999';
+            flash.style.transition = 'opacity 0.5s ease-out';
+            flash.style.pointerEvents = 'none';
+            document.body.appendChild(flash);
+
+            requestAnimationFrame(() => {
+                flash.style.opacity = '0';
+            });
+            setTimeout(() => flash.remove(), 500);
+
+            // Button State
+            btn.style.borderColor = '#fbbf24';
+            btn.style.color = '#fbbf24';
+            btn.style.background = 'rgba(251, 191, 36, 0.1)';
+            btn.innerHTML = '<i class="fas fa-trophy"></i> DONE';
+
+            // Show Message
+            msg.style.opacity = '1';
+            msg.innerText = "SI VÍŤAZ.";
+        }
+    </script>
+</body>
+
+</html>

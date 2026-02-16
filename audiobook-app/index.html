@@ -60,9 +60,15 @@
                 <button id="play-pause-btn" class="control-btn lg"><i class="fas fa-play"></i></button>
                 <button id="next-btn" class="control-btn sm"><i class="fas fa-step-forward"></i></button>
 
+                <!-- Continuous Playback Toggle -->
+                <button id="continuous-playback-btn" class="control-btn sm active" title="Kontinuálne prehrávanie: Zapnuté"
+                    style="margin-left: 15px;">
+                    <i class="fas fa-repeat"></i>
+                </button>
+
                 <!-- Ambience Toggle -->
                 <button id="ambience-toggle" class="control-btn sm ambience-toggle-btn" aria-label="Background Music"
-                    style="margin-left: 15px;">
+                    style="margin-left: 5px;">
                     <i class="fas fa-leaf"></i>
                 </button>
             </div>
@@ -98,6 +104,8 @@
     </div>
 
     <script src="app.js"></script>
+    <script src="mudrosti-db.js"></script>
+    <script src="desktop-features.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

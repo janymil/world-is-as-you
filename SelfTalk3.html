@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svet je taký, aký si ty - Vnútorný Monológ 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Special Chapter Styles - Overwhelm (Flow/Release Theme) */
+        :root {
+            --bg-deep: #0f172a;
+            --text-silver: #e2e8f0;
+            --accent-calm: #2dd4bf;
+            /* Teal */
+            --accent-release: #818cf8;
+            /* Indigo */
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-silver);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero {
+            min-height: 40vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 1)), url('https://source.unsplash.com/random/1920x1080/?water,flow,river,calm');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h4 {
+            color: var(--accent-calm) !important;
+        }
+
+        .instruction-box {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            text-align: center;
+            max-width: 700px;
+            margin: -2rem auto 4rem auto;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Stanza Cards */
+        .stanza {
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            padding: 3rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 1px solid rgba(45, 212, 191, 0.3);
+            border-right: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 2px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .stanza:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(45, 212, 191, 0.8);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.1);
+        }
+
+        .stanza p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .stanza p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: var(--accent-calm);
+        }
+
+        /* Separator */
+        .separator {
+            text-align: center;
+            color: var(--accent-calm);
+            font-size: 1.5rem;
+            opacity: 0.5;
+            margin: 2rem 0;
+        }
+
+        /* Interactive "Claim It" Button */
+        .claim-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .claim-btn {
+            background: transparent;
+            border: 2px solid var(--accent-release);
+            color: var(--accent-release);
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .claim-btn:hover {
+            background: var(--accent-release);
+            color: #0f172a;
+            box-shadow: 0 0 30px var(--accent-release);
+        }
+
+        .claim-confirm {
+            margin-top: 1rem;
+            height: 20px;
+            color: var(--accent-release);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* Breathing Animation Background */
+        .pulse-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.05) 0%, rgba(15, 23, 42, 0) 70%);
+            z-index: -1;
+            animation: breathe 10s infinite ease-in-out;
+            /* Slower breath for calm */
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pulse-bg"></div>
+    <div id="shared-header"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h4 style="letter-spacing: 3px;">VNÚTORNÝ MONOLÓG 3</h4>
+            <h1>Keď si Zahltený</h1>
+        </div>
+    </section>
+
+    <!-- Instruction Section -->
+    <div class="instruction-box">
+        <p>Čítaj každú vetu pomaly, nechaj ju preniknúť do hĺbky a opakuj si ju, kým nepocítiš zmysel uspokojenia a
+            úľavy.</p>
+    </div>
+
+    <div class="book-content">
+
+        <!-- Stanza 1 -->
+        <div class="stanza">
+            <p>Všetko je v poriadku. Všetko je pod kontrolou.</p>
+            <p>Aj keď sa to práve teraz zdá byť príliš veľa,</p>
+            <p>Viem, že mám silu to zvládnuť.</p>
+            <p>Pripomínam si, že som už čelil ťažkým chvíľam predtým a vždy som to zvládol. Tento moment nie je iný.</p>
+            <p>Púšťam potrebu niesť váhu sveta na svojich pleciach.</p>
+            <p>Nemusím všetko vyriešiť naraz. Nepotrebujem sa držať stresu alebo napätia.</p>
+            <p>Dovoľujem si dôverovať.</p>
+            <p>Dôverujem, že všetko sa pre mňa vyvíja dobre, aj keď ešte nevidím celý obraz.</p>
+            <p>Vesmír vždy preskupuje veci v môj prospech, aj spôsobmi, ktorým možno ešte nerozumiem.</p>
+            <p>Mám dovolené zastaviť sa.</p>
+            <p>Mám dovolené dýchať.</p>
+            <p>Mám dovolené urobiť krok späť a získať späť svoju jasnosť.</p>
+            <p>Nemusím sa siliť cez vyčerpanie.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-water"></i></div>
+
+        <!-- Stanza 2 -->
+        <div class="stanza">
+            <p>Nemusím mať v tejto chvíli všetky odpovede.</p>
+            <p>Som slobodný spomaliť.</p>
+            <p>Som slobodný pustiť to, čo nie je moje, aby som to niesol.</p>
+            <p>Pripomínam si, že existujú neviditeľné sily, ktoré ma podporujú, vedú a čistia mi cestu. Práve teraz si
+                vyberám dôverovať, že som presne tam, kde mám byť.</p>
+            <p>Nie je kam sa ponáhľať. Neexistuje žiadny tlak.</p>
+            <p>Čím viac sa uvoľním, tým ľahšie sa riešenia objavia.</p>
+            <p>Keď utíšim svoju myseľ, prichádza jasnosť. Keď dôverujem, život plynie.</p>
+            <p>Keď sa vzdám potreby všetko kontrolovať, veci do seba dokonale zapadnú.</p>
+            <p>Púšťam presvedčenie, že musím bojovať, aby som uspel. Púšťam presvedčenie, že stres je nevyhnutný.</p>
+            <p>Vyberám si veriť v ľahkosť.</p>
+            <p>Vyberám si veriť, že veci sa vyvíjajú lepšie, než by som si mohol naplánovať.</p>
+            <p>Vyberám si veriť, že všetko sa odvíja v dokonalom načasovaní.</p>
+        </div>
+
+        <div class="separator"><i class="fas fa-water"></i></div>
+
+        <!-- Stanza 3 -->
+        <div class="stanza">
+            <p>Som mocný a zvládnem všetko, čo mi príde do cesty.</p>
+            <p>Ale tiež viem, že nemusím bojovať. Nemusím sa vyčerpávať.</p>
+            <p>Nemusím fungovať z miesta zahltenia. Namiesto toho si vyberám ľahkosť.</p>
+            <p>Vyberám si jasnosť.</p>
+            <p>Vyberám si dôverovať, že všetky veci sa riešia bez úsilia.</p>
+            <p>Zhlboka sa nadýchnem a cítim, ako napätie opúšťa moje telo.</p>
+            <p>Vdychujem mier a vydychujem stres. Vdychujem dôveru a vydychujem pochybnosti.</p>
+            <p>Vdychujem ľahkosť a vydychujem odpor. Dovoľujem si cítiť sa ľahšie.</p>
+            <p>Dovoľujem si uvoľniť sa.</p>
+            <p>Dovoľujem si plynúť so životom namiesto proti nemu. Som v bezpečí.</p>
+            <p>Som podporovaný. Som schopný.</p>
+            <p>Všetko sa vyvíja presne tak, ako sa má, a <strong>som v poriadku.</strong></p>
+        </div>
+
+        <div class="claim-section">
+            <button class="claim-btn" onclick="claimTruth()">Uvoľniť Tlak</button>
+            <div id="claimMsg" class="claim-confirm">UVOĽNENIE PRIJATÉ</div>
+        </div>
+
+    </div>
+
+    <footer>
+        <a href="SelfTalk2.html" class="nav-btn">&larr; Späť na Monológ 2</a>
+        <a href="SelfTalk4.html" class="nav-btn">Ďalší: Pre Úspech &rarr;</a>
+        <div id="shared-footer"></div>
+    </footer>
+
+    <script src="components/header.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/scroll-top.js"></script>
+
+    <script>
+        function claimTruth() {
+            const btn = document.querySelector('.claim-btn');
+            const msg = document.getElementById('claimMsg');
+            const body = document.body;
+
+            // Visual Flash
+            const flash = document.createElement('div');
+            flash.style.position = 'fixed';
+            flash.style.top = '0';
+            flash.style.left = '0';
+            flash.style.width = '100vw';
+            flash.style.height = '100vh';
+            flash.style.backgroundColor = 'white';
+            flash.style.opacity = '0.5';
+            flash.style.zIndex = '9999';
+            flash.style.transition = 'opacity 1.5s ease-out'; // Slower fade for relax
+            flash.style.pointerEvents = 'none';
+            document.body.appendChild(flash);
+
+            requestAnimationFrame(() => {
+                flash.style.opacity = '0';
+            });
+            setTimeout(() => flash.remove(), 1500);
+
+            // Button State
+            btn.style.borderColor = '#818cf8';
+            btn.style.color = '#818cf8';
+            btn.innerHTML = '<i class="fas fa-feather"></i> JE TO V PORIADKU';
+
+            // Show Message
+            msg.style.opacity = '1';
+            msg.innerText = "DÝCHAJ.";
+        }
+    </script>
+</body>
+
+</html>
