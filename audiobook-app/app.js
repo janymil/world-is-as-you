@@ -81,6 +81,69 @@ let continuousPlayback = true; // Auto-play next chapter
 let searchIndex = []; // Stores all parsed subtitles for search
 let currentSubtitles = []; // Stores subtitles for current track to display
 
+// Feature: Speed Control
+let playbackSpeed = 1;
+
+// Feature: Bookmarks
+let bookmarks = []; // Array of {chapterIndex, timestamp, note, createdAt}
+
+// Feature: Sleep Timer
+let sleepTimerID = null;
+let sleepTimerSeconds = 0;
+let sleepTimerMode = null; // 'timer' or 'endOfChapter'
+
+// --- STORAGE FUNCTIONS (LocalStorage) ---
+
+function saveProgress() {
+    localStorage.setItem('audiobook_lastChapter', currentChapterIndex);
+    localStorage.setItem('audiobook_lastTimestamp', audio.currentTime);
+}
+
+function loadProgress() {
+    const savedChapter = localStorage.getItem('audiobook_lastChapter');
+    const savedTimestamp = localStorage.getItem('audiobook_lastTimestamp');
+    if (savedChapter !== null) {
+        return { chapter: parseInt(savedChapter), timestamp: parseFloat(savedTimestamp) };
+    }
+    return null;
+}
+
+function saveBookmarks() {
+    localStorage.setItem('audiobook_bookmarks', JSON.stringify(bookmarks));
+}
+
+function loadBookmarks() {
+    const saved = localStorage.getItem('audiobook_bookmarks');
+    bookmarks = saved ? JSON.parse(saved) : [];
+}
+
+function addBookmark(chapterIndex, timestamp, note = '') {
+    bookmarks.push({
+        id: Date.now(),
+        chapterIndex,
+        timestamp,
+        note,
+        chapterTitle: CHAPTERS[chapterIndex].title,
+        createdAt: new Date().toISOString()
+    });
+    saveBookmarks();
+    return bookmarks[bookmarks.length - 1];
+}
+
+function deleteBookmark(bookmarkId) {
+    bookmarks = bookmarks.filter(b => b.id !== bookmarkId);
+    saveBookmarks();
+}
+
+function savePlaybackSpeed() {
+    localStorage.setItem('audiobook_speed', playbackSpeed);
+}
+
+function loadPlaybackSpeed() {
+    const saved = localStorage.getItem('audiobook_speed');
+    playbackSpeed = saved ? parseFloat(saved) : 1;
+}
+
 // DOM Elements
 const audio = document.getElementById('audio-player');
 const playBtn = document.getElementById('play-pause-btn');
@@ -100,8 +163,29 @@ const transcriptEl = document.getElementById('active-transcript');
 // --- INITIALIZATION ---
 
 async function initApp() {
+    loadBookmarks();
+    loadPlaybackSpeed();
+    
+    // Load last played chapter and position
+    const progress = loadProgress();
+    if (progress) {
+        currentChapterIndex = progress.chapter;
+    }
+    
     renderPlaylist();
-    loadTrack(0, false); // Load first track, don't play
+    loadTrack(currentChapterIndex, false);
+    
+    // Restore playback speed
+    audio.playbackRate = playbackSpeed;
+    
+    // Restore timestamp after track loads
+    if (progress) {
+        audio.addEventListener('canplay', () => {
+            audio.currentTime = progress.timestamp;
+            updateSpeedControlUI();
+        }, { once: true });
+    }
+    
     await buildSearchIndex();
     setupEventListeners();
     updateContinuousPlaybackIcon();
@@ -420,13 +504,174 @@ function syncBackgroundAudio(shouldPlay) {
     }
 }
 
+// --- SWIPE GESTURE DETECTION ---
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+function detectSwipe() {
+    const swipeThreshold = 50; // Minimum distance for swipe
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swiped left - next chapter
+            if (currentChapterIndex < CHAPTERS.length - 1) {
+                loadTrack(currentChapterIndex + 1);
+            }
+        } else {
+            // Swiped right - previous chapter
+            if (currentChapterIndex > 0) {
+                loadTrack(currentChapterIndex - 1);
+            }
+        }
+    }
+}
+
+// --- SPEED CONTROL ---
+
+function setPlaybackSpeed(speed) {
+    playbackSpeed = speed;
+    audio.playbackRate = speed;
+    savePlaybackSpeed();
+    updateSpeedControlUI();
+}
+
+function updateSpeedControlUI() {
+    const buttons = document.querySelectorAll('.speed-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.speed == playbackSpeed) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// --- BOOKMARKS ---
+
+function toggleBookmarkCurrentPosition() {
+    const existingBookmark = bookmarks.find(
+        b => b.chapterIndex === currentChapterIndex && 
+        Math.abs(b.timestamp - audio.currentTime) < 1
+    );
+    
+    if (existingBookmark) {
+        deleteBookmark(existingBookmark.id);
+        alert('Záložka bol odstránená');
+    } else {
+        addBookmark(currentChapterIndex, audio.currentTime);
+        alert('Záložka bola vytvoreného');
+    }
+    updateBookmarkUI();
+}
+
+function updateBookmarkUI() {
+    const bookmarkBtn = document.getElementById('bookmark-btn');
+    const bookmarksList = document.getElementById('bookmarks-list');
+    
+    if (!bookmarksList) return;
+    
+    // Check if current position is bookmarked
+    const isBookmarked = bookmarks.some(
+        b => b.chapterIndex === currentChapterIndex && 
+        Math.abs(b.timestamp - audio.currentTime) < 1
+    );
+    
+    if (bookmarkBtn) {
+        bookmarkBtn.classList.toggle('bookmarked', isBookmarked);
+    }
+    
+    // Update bookmarks list
+    bookmarksList.innerHTML = '';
+    if (bookmarks.length === 0) {
+        bookmarksList.innerHTML = '<div class="empty-state">Žiadne záložky</div>';
+        return;
+    }
+    
+    bookmarks.forEach(bookmark => {
+        const div = document.createElement('div');
+        div.className = 'bookmark-item';
+        div.innerHTML = `
+            <div class="bookmark-info">
+                <div class="bookmark-chapter">${bookmark.chapterTitle}</div>
+                <div class="bookmark-time">${formatTime(bookmark.timestamp)}</div>
+                ${bookmark.note ? `<div class="bookmark-note">${bookmark.note}</div>` : ''}
+            </div>
+            <button class="bookmark-delete-btn" data-id="${bookmark.id}">
+                <i class="fas fa-trash"></i>
+            </button>
+        `;
+        
+        div.addEventListener('click', (e) => {
+            if (!e.target.closest('.bookmark-delete-btn')) {
+                loadTrack(bookmark.chapterIndex);
+                setTimeout(() => {
+                    audio.currentTime = bookmark.timestamp;
+                }, 100);
+            }
+        });
+        
+        div.querySelector('.bookmark-delete-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            deleteBookmark(bookmark.id);
+            updateBookmarkUI();
+        });
+        
+        bookmarksList.appendChild(div);
+    });
+}
+
+// --- SLEEP TIMER ---
+
+function setSleepTimer(mode, duration) {
+    // Clear existing timer
+    if (sleepTimerID) {
+        clearTimeout(sleepTimerID);
+    }
+    
+    sleepTimerMode = mode;
+    sleepTimerSeconds = duration;
+    
+    if (mode === 'timer' && duration > 0) {
+        sleepTimerID = setTimeout(() => {
+            audio.pause();
+            isPlaying = false;
+            renderPlaylist();
+            alert(`Spánková časovač skončil. Prehrávanie zastavené.`);
+            sleepTimerMode = null;
+            sleepTimerSeconds = 0;
+            updateSleepTimerUI();
+        }, duration * 1000);
+    } else if (mode === 'endOfChapter') {
+        // Will be handled in 'ended' event
+    }
+    
+    updateSleepTimerUI();
+}
+
+function updateSleepTimerUI() {
+    const timerSelect = document.getElementById('sleep-timer-select');
+    if (timerSelect) {
+        timerSelect.value = sleepTimerMode || '';
+    }
+}
 
 // --- EVENT LISTENERS ---
 
 function setupEventListeners() {
     // Audio Events
-    audio.addEventListener('timeupdate', updateProgress);
     audio.addEventListener('ended', () => {
+        // Handle sleep timer "end of chapter" mode
+        if (sleepTimerMode === 'endOfChapter') {
+            audio.pause();
+            isPlaying = false;
+            renderPlaylist();
+            alert(`Spánková časovač: Koniec kapitoly. Prehrávanie zastavené.`);
+            sleepTimerMode = null;
+            updateSleepTimerUI();
+            return;
+        }
+        
         if (continuousPlayback && currentChapterIndex < CHAPTERS.length - 1) {
             // Auto-play next chapter
             loadTrack(currentChapterIndex + 1, true);
@@ -435,6 +680,14 @@ function setupEventListeners() {
             isPlaying = false;
             renderPlaylist();
             syncBackgroundAudio(false); // Stop bg music at end
+        }
+    });
+
+    audio.addEventListener('timeupdate', (e) => {
+        updateProgress(e);
+        // Auto-save progress every 5 seconds
+        if (Math.floor(audio.currentTime) % 5 === 0) {
+            saveProgress();
         }
     });
 
@@ -450,7 +703,18 @@ function setupEventListeners() {
         playBtn.innerHTML = '<i class="fas fa-play"></i>';
         renderPlaylist();
         syncBackgroundAudio(false);
+        saveProgress();
     });
+
+    // Swipe gesture listeners
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    document.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        detectSwipe();
+    }, false);
 
     // Controls
     playBtn.addEventListener('click', togglePlay);
@@ -514,6 +778,84 @@ function setupEventListeners() {
         ambienceEnableBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleAmbienceState();
+        });
+    }
+
+    // --- SPEED CONTROL LISTENERS ---
+    const speedToggleBtn = document.getElementById('speed-toggle-btn');
+    const speedMenu = document.getElementById('speed-menu');
+    
+    if (speedToggleBtn) {
+        speedToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            speedMenu.classList.toggle('open');
+        });
+    }
+    
+    const speedBtns = document.querySelectorAll('.speed-btn');
+    speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            setPlaybackSpeed(parseFloat(btn.dataset.speed));
+            speedMenu.classList.remove('open');
+        });
+    });
+    
+    // Close speed menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (speedMenu && !speedMenu.contains(e.target) && !speedToggleBtn.contains(e.target)) {
+            speedMenu.classList.remove('open');
+        }
+    });
+
+    // --- BOOKMARK LISTENERS ---
+    const bookmarkBtn = document.getElementById('bookmark-btn');
+    if (bookmarkBtn) {
+        bookmarkBtn.addEventListener('click', toggleBookmarkCurrentPosition);
+    }
+
+    const bookmarksPanel = document.getElementById('bookmarks-panel');
+    const closeBookmarksBtn = document.getElementById('close-bookmarks-btn');
+    
+    if (closeBookmarksBtn) {
+        closeBookmarksBtn.addEventListener('click', () => {
+            if (bookmarksPanel) {
+                bookmarksPanel.classList.remove('open');
+            }
+        });
+    }
+    
+    // Add books panel toggle to header or playlist for access
+    const bookmarksToggleBtn = document.getElementById('bookmarks-toggle-btn');
+    if (bookmarksToggleBtn) {
+        bookmarksToggleBtn.addEventListener('click', () => {
+            if (bookmarksPanel) {
+                bookmarksPanel.classList.toggle('open');
+            }
+        });
+    }
+    
+    // Close bookmarks panel when clicking the panel background
+    if (bookmarksPanel) {
+        bookmarksPanel.addEventListener('click', (e) => {
+            if (e.target === bookmarksPanel) {
+                bookmarksPanel.classList.remove('open');
+            }
+        });
+    }
+
+    // --- SLEEP TIMER LISTENERS ---
+    const sleepTimerSelect = document.getElementById('sleep-timer-select');
+    if (sleepTimerSelect) {
+        sleepTimerSelect.addEventListener('change', (e) => {
+            const value = e.target.value;
+            if (value === 'endOfChapter') {
+                setSleepTimer('endOfChapter', 0);
+            } else if (value) {
+                const seconds = parseInt(value);
+                setSleepTimer('timer', seconds);
+            } else {
+                setSleepTimer(null, 0);
+            }
         });
     }
 

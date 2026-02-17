@@ -19,7 +19,12 @@
         <!-- Header -->
         <header class="app-header">
             <h3>Audiokniha</h3>
-            <button id="search-toggle-btn" class="icon-btn"><i class="fas fa-search"></i></button>
+            <div class="header-buttons">
+                <button id="bookmarks-toggle-btn" class="icon-btn" title="Záložky">
+                    <i class="fas fa-bookmark"></i>
+                </button>
+                <button id="search-toggle-btn" class="icon-btn"><i class="fas fa-search"></i></button>
+            </div>
         </header>
 
         <!-- Search Overlay -->
@@ -40,6 +45,19 @@
             <ul id="playlist" class="playlist">
                 <!-- Data injected via JS -->
             </ul>
+        </div>
+
+        <!-- Bookmarks Panel (Hidden) -->
+        <div id="bookmarks-panel" class="bookmarks-panel">
+            <div class="bookmarks-header">
+                <h3>Záložky</h3>
+                <button id="close-bookmarks-btn" class="icon-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="bookmarks-list" class="bookmarks-list">
+                <!-- Bookmarks injected via JS -->
+            </div>
         </div>
 
         <!-- Player Bar -->
@@ -66,6 +84,28 @@
                     <i class="fas fa-repeat"></i>
                 </button>
 
+                <!-- Bookmark Button -->
+                <button id="bookmark-btn" class="control-btn sm" title="Záložka"
+                    style="margin-left: 5px;">
+                    <i class="fas fa-bookmark"></i>
+                </button>
+
+                <!-- Speed Control Toggle -->
+                <button id="speed-toggle-btn" class="control-btn sm" title="Rýchlosť prehrávania"
+                    style="margin-left: 5px;">
+                    <i class="fas fa-tachometer-alt"></i>
+                </button>
+
+                <!-- Sleep Timer -->
+                <select id="sleep-timer-select" class="timer-select" title="Spánková časovač"
+                    style="margin-left: 5px;">
+                    <option value="">Bez časovača</option>
+                    <option value="900">15 minút</option>
+                    <option value="1800">30 minút</option>
+                    <option value="3600">1 hodina</option>
+                    <option value="endOfChapter">Koniec kapitoly</option>
+                </select>
+
                 <!-- Ambience Toggle -->
                 <button id="ambience-toggle" class="control-btn sm ambience-toggle-btn" aria-label="Background Music"
                     style="margin-left: 5px;">
@@ -73,6 +113,16 @@
                 </button>
             </div>
 
+            <!-- Speed Control Menu (Hidden) -->
+            <div id="speed-menu" class="speed-menu">
+                <div class="speed-header">Rýchlosť</div>
+                <div class="speed-buttons">
+                    <button class="speed-btn" data-speed="0.75">0.75x</button>
+                    <button class="speed-btn active" data-speed="1">1x</button>
+                    <button class="speed-btn" data-speed="1.25">1.25x</button>
+                    <button class="speed-btn" data-speed="1.5">1.5x</button>
+                </div>
+            </div>
             <!-- Ambience Popup -->
             <div id="ambience-popup" class="ambience-popup">
                 <div class="ambience-header">Meditácia</div>

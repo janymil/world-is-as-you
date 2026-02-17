@@ -126,7 +126,7 @@ If you prefer not to use the automated scripts:
 
 ## 📦 App Details
 
-- **App Name**: Moja Audiokniha
+- **App Name**: Svet si ty audiokniha
 - **Package ID**: com.worldisasyou.audiobook
 - **Version**: 1.0.0
 - **Assets Size**: ~423MB (includes all audio files and subtitles)

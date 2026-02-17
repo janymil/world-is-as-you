@@ -115,7 +115,7 @@ npm init -y
 npm install @capacitor/core @capacitor/cli @capacitor/android
 
 # 3. Initialize Capacitor
-npx cap init "Moja Audiokniha" "com.worldisasyou.audiobook" --web-dir="www"
+npx cap init "Svet si ty audiokniha" "com.worldisasyou.audiobook" --web-dir="www"
 
 # 4. Create PNG icons
 convert assets/logo.svg -resize 192x192 assets/icon-192.png
