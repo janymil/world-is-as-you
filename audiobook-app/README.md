@@ -14,6 +14,14 @@ Before building the Android APK, you need to set up the `www` folder and Android
 
 ### Automated Setup (Recommended)
 
+**Using npm (cross-platform):**
+```bash
+npm install
+npm run setup
+```
+
+**Or using shell scripts:**
+
 **On Linux/Mac:**
 ```bash
 ./setup-android.sh
@@ -24,15 +32,10 @@ Before building the Android APK, you need to set up the `www` folder and Android
 setup-android.bat
 ```
 
-**Or using npm:**
-```bash
-npm run setup
-```
-
-This will:
+All methods will:
 1. Create the `www` folder
 2. Copy all web assets to `www`
-3. Install npm dependencies
+3. Install npm dependencies (if needed)
 4. Add the Android platform
 5. Sync the Capacitor project
 

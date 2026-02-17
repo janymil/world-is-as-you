@@ -43,6 +43,14 @@ The audiobook app has been successfully configured to generate Android APK files
 
 2. **Run the setup script:**
    
+   **Using npm (cross-platform - recommended):**
+   ```bash
+   npm install
+   npm run setup
+   ```
+   
+   **Or using shell scripts:**
+   
    **On Linux/Mac:**
    ```bash
    ./setup-android.sh
@@ -53,13 +61,7 @@ The audiobook app has been successfully configured to generate Android APK files
    setup-android.bat
    ```
    
-   **Or using npm:**
-   ```bash
-   npm install
-   npm run setup
-   ```
-   
-   This automated script will:
+   All methods will:
    - Create the `www` folder
    - Copy all web assets
    - Install dependencies

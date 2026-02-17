@@ -10,6 +10,14 @@ Before building for the first time, you need to set up the `www` folder and Andr
 
 ### Automated Setup (Recommended)
 
+**Using npm (cross-platform):**
+```bash
+npm install
+npm run setup
+```
+
+**Or using shell scripts:**
+
 **On Linux/Mac:**
 ```bash
 ./setup-android.sh
@@ -20,13 +28,7 @@ Before building for the first time, you need to set up the `www` folder and Andr
 setup-android.bat
 ```
 
-**Or using npm:**
-```bash
-npm install
-npm run setup
-```
-
-This will automatically create the `www` folder, copy all assets, and set up the Android platform.
+All methods will automatically create the `www` folder, copy all assets, and set up the Android platform.
 
 ### Manual Setup
 

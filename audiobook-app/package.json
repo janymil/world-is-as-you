@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "npm run prepare-www && npm run add-platform",
-    "prepare-www": "mkdir -p www && cp index.html style.css app.js manifest.json sw.js mudrosti-db.js desktop-features.js www/ && cp -r assets www/",
-    "add-platform": "npx cap add android || echo 'Android platform already exists' && npx cap sync",
+    "prepare-www": "node -e \"require('fs').mkdirSync('www', {recursive:true})\" && node -e \"['index.html','style.css','app.js','manifest.json','sw.js','mudrosti-db.js','desktop-features.js'].forEach(f=>require('fs').copyFileSync(f,'www/'+f))\" && node -e \"require('fs').cpSync('assets','www/assets',{recursive:true})\"",
+    "add-platform": "npx cap add android 2>/dev/null || (echo 'Android platform already exists or failed to add' && exit 0) && npx cap sync",
     "sync": "npx cap sync",
     "copy": "npx cap copy",
     "build:android": "npx cap sync && npx cap open android",
