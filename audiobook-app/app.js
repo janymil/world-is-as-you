@@ -186,15 +186,23 @@ async function loadTrack(index, autoPlay = true) {
     audio.load();
 
     if (autoPlay) {
-        // Use a small delay to ensure the audio is ready to play
-        setTimeout(() => {
+        // Wait for audio to be ready before playing
+        const playWhenReady = () => {
             audio.play().catch((error) => {
                 console.log('Autoplay prevented:', error);
                 // User interaction required, show play button ready
                 isPlaying = false;
                 renderPlaylist();
             });
-        }, 100);
+        };
+
+        // If audio is already ready, play immediately
+        if (audio.readyState >= 3) { // HAVE_FUTURE_DATA or greater
+            playWhenReady();
+        } else {
+            // Otherwise, wait for canplay event
+            audio.addEventListener('canplay', playWhenReady, { once: true });
+        }
     }
 
     // Update Media Session (Lock Screen Controls)
