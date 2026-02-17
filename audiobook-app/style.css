@@ -433,7 +433,6 @@ body {
 /* Mobile specific popup positioning */
 @media (max-width: 768px) {
     .player-bar {
-        padding: 1rem;
         padding-bottom: max(1.5rem, calc(1rem + env(safe-area-inset-bottom)));
     }
     
