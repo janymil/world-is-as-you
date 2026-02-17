@@ -12,6 +12,7 @@ The audiobook app has been successfully configured to generate Android APK files
 5. ✅ **Build Scripts Added** - NPM scripts for easy building
 6. ✅ **Project Synced** - Web assets copied to Android project
 7. ✅ **Documentation Created** - Complete guides for building and deployment
+8. ✅ **Setup Scripts Created** - Automated setup scripts for Linux/Mac/Windows
 
 ### Project Files Created:
 - `package.json` - NPM dependencies and build scripts
@@ -21,6 +22,8 @@ The audiobook app has been successfully configured to generate Android APK files
 - `.gitignore` - Excludes build artifacts
 - `assets/icon-192.png` - Android app icon (192x192)
 - `assets/icon-512.png` - Android app icon (512x512)
+- `setup-android.sh` - Automated setup script for Linux/Mac
+- `setup-android.bat` - Automated setup script for Windows
 - `BUILD.md` - Quick build instructions
 - `GUIDE_TO_APK.md` - Complete setup and deployment guide
 
@@ -38,23 +41,32 @@ The audiobook app has been successfully configured to generate Android APK files
    cd world-is-as-you/audiobook-app
    ```
 
-2. **Install dependencies**:
+2. **Run the setup script:**
+   
+   **On Linux/Mac:**
+   ```bash
+   ./setup-android.sh
+   ```
+   
+   **On Windows:**
+   ```bash
+   setup-android.bat
+   ```
+   
+   **Or using npm:**
    ```bash
    npm install
+   npm run setup
    ```
+   
+   This automated script will:
+   - Create the `www` folder
+   - Copy all web assets
+   - Install dependencies
+   - Add the Android platform
+   - Sync the Capacitor project
 
-3. **Prepare web assets** (copy source files to www/):
-   ```bash
-   cp index.html style.css app.js mudrosti-db.js desktop-features.js sw.js manifest.json www/
-   cp -r assets www/
-   ```
-
-4. **Sync with Capacitor**:
-   ```bash
-   npm run sync
-   ```
-
-5. **Open in Android Studio**:
+3. **Open in Android Studio**:
    ```bash
    npm run build:android
    ```
@@ -63,7 +75,7 @@ The audiobook app has been successfully configured to generate Android APK files
    npx cap open android
    ```
 
-6. **Build the APK in Android Studio**:
+4. **Build the APK in Android Studio**:
    - Wait for Gradle sync to finish
    - Go to **Build > Build Bundle(s) / APK(s) > Build APK(s)**
    - Once complete, click "locate" to find your APK
@@ -75,6 +87,34 @@ If you have Android SDK installed:
 cd android
 ./gradlew assembleDebug
 ```
+
+### Alternative: Manual Setup
+
+If you prefer not to use the automated scripts:
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Prepare web assets** (copy source files to www/):
+   ```bash
+   mkdir -p www
+   cp index.html style.css app.js mudrosti-db.js desktop-features.js sw.js manifest.json www/
+   cp -r assets www/
+   ```
+
+3. **Add Android platform**:
+   ```bash
+   npx cap add android
+   ```
+
+4. **Sync with Capacitor**:
+   ```bash
+   npm run sync
+   ```
+
+5. Continue with steps 3-4 from the automated setup above.
 
 ## 📱 Installing the APK
 
@@ -98,6 +138,10 @@ When you modify the web files (HTML, CSS, JS):
 
 1. Edit the source files in the root of `audiobook-app/`
 2. Copy changes to `www/`:
+   ```bash
+   npm run prepare-www
+   ```
+   Or manually:
    ```bash
    cp index.html style.css app.js mudrosti-db.js desktop-features.js sw.js manifest.json www/
    cp -r assets www/
@@ -124,6 +168,8 @@ See [GUIDE_TO_APK.md](GUIDE_TO_APK.md) for complete instructions on:
 
 ## 📋 NPM Scripts
 
+- `npm run setup` - Complete automated setup (create www, add platform, sync)
+- `npm run prepare-www` - Copy web assets to www folder
 - `npm run sync` - Sync web assets to Android platform
 - `npm run copy` - Copy web assets only
 - `npm run build:android` - Sync and open in Android Studio
@@ -141,7 +187,7 @@ See [GUIDE_TO_APK.md](GUIDE_TO_APK.md) for complete instructions on:
 
 1. Install Android Studio on your local machine
 2. Clone this repository
-3. Follow the build steps above
+3. Run the setup script (`./setup-android.sh` or `setup-android.bat`)
 4. You will have a working APK file!
 
 For any questions, refer to the detailed guides in this directory.
