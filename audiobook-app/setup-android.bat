@@ -58,5 +58,3 @@ echo   1. Open Android Studio: npx cap open android
 echo   2. Build APK: Build ^> Build Bundle(s) / APK(s) ^> Build APK(s)
 echo   3. Find APK at: android\app\build\outputs\apk\debug\app-debug.apk
 echo.
-
-pause
