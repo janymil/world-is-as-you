@@ -12,6 +12,8 @@ cp index.html style.css app.js mudrosti-db.js desktop-features.js sw.js manifest
 cp -r assets www/
 ```
 
+**Important**: The assets directory is large (~423MB with all audio files). The initial copy may take a moment.
+
 ### Step 2: Sync Capacitor
 ```bash
 npm run sync

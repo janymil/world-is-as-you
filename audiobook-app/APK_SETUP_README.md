@@ -87,6 +87,10 @@ cd android
 - **App Name**: Moja Audiokniha
 - **Package ID**: com.worldisasyou.audiobook
 - **Version**: 1.0.0
+- **Assets Size**: ~423MB (includes all audio files and subtitles)
+- **Expected APK Size**: ~420-430MB
+
+**Note**: The APK will be quite large because it includes all audiobook chapters as MP3 files and SRT subtitle files. This is intentional to allow offline playback.
 
 ## 🔄 Making Changes
 
