@@ -206,9 +206,11 @@ body {
 .player-bar {
     background: var(--secondary-bg);
     padding: 1rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
     border-top: 1px solid var(--border-glass);
     box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
     z-index: 50;
+    position: relative;
 }
 
 .player-info {
@@ -430,6 +432,10 @@ body {
 
 /* Mobile specific popup positioning */
 @media (max-width: 768px) {
+    .player-bar {
+        padding-bottom: max(1.5rem, calc(1rem + env(safe-area-inset-bottom)));
+    }
+    
     .ambience-popup {
         bottom: 160px;
         /* Clear player + spacing */
