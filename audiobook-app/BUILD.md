@@ -4,9 +4,64 @@
 - Android Studio must be installed
 - Node.js and npm (already available)
 
+## First Time Setup
+
+Before building for the first time, you need to set up the `www` folder and Android platform.
+
+### Automated Setup (Recommended)
+
+**Using npm (cross-platform):**
+```bash
+npm install
+npm run setup
+```
+
+**Or using shell scripts:**
+
+**On Linux/Mac:**
+```bash
+./setup-android.sh
+```
+
+**On Windows:**
+```bash
+setup-android.bat
+```
+
+All methods will automatically create the `www` folder, copy all assets, and set up the Android platform.
+
+### Manual Setup
+
+If you prefer to do it manually:
+
+1. **Create www folder:**
+   ```bash
+   mkdir -p www
+   ```
+
+2. **Copy files to www:**
+   ```bash
+   cp index.html style.css app.js mudrosti-db.js desktop-features.js sw.js manifest.json www/
+   cp -r assets www/
+   ```
+
+3. **Install dependencies and add platform:**
+   ```bash
+   npm install
+   npx cap add android
+   npx cap sync
+   ```
+
 ## Build APK
 
+Once setup is complete, you can build the APK.
+
 ### Step 1: Copy any changes to www directory
+```bash
+npm run prepare-www
+```
+
+Or manually:
 ```bash
 cp index.html style.css app.js mudrosti-db.js desktop-features.js sw.js manifest.json www/
 cp -r assets www/

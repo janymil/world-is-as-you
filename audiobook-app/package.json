@@ -5,6 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "npm run prepare-www && npm run add-platform",
+    "prepare-www": "node -e \"require('fs').mkdirSync('www', {recursive:true})\" && node -e \"['index.html','style.css','app.js','manifest.json','sw.js','mudrosti-db.js','desktop-features.js'].forEach(f=>require('fs').copyFileSync(f,'www/'+f))\" && node -e \"require('fs').cpSync('assets','www/assets',{recursive:true})\"",
+    "add-platform": "node -e \"const cp=require('child_process');try{cp.execSync('npx cap add android',{stdio:'inherit'})}catch(e){console.log('Android platform already exists')}\" && npx cap sync",
     "sync": "npx cap sync",
     "copy": "npx cap copy",
     "build:android": "npx cap sync && npx cap open android",

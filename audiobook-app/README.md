@@ -8,7 +8,64 @@ This is a separate project for the mobile audiobook app.
 - `app.js`: Logic for the player, playlist, and search.
 - `assets/`: Contains .mp3 and .srt (subtitles) files.
 
-## How to run
+## Setup for Android APK Build
+
+Before building the Android APK, you need to set up the `www` folder and Android platform.
+
+### Automated Setup (Recommended)
+
+**Using npm (cross-platform):**
+```bash
+npm install
+npm run setup
+```
+
+**Or using shell scripts:**
+
+**On Linux/Mac:**
+```bash
+./setup-android.sh
+```
+
+**On Windows:**
+```bash
+setup-android.bat
+```
+
+All methods will:
+1. Create the `www` folder
+2. Copy all web assets to `www`
+3. Install npm dependencies (if needed)
+4. Add the Android platform
+5. Sync the Capacitor project
+
+### Manual Setup
+
+If you prefer to set up manually, follow these steps:
+
+1. **Create www folder and copy files:**
+   ```bash
+   mkdir -p www
+   cp index.html style.css app.js manifest.json sw.js mudrosti-db.js desktop-features.js www/
+   cp -r assets www/
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Add Android platform:**
+   ```bash
+   npx cap add android
+   ```
+
+4. **Sync the project:**
+   ```bash
+   npx cap sync
+   ```
+
+## How to run (Web Development)
 Since this app loads subtitle files (.srt) dynamically, it needs to be served via a local web server to avoid browser security restrictions (CORS) when opening file:// directly.
 
 ### Option 1: VS Code Live Server
