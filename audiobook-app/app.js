@@ -182,13 +182,19 @@ async function loadTrack(index, autoPlay = true) {
 
     renderPlaylist(); // Update active state
 
+    // Load the audio before attempting to play
+    audio.load();
+
     if (autoPlay) {
-        audio.play().catch((error) => {
-            console.log('Autoplay prevented:', error);
-            // User interaction required, show play button ready
-            isPlaying = false;
-            renderPlaylist();
-        });
+        // Use a small delay to ensure the audio is ready to play
+        setTimeout(() => {
+            audio.play().catch((error) => {
+                console.log('Autoplay prevented:', error);
+                // User interaction required, show play button ready
+                isPlaying = false;
+                renderPlaylist();
+            });
+        }, 100);
     }
 
     // Update Media Session (Lock Screen Controls)
